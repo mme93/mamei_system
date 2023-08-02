@@ -16,6 +16,8 @@ export class LoginComponent {
   });
 
   constructor(private loginService: LoginService, private router: Router) {
+    localStorage.setItem('login', 'false')
+    window.parent.postMessage({ type: 'updateLogoutButton', value: false }, '*');
   }
 
   getErrorMessage() {
@@ -37,6 +39,7 @@ export class LoginComponent {
     // @ts-ignore
     if (this.loginService.login(this.user.controls.username.value, this.user.controls.password.value)) {
       this.isLoading = false;
+      window.parent.postMessage({ type: 'updateLogoutButton', value: true }, '*');
       this.router.navigate(['/home'])
     } else {
       this.isLoading = false;

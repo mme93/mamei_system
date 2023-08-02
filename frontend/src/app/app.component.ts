@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit{
   showIcon = false;
+
+  constructor(private router: Router) {
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'updateLogoutButton') {
+        if(event.data.value){
+          this.showIcon = true;
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     const loginValue = localStorage.getItem('login');
@@ -18,9 +29,9 @@ export class AppComponent implements OnInit{
   }
 
 
-  login() {
+  logout() {
     localStorage.setItem('login', 'false')
     this.showIcon = false;
+    this.router.navigate(['/login'])
   }
-
 }

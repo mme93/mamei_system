@@ -5,37 +5,12 @@
     </button>
     <span>Adventure Games</span>
     <span class="toolbar-item-spacer"></span>
-    <button mat-icon-button matTooltip="Like">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="Share">
-      <mat-icon>share</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="Notifications">
-      <mat-icon>notifications</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="My Account">
+    <button mat-icon-button>
       <mat-icon>account_circle</mat-icon>
     </button>
-    <mat-menu>
-      <button mat-menu-item routerLink="#">
-        <mat-icon>person</mat-icon>
-        <span>My Account</span>
-      </button>
-      <button mat-menu-item routerLink="#">
-        <mat-icon>settings</mat-icon>
-        <span>Settings</span>
-      </button>
-      <button mat-menu-item routerLink="#">
-        <mat-icon>help</mat-icon>
-        <span>Help</span>
-      </button>
-      <mat-divider></mat-divider>
-      <button mat-menu-item routerLink="#">
-        <mat-icon>exit_to_app</mat-icon>
-        Logout
-      </button>
-    </mat-menu>
+    <button mat-icon-button (click)="logout()" *ngIf="showIcon">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
   </mat-toolbar>
 
   <mat-sidenav-container class="app-container">
