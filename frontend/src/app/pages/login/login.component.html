@@ -1,1 +1,25 @@
-<p>login works!</p>
+<article style="padding: 30vh">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="user">
+        <mat-form-field>
+          <mat-label>Enter your username</mat-label>
+          <input matInput placeholder="username" formControlName="username" required>
+          <mat-error *ngIf="user.controls.username.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input matInput type="password" placeholder="******" formControlName="password" required>
+          <mat-error *ngIf="user.controls.password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <button mat-raised-button color="primary" (click)="login()">Login</button>
+    <mat-card-footer *ngIf="isLoading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</article>
