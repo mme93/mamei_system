@@ -1,10 +1,8 @@
 package com.login.controller;
 
+import com.login.dao.request.RequestToken;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/token")
@@ -13,7 +11,7 @@ public class TokenController {
 
     @PostMapping("/isExpired")
     public void isTokenExpired(){
-
+        System.err.println("Test test test");
     }
 
 }
