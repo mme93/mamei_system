@@ -12,20 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/authenticate")
 @RequiredArgsConstructor
 public class AuthenticationController {
+
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/signup")
-    public ResponseEntity<JwtAuthenticationResponse> signup(@RequestBody SignUpRequest request) {
-        System.err.println(request.getEmail());
-        return ResponseEntity.ok(authenticationService.signup(request));
+    @PostMapping("/login")
+    public ResponseEntity<JwtAuthenticationResponse> login(@RequestBody SigninRequest request) {
+        System.err.println("Login");
+        return ResponseEntity.ok(authenticationService.login(request));
     }
 
-    @PostMapping("/signin")
-    public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SigninRequest request) {
-        System.err.println(request.getEmail());
-        return ResponseEntity.ok(authenticationService.signin(request));
+    @PostMapping("/registration")
+    public ResponseEntity<JwtAuthenticationResponse> registration(@RequestBody SignUpRequest request) {
+        return ResponseEntity.ok(authenticationService.registration(request));
     }
+
 }

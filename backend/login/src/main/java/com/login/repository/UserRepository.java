@@ -1,13 +1,14 @@
 package com.login.repository;
 
-import com.login.model.entities.User;
+import com.login.model.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     // Since email is unique, we'll find users by email
-    Optional<User> findByEmail(String email);
+   // Optional<UserEntity> findByEmail(String email);
+    Optional<UserEntity> findByPassword(String password);
 }
