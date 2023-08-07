@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SudokuBlock {
-    String [][] sudoku9;
-
+public class SudokuRows {
+    String [] rows;
 }
