@@ -21,7 +21,6 @@ public class APISudokuService {
     public Object loadSudoku(APISudokuLevelRequest levelRequest) {
 
         String uri = discoveryClientService.getSudokuClientAdress() + SudokuRouteTable.uri_load_sudoku;
-        System.err.println(uri);
         return webClient
                 .build()
                 .post()
