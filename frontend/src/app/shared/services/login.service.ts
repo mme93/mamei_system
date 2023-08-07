@@ -14,13 +14,11 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
   isTokenExpired(){
-    localStorage.setItem('login', 'true')
     const token= {token: localStorage.getItem('token')}
     return this.http.post<JwtAuthenticationResponse>(this.apiIsTokenExpired,token);
   }
 
   login(request: LoginRequest): Observable<JwtAuthenticationResponse> {
-    localStorage.setItem('login', 'true')
     return this.http.post<JwtAuthenticationResponse>(this.apiLoginUrl, request);
   }
 
