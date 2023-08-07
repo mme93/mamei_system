@@ -40,5 +40,16 @@ public class APISudokuService {
                 .retrieve()
                 .bodyToMono(Boolean.class);
     }
+    @Async
+    public Boolean loadSudokuLevelList(String username) {
+        String uri = discoveryClientService.getSudokuClientAdress() + SudokuRouteTable.uri_load_sudoku_level_list+username;
+        return webClient
+                .build()
+                .post()
+                .uri(uri)
+                .body(BodyInserters.fromValue(username))
+                .retrieve()
+                .bodyToMono(Boolean.class).block();
+    }
 
 }

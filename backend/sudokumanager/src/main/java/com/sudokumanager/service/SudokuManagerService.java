@@ -38,4 +38,8 @@ public class SudokuManagerService {
         }
     }
 
+    public void generateSudokuLevelList(String username){
+        System.err.println(username);
+    }
+
 }

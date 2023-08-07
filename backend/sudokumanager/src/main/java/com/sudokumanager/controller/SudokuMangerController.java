@@ -1,12 +1,11 @@
 package com.sudokumanager.controller;
 
+import com.sudokumanager.model.dto.RequestToken;
 import com.sudokumanager.service.SudokuManagerService;
 import com.sudokumanager.service.SudokuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/sudokumanager")
@@ -27,6 +26,11 @@ public class SudokuMangerController {
             return new ResponseEntity(true,HttpStatus.OK);
         }
         return new ResponseEntity(false, HttpStatus.CONFLICT);
+    }
+    @PostMapping("/levelList/{username}")
+    public ResponseEntity<Boolean> createLevelListByUser(@PathVariable String username) {
+        sudokuManagerService.generateSudokuLevelList(username);
+        return new ResponseEntity(true, HttpStatus.CONFLICT);
     }
 
 }

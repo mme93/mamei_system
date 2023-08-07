@@ -4,6 +4,43 @@
       <mat-card-title>Sudok Games</mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <mat-tab-group style="width: 100%">
+        <mat-tab label="Level List">
+         <div>
+           <p>Select difficutly level</p>
+           <mat-radio-group>
+             <mat-radio-button value="1">Easy</mat-radio-button>
+             <mat-radio-button value="2">Normal</mat-radio-button>
+             <mat-radio-button value="3">Hard</mat-radio-button>
+           </mat-radio-group>
+         </div>
+          <!--
+          <div class="list-container">
+            <div class="list-item" *ngFor="let item of listItems">
+              <span>{{ item.text }}</span>
+              <button mat-button>Button</button>
+            </div>
+          </div>
+          -->
+        </mat-tab>
+        <mat-tab label="New Game">
+
+        </mat-tab>
+        <mat-tab label="Exist Game">
+
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+    <mat-card-footer>
+
+    </mat-card-footer>
+  </mat-card>
+  <!--
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Sudok Games</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
 
       <p>Bitte wählen Sie die Schwierigkeitsstufe aus</p>
 
@@ -16,4 +53,5 @@
     </mat-card-content>
 
   </mat-card>
+  -->
 </article>
