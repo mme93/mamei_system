@@ -12,16 +12,20 @@ export interface SudokuLevelList {
 })
 export class SudokuLevelService {
 
-  private apiLoginUrl = 'http://localhost:9000/api/sudoku/load/levelList';
+  private apiLoginUrl = 'http://localhost:9000/api/sudoku/load/1/EASY';
 
   constructor(private http: HttpClient) {
   }
 
   loadSudokuLevelList() {
-    let headers = new HttpHeaders({
-      'Authorization': localStorage.getItem('token')+''
-    });
-    this.http.post<JwtAuthenticationResponse>(this.apiLoginUrl, null,{headers}).subscribe(result =>console.log(result))
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token') + '',
+      }),
+      withCredentials: true
+    };
+    this.http.post(this.apiLoginUrl, null, httpOptions).subscribe(result => console.log(result))
   }
 
 }
