@@ -1,5 +1,6 @@
 package com.sudokumanager.controller;
 
+import com.sudokumanager.model.dto.SudokuLevel;
 import com.sudokumanager.model.dto.SudokuLevelRequest;
 import com.sudokumanager.service.SudokuService;
 import org.springframework.http.HttpStatus;
@@ -22,11 +23,14 @@ public class SudokuController {
     }
 
     @PostMapping("/load")
-    public ResponseEntity loadSudoku(@RequestBody SudokuLevelRequest levelRequest) {
-        try{
-            sudokuService.loadSudoku(levelRequest.getUsername(), levelRequest.getDifficultyLevel(), levelRequest.getLevel());
-            return new ResponseEntity(HttpStatus.OK);
-        }catch (NoSuchElementException e){
+    public ResponseEntity<SudokuLevel> loadSudoku(@RequestBody SudokuLevelRequest levelRequest) {
+        try {
+            return new ResponseEntity(
+                    sudokuService.loadSudoku(levelRequest.getUsername()
+                            , levelRequest.getDifficultyLevel()
+                            , levelRequest.getLevel()
+                    ), HttpStatus.OK);
+        } catch (NoSuchElementException e) {
             System.err.println(e.getMessage());
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }

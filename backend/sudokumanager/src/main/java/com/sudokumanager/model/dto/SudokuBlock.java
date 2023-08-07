@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SudokuBlock {
-    String [][] sudoku9;
-
+    private String[] block;
+    private int blockNumber;
 }

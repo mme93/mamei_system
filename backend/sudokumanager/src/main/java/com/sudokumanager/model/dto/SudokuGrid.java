@@ -13,5 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class SudokuGrid {
 
-    List<SudokuBlock> sudokuBlocks;
+    private List<SudokuRows> sudokuRows;
+    private List<SudokuColumns> sudokuColumns;
+    private List<SudokuBlock> sudokuBlocks;
 }
