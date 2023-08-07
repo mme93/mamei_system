@@ -82,6 +82,11 @@
 			<artifactId>mariadb-java-client</artifactId>
 			<version>1.5.7</version>
 		</dependency>
+		<!--Webflux-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webflux</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

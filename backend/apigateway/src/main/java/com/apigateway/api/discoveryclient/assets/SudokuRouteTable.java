@@ -1,0 +1,7 @@
+package com.apigateway.api.discoveryclient.assets;
+
+public class SudokuRouteTable {
+
+    public static final String uri_generate_sudoku = "/sudokumanager/create";
+
+}
