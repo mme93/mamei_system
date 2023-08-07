@@ -32,10 +32,11 @@ public class APISudokuManagerController {
     }
 
     @PostMapping("/load/{level}/{difficultyLevel}")
-    public ResponseEntity loadSudoku(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @PathVariable String difficultyLevel, @PathVariable String level) {
+    public ResponseEntity<Object> loadSudoku(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @PathVariable String difficultyLevel, @PathVariable String level) {
         String username = jwtService.extractUserName(token.substring(7));
-        if (APISudokuService.loadSudoku(new APISudokuLevelRequest(username, APIDifficultyLevel.valueOf(difficultyLevel), Integer.valueOf(level)))) {
-            return new ResponseEntity(HttpStatus.OK);
+        Object sudokuLevel=APISudokuService.loadSudoku(new APISudokuLevelRequest(username, APIDifficultyLevel.valueOf(difficultyLevel), Integer.valueOf(level)));
+        if (sudokuLevel!=null) {
+            return new ResponseEntity(sudokuLevel,HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.CONFLICT);
     }

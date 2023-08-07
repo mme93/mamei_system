@@ -18,18 +18,17 @@ public class APISudokuService {
     private final WebClient.Builder webClient;
 
     @Async
-    public Boolean loadSudoku(APISudokuLevelRequest levelRequest) {
+    public Object loadSudoku(APISudokuLevelRequest levelRequest) {
 
         String uri = discoveryClientService.getSudokuClientAdress() + SudokuRouteTable.uri_load_sudoku;
         System.err.println(uri);
-        webClient
+        return webClient
                 .build()
                 .post()
                 .uri(uri)
                 .body(BodyInserters.fromValue(levelRequest))
                 .retrieve()
-                .bodyToMono(Void.class).block();
-        return true;
+                .bodyToMono(Object.class).block();
     }
 
     @Async
