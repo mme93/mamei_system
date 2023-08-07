@@ -1,0 +1,11 @@
+<article class="sudoku-grid-container">
+  <table>
+    <tr *ngFor="let row of sudokuGrid">
+      <td *ngFor="let cell of row" class="sudoku-cell">
+        <button mat-raised-button color="primary" class="sudoku-button">
+          {{ cell }}
+        </button>
+      </td>
+    </tr>
+  </table>
+</article>

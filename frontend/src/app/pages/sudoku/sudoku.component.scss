@@ -1,0 +1,24 @@
+article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+mat-card {
+  width: 100%;
+  max-width: 50%;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+button{
+  width: 80%;
+  margin-bottom: 20px;
+  margin-lef: 0;
+}
+
+mat-card-content {
+  width: 100%;
+}
