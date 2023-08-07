@@ -15,6 +15,7 @@
           <input matInput type="password" placeholder="******" formControlName="password" required>
           <mat-error *ngIf="user.controls.password.invalid">{{getPasswordErrorMessage()}}</mat-error>
         </mat-form-field>
+        <p *ngIf="checkLogin" style="color: red">Wrong Username or password!</p>
       </form>
     </mat-card-content>
     <button mat-raised-button color="primary" (click)="login()">Login</button>

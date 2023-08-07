@@ -2,6 +2,9 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../shared/services/login.service";
 import {Router} from "@angular/router";
+import {LoginRequest} from "../../shared/model/Login";
+import {HttpErrorResponse} from '@angular/common/http';
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-login',
@@ -10,14 +13,15 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
   isLoading = false;
+  checkLogin = false;
+
   user = new FormGroup({
-    username: new FormControl('admin', [Validators.required, Validators.minLength(1)]),
-    password: new FormControl('123', [Validators.required, Validators.minLength(1)])
+    username: new FormControl('marv', [Validators.required, Validators.minLength(1)]),
+    password: new FormControl('1234', [Validators.required, Validators.minLength(1)])
   });
 
-  constructor(private loginService: LoginService, private router: Router) {
-    localStorage.setItem('login', 'false')
-    window.parent.postMessage({ type: 'updateLogoutButton', value: false }, '*');
+  constructor(private loginService: LoginService, private router: Router, private appComponent: AppComponent) {
+    this.appComponent.isSidenavDisabled = false;
   }
 
   getErrorMessage() {
@@ -36,13 +40,23 @@ export class LoginComponent {
 
   login() {
     this.isLoading = true;
-    // @ts-ignore
-    if (this.loginService.login(this.user.controls.username.value, this.user.controls.password.value)) {
-      this.isLoading = false;
-      window.parent.postMessage({ type: 'updateLogoutButton', value: true }, '*');
-      this.router.navigate(['/home'])
-    } else {
-      this.isLoading = false;
-    }
+    const loginRequest: LoginRequest = {
+      username: this.user.controls.username.value as string,
+      password: this.user.controls.password.value as string
+    };
+    this.loginService.login(loginRequest).subscribe(
+      result => {
+        localStorage.setItem('token', 'Bearer ' + result.token);
+        this.isLoading = false;
+        this.appComponent.isSidenavDisabled = true;
+        this.router.navigate(['/home']);
+      },
+      (error: HttpErrorResponse) => {
+        this.isLoading = false;
+        this.checkLogin = true;
+        console.log('HTTP Status:', error.status);
+      }
+    );
+
   }
 }

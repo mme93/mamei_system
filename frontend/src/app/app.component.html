@@ -1,14 +1,14 @@
 <div>
-  <mat-toolbar color="primary">
-    <button mat-icon-button *ngIf="showIcon" (click)="sidenav.toggle()" matTooltip="Menu">
+  <mat-toolbar color="primary" >
+    <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu" *ngIf="isSidenavDisabled">
       <mat-icon>menu</mat-icon>
     </button>
     <span>Adventure Games</span>
     <span class="toolbar-item-spacer"></span>
-    <button mat-icon-button>
+    <button mat-icon-button *ngIf="isSidenavDisabled">
       <mat-icon>account_circle</mat-icon>
     </button>
-    <button mat-icon-button (click)="logout()" *ngIf="showIcon">
+    <button mat-icon-button (click)="logout()" *ngIf="isSidenavDisabled">
       <mat-icon>exit_to_app</mat-icon>
     </button>
   </mat-toolbar>
