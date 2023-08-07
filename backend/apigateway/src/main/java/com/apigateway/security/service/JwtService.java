@@ -40,6 +40,13 @@ public class JwtService {
         return claimsResolvers.apply(claims);
     }
 
+    public String generateNewToken(Map<String, Object> extraClaims, String token) {
+        return Jwts.builder().setClaims(extraClaims).setSubject(extractUserName(token))
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
+    }
+
     private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -47,7 +54,7 @@ public class JwtService {
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 
-    private boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 

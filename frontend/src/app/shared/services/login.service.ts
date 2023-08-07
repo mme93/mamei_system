@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {JwtAuthenticationResponse, LoginRequest} from "../model/Login";
+import {JwtAuthenticationRequest, JwtAuthenticationResponse, LoginRequest} from "../model/Login";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -8,16 +8,20 @@ import {Observable} from "rxjs";
 })
 export class LoginService {
 
-  private apiUrl = 'http://localhost:9000/authenticate/login';
+  private apiLoginUrl = 'http://localhost:9000/authenticate/login';
+  private apiIsTokenExpired = 'http://localhost:9000/token/isExpired';
 
   constructor(private http: HttpClient) {
   }
-
+  isTokenExpired(){
+    localStorage.setItem('login', 'true')
+    const token= {token: localStorage.getItem('token')}
+    return this.http.post<JwtAuthenticationResponse>(this.apiIsTokenExpired,token);
+  }
 
   login(request: LoginRequest): Observable<JwtAuthenticationResponse> {
-    const url = `${this.apiUrl}`;
     localStorage.setItem('login', 'true')
-    return this.http.post<JwtAuthenticationResponse>(url, request);
+    return this.http.post<JwtAuthenticationResponse>(this.apiLoginUrl, request);
   }
 
 }
