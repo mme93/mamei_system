@@ -5,6 +5,7 @@ import { NormalComponent } from './level/normal/normal.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
+import { StandardComponent } from './level/standard/standard.component';
 
 
 @NgModule({
@@ -14,6 +15,6 @@ import {CommonModule} from "@angular/common";
     CommonModule,
     MatButtonModule
   ],
-  declarations: [SudokuComponent, NormalComponent]
+  declarations: [SudokuComponent, NormalComponent, StandardComponent]
 })
 export class SudokuComponentModule {}
