@@ -1,9 +1,9 @@
-FROM node:18.12.1-alpine as build
+# Stage 1
+FROM node:14.15.4 as node
 WORKDIR /app
-COPY package*.json /app/
-RUN npm install n latest
-RUN npm install -g @angular/cli
+COPY . .
 RUN npm install
-COPY ./ /app/
-EXPOSE 8100
-CMD ["ng", "serve"]
+RUN npm run build --prod
+# Stage 2
+FROM nginx:alpine
+COPY --from=node /app/dist/angular-app /usr/share/nginx/html
