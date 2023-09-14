@@ -1,8 +1,8 @@
 FROM node:18.12.1-alpine as build
 WORKDIR /app
+RUN npm install -g @angular/cli@15
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
-RUN npm install
-RUN npm run build --prod
-# Stage 2
-FROM nginx:alpine
-COPY --from=node /app/dist/angular-app /usr/share/nginx/html
+EXPOSE 4200
+CMD ["ng", "serve", "--host", "0.0.0.0"]
