@@ -6,4 +6,4 @@ RUN npm install -g @angular/cli
 RUN npm install
 COPY ./ /app/
 EXPOSE 8100
-CMD ["ng", "serve", "--external"]
+CMD ["ng", "serve"]
