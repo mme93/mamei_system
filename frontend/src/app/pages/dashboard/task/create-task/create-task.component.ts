@@ -18,20 +18,18 @@ export class CreateTaskComponent {
     needRange: new FormControl(true, [Validators.required]),
     needDate: new FormControl(true, [Validators.required]),
     needTime: new FormControl(true, [Validators.required]),
-    isStandard: new FormControl(true, [Validators.required]),
-    timeStart: new FormControl<Time | null>(null),
-    timeEnd: new FormControl<Time | null>(null)
+    isStandard: new FormControl(true, [Validators.required])
   });
 
   task = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    information: new FormControl('', [Validators.required, Validators.minLength(1)])
+    information: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    timeStart: new FormControl<Time | null>(null),
+    timeEnd: new FormControl<Time | null>(null),
+    dateStart: new FormControl<Date | null>(null),
+    dateEnd: new FormControl<Date | null>(null)
   });
 
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
 
   dateFormClass = "date_form";
 
@@ -83,7 +81,7 @@ export class CreateTaskComponent {
   }
 
 
-  login() {
+  createTask() {
     this.isLoading = true;
 
   }
