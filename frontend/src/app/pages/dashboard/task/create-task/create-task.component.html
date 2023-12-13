@@ -6,14 +6,22 @@
       </div>
       <mat-card-title>Task Name: {{task.controls.name.value}}</mat-card-title>
     </mat-card-header>
-    <mat-card-content >
-
+    <mat-card-content>
       <form [formGroup]="options">
-        <mat-checkbox formControlName="isStandard">Use Standard Task</mat-checkbox>
-        <mat-checkbox formControlName="needDate">With Date</mat-checkbox>
-        <mat-checkbox formControlName="needTime">With Time</mat-checkbox>
+        <mat-checkbox formControlName="isStandard" (change)="changeIsStandard()">Use Standard Task</mat-checkbox>
 
-        <mat-form-field *ngIf="options.controls.needDate.value===true || options.controls.needTime.value===true">
+        <mat-checkbox formControlName="needDate" *ngIf="options.controls.isStandard.value===false"
+                      (change)="changeWithDate()">With Date
+        </mat-checkbox>
+        <mat-checkbox formControlName="needTime" *ngIf="options.controls.isStandard.value===false"
+                      (change)="changeWithTime()">With Time
+        </mat-checkbox>
+        <mat-checkbox formControlName="needRange" *ngIf="options.controls.isStandard.value===false"
+                      (change)="changeIsRange()">With Range
+        </mat-checkbox>
+
+        <mat-form-field
+          *ngIf="(options.controls.needDate.value===true || options.controls.needTime.value===true)&&options.controls.isStandard.value===false">
           <mat-label>Date/Time Options</mat-label>
           <select matNativeControl>
             <option value="1">Start</option>
@@ -36,11 +44,38 @@
           <mat-error *ngIf="task.controls.information.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
 
+        <div [ngClass]="dateFormClass">
+          <mat-form-field *ngIf="options.controls.needDate.value===true">
+            <mat-label>Enter a start date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
 
-        <p *ngIf="checkLogin" style="color: red">Wrong Username or password!</p>
+          <mat-form-field *ngIf="options.controls.needTime.value===true">
+            <mat-label>Enter a start time</mat-label>
+            <input matInput type="time" placeholder="17:20">
+          </mat-form-field>
+
+          <mat-form-field *ngIf="options.controls.needDate.value===true">
+            <mat-label>Enter a end date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="options.controls.needTime.value===true">
+            <mat-label>Enter a end Time</mat-label>
+            <input matInput type="time" placeholder="15:15">
+          </mat-form-field>
+        </div>
       </form>
+
+
     </mat-card-content>
-    <button mat-raised-button color="primary" (click)="login()">Login</button>
+    <button mat-raised-button color="primary" (click)="login()">Create</button>
     <mat-card-footer *ngIf="isLoading">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </mat-card-footer>

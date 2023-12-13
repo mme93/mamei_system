@@ -18,6 +18,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     MatFormFieldModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatNativeDateModule
   ],
   declarations: [DashboardComponent,TaskComponent,OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent]
 })

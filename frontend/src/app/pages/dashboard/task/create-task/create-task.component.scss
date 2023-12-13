@@ -3,6 +3,7 @@ article {
   justify-content: center;
   align-items: center;
 }
+
 mat-card {
   width: 100%;
 }
@@ -12,9 +13,46 @@ mat-card-content {
   flex-direction: column;
   align-items: center;
 }
-form{
+
+form {
   width: 100%;
 }
+
+.date_form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.date_form mat-form-field:nth-child(1) {
+  width: 29%;
+}
+.date_form mat-form-field:nth-child(2) {
+  width: 19%;
+}
+
+.date_form mat-form-field:nth-child(3) {
+  width: 29%;
+}
+.date_form mat-form-field:nth-child(4) {
+  width: 19%;
+}
+
+.date_form_two_dif_types {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.date_form_two_dif_types mat-form-field:nth-child(1),
+.date_form_two_dif_types mat-form-field:nth-child(2){
+  width: 49%;
+}
+
 
 
 mat-card-content mat-form-field {
