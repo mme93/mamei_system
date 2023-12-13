@@ -22,3 +22,21 @@ button{
 mat-card-content {
   width: 100%;
 }
+
+.list-container {
+  height: 300px; /* Höhe des scrollbaren Containers */
+  overflow: auto; /* Ermöglicht das Scrollen */
+  border: 1px solid #ccc; /* Optional: Füge einen Rahmen hinzu */
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #ccc; /* Optional: Füge eine Trennlinie zwischen den Einträgen hinzu */
+}
+
+span {
+  flex: 1;
+  margin-right: 16px;
+}

@@ -1,6 +1,5 @@
-package com.apigateway.api.sudokumanager.model;
+package com.apigateway.api.sudokumanager.model.dto;
 
-import com.apigateway.api.sudokumanager.controller.APIDifficultyLevel;
 import lombok.*;
 
 @Data

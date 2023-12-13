@@ -1,6 +1,7 @@
 package com.apigateway.api.sudokumanager.controller;
 
-import com.apigateway.api.sudokumanager.model.APISudokuLevelRequest;
+import com.apigateway.api.sudokumanager.model.dto.APIDifficultyLevel;
+import com.apigateway.api.sudokumanager.model.dto.APISudokuLevelRequest;
 import com.apigateway.api.sudokumanager.service.APISudokuService;
 import com.apigateway.security.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,15 @@ public class APISudokuManagerController {
         Object sudokuLevel=APISudokuService.loadSudoku(new APISudokuLevelRequest(username, APIDifficultyLevel.valueOf(difficultyLevel), Integer.valueOf(level)));
         if (sudokuLevel!=null) {
             return new ResponseEntity(sudokuLevel,HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.CONFLICT);
+    }
+    @PostMapping("/load/levelList")
+    public ResponseEntity<Object> loadLevelList(@RequestHeader(HttpHeaders.AUTHORIZATION) String token){
+        String username = jwtService.extractUserName(token.substring(7));
+        Object sudokuLevelList=APISudokuService.loadSudokuLevelList(username);
+        if (sudokuLevelList!=null) {
+            return new ResponseEntity(sudokuLevelList,HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.CONFLICT);
     }

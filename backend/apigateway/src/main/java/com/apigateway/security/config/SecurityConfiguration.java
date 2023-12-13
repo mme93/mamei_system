@@ -33,7 +33,7 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authorizeHttpRequests(request ->
-                        request.requestMatchers("/authenticate/**","/token/isExpired")
+                        request.requestMatchers("/authenticate/**", "/token/isExpired")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
@@ -67,9 +67,12 @@ public class SecurityConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
                         .allowedMethods("*")
-                        .allowedHeaders("*");
+                        .allowedOrigins("*")
+                        .allowedOriginPatterns("*")
+                        .allowedHeaders("*")
+                        .exposedHeaders("*")
+                        .maxAge(1800L);
             }
         };
     }

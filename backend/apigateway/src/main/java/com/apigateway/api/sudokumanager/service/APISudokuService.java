@@ -2,7 +2,7 @@ package com.apigateway.api.sudokumanager.service;
 
 import com.apigateway.api.discoveryclient.assets.SudokuRouteTable;
 import com.apigateway.api.discoveryclient.service.DiscoveryClientService;
-import com.apigateway.api.sudokumanager.model.APISudokuLevelRequest;
+import com.apigateway.api.sudokumanager.model.dto.APISudokuLevelRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -39,6 +39,17 @@ public class APISudokuService {
                 .uri(uri)
                 .retrieve()
                 .bodyToMono(Boolean.class);
+    }
+    @Async
+    public Object loadSudokuLevelList(String username) {
+        String uri = discoveryClientService.getSudokuClientAdress() + SudokuRouteTable.uri_load_sudoku_level_list+username;
+        return webClient
+                .build()
+                .post()
+                .uri(uri)
+                .body(BodyInserters.fromValue(username))
+                .retrieve()
+                .bodyToMono(Object.class).block();
     }
 
 }

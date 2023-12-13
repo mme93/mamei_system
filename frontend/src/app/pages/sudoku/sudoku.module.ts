@@ -6,6 +6,9 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
 import { StandardComponent } from './level/standard/standard.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -13,7 +16,10 @@ import { StandardComponent } from './level/standard/standard.component';
     SudokuComponentRoutingModule,
     MatCardModule,
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule,
+    MatRadioModule
   ],
   declarations: [SudokuComponent, NormalComponent, StandardComponent]
 })
