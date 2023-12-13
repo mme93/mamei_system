@@ -9,6 +9,9 @@ import {DashboardRoutingModule} from "./dashboard-routing.module";
 import {DashboardComponent} from "./dashboard.component";
 import {TaskComponent} from "./task/task.component";
 import {OverviewComponent} from "./overview/overview.component";
+import { CreateTaskComponent } from './task/create-task/create-task.component';
+import { TaskOverviewComponent } from './task/task-overview/task-overview.component';
+import { EditTaskComponent } from './task/edit-task/edit-task.component';
 
 
 @NgModule({
@@ -21,6 +24,6 @@ import {OverviewComponent} from "./overview/overview.component";
     MatTabsModule,
     MatRadioModule
   ],
-  declarations: [DashboardComponent,TaskComponent,OverviewComponent]
+  declarations: [DashboardComponent,TaskComponent,OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent]
 })
 export class DashboardModule {}
