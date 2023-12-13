@@ -1,5 +1,6 @@
 <div>
-  <mat-toolbar color="primary">
+
+  <mat-toolbar color="primary" id="menu_bar_id">
     <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu" *ngIf="isSidenavDisabled">
       <mat-icon>menu</mat-icon>
     </button>
@@ -29,7 +30,7 @@
               <mat-icon>insert_chart</mat-icon>
               <span>Dashboard</span>
             </a>
-            <a mat-list-item routerLink="/dashboard/task"  (click)="sidenav.toggle()">
+            <a mat-list-item routerLink="/dashboard/task" (click)="sidenav.toggle()">
               <mat-icon>feed</mat-icon>
               <span>Tasks</span>
             </a>

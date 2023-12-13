@@ -1,16 +1,48 @@
-<article>
-  <form [formGroup]="taskForm" class="form">
+<article style="padding: 15vh">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon>home</mat-icon>
+      </div>
+      <mat-card-title>Task Name: {{task.controls.name.value}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content >
 
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your username</mat-label>
-      <input matInput placeholder="name" formControlName="name" required>
-      <mat-error *ngIf="taskForm.controls.name.invalid">{{'Error'}}</mat-error>
-    </mat-form-field>
+      <form [formGroup]="options">
+        <mat-checkbox formControlName="isStandard">Use Standard Task</mat-checkbox>
+        <mat-checkbox formControlName="needDate">With Date</mat-checkbox>
+        <mat-checkbox formControlName="needTime">With Time</mat-checkbox>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your username</mat-label>
-      <textarea matInput placeholder="information" formControlName="information" required></textarea>
-      <mat-error *ngIf="taskForm.controls.information.invalid">{{'Error'}}</mat-error>
-    </mat-form-field>
-  </form>
+        <mat-form-field *ngIf="options.controls.needDate.value===true || options.controls.needTime.value===true">
+          <mat-label>Date/Time Options</mat-label>
+          <select matNativeControl>
+            <option value="1">Start</option>
+            <option value="2">End</option>
+            <option value="3">Start and End</option>
+          </select>
+        </mat-form-field>
+      </form>
+
+      <form [formGroup]="task">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter you a name for this Task</mat-label>
+          <input matInput placeholder="name" formControlName="name" required>
+          <mat-error *ngIf="task.controls.name.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your information</mat-label>
+          <textarea matInput placeholder="information" formControlName="information" required></textarea>
+          <mat-error *ngIf="task.controls.information.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+
+        <p *ngIf="checkLogin" style="color: red">Wrong Username or password!</p>
+      </form>
+    </mat-card-content>
+    <button mat-raised-button color="primary" (click)="login()">Login</button>
+    <mat-card-footer *ngIf="isLoading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
 </article>

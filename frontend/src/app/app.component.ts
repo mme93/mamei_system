@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   logout() {
     localStorage.setItem('token', '')
     this.isSidenavDisabled = false;
