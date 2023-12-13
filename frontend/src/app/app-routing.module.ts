@@ -9,13 +9,18 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: LandingpageComponent,canActivate: [SecurityGuard] },
   {
-    path: 'sudoku',
-    loadChildren: () => import('./pages/sudoku/sudoku.module').then(m => m.SudokuComponentModule),
+    path: 'games',
+    loadChildren: () => import('./pages/games/games.module').then(m => m.GamesModule),
     canActivate: [SecurityGuard]
   },
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [SecurityGuard]
+  },
+  {
+    path: 'help',
+    loadChildren: () => import('./pages/help/help.module').then(m => m.HelpModule),
     canActivate: [SecurityGuard]
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }

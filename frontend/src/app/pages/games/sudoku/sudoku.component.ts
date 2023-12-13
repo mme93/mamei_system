@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {SudokuLevelService} from "../../shared/services/sudoku/sudoku-level.service";
+import {SudokuLevelService} from "../../../shared/services/sudoku/sudoku-level.service";
 
 @Component({
   selector: 'app-sudoku',
