@@ -12,6 +12,12 @@ import {OverviewComponent} from "./overview/overview.component";
 import { CreateTaskComponent } from './task/create-task/create-task.component';
 import { TaskOverviewComponent } from './task/task-overview/task-overview.component';
 import { EditTaskComponent } from './task/edit-task/edit-task.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 @NgModule({
@@ -22,7 +28,14 @@ import { EditTaskComponent } from './task/edit-task/edit-task.component';
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatProgressBarModule
   ],
   declarations: [DashboardComponent,TaskComponent,OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent]
 })
