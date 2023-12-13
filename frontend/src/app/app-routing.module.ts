@@ -13,6 +13,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/sudoku/sudoku.module').then(m => m.SudokuComponentModule),
     canActivate: [SecurityGuard]
   },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [SecurityGuard]
+  },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
