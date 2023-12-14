@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Verwende das offizielle Node.js-Image als Basis
 FROM node:16 as builder
 
@@ -27,7 +26,6 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
 
 # Starte den Nginx-Server beim Ausfü
-=======
 FROM node:18.12.1-alpine as build
 WORKDIR /app
 RUN npm install -g @angular/cli@15
@@ -36,4 +34,4 @@ RUN npm ci
 COPY . .
 EXPOSE 4200
 CMD ["ng", "serve", "--host", "0.0.0.0","--disable-host-check"]
->>>>>>> origin/feature/sudoku
+
