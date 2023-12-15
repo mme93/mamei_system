@@ -25,9 +25,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "9002:9002"
-  healtmanager:
+  healthmanager:
     build:
-      context: ./healtmanager
+      context: ./healthmanager
       dockerfile: Dockerfile
     ports:
       - "9003:9003"
