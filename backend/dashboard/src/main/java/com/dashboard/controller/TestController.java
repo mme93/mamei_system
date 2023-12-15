@@ -21,4 +21,9 @@ public class TestController {
     public String testset() {
         return "XXysadasdasdasdasdXX";
     }
+
+    @RequestMapping( "/testD" )
+    public String testset1() {
+        return "Test mich";
+    }
 }
