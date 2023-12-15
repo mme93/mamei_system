@@ -2,7 +2,7 @@ spring:
   application:
     name: healthmanager
 server:
-  port: 9005
+  port: 9003
 eureka:
   client:
     serviceUrl:

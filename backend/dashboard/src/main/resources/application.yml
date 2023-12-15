@@ -2,7 +2,7 @@ spring:
   application:
     name: dashboard
 server:
-  port: 9009
+  port: 9052
 eureka:
   client:
     serviceUrl:

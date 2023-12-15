@@ -2,7 +2,7 @@ spring:
   application:
     name: sudoku
 server:
-  port: 9001
+  port: 9051
 eureka:
   client:
     serviceUrl:

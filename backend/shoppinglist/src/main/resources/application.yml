@@ -2,7 +2,7 @@ spring:
   application:
     name: shoppingList
 server:
-  port: 9002
+  port: 9053
 eureka:
   client:
     serviceUrl:
