@@ -1,5 +1,13 @@
 # Project Overview
 
+## Start Backend
+
+The backend project, which includes various Spring Boot micro-services, can be started in different ways. 
+
+Each individual service contains a Dockerfile, which can be created using "**docker build -t IMAGENAME .**" builds an image and can be called with "**docker run -d -p 8080:8080 IMAGENAME:latest**". 
+
+Furthermore, the project in the backend directory the Docker-Compose file can be called with “**docker-compose up**”.
+
 ## Port-Mapping
 
 ### Services Registry
