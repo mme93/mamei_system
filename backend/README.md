@@ -4,38 +4,27 @@
 
 ### Services Registry
 
-- ServiceregistryApplication:
-    - Port: **8761**
+| Services                    | Port | Name          |
+|-----------------------------|------|---------------|
+| ServiceregistryApplication  | 8761 |*Is the Service Registry* | 
 
 ### System Services Range 9000-9049
 
-- ApigatewayApplication:
-    - Port: **9000**
-    - Name: **APIGATEWAY**
-- SystemmanagerApplication:
-    - Port: **9001**
-    - Name: **SYSTEM**
-- ConfigmanagerApplication:
-    - Port: **9002**
-    - Name: *Not in Service*
-- HealtmanagerApplication:
-    - Port: **9003**
-    - Name: **HEALTHMANAGER**
+| Services                   | Port | Name          |
+|-----------------------------|------|---------------|
+| ApigatewayApplication       | 9000 | APIGATEWAY    |
+| SystemmanagerApplication    | 9001 | SYSTEM        |
+| ConfigmanagerApplication    | 9002 | *Not in Service Registry* |
+| HealtmanagerApplication     | 9003 | HEALTHMANAGER |
 
 ### Project Services Range 9050-9099
 
-- UserApplication:
-    - Port: **9050**
-    - Name: **USER**
-- SudokumanagerApplication:
-    - Port: **9051**
-    - Name: **SUDOKU**
-- DashboardApplication:
-    - Port: **9052**
-    - Name: **DASHBOARD**
-- ShoppinglistApplication:
-    - Port: **9053**
-    - Name: **SHOPPINGLIST**
+| Services               | Port | Name          |
+|-------------------------|------|---------------|
+| UserApplication         | 9050 | USER          |
+| SudokumanagerApplication| 9051 | SUDOKU        |
+| DashboardApplication    | 9052 | DASHBOARD     |
+| ShoppinglistApplication  | 9053 | SHOPPINGLIST  |
 
 ## Service Description
 
