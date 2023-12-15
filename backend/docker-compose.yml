@@ -3,7 +3,6 @@ version: '3'
 services:
   serviceregistry:
     build:
-      context: serviceregistry
       dockerfile: serviceregistry/Dockerfile
     ports:
       - "8761:8761"
