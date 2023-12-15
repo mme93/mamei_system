@@ -8,6 +8,8 @@ Each individual service contains a Dockerfile, which can be created using "**doc
 
 Furthermore, the project in the backend directory the Docker-Compose file can be called with “**docker-compose up**”.
 
+- docker-compose -f docker-compose-services.yml up
+
 ## Port-Mapping
 
 ### Services Registry
