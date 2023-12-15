@@ -3,25 +3,46 @@
 ## Port-Mapping
 
 ### Services Registry
-- ServiceregistryApplication: 8761
-- 
+
+- ServiceregistryApplication:
+    - Port: **8761**
+
 ### System Services Range 9000-9049
-- ApigatewayApplication: 9000
-- SystemmanagerApplication: 9001
-- ConfigmanagerApplication: 9002
-- HealtmanagerApplication: 9003
+
+- ApigatewayApplication:
+    - Port: **9000**
+    - Name: **APIGATEWAY**
+- SystemmanagerApplication:
+    - Port: **9001**
+    - Name: **SYSTEM**
+- ConfigmanagerApplication:
+    - Port: **9002**
+    - Name: *Not in Service*
+- HealtmanagerApplication:
+    - Port: **9003**
+    - Name: **HEALTHMANAGER**
 
 ### Project Services Range 9050-9099
-- UserApplication: 9050
-- SudokumanagerApplication: 9051
-- DashboardApplication: 9052
-- ShoppinglistApplication: 9053
+
+- UserApplication:
+    - Port: **9050**
+    - Name: **USER**
+- SudokumanagerApplication:
+    - Port: **9051**
+    - Name: **SUDOKU**
+- DashboardApplication:
+    - Port: **9052**
+    - Name: **DASHBOARD**
+- ShoppinglistApplication:
+    - Port: **9053**
+    - Name: **SHOPPINGLIST**
 
 ## Service Description
 
 ### ServiceregistryApplication
 
-Registers all Spring Boot microservices by name and lists them. All registered services can be found at http://localhost:8761.
+Registers all Spring Boot microservices by name and lists them. All registered services can be found
+at http://localhost:8761.
 
 ### ApigatewayApplication
 
