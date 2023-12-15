@@ -5,13 +5,3 @@ services:
     image: serviceregistry
     ports:
       - "8761:8761"
-
-  apigateway:
-    image: apigateway
-    ports:
-      - "9000:9000"
-
-  dashboard:
-    image: dashboard
-    ports:
-      - "9052:9052"
