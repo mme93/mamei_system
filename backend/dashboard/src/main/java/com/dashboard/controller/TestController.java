@@ -26,4 +26,10 @@ public class TestController {
     public String testset1() {
         return "Test mich";
     }
+
+
+    @RequestMapping( "/testf" )
+    public String testset1f() {
+        return "Test mich in F ichasbdaisofdnosdfpojsdrgf";
+    }
 }
