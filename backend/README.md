@@ -1,14 +1,18 @@
 # Project Overview
 
 ## Port-Mapping
+
+### System Services
 - ServiceregistryApplication: 8761
 - ApigatewayApplication: 9000
-- SudokumanagerApplication: 9001
-- ShoppinglistApplication: 9002
-- UserApplication: 9003
-- SystemmanagerApplication: 9004
-- HealtmanagerApplication: 9005
-- ConfigmanagerApplication: 9006
+- SystemmanagerApplication: 9001
+- ConfigmanagerApplication: 9002
+- HealtmanagerApplication: 9003
+
+### Project Services
+- UserApplication: 9004
+- SudokumanagerApplication: 9005
+- ShoppinglistApplication: 9006
 - DashboardApplication: 9007
 
 ## Service Description

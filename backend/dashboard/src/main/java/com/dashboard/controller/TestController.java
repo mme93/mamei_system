@@ -8,12 +8,17 @@ public class TestController {
 
     @RequestMapping( "/hellos" )
     public String echo() {
-        System.out.println("Hallo ich bin eine Hello!!!!");
+        System.out.println("Hallo ich bin eine Hello!!!! Test mich weiter");
         return "Hello World! Ich wurde erweitert!";
     }
 
     @RequestMapping( "/helloWorld" )
     public String echos() {
-        return "XXXX";
+        return "XXXX1";
+    }
+
+    @RequestMapping( "/test" )
+    public String testset() {
+        return "XXysadasdasdasdasdXX";
     }
 }
