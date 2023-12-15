@@ -1,0 +1,15 @@
+services:
+  apigateway:
+    image: your-apigateway-image
+    ports:
+      - "9000:9000"
+
+  serviceregistry:
+    image: your-serviceregistry-image
+    ports:
+      - "8761:8761"
+
+  dashboard:
+    image: your-dashboard-image
+    ports:
+      - "9052:9052"
