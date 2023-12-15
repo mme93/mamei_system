@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  serviceregistry:
+    build:
+      context: ./serviceregistry
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+  apigateway:
+    build:
+      context: ./apigateway
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+  systemmanager:
+    build:
+      context: ./systemmanager
+      dockerfile: Dockerfile
+    ports:
+      - "9001:9001"
+  configmanager:
+    build:
+      context: ./configmanager
+      dockerfile: Dockerfile
+    ports:
+      - "9002:9002"
+  healtmanager:
+    build:
+      context: ./healtmanager
+      dockerfile: Dockerfile
+    ports:
+      - "9003:9003"
