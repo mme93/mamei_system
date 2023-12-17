@@ -1,6 +1,5 @@
 package com.apigateway.api.services.securitygateway.controller;
 
-import com.apigateway.api.services.securitygateway.model.LoginRequest;
 import com.apigateway.api.services.securitygateway.service.SecurityGatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
