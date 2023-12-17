@@ -15,4 +15,8 @@ public class DiscoveryClientService {
        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.SudokuAPI).get(0).getUri().toString();
     }
 
+    public String getSystemClientAdress(){
+        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.SystemManagerAPI).get(0).getUri().toString();
+    }
+
 }

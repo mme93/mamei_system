@@ -1,4 +1,4 @@
-package com.apigateway.api.discoveryclient.assets;
+package com.apigateway.api.discoveryclient.assets.table;
 
 public class SudokuRouteTable {
 

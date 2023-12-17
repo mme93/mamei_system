@@ -1,6 +1,6 @@
 package com.apigateway.api.sudokumanager.service;
 
-import com.apigateway.api.discoveryclient.assets.SudokuRouteTable;
+import com.apigateway.api.discoveryclient.assets.table.SudokuRouteTable;
 import com.apigateway.api.discoveryclient.service.DiscoveryClientService;
 import com.apigateway.api.sudokumanager.model.dto.APISudokuLevelRequest;
 import lombok.RequiredArgsConstructor;
