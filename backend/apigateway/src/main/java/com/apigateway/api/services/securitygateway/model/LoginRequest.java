@@ -1,4 +1,4 @@
-package com.apigateway.api.securitygateway.model;
+package com.apigateway.api.services.securitygateway.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

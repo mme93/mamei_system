@@ -1,8 +1,8 @@
-package com.apigateway.api.sudokumanager.service;
+package com.apigateway.api.services.sudokumanager.service;
 
 import com.apigateway.api.discoveryclient.assets.table.SudokuRouteTable;
 import com.apigateway.api.discoveryclient.service.DiscoveryClientService;
-import com.apigateway.api.sudokumanager.model.dto.APISudokuLevelRequest;
+import com.apigateway.api.services.sudokumanager.model.dto.APISudokuLevelRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

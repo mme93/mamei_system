@@ -1,7 +1,7 @@
-package com.apigateway.api.securitygateway.controller;
+package com.apigateway.api.services.securitygateway.controller;
 
-import com.apigateway.api.securitygateway.model.LoginRequest;
-import com.apigateway.api.securitygateway.service.SecurityGatewayService;
+import com.apigateway.api.services.securitygateway.model.LoginRequest;
+import com.apigateway.api.services.securitygateway.service.SecurityGatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

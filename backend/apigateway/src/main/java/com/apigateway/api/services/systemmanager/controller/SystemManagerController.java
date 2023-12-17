@@ -1,6 +1,6 @@
-package com.apigateway.api.systemmanager.controller;
+package com.apigateway.api.services.systemmanager.controller;
 
-import com.apigateway.api.systemmanager.service.SystemManagerService;
+import com.apigateway.api.services.systemmanager.service.SystemManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class SystemManagerController {
 
     @GetMapping("/ping")
     public ResponseEntity<String> getPing(){
-        return new ResponseEntity<>(service.x(), HttpStatus.OK);
+        return new ResponseEntity<>(service.getPing(), HttpStatus.OK);
     }
 
 }

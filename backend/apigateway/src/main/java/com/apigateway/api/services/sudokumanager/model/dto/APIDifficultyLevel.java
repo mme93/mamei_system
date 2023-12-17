@@ -1,4 +1,4 @@
-package com.apigateway.api.sudokumanager.model.dto;
+package com.apigateway.api.services.sudokumanager.model.dto;
 
 public enum APIDifficultyLevel {
     EASY,

@@ -1,7 +1,8 @@
-package com.apigateway.api.systemmanager.service;
+package com.apigateway.api.services.systemmanager.service;
 
 import com.apigateway.api.discoveryclient.assets.table.SystemManagerRouterTable;
 import com.apigateway.api.discoveryclient.service.DiscoveryClientService;
+import com.apigateway.api.services.securitygateway.service.SecurityGatewayService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -13,19 +14,17 @@ public class SystemManagerService {
 
     private final DiscoveryClientService clientService;
     private final WebClient.Builder webClient;
-
+    private final SecurityGatewayService securityGatewayService;
 
     @Async
-    public String x(){
-        String uri=clientService.getSystemClientAdress()+ SystemManagerRouterTable.uri_system_ping;
-        String test=webClient
+    public String getPing() {
+        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_ping;
+        return webClient
                 .build()
                 .get()
                 .uri(uri)
                 .retrieve()
                 .bodyToMono(String.class).block();
-        System.err.println("Mein test lautet: "+test);
-        return "Ping";
     }
 
 }

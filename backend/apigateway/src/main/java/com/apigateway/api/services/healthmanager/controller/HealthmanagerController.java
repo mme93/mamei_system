@@ -1,4 +1,4 @@
-package com.apigateway.api.healthmanager.controller;
+package com.apigateway.api.services.healthmanager.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

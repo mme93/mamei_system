@@ -1,8 +1,8 @@
-package com.apigateway.api.sudokumanager.controller;
+package com.apigateway.api.services.sudokumanager.controller;
 
-import com.apigateway.api.sudokumanager.model.dto.APIDifficultyLevel;
-import com.apigateway.api.sudokumanager.model.dto.APISudokuLevelRequest;
-import com.apigateway.api.sudokumanager.service.APISudokuService;
+import com.apigateway.api.services.sudokumanager.model.dto.APIDifficultyLevel;
+import com.apigateway.api.services.sudokumanager.model.dto.APISudokuLevelRequest;
+import com.apigateway.api.services.sudokumanager.service.APISudokuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
