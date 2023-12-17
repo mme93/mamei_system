@@ -1,9 +1,15 @@
 package com.securitygateway.security.service;
 
 
+import com.securitygateway.security.model.dao.request.LoginRequest;
 import com.securitygateway.security.model.dao.request.RegistrationsRequest;
 import com.securitygateway.security.model.dao.response.JwtAuthenticationResponse;
+import com.securitygateway.security.model.entity.Role;
+import com.securitygateway.security.model.entity.UserEntity;
+import com.securitygateway.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,9 @@
 package com.securitygateway.security.filter;
 
 
-import com.apigateway.security.service.JwtService;
-import com.apigateway.security.service.UserService;
+
+import com.securitygateway.security.service.JwtService;
+import com.securitygateway.security.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

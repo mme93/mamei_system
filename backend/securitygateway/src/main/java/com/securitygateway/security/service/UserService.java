@@ -1,7 +1,6 @@
 package com.securitygateway.security.service;
 
-
-import com.apigateway.security.repository.UserRepository;
+import com.securitygateway.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
