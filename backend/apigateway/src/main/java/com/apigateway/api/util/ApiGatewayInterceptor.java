@@ -50,7 +50,11 @@ public class ApiGatewayInterceptor implements HandlerInterceptor {
     }
 
     private boolean isInWhiteList(String requestUri){
-        List<String>whiteList=asList("/api/database/init");
+        List<String>whiteList=asList(
+                "/api/database/init",
+                "/api/security/login",
+                "/api/security/registration"
+        );
         return whiteList.contains(requestUri);
     }
 }

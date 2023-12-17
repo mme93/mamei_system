@@ -33,7 +33,7 @@ public class DatabaseInitService {
             if(id.equals(UserRouterTable.USER_ID)){
                 uriList.add(clientService.getUserClientAdress() + UserRouterTable.URI_USER_DATABASE_INIT);
             }else if(id.equals(SecurityGatewayRouterTable.SECURITY_GATEWAY_ID)){
-                uriList.add(clientService.getSecurityGatewayClientAdress() + SecurityGatewayRouterTable.uri_security_gateway_user_init);
+                uriList.add(clientService.getSecurityGatewayClientAdress() + SecurityGatewayRouterTable.URI_SECURITY_GATEWAY_USER_INIT);
             }
         }
         return uriList;
