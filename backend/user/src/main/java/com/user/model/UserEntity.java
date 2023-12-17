@@ -1,10 +1,7 @@
 package com.user.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "User")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -23,7 +20,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    public User(String userName, String password) {
+    public UserEntity(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }

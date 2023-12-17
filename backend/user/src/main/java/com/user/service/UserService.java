@@ -1,6 +1,6 @@
 package com.user.service;
 
-import com.user.model.User;
+import com.user.model.UserEntity;
 import com.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class UserService {
      * @param user The user object to be created.
      * @return The created user object.
      */
-    public User createUser(User user) {
+    public UserEntity createUser(UserEntity user) {
         return userRepository.save(user);
     }
 
@@ -67,7 +67,7 @@ public class UserService {
      * @param id The ID of the user to be retrieved.
      * @return An Optional containing the user if found, otherwise empty.
      */
-    public Optional<User> getUserById(Long id) {
+    public Optional<UserEntity> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
@@ -77,7 +77,7 @@ public class UserService {
      * @param userName The username of the user to be retrieved.
      * @return An Optional containing the user if found, otherwise empty.
      */
-    public Optional<User> getUserByName(String userName) {
+    public Optional<UserEntity> getUserByName(String userName) {
         return userRepository.findByUserName(userName);
     }
 
@@ -86,7 +86,7 @@ public class UserService {
      *
      * @return The list of all users.
      */
-    public List<User> getUsers() {
+    public List<UserEntity> getUsers() {
         return userRepository.findAll();
     }
 
@@ -96,8 +96,8 @@ public class UserService {
      * @param user The updated user object.
      * @return The updated user object.
      */
-    public User updateUser(User user) {
-        Optional<User> existingUser = userRepository.findByUserName(user.getUserName());
+    public UserEntity updateUser(UserEntity user) {
+        Optional<UserEntity> existingUser = userRepository.findByUserName(user.getUserName());
         existingUser.ifPresent(updateUser -> {
             updateUser.setUserName(user.getUserName());
             updateUser.setPassword(user.getPassword());

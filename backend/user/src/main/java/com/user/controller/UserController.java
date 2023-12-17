@@ -1,6 +1,6 @@
 package com.user.controller;
 
-import com.user.model.User;
+import com.user.model.UserEntity;
 import com.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +39,7 @@ public class UserController {
      * @return ResponseEntity with the list of users and HttpStatus.OK.
      */
     @GetMapping("")
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserEntity>> getUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
@@ -50,7 +50,7 @@ public class UserController {
      * @return ResponseEntity with the updated user object and HttpStatus.OK.
      */
     @PutMapping("")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity user) {
         return new ResponseEntity(userService.updateUser(user), HttpStatus.OK);
     }
 
@@ -61,7 +61,7 @@ public class UserController {
      * @return ResponseEntity with the created user object and HttpStatus.OK.
      */
     @PostMapping("")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
         return new ResponseEntity(userService.createUser(user), HttpStatus.OK);
     }
 
@@ -100,7 +100,7 @@ public class UserController {
      * @return ResponseEntity with the user if found and HttpStatus.OK, otherwise HttpStatus.NOT_FOUND.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserEntity> getUserById(@PathVariable Long id) {
         return new ResponseEntity(userService.getUserById(id), HttpStatus.OK);
     }
 
@@ -111,7 +111,7 @@ public class UserController {
      * @return ResponseEntity with the user if found and HttpStatus.OK, otherwise HttpStatus.NOT_FOUND.
      */
     @GetMapping("/{name}")
-    public ResponseEntity<User> getUserByName(@PathVariable String name) {
+    public ResponseEntity<UserEntity> getUserByName(@PathVariable String name) {
         return new ResponseEntity(userService.getUserByName(name), HttpStatus.OK);
     }
 }
