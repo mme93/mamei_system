@@ -1,4 +1,4 @@
-package com.securitygateway.model.dao.request;
+package com.securitygateway.security.model.dao.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

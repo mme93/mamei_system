@@ -1,4 +1,4 @@
-package com.securitygateway.model.dao.response;
+package com.securitygateway.security.model.dao.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class JwtAuthenticationResponse {
-    private String token;
+public class LoginRequest {
+    private String username;
+    private String password;
 }
