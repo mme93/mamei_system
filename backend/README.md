@@ -26,6 +26,7 @@ Furthermore, the project in the backend directory the Docker-Compose file can be
 | SystemmanagerApplication    | 9001 | SYSTEM        |
 | ConfigmanagerApplication    | 9002 | *Not in Service Registry* |
 | HealtmanagerApplication     | 9003 | HEALTHMANAGER |
+| SecuritygatewayApplication     | 9004 | SECURITYGATEWAY |
 
 ### Project Services Range 9050-9099
 
