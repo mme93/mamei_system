@@ -24,6 +24,7 @@ public class TokenController {
     @PostMapping("/isExpired")
     public ResponseEntity<JwtAuthenticationResponse> isTokenExpired(@RequestBody RequestToken requestToken) {
         try {
+            System.err.println(requestToken.getToken());
             String token = requestToken.getToken().substring(7);
             jwtService.isTokenExpired(token);
             token = jwtService.generateNewToken(new HashMap<>(), token);

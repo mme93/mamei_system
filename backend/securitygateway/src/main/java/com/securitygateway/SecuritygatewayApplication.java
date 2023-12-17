@@ -13,5 +13,4 @@ public class SecuritygatewayApplication {
 		SpringApplication.run(SecuritygatewayApplication.class, args);
 	}
 
-
 }
