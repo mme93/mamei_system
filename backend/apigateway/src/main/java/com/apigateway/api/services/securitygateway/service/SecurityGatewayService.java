@@ -19,7 +19,7 @@ public class SecurityGatewayService {
     private final WebClient.Builder webClient;
 
     @Async
-    public JwtToken isTokeExpired(JwtToken token) {
+    public JwtToken isTokeExpired(JwtToken token) throws Exception{
         String uri = clientService.getSecurityGatewayClientAdress() + SecurityGatewayRouterTable.uri_security_gateway_isExpired;
         return webClient
                 .build()
