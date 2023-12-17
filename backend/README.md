@@ -50,7 +50,17 @@ Serves as the first point of contact for all requests and distributes them to th
 
 ### SystemmanagerApplication
 
-Is the main micro-services that takes care of distributing the requests and forwarding them.
+*Central logging and monitoring*:
+
+1) The system service can serve as a central contact point for logging and monitoring. This would allow log data and monitoring information to be consolidated system-wide.
+
+*Caching strategies*:
+
+2) The system service could provide centralized caching strategies to improve performance and minimize duplication of data access.
+
+*Central event bus handling*:
+
+3) A system service could serve as a central hub for managing event bus communications between different microservices.
 
 ### ConfigmanagerApplication
 
