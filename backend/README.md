@@ -14,28 +14,28 @@ Furthermore, the project in the backend directory the Docker-Compose file can be
 
 ### Services Registry
 
-| Services                    | Port | Name          |
-|-----------------------------|------|---------------|
+| Services                    | Port | Name                     |
+|-----------------------------|------|--------------------------|
 | ServiceregistryApplication  | 8761 |*Is the Service Registry* | 
 
 ### System Services Range 9000-9049
 
-| Services                   | Port | Name          |
-|-----------------------------|------|---------------|
-| ApigatewayApplication       | 9000 | APIGATEWAY    |
-| SystemmanagerApplication    | 9001 | SYSTEM        |
-| ConfigmanagerApplication    | 9002 | *Not in Service Registry* |
-| HealtmanagerApplication     | 9003 | HEALTHMANAGER |
-| SecuritygatewayApplication     | 9004 | SECURITYGATEWAY |
+| Services                       | Port | Name                      |
+|--------------------------------|------|---------------------------|
+| ApigatewayApplication          | 9000 | APIGATEWAY                |
+| SystemmanagerApplication       | 9001 | SYSTEM                    |
+| ConfigmanagerApplication       | 9002 | *Not in Service Registry* |
+| HealtmanagerApplication        | 9003 | HEALTHMANAGER             |
+| SecuritygatewayApplication     | 9004 | SECURITYGATEWAY           |
 
 ### Project Services Range 9050-9099
 
-| Services               | Port | Name          |
+| Services                | Port | Name          |
 |-------------------------|------|---------------|
 | UserApplication         | 9050 | USER          |
 | SudokumanagerApplication| 9051 | SUDOKU        |
 | DashboardApplication    | 9052 | DASHBOARD     |
-| ShoppinglistApplication  | 9053 | SHOPPINGLIST  |
+| ShoppinglistApplication | 9053 | SHOPPINGLIST  |
 
 ## Service Description
 
@@ -46,7 +46,7 @@ at http://localhost:8761.
 
 ### ApigatewayApplication
 
-Checks the token whether it is valid or not. With the validator token, this is automatically renewed.
+Serves as the first point of contact for all requests and distributes them to the target services after you have passed the security check from the security gateway.
 
 ### SystemmanagerApplication
 
@@ -59,3 +59,7 @@ Provides the configurations for the other micro-services and cannot be found in 
 ### HealtmanagerApplication
 
 Should monitor all micro-services and analyze the status of the services with the help of the actuator.
+
+### SecuritygatewayApplication
+
+Takes care of all areas of network security such as token procedures.
