@@ -11,6 +11,10 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
+
 public class ApiGatewayInterceptor implements HandlerInterceptor {
 
     private final SecurityGatewayService securityGatewayService;
@@ -22,13 +26,15 @@ public class ApiGatewayInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         final String authHeader = request.getHeader("Authorization");
-        if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
-        }
-        try{
-            securityGatewayService.isTokeExpired(new JwtToken(authHeader));
-        }catch (WebClientResponseException e){
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
+        if(!isInWhiteList(request.getRequestURI())){
+            if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
+            }
+            try{
+                securityGatewayService.isTokeExpired(new JwtToken(authHeader));
+            }catch (WebClientResponseException e){
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
+            }
         }
         return true;
     }
@@ -41,5 +47,10 @@ public class ApiGatewayInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         //System.out.println("Nach der Rückgabe an den Client oder bei einem Fehler");
+    }
+
+    private boolean isInWhiteList(String requestUri){
+        List<String>whiteList=asList("/api/database/init");
+        return whiteList.contains(requestUri);
     }
 }

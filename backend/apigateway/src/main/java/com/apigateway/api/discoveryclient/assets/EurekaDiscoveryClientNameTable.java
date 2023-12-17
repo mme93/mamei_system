@@ -8,4 +8,5 @@ public class EurekaDiscoveryClientNameTable {
     public static final String SecurityGatewayAPI = "SECURITYGATEWAY";
     public static final String DashboardAPI = "DASHBOARD";
     public static final String ShoppinglistAPI = "SHOPPINGLIST";
+    public static final String UserAPI = "USER";
 }
