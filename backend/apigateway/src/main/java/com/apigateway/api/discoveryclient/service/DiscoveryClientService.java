@@ -19,4 +19,8 @@ public class DiscoveryClientService {
         return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.SystemManagerAPI).get(0).getUri().toString();
     }
 
+    public String getSecurityGatewayClientAdress(){
+        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.SecurityGatewayAPI).get(0).getUri().toString();
+    }
+
 }

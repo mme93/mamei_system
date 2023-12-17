@@ -1,10 +1,9 @@
 package com.systemmanager.controller;
 
+import com.systemmanager.model.LoginRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/system")
@@ -21,6 +20,12 @@ public class SystemController {
         long waitTimeMillis = 10 * 1000;
         Thread.sleep(waitTimeMillis);
         return new ResponseEntity<>("Ping after 10sec", HttpStatus.OK);
+    }
+
+    @PostMapping("/ping")
+    public ResponseEntity<LoginRequest> postX(@RequestBody LoginRequest request){
+
+        return new ResponseEntity<>(request,HttpStatus.OK);
     }
 
 }

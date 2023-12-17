@@ -3,6 +3,8 @@ spring:
     name: securitygateway
 server:
   port: 9004
+  servlet:
+    context-path: /security
 eureka:
   client:
     serviceUrl:

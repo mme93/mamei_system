@@ -12,7 +12,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class SystemManagerService {
 
     private final DiscoveryClientService clientService;
-    private String systemClientAdress;
     private final WebClient.Builder webClient;
 
 
