@@ -35,4 +35,9 @@ public class UserService {
         return username -> userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
+
+    public String encryptPassword(String password) {
+        PasswordEncoder pw = new BCryptPasswordEncoder();
+        return pw.encode(password);
+    }
 }

@@ -1,7 +1,7 @@
 package com.user.service;
 
-import com.user.model.UserEntity;
-import com.user.repository.UserRepository;
+import com.user.model.SystemUserEntity;
+import com.user.repository.SystemUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +12,13 @@ import java.util.Optional;
  * Service class for managing user-related operations.
  */
 @Service
-public class UserService {
+public class SystemUserService {
 
-    private final UserRepository userRepository;
+    private final SystemUserRepository systemUserRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public SystemUserService(SystemUserRepository systemUserRepository) {
+        this.systemUserRepository = systemUserRepository;
     }
 
     /**
@@ -27,8 +27,8 @@ public class UserService {
      * @param user The user object to be created.
      * @return The created user object.
      */
-    public UserEntity createUser(UserEntity user) {
-        return userRepository.save(user);
+    public SystemUserEntity createUser(SystemUserEntity user) {
+        return systemUserRepository.save(user);
     }
 
     /**
@@ -39,7 +39,7 @@ public class UserService {
      */
     public boolean deleteUserById(Long id) {
         try {
-            userRepository.deleteById(id);
+            systemUserRepository.deleteById(id);
             return true;
         } catch (Exception e) {
             return false;
@@ -54,7 +54,7 @@ public class UserService {
      */
     public boolean deleteUserByName(String userName) {
         try {
-            userRepository.deleteByUserName(userName);
+            systemUserRepository.deleteByUserName(userName);
             return true;
         } catch (Exception e) {
             return false;
@@ -67,8 +67,8 @@ public class UserService {
      * @param id The ID of the user to be retrieved.
      * @return An Optional containing the user if found, otherwise empty.
      */
-    public Optional<UserEntity> getUserById(Long id) {
-        return userRepository.findById(id);
+    public Optional<SystemUserEntity> getUserById(Long id) {
+        return systemUserRepository.findById(id);
     }
 
     /**
@@ -77,8 +77,8 @@ public class UserService {
      * @param userName The username of the user to be retrieved.
      * @return An Optional containing the user if found, otherwise empty.
      */
-    public Optional<UserEntity> getUserByName(String userName) {
-        return userRepository.findByUserName(userName);
+    public Optional<SystemUserEntity> getUserByName(String userName) {
+        return systemUserRepository.findByUserName(userName);
     }
 
     /**
@@ -86,8 +86,8 @@ public class UserService {
      *
      * @return The list of all users.
      */
-    public List<UserEntity> getUsers() {
-        return userRepository.findAll();
+    public List<SystemUserEntity> getUsers() {
+        return systemUserRepository.findAll();
     }
 
     /**
@@ -96,12 +96,12 @@ public class UserService {
      * @param user The updated user object.
      * @return The updated user object.
      */
-    public UserEntity updateUser(UserEntity user) {
-        Optional<UserEntity> existingUser = userRepository.findByUserName(user.getUserName());
+    public SystemUserEntity updateUser(SystemUserEntity user) {
+        Optional<SystemUserEntity> existingUser = systemUserRepository.findByUserName(user.getUserName());
         existingUser.ifPresent(updateUser -> {
             updateUser.setUserName(user.getUserName());
             updateUser.setPassword(user.getPassword());
-            userRepository.save(updateUser);
+            systemUserRepository.save(updateUser);
         });
         return user;
     }

@@ -22,7 +22,7 @@ public class DatabaseInitService {
 
     public void initDatabase() {
         System.err.println("Init Database");
-        for(String uri:createList(asList(UserRouterTable.USER_ID, SecurityGatewayRouterTable.SECURITY_GATEWAY_ID))){
+        for(String uri:createList(asList(UserRouterTable.USER_ID))){
             callInit(uri);
         }
     }
@@ -32,8 +32,6 @@ public class DatabaseInitService {
         for(String id:idList){
             if(id.equals(UserRouterTable.USER_ID)){
                 uriList.add(clientService.getUserClientAdress() + UserRouterTable.URI_USER_DATABASE_INIT);
-            }else if(id.equals(SecurityGatewayRouterTable.SECURITY_GATEWAY_ID)){
-                uriList.add(clientService.getSecurityGatewayClientAdress() + SecurityGatewayRouterTable.URI_SECURITY_GATEWAY_USER_INIT);
             }
         }
         return uriList;

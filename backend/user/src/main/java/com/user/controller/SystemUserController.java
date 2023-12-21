@@ -1,7 +1,7 @@
 package com.user.controller;
 
-import com.user.model.UserEntity;
-import com.user.service.UserService;
+import com.user.model.SystemUserEntity;
+import com.user.service.SystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +14,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class SystemUserController {
 
-    private final UserService userService;
+    private final SystemUserService systemUserService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public SystemUserController(SystemUserService systemUserService) {
+        this.systemUserService = systemUserService;
     }
 
     /**
@@ -39,8 +39,8 @@ public class UserController {
      * @return ResponseEntity with the list of users and HttpStatus.OK.
      */
     @GetMapping("")
-    public ResponseEntity<List<UserEntity>> getUsers() {
-        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
+    public ResponseEntity<List<SystemUserEntity>> getUsers() {
+        return new ResponseEntity<>(systemUserService.getUsers(), HttpStatus.OK);
     }
 
     /**
@@ -50,8 +50,8 @@ public class UserController {
      * @return ResponseEntity with the updated user object and HttpStatus.OK.
      */
     @PutMapping("")
-    public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity user) {
-        return new ResponseEntity(userService.updateUser(user), HttpStatus.OK);
+    public ResponseEntity<SystemUserEntity> updateUser(@RequestBody SystemUserEntity user) {
+        return new ResponseEntity(systemUserService.updateUser(user), HttpStatus.OK);
     }
 
     /**
@@ -61,8 +61,8 @@ public class UserController {
      * @return ResponseEntity with the created user object and HttpStatus.OK.
      */
     @PostMapping("")
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
-        return new ResponseEntity(userService.createUser(user), HttpStatus.OK);
+    public ResponseEntity<SystemUserEntity> createUser(@RequestBody SystemUserEntity user) {
+        return new ResponseEntity(systemUserService.createUser(user), HttpStatus.OK);
     }
 
     /**
@@ -73,7 +73,7 @@ public class UserController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUserById(@PathVariable Long id) {
-        if (userService.deleteUserById(id)) {
+        if (systemUserService.deleteUserById(id)) {
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.CONFLICT);
@@ -87,7 +87,7 @@ public class UserController {
      */
     @DeleteMapping("/{name}")
     public ResponseEntity deleteUserByName(@PathVariable String name) {
-        if (userService.deleteUserByName(name)) {
+        if (systemUserService.deleteUserByName(name)) {
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.CONFLICT);
@@ -100,8 +100,8 @@ public class UserController {
      * @return ResponseEntity with the user if found and HttpStatus.OK, otherwise HttpStatus.NOT_FOUND.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<UserEntity> getUserById(@PathVariable Long id) {
-        return new ResponseEntity(userService.getUserById(id), HttpStatus.OK);
+    public ResponseEntity<SystemUserEntity> getUserById(@PathVariable Long id) {
+        return new ResponseEntity(systemUserService.getUserById(id), HttpStatus.OK);
     }
 
     /**
@@ -111,7 +111,7 @@ public class UserController {
      * @return ResponseEntity with the user if found and HttpStatus.OK, otherwise HttpStatus.NOT_FOUND.
      */
     @GetMapping("/{name}")
-    public ResponseEntity<UserEntity> getUserByName(@PathVariable String name) {
-        return new ResponseEntity(userService.getUserByName(name), HttpStatus.OK);
+    public ResponseEntity<SystemUserEntity> getUserByName(@PathVariable String name) {
+        return new ResponseEntity(systemUserService.getUserByName(name), HttpStatus.OK);
     }
 }

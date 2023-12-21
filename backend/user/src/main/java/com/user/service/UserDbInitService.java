@@ -1,7 +1,7 @@
 package com.user.service;
 
-import com.user.model.UserEntity;
-import com.user.repository.UserRepository;
+import com.user.model.SystemUserEntity;
+import com.user.repository.SystemUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,28 +11,28 @@ import java.util.List;
 @Service
 public class UserDbInitService {
 
-    private final UserRepository userRepository;
+    private final SystemUserRepository systemUserRepository;
 
     @Autowired
-    public UserDbInitService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDbInitService(SystemUserRepository systemUserRepository) {
+        this.systemUserRepository = systemUserRepository;
     }
 
     public boolean initDatabase() {
-        for(UserEntity user:getUserList()){
-            if(!userRepository.existsByUserName(user.getUserName())){
-                userRepository.save(user);
+        for(SystemUserEntity user:getSystemUserList()){
+            if(!systemUserRepository.existsByUserName(user.getUserName())){
+                systemUserRepository.save(user);
             }
         }
         return true;
     }
 
-    public List<UserEntity> getUserList(){
-        List<UserEntity>userList= new ArrayList<>();
-        userList.add(new UserEntity("admin","test123"));
-        userList.add(new UserEntity("superAdmin","test123"));
-        userList.add(new UserEntity("user","test123"));
-        userList.add(new UserEntity("guest","test123"));
+    public List<SystemUserEntity> getSystemUserList(){
+        List<SystemUserEntity>userList= new ArrayList<>();
+        userList.add(new SystemUserEntity("admin","test123"));
+        userList.add(new SystemUserEntity("superAdmin","test123"));
+        userList.add(new SystemUserEntity("user","test123"));
+        userList.add(new SystemUserEntity("guest","test123"));
         return userList;
     }
 }
