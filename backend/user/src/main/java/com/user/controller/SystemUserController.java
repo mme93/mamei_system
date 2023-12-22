@@ -13,7 +13,7 @@ import java.util.List;
  * REST Controller for managing user-related operations.
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/system_user")
 public class SystemUserController {
 
     private final SystemUserService systemUserService;

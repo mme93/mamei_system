@@ -1,5 +1,6 @@
 package com.securitygateway.security.model.dao.request;
 
+import com.securitygateway.security.model.entity.UserFlags;
 import lombok.*;
 
 @Getter
@@ -9,4 +10,5 @@ import lombok.*;
 public class LoginRequest {
     private String username;
     private String password;
+    private UserFlags flag;
 }

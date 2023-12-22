@@ -15,20 +15,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "userD")
-public class UserEntity implements UserDetails {
+public class SearchUser implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String firstName;
-    private String lastName;
+
     private String username;
-    private String callNumber;
-
-    @Column(unique = true)
-    private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -64,13 +54,8 @@ public class UserEntity implements UserDetails {
         return true;
     }
 
-    public UserEntity(String firstName, String lastName, String username, String callNumber, String email, String password, Role role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public SearchUser(String username, String password) {
         this.username = username;
-        this.callNumber = callNumber;
-        this.email = email;
         this.password = password;
-        this.role = role;
     }
 }

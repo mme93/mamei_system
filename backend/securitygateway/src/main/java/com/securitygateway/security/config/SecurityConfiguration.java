@@ -35,7 +35,8 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authorizeHttpRequests(request ->
-                        request.requestMatchers("/authenticate/**", "/token/isExpired","/user/init","/user/password/encrypt","/authenticate/login","/authenticate/registration")
+                       // request.requestMatchers("/authenticate/**", "/token/isExpired","/user/init","/user/password/encrypt","/authenticate/login","/authenticate/registration")
+                        request.requestMatchers("/authenticate/login","/authenticate/isExpired")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
