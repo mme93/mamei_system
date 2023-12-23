@@ -23,8 +23,6 @@ public class AuthenticationService {
     }
 
     public String login(SecurityUserEntity securityUserEntity) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(securityUserEntity.getUsername(), securityUserEntity.getPassword()));
         var user = securityUserEntityRepository.findByUsername(securityUserEntity.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
         return jwtService.generateToken(user);
