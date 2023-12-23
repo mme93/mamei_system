@@ -25,6 +25,7 @@ public class ApiGatewayInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        /*
         final String authHeader = request.getHeader("Authorization");
         if(!isInWhiteList(request.getRequestURI())){
             if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
@@ -36,6 +37,7 @@ public class ApiGatewayInterceptor implements HandlerInterceptor {
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
             }
         }
+         */
         return true;
     }
 

@@ -17,7 +17,7 @@ public class UserService {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 System.err.println("Username: "+username);
-                return new SearchUser("gugus","$2a$10$.9EXnejKjkgTNbipq.ZF5.I13i6yxPl3jJmN7XZ.JnP.MUAOVoOry", Role.USER);
+                return new SearchUser("gugu","$2a$10$.9EXnejKjkgTNbipq.ZF5.I13i6yxPl3jJmN7XZ.JnP.MUAOVoOry", Role.USER);
             }
         };
     }

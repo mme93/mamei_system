@@ -1,8 +1,8 @@
-package com.securitygateway.security.config;
+package com.apigateway.security.config;
 
 
-import com.securitygateway.security.filter.JwtAuthenticationFilter;
-import com.securitygateway.security.service.UserService;
+import com.apigateway.security.filter.JwtAuthenticationFilter;
+import com.apigateway.security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,8 +34,13 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .authorizeHttpRequests(request ->
+                        request.requestMatchers("/auth/login","/auth/registration")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated())
+                .authenticationProvider(authenticationProvider()).addFilterBefore(
+                        jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
