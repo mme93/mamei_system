@@ -48,6 +48,9 @@ at http://localhost:8761.
 
 Serves as the first point of contact for all requests and distributes them to the target services after you have passed the security check from the security gateway.
 
+Takes care of all areas of network security such as token procedures.
+
+
 ### SystemmanagerApplication
 
 *Central logging and monitoring*:
@@ -72,4 +75,4 @@ Should monitor all micro-services and analyze the status of the services with th
 
 ### SecuritygatewayApplication
 
-Takes care of all areas of network security such as token procedures.
+Overview about current and past Security-Protocols or Events.
