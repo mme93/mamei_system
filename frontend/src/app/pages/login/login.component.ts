@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {LoginRequest} from "../../shared/model/Login";
 import {HttpErrorResponse} from '@angular/common/http';
 import {AppComponent} from "../../app.component";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import {AppComponent} from "../../app.component";
 export class LoginComponent {
   isLoading = false;
   checkLogin = false;
+  title=environment.apiUrl;
 
   user = new FormGroup({
     username: new FormControl('user', [Validators.required, Validators.minLength(1)]),
