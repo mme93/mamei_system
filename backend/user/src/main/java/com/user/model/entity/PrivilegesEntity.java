@@ -30,4 +30,11 @@ public class PrivilegesEntity {
     private String systemPrivileges;
 
     private String dataPrivileges;
+
+    public PrivilegesEntity(Long accountId, String servicesPrivileges, String systemPrivileges, String dataPrivileges) {
+        this.accountId = accountId;
+        this.servicesPrivileges = servicesPrivileges;
+        this.systemPrivileges = systemPrivileges;
+        this.dataPrivileges = dataPrivileges;
+    }
 }

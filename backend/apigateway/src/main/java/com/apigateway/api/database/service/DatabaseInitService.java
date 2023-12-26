@@ -5,6 +5,7 @@ import com.apigateway.api.discoveryclient.service.DiscoveryClientService;
 import com.apigateway.security.SecurityUserEntityRepository;
 import com.apigateway.security.model.entity.SecurityUserEntity;
 import com.apigateway.security.model.entity.UserCollection;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,14 +25,23 @@ public class DatabaseInitService {
     private final WebClient.Builder webClient;
     private final SecurityUserEntityRepository securityUserEntityRepository;
 
+    @Transactional
     public void initDatabase() {
         System.err.println("Init Database");
+        cleanSecurityUser(asList("admin","superAdmin","user","guest","root"));
+        initSecurityUser();
         for (String uri : createList(asList(UserRouterTable.USER_ID))) {
             callInit(uri);
         }
-        initSecurityUser();
+
     }
 
+    @Transactional
+    private void cleanSecurityUser(List<String>userNamelist){
+        for(String userName:userNamelist){
+            securityUserEntityRepository.deleteByUsername(userName);
+        }
+    }
     private List<String> createList(List<String> idList) {
         List<String> uriList = new ArrayList<>();
         for (String id : idList) {

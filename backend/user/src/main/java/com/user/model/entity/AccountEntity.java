@@ -26,6 +26,7 @@ public class AccountEntity {
     private String firstName;
     private String lastName;
 
+    @Column(unique = true)
     private String username;
 
     private String callNumber;
