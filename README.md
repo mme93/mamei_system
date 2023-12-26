@@ -1,5 +1,14 @@
 # Mameie Systems
 
+## Docker Hints
+
+Remove all Images:
+- docker rmi $(docker images -aq)
+
+Remove all Container:
+- docker stop $(docker ps -aq)
+- docker rm $(docker ps -aq)
+
 ## Content Folders
 
 1) backend

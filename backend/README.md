@@ -11,15 +11,6 @@ Furthermore, the project in the backend directory the Docker-Compose file can be
 
 - docker-compose -f docker-compose-services.yml up
 
-## Docker Hints
-
-Remove all Images:
-- docker rmi $(docker images -aq)
-
-Remove all Container:
-- docker stop $(docker ps -aq)
-- docker rm $(docker ps -aq)
-
 ## Port-Mapping
 
 ### Services Registry
