@@ -7,15 +7,18 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8761:8761"
+    networks:
+      - eureka
+
   apigateway:
     build:
       context: ./apigateway
       dockerfile: Dockerfile
     ports:
       - "9000:9000"
-  user:
-    build:
-      context: ./user
-      dockerfile: Dockerfile
-    ports:
-      - "9050:9050"
+    networks:
+      - eureka
+
+networks:
+  my-network:
+    driver: bridge
