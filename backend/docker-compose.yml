@@ -1,6 +1,10 @@
 version: '3'
 
 services:
+  echo-service:
+    image: echo-service
+    depends_on:
+      - serviceregistry
   serviceregistry:
     build:
       context: ./serviceregistry
