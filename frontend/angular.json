@@ -51,6 +51,9 @@
               ],
               "outputHashing": "all"
             },
+            "docker-development": {
+              "browserTarget": "frontend:build:docker-development"
+            },
             "development": {
               "fileReplacements": [
                 {
@@ -73,6 +76,9 @@
           "configurations": {
             "production": {
               "browserTarget": "frontend:build:production"
+            },
+            "docker-development": {
+              "browserTarget": "frontend:build:docker-development"
             },
             "development": {
               "browserTarget": "frontend:build:development"
