@@ -1,0 +1,59 @@
+.database_panel {
+    background-color: #FFA500;
+    color: black;
+
+}
+
+.database_panel table {
+    border: black solid 2px;
+    border-collapse: collapse;
+    margin-left: 7vw;
+    margin-right: 7vw;
+}
+.database_panel tr{
+    background-color: #FFA500;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-container p {
+    margin-right: 5px;
+}
+
+.buttons {
+    margin-left: auto;
+}
+
+.container {
+    background-color: #FFA500;
+    color: black;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.info-container {
+    display: flex;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon_button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 1px;
+}
+
+
+

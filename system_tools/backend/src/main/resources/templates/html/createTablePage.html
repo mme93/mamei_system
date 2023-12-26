@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/createTablePage.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<div class="page_header">
+    <h1 class="page_title" th:text="${title}"></h1>
+</div>
+
+<div class="container">
+    <span style="flex: 1;">Table Name:</span>
+    <input type="text" style="flex: 5;" id="tableNameInput">
+    <button id="button1" onclick="validateTable()" class="icon_button" style="color: yellow">
+        <i class="fas fa-check"></i>
+    </button>
+    <button id="button2" onclick="createTable()" class="icon_button" style="color: red" disabled="true">
+        <i class="fas fa-floppy-disk"></i>
+    </button>
+    <button id="button3" onclick="resetTable()" class="icon_button" style="color: grey">
+        <i class="fas fa-trash"></i>
+    </button>
+</div>
+
+<div class="button-container">
+
+</div>
+
+
+<table id="tableId">
+    <tr>
+        <th>Nr.</th>
+        <th>Spaltenname</th>
+        <th>Primary Key</th>
+        <th>Is Nullable</th>
+        <th>Default Wert</th>
+        <th>Datentyp</th>
+        <th>Extra</th>
+        <th>Action</th>
+    </tr>
+    <tr id="rowToAdd">
+        <td style="visibility: hidden"><span>0</span></td>
+        <td><input type="text" name="columnName" id="columnName"></td>
+        <td>
+            <select name="primaryKey">
+                <option value="No Key">No Key</option>
+                <option value="PRIMARY">PRIMARY</option>
+            </select>
+        </td>
+        </td>
+        <td><input type="checkbox" name="isNullable"></td>
+        <td><input type="text" name="defaultValue"></td>
+        <td>
+            <select name="dataType">
+                <option value="INT">INT</option>
+                <option value="VARCHAR(255)">VARCHAR(255)</option>
+                <option value="DATE">DATE</option>
+            </select>
+        </td>
+        <td>
+            <select name="extra">
+                <option value="">Kein Extra</option>
+                <option value="AUTO_INCREMENT">AUTO_INCREMENT</option>
+                <option value="UNIQUE">UNIQUE</option>
+            </select>
+        </td>
+        <td><input type="button" value="Add" onclick="addRow()" style="width: 100%"></td>
+    </tr>
+</table>
+<script type="text/javascript" th:inline="javascript">
+    let tableColumnsArray = [];
+    let number = 1;
+
+    function validateTable() {
+
+        const serverUrl = /*[[${@environment.getProperty('spring.config.serverUrl')}]]*/ '';
+        const url = serverUrl + "restTable/validate"
+        let tableNameInputEle = document.getElementById("tableNameInput");
+        const databaseServer = {
+            serverName: /*[[${serverName}]]*/ 'ServernameFallback',
+            databaseName: /*[[${databaseName}]]*/ 'DatabaseNameFallback',
+            tableName: tableNameInputEle.value
+        };
+
+        const anfrage = {
+            databaseServer: databaseServer,
+            tableMetaColumnList: tableColumnsArray
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(anfrage)
+        };
+
+        fetch(url, requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                analyzeReport(data)
+            })
+            .catch(error => {
+                console.error('Fehler bei der POST-Anfrage:', error);
+            });
+    }
+
+    function analyzeReport(data) {
+
+        if (data.tableValid) {
+            document.getElementById("button1").style.color = "green"
+            document.getElementById("button2").style.color = "green"
+            document.getElementById("button2").disabled=false;
+        } else {
+            document.getElementById("button1").style.color = "yellow"
+            document.getElementById("button2").style.color = "red"
+            document.getElementById("button2").disabled=true;
+        }
+    }
+
+    function addRow() {
+        let row = document.getElementById("rowToAdd");
+        let columns = row.querySelectorAll("td");
+        let addDataRow = document.getElementById('tableId');
+        let tr = document.createElement('tr');
+        let nr = document.createElement("span");
+        let colTd = document.createElement("td");
+        nr.textContent = number.toString();
+        number++;
+        colTd.appendChild(nr)
+        tr.appendChild(colTd)
+        let metColumn = new TableColumn();
+        let index = 0;
+        columns.forEach(function (column) {
+
+            let input = column.querySelector("input, select");
+            if (input) {
+                let td = document.createElement("td");
+                let name = input.name;
+                let object;
+                let value;
+                if (input.type === 'checkbox') {
+                    value = input.checked;
+                    object = document.createElement("input");
+                    object.type = "checkbox";
+                    object.checked = input.checked;
+                    object.addEventListener("change", function () {
+                        changeValue(object.checked, nr.textContent, 'nullAble')
+                    });
+                    metColumn.nullAble = value;
+                } else if (input.type === 'button') {
+                    object = document.createElement("button");
+                    object.textContent = 'Remove';
+                    object.onclick = function () {
+                        removeRowFromTable(nr.textContent);
+                    };
+                } else {
+                    value = input.value;
+                    if (name === 'columnName') {
+                        object = document.createElement("input");
+                        object.type = "text";
+                        object.textContent = value;
+                        object.value = value;
+                        object.addEventListener("input", function () {
+                            changeValue(object.value, nr.textContent, 'columnName')
+                        });
+                        metColumn.columnName = value;
+                    } else if (name === 'primaryKey') {
+                        metColumn.columnKey = value;
+                        object = document.createElement("select");
+                        let firstOption = document.createElement("option");
+                        firstOption.value = "No Key";
+                        firstOption.textContent = "No Key";
+                        object.appendChild(firstOption);
+                        let secondOption = document.createElement("option");
+                        secondOption.value = "PRIMARY";
+                        secondOption.textContent = "PRIMARY";
+                        object.appendChild(secondOption);
+                        object.value = value;
+                        object.addEventListener("change", function () {
+                            changeValue(object.value, nr.textContent, 'columnKey')
+                        });
+                    } else if (name === 'defaultValue') {
+                        object = document.createElement("input");
+                        object.type = "text";
+                        object.textContent = value;
+                        object.value = value;
+                        object.addEventListener("input", function () {
+                            changeValue(object.value, nr.textContent, 'columnDefault')
+                        });
+                        metColumn.columnDefault = value;
+                    } else if (name === 'dataType') {
+                        metColumn.columnType = value;
+                        object = document.createElement("select");
+                        let firstOption = document.createElement("option");
+                        firstOption.value = "INT";
+                        firstOption.textContent = "INT";
+                        object.appendChild(firstOption);
+                        let secondOption = document.createElement("option");
+                        secondOption.value = "VARCHAR(255)";
+                        secondOption.textContent = "VARCHAR(255)";
+                        object.appendChild(secondOption);
+                        let thirdOption = document.createElement("option");
+                        thirdOption.value = "DATE";
+                        thirdOption.textContent = "DATE";
+                        object.addEventListener("change", function () {
+                            changeValue(object.value, nr.textContent, 'columnType')
+                        });
+                        object.appendChild(thirdOption);
+                        object.value = value;
+                    } else if (name === 'extra') {
+                        metColumn.extra = value;
+                        object = document.createElement("select");
+                        let firstOption = document.createElement("option");
+                        firstOption.value = "";
+                        firstOption.textContent = "Kein Extra";
+                        object.appendChild(firstOption);
+                        let secondOption = document.createElement("option");
+                        secondOption.value = "AUTO_INCREMENT";
+                        secondOption.textContent = "AUTO_INCREMENT";
+                        object.appendChild(secondOption);
+                        let thirdOption = document.createElement("option");
+                        thirdOption.value = "UNIQUE";
+                        thirdOption.textContent = "UNIQUE";
+                        object.appendChild(thirdOption);
+                        object.value = value;
+                        object.addEventListener("change", function () {
+                            changeValue(object.value, nr.textContent, 'extra')
+                        });
+                    }
+                }
+                td.appendChild(object);
+                tr.appendChild(td)
+
+                if (input.type === "text") {
+                    input.value = "";
+                } else if (input.type === "checkbox") {
+                    input.checked = false;
+                } else if (input.tagName === "SELECT") {
+                    input.selectedIndex = 0;
+                }
+
+            }
+            index++;
+        });
+        tableColumnsArray.push(metColumn)
+        addDataRow.appendChild(tr)
+    }
+
+
+    function removeRowFromTable(number) {
+        tableColumnsArray.splice(number - 1, 1);
+        clear();
+        rebuildTable();
+    }
+
+
+    function clear() {
+        const table = document.getElementById('tableId');
+        const trRows = table.querySelectorAll('tr');
+        for (let i = 2; i < trRows.length; i++) {
+            trRows[i].remove();
+        }
+    }
+
+    function createTable() {
+        if (tableColumnsArray.length > 0) {
+            const serverUrl = /*[[${@environment.getProperty('spring.config.serverUrl')}]]*/ '';
+            const url = serverUrl + "restTable/create"
+            let tableNameInputEle = document.getElementById("tableNameInput");
+            const databaseServer = {
+                serverName: /*[[${serverName}]]*/ 'ServernameFallback',
+                databaseName: /*[[${databaseName}]]*/ 'DatabaseNameFallback',
+                tableName: tableNameInputEle.value
+            };
+            let copyTableColumnsArray = tableColumnsArray;
+            for (let i = 0; i < copyTableColumnsArray.length; i++) {
+                if (copyTableColumnsArray[i].columnKey === 'No Key') {
+                    copyTableColumnsArray[i].columnKey = '';
+                }
+            }
+
+            const anfrage = {
+                databaseServer: databaseServer,
+                tableMetaColumnList: copyTableColumnsArray
+            }
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(anfrage)
+                //body: JSON.stringify(tableColumnsArray)
+            };
+
+            fetch(url, requestOptions)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if(data){
+                        window.location.href=serverUrl+'web/tables/'+ databaseServer.serverName+'/'+databaseServer.databaseName;
+                    }else{
+                        alert('Fehler bei der POST-Anfrage.');
+                    }
+                })
+                .catch(error => {
+                    alert('Fehler bei der POST-Anfrage:', error);
+                });
+
+        }
+
+    }
+
+    function resetTable() {
+        const table = document.getElementById('tableId');
+        const trRows = table.querySelectorAll('tr');
+        for (let i = 2; i < trRows.length; i++) {
+            trRows[i].remove();
+        }
+        tableColumnsArray = [];
+        document.getElementById("columnName").textContent = '';
+        number = 1;
+    }
+
+    function rebuildTable() {
+        number = 1;
+
+        for (let i = 0; i < tableColumnsArray.length; i++) {
+            let addDataRow = document.getElementById('tableId');
+            let tr = document.createElement('tr');
+            //Nr
+            let nr = document.createElement("span");
+            let colTd = document.createElement("td");
+            nr.textContent = number.toString();
+            colTd.appendChild(nr)
+            tr.appendChild(colTd)
+            //ColName
+            let colName = document.createElement("input");
+            colName.type = "text";
+            let colNameTd = document.createElement("td");
+            colName.textContent = tableColumnsArray[i].columnName;
+            colName.value = tableColumnsArray[i].columnName;
+            colName.addEventListener("input", function () {
+                changeValue(colName.value, nr.textContent, 'columnName')
+            });
+            colNameTd.appendChild(colName);
+            tr.appendChild(colNameTd);
+            //Key
+            let keyName = document.createElement("select");
+            let firstOption = document.createElement("option");
+            firstOption.value = "";
+            firstOption.textContent = "No Key";
+            keyName.appendChild(firstOption);
+            let secondOption = document.createElement("option");
+            secondOption.value = "PRIMARY";
+            secondOption.textContent = "PRIMARY";
+            keyName.appendChild(secondOption);
+            let keyNameTd = document.createElement("td");
+            keyName.value = tableColumnsArray[i].columnKey;
+            keyNameTd.appendChild(keyName);
+            keyNameTd.addEventListener("change", function () {
+                changeValue(keyName.value, nr.textContent, 'columnKey')
+            })
+            tr.appendChild(keyNameTd);
+            //IsNullable
+            let isNullAble = document.createElement("input");
+            let isNullAbleTd = document.createElement("td");
+            isNullAble.type = "checkbox";
+            isNullAble.checked = tableColumnsArray[i].nullAble;
+            isNullAble.addEventListener("change", function () {
+                changeValue(isNullAble.checked, nr.textContent, 'nullAble')
+            });
+            isNullAbleTd.appendChild(isNullAble);
+            tr.appendChild(isNullAbleTd);
+            //Default Wert
+            let defaultValue = document.createElement("input");
+            defaultValue.type = "text"
+            let defaultValueTd = document.createElement("td");
+            defaultValue.textContent = tableColumnsArray[i].columnDefault;
+            defaultValue.value = tableColumnsArray[i].columnDefault;
+            defaultValue.addEventListener("input", function () {
+                changeValue(defaultValue.value, nr.textContent, 'columnDefault')
+            });
+            defaultValueTd.appendChild(defaultValue);
+            tr.appendChild(defaultValueTd);
+            //DataType
+            let dataType = document.createElement("select");
+            let dataTypeTd = document.createElement("td");
+            firstOption = document.createElement("option");
+            firstOption.value = "INT";
+            firstOption.textContent = "INT";
+            dataType.appendChild(firstOption);
+            secondOption = document.createElement("option");
+            secondOption.value = "VARCHAR(255)";
+            secondOption.textContent = "VARCHAR(255)";
+            dataType.appendChild(secondOption);
+            let thirdOption = document.createElement("option");
+            thirdOption.value = "DATE";
+            thirdOption.textContent = "DATE";
+            dataType.appendChild(thirdOption);
+            dataType.value = tableColumnsArray[i].columnType;
+            dataType.addEventListener("change", function () {
+                changeValue(dataType.value, nr.textContent, 'columnType')
+            });
+            dataTypeTd.appendChild(dataType);
+            tr.appendChild(dataTypeTd);
+            //Extra
+            let extra = document.createElement("select");
+            let extraTd = document.createElement("td");
+            extra.textContent = tableColumnsArray[i].extra;
+            firstOption = document.createElement("option");
+            firstOption.value = "";
+            firstOption.textContent = "Kein Extra";
+            extra.appendChild(firstOption);
+            secondOption = document.createElement("option");
+            secondOption.value = "AUTO_INCREMENT";
+            secondOption.textContent = "AUTO_INCREMENT";
+            extra.appendChild(secondOption);
+            thirdOption = document.createElement("option");
+            thirdOption.value = "UNIQUE";
+            thirdOption.textContent = "UNIQUE";
+            extra.appendChild(thirdOption);
+            extraTd.appendChild(extra);
+            extra.value = tableColumnsArray[i].extra;
+            extra.addEventListener("change", function () {
+                changeValue(extra.value, nr.textContent, 'extra')
+            });
+            tr.appendChild(extraTd);
+            //Button
+            let removeButtonTd = document.createElement("td");
+            let removeButton = document.createElement("button");
+            removeButton.textContent = 'Remove';
+            removeButton.onclick = function () {
+                removeRowFromTable(nr.textContent);
+            };
+            removeButtonTd.appendChild(removeButton);
+            tr.appendChild(removeButtonTd);
+            addDataRow.appendChild(tr)
+            number++;
+        }
+    }
+
+    function changeValue(value, nr, colName) {
+        const index = Number(nr) - 1;
+        if (colName === 'columnName') {
+            tableColumnsArray[index].columnName = value;
+        } else if (colName === 'columnKey') {
+            tableColumnsArray[index].columnKey = value;
+        } else if (colName === 'nullAble') {
+            tableColumnsArray[index].nullAble = value;
+        } else if (colName === 'columnDefault') {
+            tableColumnsArray[index].columnDefault = value;
+        } else if (colName === 'columnType') {
+            tableColumnsArray[index].columnType = value;
+        } else if (colName === 'extra') {
+            tableColumnsArray[index].extra = value;
+        }
+    }
+
+
+    class TableColumn {
+        columnName = '';
+        columnType = '';
+        nullAble = false;
+        columnKey = '';
+        columnDefault = '';
+        extra = '';
+    }
+</script>
+</body>
+</html>

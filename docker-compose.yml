@@ -31,12 +31,20 @@ services:
       - eureka
     environment:
       - EUREKA_URI=http://serviceregistry:8761/eureka
+
   frontend:
     build:
       context: frontend
       dockerfile: Dockerfile
     ports:
       - "80:4200"
+
+  db_manager:
+    build:
+      context: system_tools/backend
+      dockerfile: Dockerfile
+    ports:
+      - "8998:8998"
 
 networks:
   eureka:

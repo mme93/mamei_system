@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/tablePage.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="page_header" id="headerId">
+    <h1 class="page_title">Table Overview</h1>
+</div>
+
+<h4 th:text="${tableView.tableName}">[tableView.tableName]</h4>
+
+
+<div class="add_dataset_container" id="addDataPopUp">
+    <h4>New Dataset</h4>
+    <div>
+        <div th:each="tableColumn : ${tableView.tableColumns}" class="add_dataset_row">
+            <p th:text="${tableColumn.columnName}"></p>
+            <input type="text" th:id="${tableColumn.columnName}">
+        </div>
+    </div>
+    <div class="add_dataset_button_container">
+        <button>Add</button>
+        <button onclick="closeDialog()">Close</button>
+    </div>
+</div>
+<button id="addButton" style="width: 100%" onclick="addDataset()">Add</button>
+
+
+<div class="table-overview">
+    <table style="width: 100%">
+        <tr>
+            <th id="columnId" th:each="tableColumn : ${tableView.tableColumns}">
+                <span th:text="${tableColumn.columnName}"></span>
+            </th>
+        </tr>
+        <tr th:each="tableMetaRow : ${tableView.tableMetaRows}">
+            <td th:each="tableMetaColumn : ${tableMetaRow.tableMetaColumns}">
+                <span th:text="${tableMetaColumn.value}"
+                      th:value="${tableMetaColumn.value}"
+                      th:attr="data-columnInfo=${tableMetaRow.tableMetaColumns[0].value} +'|'+${tableMetaColumn.columnName}"
+                      ondblclick="convertToInput(this)"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+    let editedValues = [[${tableView}]];
+    let isChange = false;
+    initPage();
+
+    function addDataset(){
+        document.getElementById('addDataPopUp').style.visibility="visible"
+    }
+    function closeDialog(){
+        document.getElementById('addDataPopUp').style.visibility="hidden"
+    }
+
+    function convertToInput(spanElement) {
+        const searchColumnName = spanElement.getAttribute('data-columnInfo').split('|')[1];
+        const searchColumnId = spanElement.getAttribute('data-columnInfo').split('|')[0]
+        const existingInput = spanElement.nextSibling;
+        if (existingInput && existingInput.tagName === 'INPUT') {
+            return;
+        }
+        const textValue = spanElement.innerText;
+        const inputElement = document.createElement('input');
+        inputElement.value = textValue;
+
+        const finishEditing = function () {
+            spanElement.innerText = inputElement.value;
+            spanElement.style.display = 'inline';
+            inputElement.style.display = 'none';
+        };
+
+        inputElement.onblur = finishEditing;
+        inputElement.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                saveData();
+                finishEditing();
+            }
+        });
+        inputElement.addEventListener('input', function () {
+            updateModel(inputElement.value, searchColumnName, searchColumnId);
+
+        });
+
+        inputElement.addEventListener('blur', function () {
+            console.log('Input-Element hat den Fokus verloren');
+        });
+
+
+        spanElement.style.display = 'none';
+        inputElement.style.display = 'inline';
+        spanElement.parentNode.appendChild(inputElement);
+
+        inputElement.focus();
+        inputElement.select();
+    }
+
+
+    function initPage() {
+        const columnSize = editedValues.tableSize;
+        if (columnSize > 8) {
+            document.getElementById('columnId').style.width = (100 / columnSize) + '%';
+        } else {
+            document.getElementById('columnId').style.width = 20 + '%';
+        }
+        document.getElementById('headerId').style.width = 100 + '%';
+    }
+
+    function saveData() {
+
+        isChange = false;
+    }
+
+    function updateModel(updatedValue, searchColumnName, searchColumnId) {
+        for (let i = 0; i < editedValues.tableMetaRows.length; i++) {
+            const resultId = editedValues.tableMetaRows[i].tableMetaColumns[0].value;
+            if (resultId === searchColumnId) {
+                for (let j = 0; j < editedValues.tableMetaRows[i].tableMetaColumns.length; j++) {
+                    if (editedValues.tableMetaRows[i].tableMetaColumns[j].columnName === searchColumnName) {
+                        editedValues.tableMetaRows[i].tableMetaColumns[j].value = updatedValue;
+                    }
+                }
+            }
+        }
+        isChange = true;
+    }
+
+</script>
+
+</body>
+</html>

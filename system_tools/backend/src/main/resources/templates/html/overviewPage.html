@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/overviewPage.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="page_header">
+    <h1 class="page_title">DB Manger</h1>
+</div>
+
+<div class="page_panel">
+    <div>
+        <label for="linuxServer">Choose a Server for MariaDB:</label>
+        <select name="linuxServer" id="linuxServer" style="width: 100%">
+            <option th:each="server : ${serverNameList}"
+                    th:value="${server.value}"
+                    th:text="${server.name}">Server Name
+            </option>
+        </select>
+        <button style="width: 100%" type="submit" id="loadConfig" name="loadConfig">
+            Load Table
+        </button>
+    </div>
+
+
+    <div name="databaseList" id="databaseList">
+
+    </div>
+
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        let loadConfigButton = document.getElementById('loadConfig');
+        let select = document.getElementById('linuxServer');
+        loadConfigButton.addEventListener('click', function () {
+            const serverName=select.value;
+            const serverUrl = /*[[${@environment.getProperty('spring.config.serverUrl')}]]*/ '';
+            window.location.href=serverUrl+'web/database/'+ serverName;
+        });
+    });
+</script>
+
+</body>
+</html>
