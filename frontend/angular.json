@@ -51,16 +51,7 @@
               ],
               "outputHashing": "all"
             },
-            "docker-development": {
-              "browserTarget": "frontend:build:docker-development"
-            },
             "development": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -76,9 +67,6 @@
           "configurations": {
             "production": {
               "browserTarget": "frontend:build:production"
-            },
-            "docker-development": {
-              "browserTarget": "frontend:build:docker-development"
             },
             "development": {
               "browserTarget": "frontend:build:development"
