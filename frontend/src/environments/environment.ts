@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'Ich bin kein Docker'
+  apiUrl: 'Ich bin die normale Env'
 };
