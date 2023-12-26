@@ -21,6 +21,17 @@ services:
     environment:
       - EUREKA_URI=http://serviceregistry:8761/eureka
 
+  user:
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    ports:
+      - "9050:9050"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
 networks:
   eureka:
     driver: bridge
