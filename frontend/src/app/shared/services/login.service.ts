@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {JwtAuthenticationRequest, JwtAuthenticationResponse, LoginRequest} from "../model/Login";
+import { JwtAuthenticationResponse, LoginRequest} from "../model/Login";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 
