@@ -18,6 +18,8 @@ services:
       - "9000:9000"
     networks:
       - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
 
 networks:
   my-network:
