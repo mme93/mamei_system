@@ -2,9 +2,10 @@
 
 ## Start Backend
 
-The backend project, which includes various Spring Boot micro-services, can be started in different ways. 
+The backend project, which includes various Spring Boot micro-services, can be started in different ways.
 
-Each individual service contains a Dockerfile, which can be created using "**docker build -t IMAGENAME .**" builds an image and can be called with "**docker run -d -p 8080:8080 IMAGENAME:latest**". 
+Each individual service contains a Dockerfile, which can be created using "**docker build -t IMAGENAME .**" builds an
+image and can be called with "**docker run -d -p 8080:8080 IMAGENAME:latest**".
 
 Furthermore, the project in the backend directory the Docker-Compose file can be called with “**docker-compose up**”.
 
@@ -46,20 +47,22 @@ at http://localhost:8761.
 
 ### ApigatewayApplication
 
-Serves as the first point of contact for all requests and distributes them to the target services after you have passed the security check from the security gateway.
+Serves as the first point of contact for all requests and distributes them to the target services after you have passed
+the security check from the security gateway.
 
 Takes care of all areas of network security such as token procedures.
-
 
 ### SystemmanagerApplication
 
 *Central logging and monitoring*:
 
-1) The system service can serve as a central contact point for logging and monitoring. This would allow log data and monitoring information to be consolidated system-wide.
+1) The system service can serve as a central contact point for logging and monitoring. This would allow log data and
+   monitoring information to be consolidated system-wide.
 
 *Caching strategies*:
 
-2) The system service could provide centralized caching strategies to improve performance and minimize duplication of data access.
+2) The system service could provide centralized caching strategies to improve performance and minimize duplication of
+   data access.
 
 *Central event bus handling*:
 
@@ -76,3 +79,8 @@ Should monitor all micro-services and analyze the status of the services with th
 ### SecuritygatewayApplication
 
 Overview about current and past Security-Protocols or Events.
+
+## User
+
+The normal user for logging into the system runs via the security_user, which is managed on the API gateway. The
+remaining "Users" are in the User Services and are an extension of the security_user.
