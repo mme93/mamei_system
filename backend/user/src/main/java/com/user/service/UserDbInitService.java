@@ -1,8 +1,8 @@
 package com.user.service;
 
-import com.user.model.Role;
-import com.user.model.SystemUserEntity;
-import com.user.model.UserEntity;
+import com.user.model.entity_enum.Role;
+import com.user.model.entity.SystemUserEntity;
+import com.user.model.entity.UserEntity;
 import com.user.repository.SystemUserRepository;
 import com.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.user.controller;
 
-import com.user.model.SystemUserEntity;
+import com.user.model.entity.SystemUserEntity;
 import com.user.service.SystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

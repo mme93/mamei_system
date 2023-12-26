@@ -1,5 +1,6 @@
-package com.user.model;
+package com.user.model.entity;
 
+import com.user.model.entity_enum.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
