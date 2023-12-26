@@ -1,5 +1,6 @@
 package com.user.model.entity;
 
+import com.user.model.entity_enum.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,12 +33,16 @@ public class AccountEntity {
     @Column(unique = true)
     private String email;
 
-    public AccountEntity(Long userId, String firstName, String lastName, String username, String callNumber, String email) {
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public AccountEntity(Long userId, String firstName, String lastName, String username, String callNumber, String email, Role role) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.callNumber = callNumber;
         this.email = email;
+        this.role = role;
     }
 }

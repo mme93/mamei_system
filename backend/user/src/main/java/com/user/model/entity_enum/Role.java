@@ -2,5 +2,6 @@ package com.user.model.entity_enum;
 
 public enum Role {
     USER,
-    ADMIN
+    ADMIN,
+    GUEST
 }
