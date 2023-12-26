@@ -8,8 +8,8 @@ import {Observable} from "rxjs";
 })
 export class LoginService {
 
-  private apiLoginUrl = 'http://localhost:9000/authenticate/login';
-  private apiIsTokenExpired = 'http://localhost:9000/token/isExpired';
+  private apiLoginUrl = 'http://localhost:9000/api/auth/login';
+  private apiIsTokenExpired = 'http://localhost:9000/api/auth/isTokenExpired';
 
   constructor(private http: HttpClient) {
   }

@@ -16,8 +16,8 @@ export class LoginComponent {
   checkLogin = false;
 
   user = new FormGroup({
-    username: new FormControl('marv', [Validators.required, Validators.minLength(1)]),
-    password: new FormControl('1234', [Validators.required, Validators.minLength(1)])
+    username: new FormControl('user', [Validators.required, Validators.minLength(1)]),
+    password: new FormControl('test123', [Validators.required, Validators.minLength(1)])
   });
 
   constructor(private loginService: LoginService, private router: Router, private appComponent: AppComponent) {
