@@ -22,5 +22,5 @@ services:
       - EUREKA_URI=http://serviceregistry:8761/eureka
 
 networks:
-  my-network:
+  eureka:
     driver: bridge
