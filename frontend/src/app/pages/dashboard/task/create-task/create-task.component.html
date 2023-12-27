@@ -37,7 +37,7 @@
         <div [ngClass]="dateFormClass">
           <mat-form-field *ngIf="options.controls.needDate.value===true">
             <mat-label>Enter a start date</mat-label>
-            <input matInput [matDatepicker]="picker">
+            <input matInput [matDatepicker]="picker" formControlName="dateStart">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
