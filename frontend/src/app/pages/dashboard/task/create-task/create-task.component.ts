@@ -96,31 +96,7 @@ export class CreateTaskComponent {
       // @ts-ignore
       endTime: this.task.controls.timeEnd.value !== null ? this.task.controls.timeEnd.value : new Time(),
     };
-    this.taskService.test(task);
-    /*
-    this.isLoading = true;
-    const task: StandardTask = {
-      name: this.task.controls.name.value ?? '',
-      information: this.task.controls.information.value ?? '',
-      startDate: this.task.controls.dateStart.value ?? new Date(),
-      endDate: this.task.controls.dateEnd.value ?? new Date(),
-      // @ts-ignore
-      startTime: this.task.controls.timeStart.value !== null ? this.task.controls.timeStart.value : new Time(),
-      // @ts-ignore
-      endTime: this.task.controls.timeEnd.value !== null ? this.task.controls.timeEnd.value : new Time(),
-    };
-    this.taskService.createTask(task).subscribe(
-      result => {
-        this.isLoading = false;
-        console.log(result)
-      },
-      (error: HttpErrorResponse) => {
-        this.isLoading = false;
-        console.log('HTTP Status:', error.status);
-      }
-    );
-     */
-
+    this.taskService.createTask(task);
   }
 
 

@@ -27,12 +27,22 @@ public class DashboardService {
                 .bodyToMono(String.class).block();
     }
 
-    public List<Object> getAllTask(){
-
-        String uri = clientService.getDashboardClientAdress();
+    public Object getTaskById(Long id){
+        String uri = clientService.getDashboardClientAdress()+ DashboardRouterTable.URI_DASH_BOARD_GET_TASK_BY_ID+id;
         return webClient
                 .build()
-                .post()
+                .get()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(Object.class).block();
+    }
+
+    public List<Object> getAllTask(){
+
+        String uri = clientService.getDashboardClientAdress()+ DashboardRouterTable.URI_DASH_BOARD_GET_ALL_TASK;
+        return webClient
+                .build()
+                .get()
                 .uri(uri)
                 .retrieve()
                 .bodyToMono(List.class).block();

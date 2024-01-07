@@ -1,1 +1,9 @@
-<p>task-overview works!</p>
+<h1>All Task</h1>
+<div *ngFor="let myTask of task">
+  <span>{{myTask.startDate}}</span>
+  <span>{{myTask.startTime}}</span>
+  <span>{{myTask.name}}</span>
+  <span>{{myTask.information}}</span>
+  <span>{{myTask.endDate}}</span>
+  <span>{{myTask.endTime}}</span>
+</div>
