@@ -2,6 +2,7 @@ package com.apigateway.api.services.dashboard.service;
 
 import com.apigateway.api.discoveryclient.service.DiscoveryClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -15,13 +16,13 @@ public class DashboardService {
     private final WebClient.Builder webClient;
 
     public Object createTask(Object task) {
-        String uri = clientService.getDashboardClientAdress();
+        String uri = clientService.getDashboardClientAdress()+"/createTask";
         return webClient
                 .build()
                 .post()
                 .uri(uri)
                 .retrieve()
-                .bodyToMono(Object.class).block();
+                .bodyToMono(String.class).block();
     }
 
     public List<Object> getAllTask(){
