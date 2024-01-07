@@ -6,10 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mamei.backend.datenbank.mariadb.db.model.DatabaseServer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -87,11 +85,22 @@ public class TableObject {
                 tableMetaColumn.setColumnName(tableColumn.getColumnName());
                 tableMetaColumn.setValue(String.valueOf(result));
                 tableMetaColumns.add(tableMetaColumn);
-            }else if (matchColumnType(tableColumn.getColumnType(), Enum.class)) {
+            } else if (matchColumnType(tableColumn.getColumnType(), Enum.class)) {
                 TableMetaColumn tableMetaColumn = new TableMetaColumn();
                 String result = resultSet.getString(tableColumn.getColumnName());
                 tableMetaColumn.setColumnName(tableColumn.getColumnName());
                 tableMetaColumn.setValue(String.valueOf(result));
+                tableMetaColumns.add(tableMetaColumn);
+            } else if (matchColumnType(tableColumn.getColumnType(), Date.class)) {
+                TableMetaColumn tableMetaColumn = new TableMetaColumn();
+                tableMetaColumn.setColumnName(tableColumn.getColumnName());
+                if (tableColumn.getColumnType().contains("time")) {
+                    Time result = resultSet.getTime(tableColumn.getColumnName());
+                    tableMetaColumn.setValue(String.valueOf(result));
+                } else {
+                    Date result = resultSet.getDate(tableColumn.getColumnName());
+                    tableMetaColumn.setValue(String.valueOf(result));
+                }
                 tableMetaColumns.add(tableMetaColumn);
             } else {
                 throw new SQLException("No column typ found from typ: " + tableColumn.getColumnType());
@@ -103,9 +112,10 @@ public class TableObject {
 
     public boolean matchColumnType(String columnType, Class typeClass) {
         String[] stringTypes = {"varchar", "text"};
-        String[] intTypes = {"bigint","int"};
+        String[] intTypes = {"bigint", "int"};
         String[] floatTypes = {"decimal"};
         String[] enumTypes = {"enum"};
+        String[] dateTypes = {"date", "time"};
         switch (getTypeClassSimpleName(typeClass)) {
             case "String":
                 if (containsColumnTypes(columnType, stringTypes)) return true;
@@ -118,6 +128,9 @@ public class TableObject {
                 break;
             case "Enum":
                 if (containsColumnTypes(columnType, enumTypes)) return true;
+                break;
+            case "Date":
+                if (containsColumnTypes(columnType, dateTypes)) return true;
                 break;
             default:
                 return false;
@@ -162,7 +175,7 @@ public class TableObject {
     }
 
     private void createVisualIdCol() {
-        String colName="vs_id";
+        String colName = "vs_id";
         tableColumns.add(0, new TableColumn(colName, "bigInt()", false, null, null, null));
         int index = 1;
         for (TableMetaRow tableMetaRow : tableMetaRows) {
