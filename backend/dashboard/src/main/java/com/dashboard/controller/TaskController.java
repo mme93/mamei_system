@@ -2,12 +2,14 @@ package com.dashboard.controller;
 
 import com.dashboard.model.entity.Task;
 import com.dashboard.service.TaskService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -22,13 +24,14 @@ public class TaskController {
     }
 
     @PostMapping("/createTask")
-    public ResponseEntity<Task> createTask(@RequestBody Task task) {
-        return new ResponseEntity<>(this.taskService.createTask(task), HttpStatus.OK);
+    public ResponseEntity<Task> createTask(@RequestBody Task task, HttpServletRequest request) {
+        return new ResponseEntity<>(this.taskService.createTask(task, request), HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Task>> getAllTask() {
-        return new ResponseEntity<>(this.taskService.getAllTask(), HttpStatus.OK);
+    public ResponseEntity<List<Task>> getAllTask(HttpServletRequest request) {
+
+        return new ResponseEntity(this.taskService.getAllTask(request), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

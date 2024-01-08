@@ -40,6 +40,10 @@ public class Task {
     @Temporal(TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime endTime;
+
+    private String userName;
+
+    private Long securityUserId;
 }
 
 
