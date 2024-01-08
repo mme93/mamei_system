@@ -45,4 +45,9 @@ public class DatabaseService {
         System.err.println(response);
         return true;
     }
+
+    public void rebuildDatabase(DatabaseServer databaseServer) throws SQLException {
+        deleteDatabase(databaseServer);
+        createDatabase(databaseServer);
+    }
 }

@@ -19,16 +19,18 @@ import static java.util.Arrays.asList;
 
 @Service
 @RequiredArgsConstructor
-public class DatabaseInitService {
+public class DatabaseService {
 
     private final DiscoveryClientService clientService;
     private final WebClient.Builder webClient;
     private final SecurityUserEntityRepository securityUserEntityRepository;
 
     @Transactional
-    public void initDatabase() {
-        System.err.println("Init Database");
-        cleanSecurityUser(asList("admin","superAdmin","user","guest","root"));
+    public void rebuildDatabase() {
+        System.err.println("Rebuild Database");
+        //callRebuildDatabase("http://services-meier.de:8998"+UserRouterTable.DATABASE_MANAGER_REBUILD_DATABASE);
+        callRebuildDatabase("http://localhost:8998"+UserRouterTable.DATABASE_MANAGER_REBUILD_DATABASE);
+        cleanSecurityUser(asList("admin", "superAdmin", "user", "guest", "root"));
         initSecurityUser();
         for (String uri : createList(asList(UserRouterTable.USER_ID))) {
             callInit(uri);
@@ -37,11 +39,23 @@ public class DatabaseInitService {
     }
 
     @Transactional
-    private void cleanSecurityUser(List<String>userNamelist){
-        for(String userName:userNamelist){
+    public void initDatabase() {
+        System.err.println("Init Database");
+        cleanSecurityUser(asList("admin", "superAdmin", "user", "guest", "root"));
+        initSecurityUser();
+        for (String uri : createList(asList(UserRouterTable.USER_ID))) {
+            callInit(uri);
+        }
+
+    }
+
+    @Transactional
+    private void cleanSecurityUser(List<String> userNamelist) {
+        for (String userName : userNamelist) {
             securityUserEntityRepository.deleteByUsername(userName);
         }
     }
+
     private List<String> createList(List<String> idList) {
         List<String> uriList = new ArrayList<>();
         for (String id : idList) {
@@ -50,6 +64,15 @@ public class DatabaseInitService {
             }
         }
         return uriList;
+    }
+
+    private void callRebuildDatabase(String uri) {
+        webClient
+                .build()
+                .post()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(Void.class).block();
     }
 
     private Object callInit(String uri) {

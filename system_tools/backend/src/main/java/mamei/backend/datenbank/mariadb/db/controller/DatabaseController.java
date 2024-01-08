@@ -1,11 +1,13 @@
 package mamei.backend.datenbank.mariadb.db.controller;
 
+import mamei.backend.datenbank.mariadb.db.constants.DBSettingsConstants;
 import mamei.backend.datenbank.mariadb.db.model.DatabaseServer;
 import mamei.backend.datenbank.mariadb.db.service.DatabaseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -48,6 +50,19 @@ public class DatabaseController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+    }
+
+    @PostMapping("/rebuild")
+    public ResponseEntity rebuildDatabase(){
+        try {
+            databaseService.rebuildDatabase(new DatabaseServer(DBSettingsConstants.CLOUD_XXL,DBSettingsConstants.CLOUD_XLL_MAMEI_SYSTEM,null));
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+
     }
 
 }
