@@ -1,7 +1,15 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {TaskService} from "../../../../shared/services/dashboard/task.service";
 import {StandardTask} from "../../../../shared/model/Task";
 import {MatTableDataSource} from "@angular/material/table";
+
+export interface TaskRowElement {
+  position: number;
+  name: string;
+  information: string;
+  date: string;
+  symbol: string;
+}
 
 export interface PeriodicElement {
   name: string;
@@ -29,13 +37,29 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./task-overview.component.scss']
 })
 export class TaskOverviewComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-   task:StandardTask[]=[];
+  taskRow: TaskRowElement[] = [];
+  //displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position','name', 'information', 'date', 'symbol'];
+  dataSource = new MatTableDataSource(this.taskRow);
+  task: StandardTask[] = [];
 
-  constructor(private taskService:TaskService) {
-    taskService.getAllTask().subscribe(value => this.task=value);
+  constructor(private taskService: TaskService) {
+    taskService.getAllTask().subscribe(value => this.setData(value));
   }
+
+  setData(task: StandardTask[]) {
+    for (let i = 1; i < task.length + 1; i++) {
+      this.taskRow.push({
+        position: i,
+        name: task[i-1].name,
+        information: task[i-1].information,
+        date: task[i-1].startDate+' '+task[i-1].startTime+'   -   '+task[i-1].endDate+' '+task[i-1].endTime,
+        symbol: 'auto'
+      });
+    }
+    this.dataSource = new MatTableDataSource(this.taskRow);
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
