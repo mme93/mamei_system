@@ -25,19 +25,7 @@ public class ApiGatewayInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        /*
-        final String authHeader = request.getHeader("Authorization");
-        if(!isInWhiteList(request.getRequestURI())){
-            if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
-                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
-            }
-            try{
-                securityGatewayService.isTokeExpired(new JwtToken(authHeader));
-            }catch (WebClientResponseException e){
-                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
-            }
-        }
-         */
+
         return true;
     }
 
@@ -51,12 +39,5 @@ public class ApiGatewayInterceptor implements HandlerInterceptor {
         //System.out.println("Nach der Rückgabe an den Client oder bei einem Fehler");
     }
 
-    private boolean isInWhiteList(String requestUri){
-        List<String>whiteList=asList(
-                "/api/database/init",
-                "/api/security/login",
-                "/api/security/registration"
-        );
-        return whiteList.contains(requestUri);
-    }
+
 }

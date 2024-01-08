@@ -3,11 +3,9 @@ package com.apigateway.security.service;
 import com.apigateway.security.SecurityUserEntityRepository;
 import com.apigateway.security.model.dto.JwtToken;
 import com.apigateway.security.model.entity.SecurityUserEntity;
-import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -40,6 +38,24 @@ public class UserService {
         }
         String userName = jwtService.extractUserName(token);
         return new JwtToken(jwtService.generateToken(securityUserEntityRepository.findByUsername(userName).get()));
+    }
+
+
+    public String getCurrentUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            return authentication.getName();
+        }
+        return null;
+    }
+
+    public int getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<SecurityUserEntity>user=securityUserEntityRepository.findByUsername(authentication.getName());
+        if (authentication != null && authentication.isAuthenticated() && user.isPresent()) {
+            return user.get().getId();
+        }
+        return -1;
     }
 
 }
