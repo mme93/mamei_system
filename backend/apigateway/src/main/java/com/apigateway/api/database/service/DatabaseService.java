@@ -28,13 +28,8 @@ public class DatabaseService {
     @Transactional
     public void rebuildDatabase() {
         System.err.println("Rebuild Database");
-        //callRebuildDatabase("http://services-meier.de:8998"+UserRouterTable.DATABASE_MANAGER_REBUILD_DATABASE);
-        callRebuildDatabase("http://localhost:8998"+UserRouterTable.DATABASE_MANAGER_REBUILD_DATABASE);
-        cleanSecurityUser(asList("admin", "superAdmin", "user", "guest", "root"));
-        initSecurityUser();
-        for (String uri : createList(asList(UserRouterTable.USER_ID))) {
-            callInit(uri);
-        }
+        callRebuildDatabase("http://services-meier.de:8998"+UserRouterTable.DATABASE_MANAGER_REBUILD_DATABASE);
+        //callRebuildDatabase("http://localhost:8998"+UserRouterTable.DATABASE_MANAGER_REBUILD_DATABASE);
 
     }
 
