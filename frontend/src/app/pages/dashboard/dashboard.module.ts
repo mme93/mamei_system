@@ -19,6 +19,7 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatButtonModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule
   ],
   declarations: [DashboardComponent,TaskComponent,OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent]
 })
