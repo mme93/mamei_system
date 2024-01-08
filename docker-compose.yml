@@ -32,6 +32,18 @@ services:
     environment:
       - EUREKA_URI=http://serviceregistry:8761/eureka
 
+  dashboard:
+    build:
+      context: backend/dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "9052:9052"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+
   frontend:
     build:
       context: frontend
