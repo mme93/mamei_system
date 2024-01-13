@@ -15,7 +15,6 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
 import {UtilsRoutingModule} from "./utils-routing.module";
 import {ChecklistComponent} from "./checklist/checklist.component";
-import {UtilsComponent} from "./utils.component";
 
 
 @NgModule({
@@ -37,6 +36,6 @@ import {UtilsComponent} from "./utils.component";
     MatNativeDateModule,
     MatTableModule
   ],
-  declarations: [ ChecklistComponent, UtilsComponent]
+  declarations: [ ChecklistComponent]
 })
 export class UtilsModule {}
