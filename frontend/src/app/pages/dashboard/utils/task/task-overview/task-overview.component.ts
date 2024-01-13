@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {TaskService} from "../../../../shared/services/dashboard/task.service";
-import {StandardTask} from "../../../../shared/model/Task";
 import {MatTableDataSource} from "@angular/material/table";
+import {TaskService} from "../../../../../shared/services/dashboard/task.service";
+import {StandardTask} from "../../../../../shared/model/Task";
 
 export interface TaskRowElement {
   position: number;

@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AppComponent} from "../../../../app.component";
-import {TaskService} from "../../../../shared/services/dashboard/task.service";
-import {StandardTask} from "../../../../shared/model/Task";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Time} from "@angular/common";
+import {AppComponent} from "../../../../../app.component";
+import {TaskService} from "../../../../../shared/services/dashboard/task.service";
+import {StandardTask} from "../../../../../shared/model/Task";
 
 
 @Component({

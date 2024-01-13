@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {TaskComponent} from "./task/task.component";
 import {OverviewComponent} from "./overview/overview.component";
 import {DashboardComponent} from "./dashboard.component";
 import {SecurityGuard} from "../../shared/guard/security.guard";
+import {TaskComponent} from "./utils/task/task.component";
 
 const routes: Routes = [
   {

@@ -7,11 +7,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatRadioModule} from "@angular/material/radio";
 import {DashboardRoutingModule} from "./dashboard-routing.module";
 import {DashboardComponent} from "./dashboard.component";
-import {TaskComponent} from "./task/task.component";
 import {OverviewComponent} from "./overview/overview.component";
-import { CreateTaskComponent } from './task/create-task/create-task.component';
-import { TaskOverviewComponent } from './task/task-overview/task-overview.component';
-import { EditTaskComponent } from './task/edit-task/edit-task.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
@@ -22,6 +18,10 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
 import { ChecklistComponent } from './utils/checklist/checklist.component';
 import { UtilsComponent } from './utils/utils.component';
+import {TaskComponent} from "./utils/task/task.component";
+import {TaskOverviewComponent} from "./utils/task/task-overview/task-overview.component";
+import {EditTaskComponent} from "./utils/task/edit-task/edit-task.component";
+import {CreateTaskComponent} from "./utils/task/create-task/create-task.component";
 
 
 @NgModule({
