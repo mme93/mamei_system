@@ -5,13 +5,6 @@ import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatRadioModule} from "@angular/material/radio";
-import {DashboardRoutingModule} from "./dashboard-routing.module";
-import {DashboardComponent} from "./dashboard.component";
-import {TaskComponent} from "./task/task.component";
-import {OverviewComponent} from "./overview/overview.component";
-import { CreateTaskComponent } from './task/create-task/create-task.component';
-import { TaskOverviewComponent } from './task/task-overview/task-overview.component';
-import { EditTaskComponent } from './task/edit-task/edit-task.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
@@ -20,13 +13,14 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
-import { ChecklistComponent } from './utils/checklist/checklist.component';
-import { UtilsComponent } from './utils/utils.component';
+import {UtilsRoutingModule} from "./utils-routing.module";
+import {ChecklistComponent} from "./checklist/checklist.component";
+import {UtilsComponent} from "./utils.component";
 
 
 @NgModule({
   imports: [
-    DashboardRoutingModule,
+    UtilsRoutingModule,
     MatCardModule,
     CommonModule,
     MatButtonModule,
@@ -43,6 +37,6 @@ import { UtilsComponent } from './utils/utils.component';
     MatNativeDateModule,
     MatTableModule
   ],
-  declarations: [DashboardComponent,TaskComponent,OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, ChecklistComponent, UtilsComponent]
+  declarations: [ ChecklistComponent, UtilsComponent]
 })
-export class DashboardModule {}
+export class UtilsModule {}
