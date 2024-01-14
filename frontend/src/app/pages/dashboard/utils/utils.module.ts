@@ -16,7 +16,6 @@ import {MatTableModule} from "@angular/material/table";
 import {UtilsRoutingModule} from "./utils-routing.module";
 import {ChecklistComponent} from "./checklist/checklist.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {UtilsComponent} from "./utils.component";
 
 
 @NgModule({

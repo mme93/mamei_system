@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 })
 export class LandingpageComponent {
   gridItems = [
-    { icon: 'feed', text: 'Entities',route:'' },
+    { icon: 'feed', text: 'Entities',route:'/dashboard/entities/menu' },
     { icon: 'inventory', text: 'Task',route:'' },
     { icon: 'checklist', text: 'Checklist',route:'' },
     { icon: 'sports_esports', text: 'Games' ,route:''},

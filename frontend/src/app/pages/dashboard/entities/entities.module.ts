@@ -15,6 +15,9 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {EntitiesRoutingModule} from "./entites-routing.module";
+import { PrimaryComponent } from './primary/primary.component';
+import { SecondaryComponent } from './secondary/secondary.component';
+import { GenericComponent } from './generic/generic.component';
 
 
 @NgModule({
@@ -37,6 +40,10 @@ import {EntitiesRoutingModule} from "./entites-routing.module";
     MatTableModule,
     FlexLayoutModule
   ],
-  declarations: []
+  declarations: [
+    PrimaryComponent,
+    SecondaryComponent,
+    GenericComponent
+  ]
 })
 export class EntitiesModule {}
