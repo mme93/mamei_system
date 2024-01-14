@@ -84,3 +84,14 @@ Overview about current and past Security-Protocols or Events.
 
 The normal user for logging into the system runs via the security_user, which is managed on the API gateway. The
 remaining "Users" are in the User Services and are an extension of the security_user.
+
+## SudokuApplication
+
+You can play different Sudoku Level.
+
+## Dashboard
+You can create different entities for specific utils and display a lot of diagrams from data-pool.
+
+## ShoppingList
+
+You can create shopping list.
