@@ -15,6 +15,7 @@ export class LandingpageComponent {
     { icon: 'settings', text: 'Settings' ,route:'/help/settings/board'},
     { icon: 'storage', text: 'Database Manager',route:'' },
     { icon: 'cloud_download', text: 'Data Cloud' ,route:''},
+    { icon: 'insert_chart', text: 'Dashboard' ,route:''},
     { icon: 'email', text: 'Message' ,route:''},
     { icon: 'event', text: 'Calendar' ,route:''}
 
