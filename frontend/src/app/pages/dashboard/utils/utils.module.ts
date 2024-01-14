@@ -15,9 +15,8 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
 import {UtilsRoutingModule} from "./utils-routing.module";
 import {ChecklistComponent} from "./checklist/checklist.component";
-import {MatGridListModule} from "@angular/material/grid-list";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {BrowserModule} from "@angular/platform-browser";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {UtilsComponent} from "./utils.component";
 
 
 @NgModule({
@@ -38,7 +37,8 @@ import {BrowserModule} from "@angular/platform-browser";
     MatProgressBarModule,
     MatNativeDateModule,
     MatTableModule,
-    MatGridListModule
+    FlexLayoutModule
+
   ],
   declarations: [ ChecklistComponent]
 })

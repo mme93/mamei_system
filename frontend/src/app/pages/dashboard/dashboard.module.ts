@@ -21,6 +21,7 @@ import {TaskComponent} from "./utils/task/task.component";
 import {TaskOverviewComponent} from "./utils/task/task-overview/task-overview.component";
 import {EditTaskComponent} from "./utils/task/edit-task/edit-task.component";
 import {CreateTaskComponent} from "./utils/task/create-task/create-task.component";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {CreateTaskComponent} from "./utils/task/create-task/create-task.componen
     ReactiveFormsModule,
     MatProgressBarModule,
     MatNativeDateModule,
-    MatTableModule
+    MatTableModule,
+    FlexLayoutModule
   ],
   declarations: [DashboardComponent,TaskComponent,OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, UtilsComponent]
 })

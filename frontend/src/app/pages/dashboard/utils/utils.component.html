@@ -1,7 +1,19 @@
-<article>
-  <h1 style="text-align: center">Utils</h1>
-  <div *ngFor="let item of gridItems">
-    <mat-icon>{{ item.icon }}</mat-icon>
-    <p>{{ item.text }}</p>
+<article class="container">
+  <h1 class="title">Primary und Secondary Entities</h1>
+
+  <div class="content">
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let item of gridItems">
+        <mat-card class="custom-card">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <p>{{ item.text }}</p>
+        </mat-card>
+      </div>
+    </div>
   </div>
+
+  <mat-form-field class="filter-field">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search value" #input>
+  </mat-form-field>
 </article>
