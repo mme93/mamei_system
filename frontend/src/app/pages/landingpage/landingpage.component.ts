@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-landingpage',
@@ -7,9 +8,21 @@ import { Component } from '@angular/core';
 })
 export class LandingpageComponent {
   gridItems = [
-    { icon: 'location_on', text: 'Location' },
-    { icon: 'inventory', text: 'Task' },
-    { icon: 'person', text: 'Person' },
-    { icon: 'checklist', text: 'Checklist' }
+    { icon: 'feed', text: 'Entities',route:'' },
+    { icon: 'inventory', text: 'Task',route:'' },
+    { icon: 'checklist', text: 'Checklist',route:'' },
+    { icon: 'sports_esports', text: 'Games' ,route:''},
+    { icon: 'settings', text: 'Settings' ,route:'/help/settings/board'},
+    { icon: 'storage', text: 'Database Manager',route:'' },
+    { icon: 'cloud_download', text: 'Data Cloud' ,route:''},
+    { icon: 'email', text: 'Message' ,route:''},
+    { icon: 'event', text: 'Calendar' ,route:''}
+
   ];
+
+  constructor(private router: Router) {}
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 }
