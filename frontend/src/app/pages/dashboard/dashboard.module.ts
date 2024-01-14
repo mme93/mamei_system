@@ -23,6 +23,7 @@ import {EditTaskComponent} from "./utils/task/edit-task/edit-task.component";
 import {CreateTaskComponent} from "./utils/task/create-task/create-task.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { EntitiesComponent } from './entities/entities.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { EntitiesComponent } from './entities/entities.component';
     MatProgressBarModule,
     MatNativeDateModule,
     MatTableModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatMenuModule
   ],
   exports: [
     UtilsComponent

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  text-align: center;
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  flex: 1;
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+}

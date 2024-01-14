@@ -6,26 +6,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./utils.component.scss']
 })
 export class UtilsComponent {
-  coppyList= [
-    { icon: 'location_on', text: 'Location' },
+  copyList= [
+    { icon: 'location_on', text: 'Overview' },
     { icon: 'inventory', text: 'Task' },
-    { icon: 'person', text: 'Person' },
     { icon: 'checklist', text: 'Checklist' }
   ];
   gridItems = [
-    { icon: 'location_on', text: 'Location' },
+    { icon: 'location_on', text: 'Overview' },
     { icon: 'inventory', text: 'Task' },
-    { icon: 'person', text: 'Person' },
     { icon: 'checklist', text: 'Checklist' }
   ];
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
 
-    this.gridItems = this.coppyList.filter(item =>
+    this.gridItems = this.copyList.filter(item =>
       {
-        console.log(item.text.toLowerCase()+" | "+filterValue)
-        return item.text.toLowerCase().includes(filterValue);
+        return item.text.toLowerCase().includes(filterValue.toLowerCase());
       }
     );
   }
