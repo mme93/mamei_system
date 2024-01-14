@@ -7,26 +7,16 @@ import { Component } from '@angular/core';
 })
 export class UtilsComponent {
   coppyList= [
-    { icon: 'home', text: 'Home' },
-    { icon: 'work', text: 'Work' },
-    { icon: 'school', text: 'School' },
-    { icon: 'directions_bike', text: 'Bike' },
-    { icon: 'restaurant', text: 'Restaurant' },
-    { icon: 'shopping_cart', text: 'Shopping' },
-    { icon: 'movie', text: 'Movie' },
-    { icon: 'sports', text: 'Sports' },
-    { icon: 'music_note', text: 'Music' }
+    { icon: 'location_on', text: 'Location' },
+    { icon: 'inventory', text: 'Task' },
+    { icon: 'person', text: 'Person' },
+    { icon: 'checklist', text: 'Checklist' }
   ];
   gridItems = [
-    { icon: 'home', text: 'Home' },
-    { icon: 'work', text: 'Work' },
-    { icon: 'school', text: 'School' },
-    { icon: 'directions_bike', text: 'Bike' },
-    { icon: 'restaurant', text: 'Restaurant' },
-    { icon: 'shopping_cart', text: 'Shopping' },
-    { icon: 'movie', text: 'Movie' },
-    { icon: 'sports', text: 'Sports' },
-    { icon: 'music_note', text: 'Music' }
+    { icon: 'location_on', text: 'Location' },
+    { icon: 'inventory', text: 'Task' },
+    { icon: 'person', text: 'Person' },
+    { icon: 'checklist', text: 'Checklist' }
   ];
 
   applyFilter(event: Event) {
