@@ -7,6 +7,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatRadioModule} from "@angular/material/radio";
 import {SettingsComponent} from "./settings.component";
 import {SettingsRoutingModule} from "./settings-routing.module";
+import { ServiceStatusComponent } from './service-status/service-status.component';
 
 
 @NgModule({
@@ -19,6 +20,6 @@ import {SettingsRoutingModule} from "./settings-routing.module";
     MatTabsModule,
     MatRadioModule
   ],
-  declarations: [SettingsComponent]
+  declarations: [SettingsComponent, ServiceStatusComponent]
 })
 export class SettingsModule {}
