@@ -8,6 +8,8 @@ import {MatRadioModule} from "@angular/material/radio";
 import {SettingsComponent} from "./settings.component";
 import {SettingsRoutingModule} from "./settings-routing.module";
 import { ServiceStatusComponent } from './service-status/service-status.component';
+import {InformationComponent} from "../information/information.component";
+import { AdminstrationComponent } from './adminstration/adminstration.component';
 
 
 @NgModule({
@@ -20,6 +22,12 @@ import { ServiceStatusComponent } from './service-status/service-status.componen
     MatTabsModule,
     MatRadioModule
   ],
-  declarations: [SettingsComponent, ServiceStatusComponent]
+  declarations: [SettingsComponent, ServiceStatusComponent, InformationComponent, AdminstrationComponent]
 })
-export class SettingsModule {}
+export class SettingsModule {
+
+  showComponent(component: string) {
+    console.log(`Show component: ${component}`);
+  }
+
+}
