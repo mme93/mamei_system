@@ -27,6 +27,11 @@ const routes: Routes = [
     path: 'utils',
     loadChildren: () => import('./utils/utils.module').then(m => m.UtilsModule),
     canActivate: [SecurityGuard]
+  },
+  {
+    path: 'entities',
+    loadChildren: () => import('./entities/entities.module').then(m => m.EntitiesModule),
+    canActivate: [SecurityGuard]
   }
 
 

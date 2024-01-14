@@ -5,9 +5,6 @@ import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatRadioModule} from "@angular/material/radio";
-import {DashboardRoutingModule} from "./dashboard-routing.module";
-import {DashboardComponent} from "./dashboard.component";
-import {OverviewComponent} from "./overview/overview.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
@@ -16,18 +13,13 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
-import { UtilsComponent } from './utils/utils.component';
-import {TaskComponent} from "./utils/task/task.component";
-import {TaskOverviewComponent} from "./utils/task/task-overview/task-overview.component";
-import {EditTaskComponent} from "./utils/task/edit-task/edit-task.component";
-import {CreateTaskComponent} from "./utils/task/create-task/create-task.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import { EntitiesComponent } from './entities/entities.component';
+import {EntitiesRoutingModule} from "./entites-routing.module";
 
 
 @NgModule({
   imports: [
-    DashboardRoutingModule,
+    EntitiesRoutingModule,
     MatCardModule,
     CommonModule,
     MatButtonModule,
@@ -45,9 +37,6 @@ import { EntitiesComponent } from './entities/entities.component';
     MatTableModule,
     FlexLayoutModule
   ],
-  exports: [
-    UtilsComponent
-  ],
-  declarations: [DashboardComponent, TaskComponent, OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, UtilsComponent, EntitiesComponent]
+  declarations: []
 })
-export class DashboardModule {}
+export class EntitiesModule {}
