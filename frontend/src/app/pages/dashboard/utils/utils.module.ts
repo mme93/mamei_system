@@ -15,6 +15,9 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
 import {UtilsRoutingModule} from "./utils-routing.module";
 import {ChecklistComponent} from "./checklist/checklist.component";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserModule} from "@angular/platform-browser";
 
 
 @NgModule({
@@ -34,7 +37,8 @@ import {ChecklistComponent} from "./checklist/checklist.component";
     ReactiveFormsModule,
     MatProgressBarModule,
     MatNativeDateModule,
-    MatTableModule
+    MatTableModule,
+    MatGridListModule
   ],
   declarations: [ ChecklistComponent]
 })

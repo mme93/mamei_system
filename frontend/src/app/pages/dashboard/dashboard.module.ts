@@ -16,7 +16,6 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
-import { ChecklistComponent } from './utils/checklist/checklist.component';
 import { UtilsComponent } from './utils/utils.component';
 import {TaskComponent} from "./utils/task/task.component";
 import {TaskOverviewComponent} from "./utils/task/task-overview/task-overview.component";
@@ -43,6 +42,6 @@ import {CreateTaskComponent} from "./utils/task/create-task/create-task.componen
     MatNativeDateModule,
     MatTableModule
   ],
-  declarations: [DashboardComponent,TaskComponent,OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, ChecklistComponent, UtilsComponent]
+  declarations: [DashboardComponent,TaskComponent,OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, UtilsComponent]
 })
 export class DashboardModule {}

@@ -1,1 +1,7 @@
-<p>utils works!</p>
+<article>
+  <h1 style="text-align: center">Utils</h1>
+  <div *ngFor="let item of gridItems">
+    <mat-icon>{{ item.icon }}</mat-icon>
+    <p>{{ item.text }}</p>
+  </div>
+</article>
