@@ -8,7 +8,6 @@ import {MatRadioModule} from "@angular/material/radio";
 import {SettingsComponent} from "./settings.component";
 import {SettingsRoutingModule} from "./settings-routing.module";
 import { ServiceStatusComponent } from './service-status/service-status.component';
-import {InformationComponent} from "../information/information.component";
 import { AdminstrationComponent } from './adminstration/adminstration.component';
 import {AccountComponent} from "./account/account.component";
 
@@ -26,9 +25,5 @@ import {AccountComponent} from "./account/account.component";
   declarations: [SettingsComponent, ServiceStatusComponent, AdminstrationComponent,AccountComponent]
 })
 export class SettingsModule {
-
-  showComponent(component: string) {
-    console.log(`Show component: ${component}`);
-  }
 
 }
