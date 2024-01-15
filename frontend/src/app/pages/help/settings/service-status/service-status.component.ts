@@ -18,7 +18,4 @@ export class ServiceStatusComponent implements OnInit{
     this.microServiceStatus.getMicroServiceStatus().subscribe((value:MicroService) =>this.microServices=value);
   }
 
-  isServiceRunning(service:any) {
-    return true;
-  }
 }
