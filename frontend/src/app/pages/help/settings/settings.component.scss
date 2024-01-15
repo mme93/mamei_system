@@ -6,10 +6,20 @@
 }
 .column1 {
   border: 1px solid #ccc;
-  width: 100px;
+  width: 200px;
 }
 
 .column1 button{
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+.selectedButton{
+  border: 1px solid #ccc;
+  width: 100px;
+  background-color: grey;
+}
+.noSelectedButton{
   border: 1px solid #ccc;
   width: 100px;
 }

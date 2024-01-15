@@ -7,13 +7,21 @@ import {Component} from '@angular/core';
 })
 export class SettingsComponent {
   menuPoints = [
-    {text: "Service Status"},
-    {text: "Administration (ADMIN)"},
-    {text: "Account"}
+    {text: "Service Status",isSelected:true},
+    {text: "Administration (ADMIN)",isSelected:false},
+    {text: "Account",isSelected:false}
   ]
   selectedMenu = this.menuPoints[0].text;
 
   changeUI(text: string) {
-    this.selectedMenu = text;
+    for(let i=0;i<this.menuPoints.length;i++){
+      if(text ===this.menuPoints[i].text){
+        this.selectedMenu = text;
+        this.menuPoints[i].isSelected=true;
+      }else{
+        this.menuPoints[i].isSelected=false;
+      }
+    }
+
   }
 }
