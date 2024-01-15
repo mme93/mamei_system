@@ -37,6 +37,8 @@ Furthermore, the project in the backend directory the Docker-Compose file can be
 | SudokumanagerApplication| 9051 | SUDOKU        |
 | DashboardApplication    | 9052 | DASHBOARD     |
 | ShoppinglistApplication | 9053 | SHOPPINGLIST  |
+| GamesManagerApplication | 9054 | GAMESMANAGER  |
+| MameieFSM               | 9055 | MAMEI_FSM  |
 
 ## Service Description
 
@@ -95,3 +97,7 @@ You can create different entities for specific utils and display a lot of diagra
 ## ShoppingList
 
 You can create shopping list.
+
+## Games Manager
+
+Administration all about the different games like Sudoku.
