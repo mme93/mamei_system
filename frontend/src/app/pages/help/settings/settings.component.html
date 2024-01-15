@@ -1,31 +1,14 @@
-<!--
-<article>
-  <h1 style="text-align: center;">Settings</h1>
-  <mat-tab-group>
-    <mat-tab label="Account">
-      <app-account></app-account>
-    </mat-tab>
-    <mat-tab label="Administration (ADMIN)">
-      <app-adminstration></app-adminstration>
-    </mat-tab>
-    <mat-tab label="Service Status">
-      <app-service-status></app-service-status>
-    </mat-tab>
-  </mat-tab-group>
-</article>
--->
 <article>
   <h1 style="text-align: center;">Settings</h1>
   <div class="container">
     <div class="column1">
-      <button mat-button>Button 1</button>
-      <button mat-button>Button 2</button>
-      <button mat-button>Button 3</button>
+      <button mat-button *ngFor="let menu of menuPoints" (click)="changeUI(menu.text)">{{menu.text}}</button>
     </div>
-    <div class="column2">
-
+    <div class="column2" id="column2">
+      <app-service-status *ngIf="selectedMenu===menuPoints[0].text"></app-service-status>
+      <app-adminstration *ngIf="selectedMenu===menuPoints[1].text"></app-adminstration>
+      <app-account *ngIf="selectedMenu===menuPoints[2].text"></app-account>
     </div>
   </div>
-
 </article>
 

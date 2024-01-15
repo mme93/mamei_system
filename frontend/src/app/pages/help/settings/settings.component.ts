@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-settings',
@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent {
+  menuPoints = [
+    {text: "Service Status"},
+    {text: "Administration (ADMIN)"},
+    {text: "Account"}
+  ]
+  selectedMenu = this.menuPoints[0].text;
 
+  changeUI(text: string) {
+    this.selectedMenu = text;
+  }
 }
