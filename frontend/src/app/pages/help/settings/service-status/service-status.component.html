@@ -1,38 +1,21 @@
 <article>
   <h1 style="text-align: center;">Micro Service Status</h1>
-  <div class="flex-container">
-    <div *ngFor="let service of microServices">
-      <mat-card>
-        <mat-card-header>
-          <span>{{ service.eurekaServiceName }}</span>
-          <div class="status-circle">
-            <!-- Hier könntest du die Logik für das grüne oder rote Kreis-Icon einfügen -->
-            <!-- Beispiel: -->
-            <div [ngClass]="{'green-circle': isServiceRunning(service), 'red-circle': !isServiceRunning(service)}"></div>
-          </div>
-        </mat-card-header>
-        <mat-card-content>
+  <div class="content">
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let service of microServices">
+        <span class="label">Service Name: </span>
+        <span class="value">{{ service.eurekaServiceName }}</span>
+        <div class="info">
           <mat-icon class="icon">{{ service.iconName }}</mat-icon>
-        </mat-card-content>
-      </mat-card>
+          <span class="label">Status:</span>
+          <span class="value">{{ service.status }}</span>
+        </div>
+        <div class="description">
+          <span class="label">Description:</span>
+          <span class="value">{{ service.description }}</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!--
-  <h1 style="text-align: center;">Micro Service Status</h1>
-  <div class="flex-container">
-    <div class="service" *ngFor="let service of microServices">
-      <span class="label">Service Name: </span>
-      <span class="value">{{ service.eurekaServiceName }}</span>
-      <div class="info">
-        <mat-icon class="icon">{{ service.iconName }}</mat-icon>
-        <span class="label">Status:</span>
-        <span class="value">{{ service.status }}</span>
-      </div>
-      <div class="description">
-        <span class="label">Description:</span>
-        <span class="value">{{ service.description }}</span>
-      </div>
-    </div>
-  </div>-->
 </article>
