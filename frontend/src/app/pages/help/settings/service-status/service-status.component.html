@@ -1,5 +1,25 @@
 <article>
   <div class="content">
+
+    <div class="menu-container">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>filter_alt</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="filterServices()">
+          <mat-icon>{{status_icon}}</mat-icon>
+          <span>{{status_text}}</span>
+        </button>
+        <button mat-menu-item (click)="sortByStatus()" [disabled]="sortByStatusDisabled">
+          <mat-icon>sort</mat-icon>
+          <span>Sort by Status</span>
+        </button>
+        <button mat-menu-item (click)="sortByName()">
+          <mat-icon>sort</mat-icon>
+          <span>Sort by Service Name</span>
+        </button>
+      </mat-menu>
+    </div>
     <div class="grid-container">
       <div class="grid-item" *ngFor="let service of microServices">
         <div *ngIf="service.status!=='OFFLINE'" class="status-circle-online"></div>

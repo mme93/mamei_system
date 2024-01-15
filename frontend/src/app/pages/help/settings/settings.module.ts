@@ -10,6 +10,7 @@ import {SettingsRoutingModule} from "./settings-routing.module";
 import { ServiceStatusComponent } from './service-status/service-status.component';
 import { AdminstrationComponent } from './adminstration/adminstration.component';
 import {AccountComponent} from "./account/account.component";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {AccountComponent} from "./account/account.component";
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatMenuModule
   ],
   declarations: [SettingsComponent, ServiceStatusComponent, AdminstrationComponent,AccountComponent]
 })
