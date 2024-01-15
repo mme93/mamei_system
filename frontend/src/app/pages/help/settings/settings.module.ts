@@ -10,6 +10,7 @@ import {SettingsRoutingModule} from "./settings-routing.module";
 import { ServiceStatusComponent } from './service-status/service-status.component';
 import {InformationComponent} from "../information/information.component";
 import { AdminstrationComponent } from './adminstration/adminstration.component';
+import {AccountComponent} from "./account/account.component";
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { AdminstrationComponent } from './adminstration/adminstration.component'
     MatTabsModule,
     MatRadioModule
   ],
-  declarations: [SettingsComponent, ServiceStatusComponent, InformationComponent, AdminstrationComponent]
+  declarations: [SettingsComponent, ServiceStatusComponent, AdminstrationComponent,AccountComponent]
 })
 export class SettingsModule {
 
