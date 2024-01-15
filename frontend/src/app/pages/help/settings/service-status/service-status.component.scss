@@ -1,3 +1,17 @@
+.status-circle-online {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: green;
+  margin: 10px 10px 0 auto; /* Anpassung der Positionierung oben rechts */
+}
+.status-circle-offline {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  margin: 10px 10px 0 auto; /* Anpassung der Positionierung oben rechts */
+}
 .content {
   flex: 1;
   overflow-y: auto;
@@ -30,7 +44,7 @@
 
 .icon {
   font-size: 70px;
-  padding: 50px 50px 50px 45%;
+  padding: 50px 50px 50px 35%;
 }
 
 .label {

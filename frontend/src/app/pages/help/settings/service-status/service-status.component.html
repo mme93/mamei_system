@@ -3,15 +3,17 @@
   <div class="content">
     <div class="grid-container">
       <div class="grid-item" *ngFor="let service of microServices">
+        <div *ngIf="service.status!=='OFFLINE'" class="status-circle-online"></div>
+        <div *ngIf="service.status!=='ONLINE'" class="status-circle-offline"></div>
         <span class="label">Service Name: </span>
         <span class="value">{{ service.eurekaServiceName }}</span>
         <div class="info">
           <mat-icon class="icon">{{ service.iconName }}</mat-icon>
-          <span class="label">Status:</span>
-          <span class="value">{{ service.status }}</span>
         </div>
         <div class="description">
-          <span class="label">Description:</span>
+          <div>
+            <span class="label">Description:</span>
+          </div>
           <span class="value">{{ service.description }}</span>
         </div>
       </div>
