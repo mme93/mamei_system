@@ -6,11 +6,13 @@ import {Component} from '@angular/core';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent {
+
   menuPoints = [
-    {text: "Service Status",isSelected:true},
-    {text: "Administration (ADMIN)",isSelected:false},
-    {text: "Account",isSelected:false}
+    {text: "Service Status",isSelected:true, title:'Micro Service Status'},
+    {text: "Administration (ADMIN)",isSelected:false, title:'Administration Services and Rights'},
+    {text: "Account",isSelected:false, title:'Account'}
   ]
+  selectedTitle= this.menuPoints[0].title;
   selectedMenu = this.menuPoints[0].text;
 
   changeUI(text: string) {
@@ -18,6 +20,7 @@ export class SettingsComponent {
       if(text ===this.menuPoints[i].text){
         this.selectedMenu = text;
         this.menuPoints[i].isSelected=true;
+        this.selectedTitle= this.menuPoints[i].title;
       }else{
         this.menuPoints[i].isSelected=false;
       }
