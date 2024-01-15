@@ -43,6 +43,27 @@ services:
     environment:
       - EUREKA_URI=http://serviceregistry:8761/eureka
 
+  gamesmanager:
+    build:
+      context: backend/gamesmanager
+      dockerfile: Dockerfile
+    ports:
+      - "9052:9054"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+  mameie_fsm:
+    build:
+      context: backend/mameie_fsm
+      dockerfile: Dockerfile
+    ports:
+      - "9052:9055"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
 
   frontend:
     build:

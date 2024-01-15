@@ -40,7 +40,6 @@ public class MicroServiceStatusService {
                         EServiceStatus.OFFLINE));
             }
         }
-        discoveryClient.getServices().stream().forEach(service -> System.err.println(service));
         return microServiceDtos;
     }
 

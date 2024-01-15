@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface MicroServiceRepository extends JpaRepository<MicroServiceEntity, Long> {
     Optional<MicroServiceEntity>findByEurekaServiceName(String eurekaServiceName);
+    boolean existsByEurekaServiceName(String eurekaServiceName);
 }

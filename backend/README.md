@@ -101,3 +101,7 @@ You can create shopping list.
 ## Games Manager
 
 Administration all about the different games like Sudoku.
+
+## Mameie FSM (Frontend System Manager)
+
+Administration all about the settings and more.

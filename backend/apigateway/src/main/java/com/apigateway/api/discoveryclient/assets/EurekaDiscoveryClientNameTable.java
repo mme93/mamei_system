@@ -17,5 +17,7 @@ public class EurekaDiscoveryClientNameTable {
     public static final String SudokuAPI = "SUDOKU";
     public static final String DashboardAPI = "DASHBOARD";
     public static final String ShoppinglistAPI = "SHOPPINGLIST";
+    public static final String GamesManager = "GAMESMANAGER";
+    public static final String Mameie_FSM = "MAMEI_FSM";
 
 }
