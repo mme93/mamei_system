@@ -48,7 +48,7 @@ services:
       context: backend/gamesmanager
       dockerfile: Dockerfile
     ports:
-      - "9052:9054"
+      - "9054:9054"
     networks:
       - eureka
     environment:
@@ -59,7 +59,7 @@ services:
       context: backend/mameie_fsm
       dockerfile: Dockerfile
     ports:
-      - "9052:9055"
+      - "9055:9055"
     networks:
       - eureka
     environment:
