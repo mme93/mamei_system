@@ -9,11 +9,16 @@ import {MicroService} from "../../../../shared/model/MicroSerivce";
 })
 export class ServiceStatusComponent implements OnInit{
   microServices:MicroService[]=[];
+  serverStatusToolTip= "Tip";
   constructor(private microServiceStatus:MicroserviceStatusService) {
   }
 
   ngOnInit(): void {
     // @ts-ignore
     this.microServiceStatus.getMicroServiceStatus().subscribe((value:MicroService) =>this.microServices=value);
+  }
+
+  isServiceRunning(service:any) {
+    return true;
   }
 }
