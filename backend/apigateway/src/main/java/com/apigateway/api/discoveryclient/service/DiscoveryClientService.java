@@ -31,4 +31,12 @@ public class DiscoveryClientService {
         return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.DashboardAPI).get(0).getUri().toString();
     }
 
+    public String getGamesManagerClientAdress(){
+        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.GamesManager).get(0).getUri().toString();
+    }
+
+    public String getMameieFsmClientAdress(){
+        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.Mameie_FSM).get(0).getUri().toString();
+    }
+
 }
