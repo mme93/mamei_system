@@ -10,7 +10,8 @@ export class SettingsComponent {
   menuPoints = [
     {text: "Service Status",isSelected:true, title:'Micro Service Status'},
     {text: "Administration (ADMIN)",isSelected:false, title:'Administration Services and Rights'},
-    {text: "Account",isSelected:false, title:'Account'}
+    {text: "Account",isSelected:false, title:'Account'},
+    {text: "UI-Settings",isSelected:false, title:'UI-Settings'}
   ]
   selectedTitle= this.menuPoints[0].title;
   selectedMenu = this.menuPoints[0].text;

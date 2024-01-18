@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {SettingsComponent} from "./settings.component";
 import {AccountComponent} from "./account/account.component";
+import {UiSettingsComponent} from "./ui-settings/ui-settings.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountComponent
+  },
+  {
+    path: 'ui_settings',
+    component: UiSettingsComponent
   }
 
 ];
