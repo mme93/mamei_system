@@ -185,6 +185,14 @@ public class DatabaseService {
                     , "Administration all about the settings and more."
             ));
         }
+        if (!microServiceRepository.existsByEurekaServiceName(EurekaDiscoveryClientNameTable.DataStorageAPI)) {
+            microServiceRepository.save(new MicroServiceEntity(
+                    EurekaDiscoveryClientNameTable.DataStorageAPI
+                    , "save"
+                    , "Data-Storage"
+                    , "Administration all Data. You can update, delete, create and move files and folders."
+            ));
+        }
     }
 
     public void initSecurityUser() {

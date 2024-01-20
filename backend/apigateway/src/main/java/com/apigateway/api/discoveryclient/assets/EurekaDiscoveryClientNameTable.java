@@ -11,6 +11,7 @@ public class EurekaDiscoveryClientNameTable {
     public static final String ConfigManagerAPI = "CONFIG_NOT_IN_LIST";
     public static final String HealthManagerAPI = "HEALTHMANAGER";
     public static final String SecurityGatewayAPI = "SECURITYGATEWAY";
+    public static final String DataStorageAPI = "DATASTORAGE";
 
     //Project Services Range 9050-9099
     public static final String UserAPI = "USER";

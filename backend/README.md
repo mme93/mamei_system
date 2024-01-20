@@ -28,6 +28,7 @@ Furthermore, the project in the backend directory the Docker-Compose file can be
 | ConfigmanagerApplication       | 9002 | *Not in Service Registry* |
 | HealtmanagerApplication        | 9003 | HEALTHMANAGER             |
 | SecuritygatewayApplication     | 9004 | SECURITYGATEWAY           |
+| SecuritygatewayApplication     | 9005 | SECURITYGATEWAY           |
 
 ### Project Services Range 9050-9099
 
@@ -105,3 +106,7 @@ Administration all about the different games like Sudoku.
 ## Mameie FSM (Frontend System Manager)
 
 Administration all about the settings and more.
+
+## Data-Storage
+
+Administration all Data. You can update, delete, create and move files and folders.
