@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {environment} from "../../../../environments/environment";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 export interface DatabaseProcess {
   id: number;
@@ -15,9 +17,24 @@ export interface DatabaseProcess {
 })
 export class DatabaseProcessService {
 
-  constructor() { }
+  private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
 
-  getDataBaseProcess(processStatusIcon:string[]){
+  constructor(private http: HttpClient) {
+  }
+
+  startProcess() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      }),
+      responseType: 'text'
+    };
+    // @ts-ignore
+    return this.http.post(this.dashboardCreateTaskUrl, httpOptions);
+  }
+
+  getDataBaseProcess(processStatusIcon: string[]) {
     return [
       {
         id: 1,

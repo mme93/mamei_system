@@ -34,6 +34,7 @@ export class DatabaseProcessComponent implements OnInit {
         this.incr++;
       }
     });
+
     this.itemText = 'Database Processes ' + this.currentProcess + '/' + this.incr + ' in progress.';
 
   }
