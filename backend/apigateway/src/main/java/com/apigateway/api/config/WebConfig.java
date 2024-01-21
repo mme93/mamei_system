@@ -1,9 +1,8 @@
 package com.apigateway.api.config;
 
-import com.apigateway.api.services.securitygateway.service.SecurityGatewayService;
-import com.apigateway.api.util.ApiGatewayInterceptor;
+import com.apigateway.api.micro_services.securitygateway.service.SecurityGatewayService;
+
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -15,8 +14,4 @@ public class WebConfig implements WebMvcConfigurer {
         this.securityGatewayService = securityGatewayService;
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new ApiGatewayInterceptor(securityGatewayService));
-    }
 }

@@ -1,8 +1,8 @@
 package com.apigateway.api.database.service;
 
-import com.apigateway.api.discoveryclient.assets.EurekaDiscoveryClientNameTable;
-import com.apigateway.api.discoveryclient.assets.table.UserRouterTable;
-import com.apigateway.api.discoveryclient.service.DiscoveryClientService;
+import com.apigateway.api.eureka.discoveryclient.assets.EurekaDiscoveryClientNameTable;
+import com.apigateway.api.eureka.discoveryclient.assets.table.UserRouterTable;
+import com.apigateway.api.eureka.service.DiscoveryClientService;
 import com.apigateway.security.SecurityUserEntityRepository;
 import com.apigateway.security.model.entity.SecurityUserEntity;
 import com.apigateway.security.model.entity.UserCollection;
