@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {MatDividerModule} from "@angular/material/divider";
     CommonModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule
   ],
     exports: [
         DatabaseProcessComponent

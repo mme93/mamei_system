@@ -6,12 +6,17 @@
     <div class="steps-list">
       <mat-divider></mat-divider>
       <div class="step-item" *ngFor="let item of processList">
-        <label>
-          <mat-checkbox [disabled]="disableCheckboxes">{{ item.processLabel }}</mat-checkbox>
-        </label>
-        <button mat-icon-button>
-          <mat-icon>{{ item.processIcon }}</mat-icon>
-        </button>
+        <div class="step-item-container">
+          <label class="checkbox-label">
+            <mat-checkbox [disabled]="disableCheckboxes"></mat-checkbox>
+            <span class="checkbox-text">{{ item.processLabel }}</span>
+          </label>
+          <mat-spinner></mat-spinner>
+          <mat-icon>{{ item.processStatusIcon }}</mat-icon>
+          <button mat-icon-button>
+            <mat-icon>{{ item.processIcon }}</mat-icon>
+          </button>
+        </div>
         <mat-divider></mat-divider>
       </div>
     </div>
