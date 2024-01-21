@@ -1,16 +1,16 @@
 <article class="container">
   <div class="article-container">
     <div class="description">
-      <span class="center-text">Choose your steps for Database Processes</span>
+      <span class="center-text">{{itemText}}</span>
     </div>
     <div class="steps-list">
       <mat-divider></mat-divider>
-      <div class="step-item" *ngFor="let item of processList">
-        <div class="step-item-container">
+      <div class="step-item" *ngFor="let item of processList; index as i" >
+        <div class="step-item-container" *ngIf="item.processIsShowActivated">
           <label class="checkbox-label">
-            <mat-checkbox [disabled]="isloading"></mat-checkbox>
+            <mat-checkbox [disabled]="isLoading" (change)="changeIcon(i,$event)"></mat-checkbox>
             <span class="checkbox-text">{{ item.processLabel }}</span>
-            <div class="spinner-container" *ngIf="isloading">
+            <div class="spinner-container" *ngIf="isLoading">
               <mat-spinner diameter="20" color="warn"></mat-spinner>
             </div>
           </label>
@@ -21,12 +21,12 @@
             </button>
           </div>
         </div>
-        <mat-divider></mat-divider>
+        <mat-divider  *ngIf="item.processIsShowActivated"></mat-divider>
       </div>
     </div>
   </div>
 
-  <div style="position: relative" *ngIf="isloading">
+  <div style="position: relative" *ngIf="isLoading">
     <mat-progress-bar mode="determinate" [value]="progress" color="warn"></mat-progress-bar>
     <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; text-align: center; color: white;">
       {{progress}}%
