@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {TitleEventService} from "./shared/event/title-event.service";
 
@@ -8,18 +8,19 @@ import {TitleEventService} from "./shared/event/title-event.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit  {
 
   title: string = 'Default Title';
 
   isSidenavDisabled: boolean = true;
 
-  constructor(private router: Router,private eventService: TitleEventService) {
+  constructor(private router: Router,private eventService: TitleEventService,private cdRef: ChangeDetectorRef ) {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit  (): void {
     this.eventService.titleUpdated$.subscribe((newTitle) => {
       this.title = newTitle;
+      this.cdRef.detectChanges();
     });
   }
 

@@ -2,12 +2,20 @@ import {NgModule} from '@angular/core';
 import {AdminRoutingModule} from "./admin-routing.module";
 import { DatabaseProcessComponent } from './database-process/database-process.component';
 import {MatIconModule} from "@angular/material/icon";
+import {CommonModule} from "@angular/common";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
   imports: [
     AdminRoutingModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatDividerModule
   ],
     exports: [
         DatabaseProcessComponent

@@ -4,17 +4,17 @@
       <span class="center-text">Choose your steps for Database Processes</span>
     </div>
     <div class="steps-list">
-      <ng-container class="step-item" *ngFor="let item of processList">
+      <mat-divider></mat-divider>
+      <div class="step-item" *ngFor="let item of processList">
         <label>
-          <input type="checkbox" [disabled]="disableCheckboxes" /> {{ item.processLabel }}
+          <mat-checkbox [disabled]="disableCheckboxes">{{ item.processLabel }}</mat-checkbox>
         </label>
         <button mat-icon-button>
           <mat-icon>{{ item.processIcon }}</mat-icon>
         </button>
-      </ng-container>
+        <mat-divider></mat-divider>
+      </div>
     </div>
-    <div class="start-button">
-      <button mat-raised-button color="primary" (click)="startProcess()">Start Process</button>
-    </div>
+    <button mat-raised-button color="primary" (click)="startProcess()">Start Process</button>
   </div>
 </article>
