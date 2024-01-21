@@ -8,18 +8,31 @@
       <div class="step-item" *ngFor="let item of processList">
         <div class="step-item-container">
           <label class="checkbox-label">
-            <mat-checkbox [disabled]="disableCheckboxes"></mat-checkbox>
+            <mat-checkbox [disabled]="isloading"></mat-checkbox>
             <span class="checkbox-text">{{ item.processLabel }}</span>
+            <div class="spinner-container" *ngIf="isloading">
+              <mat-spinner diameter="20" color="warn"></mat-spinner>
+            </div>
           </label>
-          <mat-spinner></mat-spinner>
-          <mat-icon>{{ item.processStatusIcon }}</mat-icon>
-          <button mat-icon-button>
-            <mat-icon>{{ item.processIcon }}</mat-icon>
-          </button>
+          <div class="icon-container">
+            <mat-icon class="status-icon">{{ item.processStatusIcon }}</mat-icon>
+            <button mat-icon-button>
+              <mat-icon>{{ item.processIcon }}</mat-icon>
+            </button>
+          </div>
         </div>
         <mat-divider></mat-divider>
       </div>
     </div>
-    <button mat-raised-button color="primary" (click)="startProcess()">Start Process</button>
   </div>
+
+  <div style="position: relative" *ngIf="isloading">
+    <mat-progress-bar mode="determinate" [value]="progress" color="warn"></mat-progress-bar>
+    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; text-align: center; color: white;">
+      {{progress}}%
+    </div>
+  </div>
+
+
+  <button mat-raised-button color="primary" (click)="startProcess()" style="width: 100%">Start Process</button>
 </article>

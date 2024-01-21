@@ -30,6 +30,23 @@
 
 .checkbox-label span {
   margin-left: 10px;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Änderung: Ausrichtung linksbündig */
+}
+
+.spinner-container {
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.status-icon {
+  margin-left: auto; /* Verschiebt das Status-Icon ganz nach rechts */
 }
 
 .start-button {
@@ -39,7 +56,6 @@
 .container {
   background-color: #5c5c5c;
 }
-.checkbox-text{
-  font-weight: bold;
-  font-size: larger;
+mat-progress-bar {
+  margin-bottom: 15px;
 }

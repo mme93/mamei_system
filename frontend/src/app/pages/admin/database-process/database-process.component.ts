@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 export interface DatabaseProcess {
   id: number;
@@ -14,8 +14,9 @@ export interface DatabaseProcess {
   templateUrl: './database-process.component.html',
   styleUrls: ['./database-process.component.scss']
 })
-export class DatabaseProcessComponent {
+export class DatabaseProcessComponent implements OnInit {
 
+  incr = 1;
   processStatusIcon = ['play_circle_filled', 'build', 'done', 'error'];
 
   processList: DatabaseProcess[] = [
@@ -26,14 +27,14 @@ export class DatabaseProcessComponent {
       processDescription: 'Delete Database with all tables and data.',
       processActivated: false,
       processStatusIcon: this.processStatusIcon[0]
-    },{
+    }, {
       id: 2,
       processLabel: 'Build Table',
       processIcon: 'info',
       processDescription: 'Delete Database with all tables and data.',
       processActivated: false,
       processStatusIcon: this.processStatusIcon[0]
-    },{
+    }, {
       id: 3,
       processLabel: 'Set Default Dataset',
       processIcon: 'info',
@@ -42,11 +43,15 @@ export class DatabaseProcessComponent {
       processStatusIcon: this.processStatusIcon[0]
     }
   ]
+  progress = 0;
+  isloading = false;
 
-  disableCheckboxes = false;
+  ngOnInit(): void {
+  }
 
   startProcess(): void {
-
-    this.disableCheckboxes = true;
+    this.progress += 50;
+    this.isloading = true;
   }
+
 }
