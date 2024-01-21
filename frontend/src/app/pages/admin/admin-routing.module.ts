@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {AdminComponent} from "./admin.component";
+import {DatabaseProcessComponent} from "./database-process/database-process.component";
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'menu',
     component: AdminComponent
+  },
+  {
+    path: 'database-process',
+    component: DatabaseProcessComponent
   }
 
 

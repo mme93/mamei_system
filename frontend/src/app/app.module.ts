@@ -21,6 +21,7 @@ import { LandingpageComponent } from './pages/landingpage/landingpage.component'
 import {HttpClientModule} from "@angular/common/http";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {AdminComponent} from "./pages/admin/admin.component";
+import {AdminModule} from "./pages/admin/admin.module";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {AdminComponent} from "./pages/admin/admin.component";
     MatCardModule,
     MatProgressBarModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
