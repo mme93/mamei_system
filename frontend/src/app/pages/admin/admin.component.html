@@ -1,11 +1,44 @@
 <article>
-  <div>
-    <h1 style="text-align: center">Database commands</h1>
-   <div>
-     <input type="checkbox">
-   </div>
-  </div>
-  <div>
-    <h1 style="text-align: center">User</h1>
-  </div>
+  <mat-list>
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span matLine>User Administration</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list-item>
+        <span matLine>
+          <button mat-raised-button color="primary">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </span>
+      </mat-list-item>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span matLine>Database Process</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list-item>
+        <span matLine>
+          <span style="text-align: center">Choose your steps for Database Processes</span>
+         <button mat-raised-button color="primary">Start Process</button>
+        </span>
+      </mat-list-item>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span matLine>Paprika</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list-item>
+        <span matLine>Produced by dried and ground red peppers</span>
+      </mat-list-item>
+    </mat-expansion-panel>
+  </mat-list>
 </article>
