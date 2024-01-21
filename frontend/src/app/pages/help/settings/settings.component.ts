@@ -9,7 +9,7 @@ export class SettingsComponent {
 
   menuPoints = [
     {text: "Service Status",isSelected:true, title:'Micro Service Status'},
-    {text: "Administration (ADMIN)",isSelected:false, title:'Administration Services and Rights'},
+    {text: "Administration",isSelected:false, title:'Administration'},
     {text: "Account",isSelected:false, title:'Account'},
     {text: "UI-Settings",isSelected:false, title:'UI-Settings'}
   ]
