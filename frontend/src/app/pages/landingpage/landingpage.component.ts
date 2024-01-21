@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {TitleEventService} from "../../shared/event/title-event.service";
 
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
   styleUrls: ['./landingpage.component.scss']
 })
-export class LandingpageComponent {
+export class LandingpageComponent implements OnInit{
   gridItems = [
     { icon: 'feed', text: 'Entities',route:'/dashboard/entities/menu' },
     { icon: 'inventory', text: 'Task',route:'' },
@@ -21,7 +22,11 @@ export class LandingpageComponent {
 
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private eventService: TitleEventService) {}
+
+  ngOnInit(): void {
+    this.eventService.updateTitle('Welcome to Mamei Systems');
+  }
 
   navigateTo(route: string) {
     this.router.navigate([route]);
