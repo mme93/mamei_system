@@ -25,18 +25,32 @@ export class DatabaseProcessComponent implements OnInit {
     this.processList = this.databaseProcessService.getDataBaseProcess(this.processStatusIcon);
   }
 
-  startProcess(): void {
+  async startProcess() {
     this.isLoading = true;
-    this.processList.forEach(process => {
+    const selectedProcess= this.processList.filter(process =>{
       process.processIsShowActivated = process.processActivated;
+      return process.processActivated;
+    });
+    this.itemText='Process '+this.incr+'/'+selectedProcess.length+' finished.'
+    this.incr++;
+    this.isLoading = true;
+    for (const process of this.processList) {
       if (process.processActivated) {
         process.processStatusIcon = this.processStatusIcon[2];
+        try {
+          const result = await this.databaseProcessService.startProcess();
+          console.log(result);
+          this.itemText=this.default+'\n Process '+this.incr+'/'+selectedProcess.length+' finished.'
+          process.processStatusIcon = this.processStatusIcon[3];
+          process.isProcessFinish=true;
+          this.progress=this.progress+(100/selectedProcess.length);
+        } catch (error) {
+          console.error(error);
+        }
         this.incr++;
       }
-    });
-
-    this.itemText = 'Database Processes ' + this.currentProcess + '/' + this.incr + ' in progress.';
-
+    }
+    this.incr=1;
   }
 
   changeIcon(index: number, $event: MatCheckboxChange) {

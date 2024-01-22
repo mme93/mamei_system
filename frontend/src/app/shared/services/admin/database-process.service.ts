@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 export interface DatabaseProcess {
   id: number;
@@ -10,6 +11,7 @@ export interface DatabaseProcess {
   processActivated: boolean;
   processIsShowActivated: boolean;
   processStatusIcon: string;
+  isProcessFinish:boolean;
 }
 
 @Injectable({
@@ -22,7 +24,8 @@ export class DatabaseProcessService {
   constructor(private http: HttpClient) {
   }
 
-  startProcess() {
+  startProcess(): Promise<any> {
+    let x;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
@@ -31,7 +34,7 @@ export class DatabaseProcessService {
       responseType: 'text'
     };
     // @ts-ignore
-    return this.http.post(this.dashboardCreateTaskUrl, httpOptions);
+    return this.http.post(this.databaseProcessStartUrl,null, httpOptions).toPromise();
   }
 
   getDataBaseProcess(processStatusIcon: string[]) {
@@ -43,7 +46,8 @@ export class DatabaseProcessService {
         processDescription: 'Create a BackUp for this Database.',
         processActivated: false,
         processIsShowActivated: true,
-        processStatusIcon: processStatusIcon[0]
+        processStatusIcon: processStatusIcon[0],
+        isProcessFinish:false
       }, {
         id: 2,
         processLabel: 'Delete Database mamei_system',
@@ -51,7 +55,8 @@ export class DatabaseProcessService {
         processDescription: 'Delete Database with all tables and data.',
         processActivated: false,
         processIsShowActivated: true,
-        processStatusIcon: processStatusIcon[0]
+        processStatusIcon: processStatusIcon[0],
+        isProcessFinish:false
       }, {
         id: 3,
         processLabel: 'Create Database mamei_system',
@@ -59,7 +64,8 @@ export class DatabaseProcessService {
         processDescription: 'Restart all Micro-Services, to create Tables.',
         processActivated: false,
         processIsShowActivated: true,
-        processStatusIcon: processStatusIcon[0]
+        processStatusIcon: processStatusIcon[0],
+        isProcessFinish:false
       }, {
         id: 4,
         processLabel: 'Restart all needed Micro-Services and create Table',
@@ -67,7 +73,8 @@ export class DatabaseProcessService {
         processDescription: 'Restart all Micro-Services, to create Tables.',
         processActivated: false,
         processIsShowActivated: true,
-        processStatusIcon: processStatusIcon[0]
+        processStatusIcon: processStatusIcon[0],
+        isProcessFinish:false
       }, {
         id: 5,
         processLabel: 'Set Default Dataset',
@@ -75,7 +82,8 @@ export class DatabaseProcessService {
         processDescription: 'Create default data in different tables, which needed for the system.',
         processActivated: false,
         processIsShowActivated: true,
-        processStatusIcon: processStatusIcon[0]
+        processStatusIcon: processStatusIcon[0],
+        isProcessFinish:false
       }
     ];
   }
