@@ -1,6 +1,6 @@
 package com.apigateway.api.process.model;
 
-public enum EProcessModus {
+public enum EProcessMods {
     DATABASE,
     MICRO_SERVICES
 }

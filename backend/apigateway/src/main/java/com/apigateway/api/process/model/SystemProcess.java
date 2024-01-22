@@ -1,10 +1,12 @@
 package com.apigateway.api.process.model;
 
+import java.util.List;
+
 public class SystemProcess {
 
     private EProcessTyp processTyp;
-    private EProcessModus processModus;
+    private EProcessMods processMods;
     private String processText;
-    private String processIdentifcation;
-
+    private String processIdentification;
+    private List<SystemProcess>subSystemProcess;
 }

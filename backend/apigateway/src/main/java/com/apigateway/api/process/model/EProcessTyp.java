@@ -5,5 +5,8 @@ public enum EProcessTyp {
     UPDATE,
     DELETE,
     ADD,
-    MODIFY
+    MODIFY,
+    RESTART,
+    CANCEL,
+    STOP
 }

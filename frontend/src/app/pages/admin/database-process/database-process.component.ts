@@ -40,17 +40,18 @@ export class DatabaseProcessComponent implements OnInit {
         try {
           const result = await this.databaseProcessService.startProcess();
           console.log(result);
-          this.itemText=this.default+'\n Process '+this.incr+'/'+selectedProcess.length+' finished.'
+          this.itemText='Process '+this.incr+'/'+selectedProcess.length+' finished.'
           process.processStatusIcon = this.processStatusIcon[3];
           process.isProcessFinish=true;
-          this.progress=this.progress+(100/selectedProcess.length);
+          this.progress=Number((this.progress+(100/selectedProcess.length)).toFixed(2));
         } catch (error) {
           console.error(error);
         }
         this.incr++;
       }
     }
-    this.incr=1;
+    this.progress=100;
+    this.incr=0;
   }
 
   changeIcon(index: number, $event: MatCheckboxChange) {
