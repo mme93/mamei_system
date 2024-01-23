@@ -25,7 +25,6 @@ export class DatabaseProcessService {
   }
 
   startProcess(): Promise<any> {
-    let x;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',

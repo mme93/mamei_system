@@ -24,7 +24,7 @@ public class ProcessController {
 
 
     @PostMapping("/newJob")
-    public ResponseEntity<String> startNewJob(@RequestBody SystemProcess process){
+    public ResponseEntity<String> startNewJob(){
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
