@@ -1,12 +1,7 @@
 package com.apigateway.api.process.model;
 
 public enum EProcessTyp {
-    CREATE,
-    UPDATE,
-    DELETE,
-    ADD,
-    MODIFY,
-    RESTART,
-    CANCEL,
-    STOP
+    DATABASE,
+    MICRO_SERVICES,
+    EUREKA_SYSTEM
 }

@@ -1,8 +1,12 @@
-package com.apigateway.api.eureka.discoveryclient.assets;
+package com.apigateway.api.eureka.assets;
+
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public class EurekaDiscoveryClientNameTable {
 
-     //Services Registry
+    //Services Registry
     public static final String ServiceRegistration = "SERVICE_REGISTRATION_NOT_IN_LIST";
 
     //System Services Range 9000-9049
@@ -20,5 +24,8 @@ public class EurekaDiscoveryClientNameTable {
     public static final String ShoppinglistAPI = "SHOPPINGLIST";
     public static final String GamesManager = "GAMESMANAGER";
     public static final String Mameie_FSM = "MAMEI_FSM";
+
+    public static final List<String> eurekaDiscorverClientCNameList = asList("APIGATEWAY", "DASHBOARD", "DATASTORAGE",
+            "GAMESMANAGER", "HEALTHMANAGER", "MAMEI_FSM", "SECURITYGATEWAY", "SHOPPINGLIST", "SUDOKU", "SYSTEM", "USER");
 
 }
