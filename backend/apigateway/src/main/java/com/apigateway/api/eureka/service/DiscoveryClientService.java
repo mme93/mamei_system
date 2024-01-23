@@ -1,6 +1,6 @@
 package com.apigateway.api.eureka.service;
 
-import com.apigateway.api.eureka.discoveryclient.assets.EurekaDiscoveryClientNameTable;
+import com.apigateway.api.eureka.assets.EurekaDiscoveryClientNameTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;

@@ -5,10 +5,9 @@ import com.apigateway.api.process.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/process")
@@ -24,13 +23,19 @@ public class ProcessController {
 
 
     @PostMapping("/newJob")
-    public ResponseEntity<String> startNewJob(@RequestBody Process process){
+    public ResponseEntity<Boolean> startNewJob(@RequestBody Process process){
         try {
             Thread.sleep(3000);
+            return new ResponseEntity<>(processService.startProcess(process),HttpStatus.OK);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
         return new ResponseEntity("Job finished",HttpStatus.OK);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<Process>>getProcessList(){
+        return new ResponseEntity<>(processService.getProcesses(),HttpStatus.OK);
     }
 
 }

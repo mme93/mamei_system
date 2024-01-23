@@ -1,5 +1,6 @@
 package com.apigateway.api.database.service;
 
+import com.apigateway.api.database.service.domains.ProcessDefaultDBService;
 import com.apigateway.api.eureka.assets.EurekaDiscoveryClientNameTable;
 import com.apigateway.api.eureka.discoveryclient.assets.table.UserRouterTable;
 import com.apigateway.api.eureka.service.DiscoveryClientService;
@@ -28,6 +29,7 @@ public class DatabaseService {
     private final WebClient.Builder webClient;
     private final SecurityUserEntityRepository securityUserEntityRepository;
     private final MicroServiceRepository microServiceRepository;
+    private final ProcessDefaultDBService processDefaultDBService;
 
     @Transactional
     public void rebuildDatabase() {
@@ -46,6 +48,7 @@ public class DatabaseService {
             //callInit(uri);
         }
         initMicroServices();
+        processDefaultDBService.loadDefaultDataIntoDatabase();
     }
 
     @Transactional

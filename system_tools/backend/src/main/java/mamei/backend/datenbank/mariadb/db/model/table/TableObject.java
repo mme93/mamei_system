@@ -102,8 +102,14 @@ public class TableObject {
                     tableMetaColumn.setValue(String.valueOf(result));
                 }
                 tableMetaColumns.add(tableMetaColumn);
-            } else {
-                throw new SQLException("No column typ found from typ: " + tableColumn.getColumnType());
+            }else if (matchColumnType(tableColumn.getColumnType(), Boolean.class)) {
+                TableMetaColumn tableMetaColumn = new TableMetaColumn();
+                String result = resultSet.getString(tableColumn.getColumnName());
+                tableMetaColumn.setColumnName(tableColumn.getColumnName());
+                tableMetaColumn.setValue(String.valueOf(result));
+                tableMetaColumns.add(tableMetaColumn);
+            }  else {
+                throw new SQLException("No column typ found from typ: " + tableColumn.getColumnType()+" and ColName: "+tableColumn.getColumnName());
             }
         }
         tableMetaRow.setTableMetaColumns(tableMetaColumns);
@@ -116,6 +122,7 @@ public class TableObject {
         String[] floatTypes = {"decimal"};
         String[] enumTypes = {"enum"};
         String[] dateTypes = {"date", "time"};
+        String[] booleanTypes={"bit"};
         switch (getTypeClassSimpleName(typeClass)) {
             case "String":
                 if (containsColumnTypes(columnType, stringTypes)) return true;
@@ -131,6 +138,9 @@ public class TableObject {
                 break;
             case "Date":
                 if (containsColumnTypes(columnType, dateTypes)) return true;
+                break;
+            case "Boolean":
+                if (containsColumnTypes(columnType, booleanTypes)) return true;
                 break;
             default:
                 return false;

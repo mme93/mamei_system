@@ -19,10 +19,10 @@ public class Process {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private EProcessEvent processTyp;
+    private EProcessEvent processEvent;
 
     @Enumerated(EnumType.STRING)
-    private EProcessTyp processMods;
+    private EProcessTyp processTyp;
 
     @Column(unique = true, nullable = false)
     private String processName;
@@ -36,9 +36,9 @@ public class Process {
     @Column(length = 1000)
     private String dependedProcessIds;
 
-    public Process(EProcessEvent processTyp, EProcessTyp processMods, String processName, String processText, boolean hasDependedProcess, boolean isDependedProcess, String dependedProcessIds) {
+    public Process(EProcessEvent processEvent, EProcessTyp processTyp, String processName, String processText, boolean hasDependedProcess, boolean isDependedProcess, String dependedProcessIds) {
         this.processTyp = processTyp;
-        this.processMods = processMods;
+        this.processEvent = processEvent;
         this.processName = processName;
         this.processText = processText;
         this.hasDependedProcess = hasDependedProcess;
