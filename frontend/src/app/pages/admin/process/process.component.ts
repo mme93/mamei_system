@@ -32,6 +32,7 @@ export class ProcessComponent implements OnInit {
     });
   }
 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.processList = this.copyProcessList.filter(item => {
@@ -70,7 +71,9 @@ export class ProcessComponent implements OnInit {
   }
 
   changeIcon(index: number, $event: MatCheckboxChange) {
+
     if ($event.checked) {
+      this.copyProcessList[index].processActivated=this.processList[index].processActivated;
       this.processList[index].processStatusIcon = this.processStatusIcon[1];
     } else {
       this.processList[index].processStatusIcon = this.processStatusIcon[0];

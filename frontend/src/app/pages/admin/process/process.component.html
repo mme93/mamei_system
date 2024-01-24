@@ -15,7 +15,7 @@
           <div class="step-item" *ngFor="let item of processList; index as i">
             <div class="step-item-container" *ngIf="item.processIsShowActivated">
               <label class="checkbox-label">
-                <mat-checkbox [disabled]="isLoading" (change)="changeIcon(i,$event)"></mat-checkbox>
+                <mat-checkbox [disabled]="isLoading" (change)="changeIcon(i,$event)" [(ngModel)]="item.processActivated"></mat-checkbox>
                 <span class="checkbox-text">{{ item.process.processText }}</span>
                 <div class="spinner-container" *ngIf="isLoading && (!item.isProcessFinish)">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
@@ -40,6 +40,7 @@
           {{progress}}%
         </div>
       </div>
+      <button mat-raised-button color="primary" (click)="startProcess(); stepper.next()" style="width: 100%">Start Process</button>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>

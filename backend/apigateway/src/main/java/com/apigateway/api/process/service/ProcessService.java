@@ -19,6 +19,7 @@ public class ProcessService {
     }
 
     public boolean startProcess(Process process) {
+        /*
         switch (process.getProcessTyp()) {
             case EUREKA_SYSTEM:
                 return startProcessForEurekaSystem();
@@ -29,6 +30,8 @@ public class ProcessService {
             default:
                 throw new NotFoundException("No Process Typ found by Name: " + process.getProcessTyp());
         }
+         */
+        return true;
     }
 
     public boolean startProcessForDatabase() {
