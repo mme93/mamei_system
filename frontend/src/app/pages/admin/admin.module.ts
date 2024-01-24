@@ -12,6 +12,7 @@ import { SystemUserComponent } from './system-user/system-user.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatStepperModule} from "@angular/material/stepper";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {MatInputModule} from "@angular/material/input";
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatStepperModule
   ],
   exports: [
     SystemUserComponent,
