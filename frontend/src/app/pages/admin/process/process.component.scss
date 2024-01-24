@@ -10,6 +10,8 @@
 
 .steps-list {
   margin: 20px 0;
+  overflow-y: auto;
+  max-height: 600px;
 }
 
 .step-item {
@@ -37,7 +39,7 @@
 .icon-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Änderung: Ausrichtung linksbündig */
+  justify-content: flex-start;
 }
 
 .spinner-container {
@@ -46,7 +48,7 @@
 }
 
 .status-icon {
-  margin-left: auto; /* Verschiebt das Status-Icon ganz nach rechts */
+  margin-left: auto;
 }
 
 .start-button {
@@ -59,3 +61,4 @@
 mat-progress-bar {
   margin-bottom: 15px;
 }
+

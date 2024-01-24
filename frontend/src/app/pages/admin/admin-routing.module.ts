@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {AdminComponent} from "./admin.component";
-import {DatabaseProcessComponent} from "./database-process/database-process.component";
+import {ProcessComponent} from "./process/process.component";
+import {SystemUserComponent} from "./system-user/system-user.component";
 
 const routes: Routes = [
   {
@@ -14,8 +15,12 @@ const routes: Routes = [
     component: AdminComponent
   },
   {
-    path: 'database-process',
-    component: DatabaseProcessComponent
+    path: 'process',
+    component: ProcessComponent
+  },
+  {
+    path: 'system_user',
+    component: SystemUserComponent
   }
 
 

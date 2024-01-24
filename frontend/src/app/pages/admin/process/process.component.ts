@@ -1,57 +1,60 @@
 import {Component, OnInit} from '@angular/core';
+import {
+  DatabaseProcess,
+  DatabaseProcessUI
+} from "../../../shared/services/admin/process/process.service";
 import {MatCheckboxChange} from "@angular/material/checkbox";
-import {DatabaseProcess, DatabaseProcessService} from "../../../shared/services/admin/database-process.service";
-
+import {ProcessService} from "../../../shared/services/admin/process/process.service";
 
 @Component({
-  selector: 'app-database-process',
-  templateUrl: './database-process.component.html',
-  styleUrls: ['./database-process.component.scss']
+  selector: 'app-process',
+  templateUrl: './process.component.html',
+  styleUrls: ['./process.component.scss']
 })
-export class DatabaseProcessComponent implements OnInit {
+export class ProcessComponent implements OnInit {
   default = 'Choose your steps for Database Processes';
   incr = 0;
   processStatusIcon = ['play_disabled', 'play_arrow', 'build', 'done', 'error'];
-  processList: DatabaseProcess[] = [];
+  processList: DatabaseProcessUI[] = [];
   currentProcess = 1;
   progress = 0;
   isLoading = false;
   itemText = this.default;
 
-  constructor(private databaseProcessService: DatabaseProcessService) {
+  constructor(private databaseProcessService: ProcessService) {
   }
 
   ngOnInit(): void {
-    this.processList = this.databaseProcessService.getDataBaseProcess(this.processStatusIcon);
+    this.databaseProcessService.getProcesses().subscribe((process: DatabaseProcess[]) => this.processList = this.databaseProcessService.getDataBaseProcess(process));
   }
 
   async startProcess() {
     this.isLoading = true;
-    const selectedProcess= this.processList.filter(process =>{
+    const selectedProcess = this.processList.filter(process => {
       process.processIsShowActivated = process.processActivated;
       return process.processActivated;
     });
-    this.itemText='Process '+this.incr+'/'+selectedProcess.length+' finished.'
+    this.itemText = 'Process ' + this.incr + '/' + selectedProcess.length + ' finished.'
     this.incr++;
     this.isLoading = true;
     for (const process of this.processList) {
       if (process.processActivated) {
         process.processStatusIcon = this.processStatusIcon[2];
         try {
-          const result = await this.databaseProcessService.startProcess();
+          const result = await this.databaseProcessService.startProcess(process);
           console.log(result);
-          this.itemText='Process '+this.incr+'/'+selectedProcess.length+' finished.'
+          this.itemText = 'Process ' + this.incr + '/' + selectedProcess.length + ' finished.'
           process.processStatusIcon = this.processStatusIcon[3];
-          process.isProcessFinish=true;
-          this.progress=Number((this.progress+(100/selectedProcess.length)).toFixed(2));
+          process.isProcessFinish = true;
+          this.progress = Number((this.progress + (100 / selectedProcess.length)).toFixed(2));
         } catch (error) {
           console.error(error);
         }
         this.incr++;
       }
     }
-    this.progress=100;
-    this.incr=0;
+    this.progress = 100;
+    this.incr = 0;
   }
 
   changeIcon(index: number, $event: MatCheckboxChange) {

@@ -1,25 +1,21 @@
-<article class="expansion-header">
+<article>
   <mat-expansion-panel>
-
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span matLine>User Administration</span>
+        <span matLine>System User Administration</span>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <mat-list-item>
-      <span matLine>
-        <button mat-raised-button color="primary">
-          <mat-icon>refresh</mat-icon>
-        </button>
-      </span>
-    </mat-list-item>
+    <app-system-user></app-system-user>
   </mat-expansion-panel>
 
   <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
-      <mat-panel-title>Database Process</mat-panel-title>
+      <mat-panel-title>
+        <span matLine>Start Process-Jobs</span>
+      </mat-panel-title>
     </mat-expansion-panel-header>
-    <app-database-process></app-database-process>
+    <app-process></app-process>
   </mat-expansion-panel>
+
 
 </article>
