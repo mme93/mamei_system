@@ -3,6 +3,10 @@
     <div class="description">
       <span class="center-text">{{itemText}}</span>
     </div>
+    <mat-form-field style="width: 100%;">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search value" #input>
+    </mat-form-field>
     <div class="steps-list">
       <mat-divider></mat-divider>
       <div class="step-item" *ngFor="let item of processList; index as i" >

@@ -16,6 +16,7 @@ export class ProcessComponent implements OnInit {
   incr = 0;
   processStatusIcon = ['play_disabled', 'play_arrow', 'build', 'done', 'error'];
   processList: DatabaseProcessUI[] = [];
+  copyProcessList: DatabaseProcessUI[] = [];
   currentProcess = 1;
   progress = 0;
   isLoading = false;
@@ -25,7 +26,18 @@ export class ProcessComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.databaseProcessService.getProcesses().subscribe((process: DatabaseProcess[]) => this.processList = this.databaseProcessService.getDataBaseProcess(process));
+    this.databaseProcessService.getProcesses().subscribe((process: DatabaseProcess[]) => {
+      this.processList = this.databaseProcessService.getDataBaseProcess(process);
+      this.copyProcessList = this.databaseProcessService.getDataBaseProcess(process)
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.processList = this.copyProcessList.filter(item => {
+        return item.process.processText.toLowerCase().includes(filterValue.toLowerCase());
+      }
+    );
   }
 
   async startProcess() {
