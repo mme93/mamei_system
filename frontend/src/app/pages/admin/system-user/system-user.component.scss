@@ -1,0 +1,64 @@
+.article-container {
+  text-align: center;
+}
+
+.center-text {
+  display: block;
+  margin: 20px 0;
+  font-size: large;
+}
+
+.steps-list {
+  margin: 20px 0;
+  overflow-y: auto;
+  max-height: 600px;
+}
+
+.step-item {
+  margin-bottom: 10px;
+}
+
+.step-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label span {
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.spinner-container {
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.status-icon {
+  margin-left: auto;
+}
+
+.start-button {
+  margin-top: 20px;
+}
+
+.container {
+  background-color: #5c5c5c;
+}
+mat-progress-bar {
+  margin-bottom: 15px;
+}
+
