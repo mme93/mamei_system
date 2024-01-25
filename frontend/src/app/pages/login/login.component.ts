@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {LoginRequest} from "../../shared/model/Login";
 import {HttpErrorResponse} from '@angular/common/http';
 import {AppComponent} from "../../app.component";
+import {TitleEventService} from "../../shared/event/title-event.service";
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,14 @@ export class LoginComponent {
     password: new FormControl('test123', [Validators.required, Validators.minLength(1)])
   });
 
-  constructor(private loginService: LoginService, private router: Router, private appComponent: AppComponent) {
+  constructor(private loginService: LoginService, private router: Router, private appComponent: AppComponent,
+              private eventService: TitleEventService
+  ) {
     this.appComponent.isSidenavDisabled = false;
+  }
+
+  ngOnInit(): void {
+    this.eventService.updateTitle('Login')
   }
 
   getErrorMessage() {

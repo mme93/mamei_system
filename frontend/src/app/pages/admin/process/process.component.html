@@ -1,7 +1,7 @@
 <article class="container">
   <mat-stepper #stepper>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
+      <ng-template matStepLabel>Choose your processes</ng-template>
       <div class="article-container">
         <div class="description">
           <span class="center-text">{{itemText}}</span>
@@ -43,11 +43,18 @@
       <button mat-raised-button color="primary" (click)="startProcess(); stepper.next()" style="width: 100%">Start Process</button>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
+      <ng-template matStepLabel>Execute Processes</ng-template>
       <p>You are now done.</p>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-raised-button (click)="stepper.next()" color="primary"  style="width: 100%">Show Result</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Process Result Overview</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-raised-button matStepperPrevious color="primary" >Back</button>
+        <button mat-raised-button (click)="stepper.reset()" style="width: 100%" color="primary" >Reset</button>
       </div>
     </mat-step>
   </mat-stepper>
