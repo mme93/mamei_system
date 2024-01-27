@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../../../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
-export interface DatabaseProcessUI {
+export interface ProcessUI {
   processIcon: string;
-  process: DatabaseProcess;
+  process: Process;
   processActivated: boolean;
   processIsShowActivated: boolean;
   processStatusIcon: string;
   isProcessFinish: boolean;
 }
 
-export interface DatabaseProcess {
+export interface Process {
 
   id: number;
   processEvent: string;
@@ -33,7 +33,7 @@ export class ProcessService {
   constructor(private http: HttpClient) {
   }
 
-  startProcess(process: DatabaseProcessUI): Promise<any> {
+  startProcess(process: ProcessUI): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
@@ -52,11 +52,11 @@ export class ProcessService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.get<DatabaseProcess[]>("http://localhost:9000/api/process/",httpOptions);
+    return this.http.get<Process[]>("http://localhost:9000/api/process/",httpOptions);
   }
 
-  getDataBaseProcess(process: DatabaseProcess[]) {
-    let processArray:DatabaseProcessUI[]=[];
+  getProcess(process: Process[]) {
+    let processArray:ProcessUI[]=[];
     process.forEach(process => {
       processArray.push({
         processIcon: 'info',
@@ -70,7 +70,7 @@ export class ProcessService {
     return processArray;
   }
 
-  sortProcess( startProcessList: DatabaseProcess[]) {
+  sortProcess( startProcessList: Process[]) {
     console.log(startProcessList)
     const httpOptions = {
       headers: new HttpHeaders({
@@ -78,6 +78,6 @@ export class ProcessService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.put<DatabaseProcess[]>(this.databaseProcessSortUrl,startProcessList,httpOptions);
+    return this.http.put<Process[]>(this.databaseProcessSortUrl,startProcessList,httpOptions);
   }
 }
