@@ -21,6 +21,7 @@ public class ProcessTypeTableService implements IProcessTypeService{
         return switch (process.getProcessEvent()) {
             case DELETE -> deleteProcess(process);
             case RESET -> resetProcess(process);
+            case RESTART -> restartProcess(process);
             default -> throw new NotFoundException("No Process Event found by Name: " + process.getProcessEvent());
         };
     }
@@ -36,6 +37,11 @@ public class ProcessTypeTableService implements IProcessTypeService{
             processDefaultDBService.deleteAllDefaultData();
             processDefaultDBService.test();
         }
+        return false;
+    }
+
+    @Override
+    public boolean restartProcess(ExecuteProcess process) {
         return false;
     }
 }

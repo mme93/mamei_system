@@ -5,8 +5,7 @@ import jakarta.ws.rs.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProcessTypeDataSetService implements IProcessTypeService{
-
+public class ProcessTypMicroServicesService implements IProcessTypeService {
     public boolean executeProcess(ExecuteProcess process) {
         return switch (process.getProcessEvent()) {
             case DELETE -> deleteProcess(process);
@@ -18,7 +17,6 @@ public class ProcessTypeDataSetService implements IProcessTypeService{
 
     @Override
     public boolean deleteProcess(ExecuteProcess process) {
-
         return false;
     }
 
@@ -29,6 +27,7 @@ public class ProcessTypeDataSetService implements IProcessTypeService{
 
     @Override
     public boolean restartProcess(ExecuteProcess process) {
+
         return false;
     }
 }
