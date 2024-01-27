@@ -45,6 +45,16 @@ public class ProcessDefaultDBService implements IDefaultDBService {
     }
 
     @Override
+    public boolean deleteTable() {
+        return false;
+    }
+
+    @Override
+    public boolean createTable() {
+        return false;
+    }
+
+    @Override
     public boolean loadDefaultDataIntoDatabase() {
         if(!processRepository.existsByProcessName("BACKUP_DATABASE")){
             processRepository.save(new Process(

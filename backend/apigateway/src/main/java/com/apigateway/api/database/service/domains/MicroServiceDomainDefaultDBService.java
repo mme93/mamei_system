@@ -23,4 +23,14 @@ public class MicroServiceDomainDefaultDBService implements IDefaultDBService{
     public boolean existTable() {
         return false;
     }
+
+    @Override
+    public boolean deleteTable() {
+        return false;
+    }
+
+    @Override
+    public boolean createTable() {
+        return false;
+    }
 }

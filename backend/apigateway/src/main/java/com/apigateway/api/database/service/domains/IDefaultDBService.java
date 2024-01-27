@@ -6,5 +6,7 @@ public interface IDefaultDBService {
     boolean deleteAllData();
     boolean deleteAllDefaultData();
     boolean existTable();
+    boolean deleteTable();
+    boolean createTable();
 
 }
