@@ -1,11 +1,9 @@
-package com.apigateway.status.microservice.controller;
+package com.apigateway.microservice.status.controller;
 
-import com.apigateway.status.microservice.model.dto.MicroServiceDto;
-import com.apigateway.status.microservice.service.MicroServiceStatusService;
+import com.apigateway.microservice.status.model.dto.MicroServiceDto;
+import com.apigateway.microservice.status.service.MicroServiceStatusService;
 import jakarta.ws.rs.NotFoundException;
-import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.apigateway.status.microservice.model.entity;
+package com.apigateway.microservice.status.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

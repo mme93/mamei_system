@@ -1,9 +1,9 @@
-package com.apigateway.status.microservice.service;
+package com.apigateway.microservice.status.service;
 
-import com.apigateway.status.microservice.model.dto.EServiceStatus;
-import com.apigateway.status.microservice.model.dto.MicroServiceDto;
-import com.apigateway.status.microservice.model.entity.MicroServiceEntity;
-import com.apigateway.status.microservice.repository.MicroServiceRepository;
+import com.apigateway.microservice.status.model.dto.EServiceStatus;
+import com.apigateway.microservice.status.model.dto.MicroServiceDto;
+import com.apigateway.microservice.status.model.entity.MicroServiceEntity;
+import com.apigateway.microservice.status.repository.MicroServiceRepository;
 import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

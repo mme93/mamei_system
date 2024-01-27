@@ -1,4 +1,4 @@
-package com.apigateway.status.microservice.model.dto;
+package com.apigateway.microservice.status.model.dto;
 
 public enum EServiceStatus {
     ONLINE,
