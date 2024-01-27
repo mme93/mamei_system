@@ -32,7 +32,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
     @Override
     public boolean deleteAllDefaultData() {
         this.processRepository.findAll().stream().forEach(process -> {
-            if(EurekaDiscoveryClientNameTable.eurekaDiscorverClientCNameList.contains(process.getProcessName())){
+            if(EurekaDiscoveryClientNameTable.eurekaDiscoverClientNameList.contains(process.getProcessName())){
                 this.processRepository.deleteById(process.getId());
             }
         });
@@ -128,7 +128,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     false,
                     "[]"));
         }
-        for(String microServices: EurekaDiscoveryClientNameTable.eurekaDiscorverClientCNameList){
+        for(String microServices: EurekaDiscoveryClientNameTable.eurekaDiscoverClientNameList){
             if(!processRepository.existsByProcessName("RESTART_MICROSERVICES_"+microServices)){
                 processRepository.save(new Process(
                         EProcessEvent.RESTART,
