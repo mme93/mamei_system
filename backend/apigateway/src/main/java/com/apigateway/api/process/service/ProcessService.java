@@ -1,5 +1,6 @@
 package com.apigateway.api.process.service;
 
+import com.apigateway.api.process.model.ExecuteProcess;
 import com.apigateway.api.process.model.Process;
 import com.apigateway.api.process.repository.ProcessRepository;
 import jakarta.ws.rs.NotFoundException;
@@ -12,37 +13,28 @@ import java.util.List;
 public class ProcessService {
 
     private final ProcessRepository processRepository;
+    private final ProcessTypDatabaseService processTypDatabaseService;
+    private final ProcessTypMicroSerivcesService processTypMicroSerivcesService;
 
     @Autowired
-    public ProcessService(ProcessRepository processRepository) {
+    public ProcessService(ProcessRepository processRepository, ProcessTypDatabaseService processTypDatabaseService, ProcessTypMicroSerivcesService processTypMicroSerivcesService) {
         this.processRepository = processRepository;
+        this.processTypDatabaseService = processTypDatabaseService;
+        this.processTypMicroSerivcesService = processTypMicroSerivcesService;
     }
 
-    public boolean startProcess(Process process) {
+    public boolean startProcess(ExecuteProcess process) {
 
         switch (process.getProcessTyp()) {
-            case EUREKA_SYSTEM:
-                return startProcessForEurekaSystem();
             case DATABASE:
-                return startProcessForDatabase();
+                return processTypDatabaseService.executeProcess(process);
             case MICRO_SERVICES:
-                return startProcessForMicroServices();
+                return processTypMicroSerivcesService.executeProcess(process);
             default:
                 throw new NotFoundException("No Process Typ found by Name: " + process.getProcessTyp());
         }
     }
 
-    public boolean startProcessForDatabase() {
-        return true;
-    }
-
-    public boolean startProcessForMicroServices() {
-        return true;
-    }
-
-    public boolean startProcessForEurekaSystem() {
-        return true;
-    }
 
     public List<Process> getProcesses() {
         return processRepository.findAll();

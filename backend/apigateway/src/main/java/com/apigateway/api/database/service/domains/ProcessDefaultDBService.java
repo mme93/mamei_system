@@ -104,7 +104,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
         } if(!processRepository.existsByProcessName("CLEAR_TABLE")){
             processRepository.save(new Process(
                     EProcessEvent.DELETE,
-                    EProcessTyp.DATABASE,
+                    EProcessTyp.TABLE,
                     "CLEAR_TABLE",
                     "Remove all data from Table",
                     false,
@@ -113,7 +113,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
         } if(!processRepository.existsByProcessName("SET_DEFAULT_TABLE")){
             processRepository.save(new Process(
                     EProcessEvent.UPDATE,
-                    EProcessTyp.DATABASE,
+                    EProcessTyp.TABLE,
                     "SET_DEFAULT_TABLE",
                     "Set default table data",
                     false,
@@ -143,8 +143,8 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                 processRepository.save(new Process(
                         EProcessEvent.RESTART,
                         EProcessTyp.MICRO_SERVICES,
-                        "RESTART_MICROSERVICES_"+microServices,
-                        "Restart specific Microservice",
+                        "RESTART_MICROSERVICES",
+                        "Restart "+microServices+" Microservice",
                         false,
                         false,
                         "[]"));
@@ -153,18 +153,18 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                 processRepository.save(new Process(
                         EProcessEvent.RESTART,
                         EProcessTyp.MICRO_SERVICES,
-                        "STOP_MICROSERVICES_"+microServices,
-                        "Stop specific Microservice",
+                        "STOP_MICROSERVICES",
+                        "Stop "+microServices+" Microservice",
                         false,
                         false,
                         "[]"));
             }
-            if(!processRepository.existsByProcessName("START_MICROSERVICES_"+microServices)){
+            if(!processRepository.existsByProcessName("START_MICROSERVICES")){
                 processRepository.save(new Process(
                         EProcessEvent.RESTART,
                         EProcessTyp.MICRO_SERVICES,
                         "START_MICROSERVICES_"+microServices,
-                        "Start specific Microservice",
+                        "Start "+microServices+" Microservice",
                         false,
                         false,
                         "[]"));

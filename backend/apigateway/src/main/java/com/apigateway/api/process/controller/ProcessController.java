@@ -1,5 +1,6 @@
 package com.apigateway.api.process.controller;
 
+import com.apigateway.api.process.model.ExecuteProcess;
 import com.apigateway.api.process.model.Process;
 import com.apigateway.api.process.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ProcessController {
 
 
     @PostMapping("/newJob")
-    public ResponseEntity<Boolean> startNewJob(@RequestBody Process process){
+    public ResponseEntity<Boolean> startNewJob(@RequestBody ExecuteProcess process){
         try {
             Thread.sleep(3000);
             return new ResponseEntity<>(processService.startProcess(process),HttpStatus.OK);
