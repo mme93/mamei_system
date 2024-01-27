@@ -94,6 +94,9 @@ export class SystemUserComponent implements OnInit {
   }
 
   validateProcess() {
+    let sortProcessLists: DatabaseProcess[] = [];
+    this.startProcessList.forEach(process => sortProcessLists.push(process.process))
+    this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => console.log(value));
     this.isProcessRunning=true;
   }
 }

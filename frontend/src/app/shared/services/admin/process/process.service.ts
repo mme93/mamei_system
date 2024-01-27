@@ -28,6 +28,7 @@ export interface DatabaseProcess {
 })
 export class ProcessService {
   private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
+  private databaseProcessSortUrl = environment.uri + ':9000/api/process/sort';
 
   constructor(private http: HttpClient) {
   }
@@ -41,7 +42,7 @@ export class ProcessService {
       responseType: 'text'
     };
     // @ts-ignore
-    return this.http.post(this.databaseProcessStartUrl, process, httpOptions).toPromise();
+    return this.http.post(this.databaseProcessStartUrl, process.process, httpOptions).toPromise();
   }
 
   getProcesses(){
@@ -69,4 +70,14 @@ export class ProcessService {
     return processArray;
   }
 
+  sortProcess( startProcessList: DatabaseProcess[]) {
+    console.log(startProcessList)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<DatabaseProcess[]>(this.databaseProcessSortUrl,startProcessList,httpOptions);
+  }
 }

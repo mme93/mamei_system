@@ -38,4 +38,9 @@ public class ProcessController {
         return new ResponseEntity<>(processService.getProcesses(),HttpStatus.OK);
     }
 
+    @PutMapping("/sort")
+    public ResponseEntity<List<Process>>sortProcessList(@RequestBody List<Process> processList){
+        return new ResponseEntity(processService.sortProcessList(processList),HttpStatus.OK);
+    }
+
 }
