@@ -4,6 +4,7 @@ import com.apigateway.api.eureka.assets.EurekaDiscoveryClientNameTable;
 import com.apigateway.api.process.model.EProcessEvent;
 import com.apigateway.api.process.model.EProcessTyp;
 import com.apigateway.api.process.model.Process;
+import com.apigateway.api.process.model.ProcessDefaultNameTable;
 import com.apigateway.api.process.repository.ProcessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
     @Override
     public boolean deleteAllDefaultData() {
         this.processRepository.findAll().stream().forEach(process -> {
-            if(EurekaDiscoveryClientNameTable.eurekaDiscoverClientNameList.contains(process.getProcessName())){
+            if(ProcessDefaultNameTable.processNameList.contains(process.getProcessName())){
                 this.processRepository.deleteById(process.getId());
             }
         });
@@ -52,6 +53,62 @@ public class ProcessDefaultDBService implements IDefaultDBService {
     @Override
     public boolean createTable() {
         return false;
+    }
+
+    public boolean test(){
+        if(!processRepository.existsByProcessName(ProcessDefaultNameTable.DELETE_DATASET)){
+            processRepository.save(new Process(
+                    EProcessEvent.DELETE,
+                    EProcessTyp.DATA_SET,
+                    ProcessDefaultNameTable.DELETE_DATASET,
+                    "Remove all data from Table",
+                    false,
+                    false,
+                    "[]"));
+        }
+        if(!processRepository.existsByProcessName(ProcessDefaultNameTable.DELETE_DEFAULT_DATASET)){
+            processRepository.save(new Process(
+                    EProcessEvent.DELETE,
+                    EProcessTyp.DATA_SET,
+                    ProcessDefaultNameTable.DELETE_DEFAULT_DATASET,
+                    "Remove default data from Table",
+                    false,
+                    false,
+                    "[]"));
+        }
+        if(!processRepository.existsByProcessName(ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET)){
+            processRepository.save(new Process(
+                    EProcessEvent.RESET,
+                    EProcessTyp.TABLE,
+                    ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET,
+                    "Reset Table data to default",
+                    false,
+                    false,
+                    "[]"));
+        }
+        if(!processRepository.existsByProcessName(ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_DATASET)){
+            processRepository.save(new Process(
+                    EProcessEvent.RESET,
+                    EProcessTyp.TABLE,
+                    ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_DATASET,
+                    "Reset all Table data to default",
+                    false,
+                    false,
+                    "[]"));
+        }
+        if(!processRepository.existsByProcessName(ProcessDefaultNameTable.RESTART_MICROSERVICE)){
+            processRepository.save(new Process(
+                    EProcessEvent.RESTART,
+                    EProcessTyp.MICRO_SERVICES,
+                    ProcessDefaultNameTable.RESTART_MICROSERVICE,
+                    "Restart Microservice",
+                    false,
+                    false,
+                    "[]"));
+        }
+
+
+        return true;
     }
 
     @Override

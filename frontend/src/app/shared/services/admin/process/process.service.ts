@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../../../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
@@ -23,6 +23,18 @@ export interface Process {
   dependedProcessIds: string;
 }
 
+export interface ExecuteProcess {
+
+  processEvent: string;
+  processTyp: string;
+  processName: string;
+  processText: string;
+  hasDependedProcess: boolean;
+  isDependedProcess: boolean;
+  dependedProcessIds: string;
+  context: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,22 +53,32 @@ export class ProcessService {
       }),
       responseType: 'text'
     };
+    let executeProcess:ExecuteProcess ={
+      processEvent: process.process.processEvent,
+      processTyp: process.process.processTyp,
+      processName: process.process.processName,
+      processText: process.process.processText,
+      hasDependedProcess: process.process.hasDependedProcess,
+      isDependedProcess: process.process.isDependedProcess,
+      dependedProcessIds: process.process.dependedProcessIds,
+      context: 'PROCESS'
+    }
     // @ts-ignore
-    return this.http.post(this.databaseProcessStartUrl, process.process, httpOptions).toPromise();
+    return this.http.post(this.databaseProcessStartUrl, executeProcess, httpOptions).toPromise();
   }
 
-  getProcesses(){
+  getProcesses() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
         'Content-Type': 'application/json'
       })
     };
-    return this.http.get<Process[]>("http://localhost:9000/api/process/",httpOptions);
+    return this.http.get<Process[]>("http://localhost:9000/api/process/", httpOptions);
   }
 
   getProcess(process: Process[]) {
-    let processArray:ProcessUI[]=[];
+    let processArray: ProcessUI[] = [];
     process.forEach(process => {
       processArray.push({
         processIcon: 'info',
@@ -70,7 +92,7 @@ export class ProcessService {
     return processArray;
   }
 
-  sortProcess( startProcessList: Process[]) {
+  sortProcess(startProcessList: Process[]) {
     console.log(startProcessList)
     const httpOptions = {
       headers: new HttpHeaders({
@@ -78,6 +100,6 @@ export class ProcessService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.put<Process[]>(this.databaseProcessSortUrl,startProcessList,httpOptions);
+    return this.http.put<Process[]>(this.databaseProcessSortUrl, startProcessList, httpOptions);
   }
 }

@@ -3,6 +3,10 @@ package com.apigateway.api.process.service;
 import com.apigateway.api.process.model.ExecuteProcess;
 import com.apigateway.api.process.model.Process;
 import com.apigateway.api.process.repository.ProcessRepository;
+import com.apigateway.api.process.service.processtyp.ProcessTypDatabaseService;
+import com.apigateway.api.process.service.processtyp.ProcessTypMicroSerivcesService;
+import com.apigateway.api.process.service.processtyp.ProcessTypeDataSetService;
+import com.apigateway.api.process.service.processtyp.ProcessTypeTableService;
 import jakarta.ws.rs.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +19,16 @@ public class ProcessService {
     private final ProcessRepository processRepository;
     private final ProcessTypDatabaseService processTypDatabaseService;
     private final ProcessTypMicroSerivcesService processTypMicroSerivcesService;
+    private final ProcessTypeDataSetService processTypeDataSetService;
+    private final ProcessTypeTableService processTypeTableService;
 
     @Autowired
-    public ProcessService(ProcessRepository processRepository, ProcessTypDatabaseService processTypDatabaseService, ProcessTypMicroSerivcesService processTypMicroSerivcesService) {
+    public ProcessService(ProcessRepository processRepository, ProcessTypDatabaseService processTypDatabaseService, ProcessTypMicroSerivcesService processTypMicroSerivcesService, ProcessTypeDataSetService processTypeDataSetService, ProcessTypeTableService processTypeTableService) {
         this.processRepository = processRepository;
         this.processTypDatabaseService = processTypDatabaseService;
         this.processTypMicroSerivcesService = processTypMicroSerivcesService;
+        this.processTypeDataSetService = processTypeDataSetService;
+        this.processTypeTableService = processTypeTableService;
     }
 
     public boolean startProcess(ExecuteProcess process) {
@@ -30,6 +38,10 @@ public class ProcessService {
                 return processTypDatabaseService.executeProcess(process);
             case MICRO_SERVICES:
                 return processTypMicroSerivcesService.executeProcess(process);
+            case DATA_SET:
+                return processTypeDataSetService.executeProcess(process);
+            case TABLE:
+                return processTypeTableService.executeProcess(process);
             default:
                 throw new NotFoundException("No Process Typ found by Name: " + process.getProcessTyp());
         }

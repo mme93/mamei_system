@@ -9,5 +9,6 @@ public enum EProcessEvent {
     RESTART,
     CANCEL,
     STOP,
-    BUILD
+    BUILD,
+    RESET
 }

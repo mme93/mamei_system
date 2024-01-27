@@ -29,4 +29,15 @@ public class ExecuteProcess {
     private String startTime;
 
     private String endTime;
+
+    public ExecuteProcess(EProcessEvent processEvent, EProcessTyp processTyp, String processName, String processText, boolean hasDependedProcess, boolean isDependedProcess, String dependedProcessIds, String context) {
+        this.processEvent = processEvent;
+        this.processTyp = processTyp;
+        this.processName = processName;
+        this.processText = processText;
+        this.hasDependedProcess = hasDependedProcess;
+        this.isDependedProcess = isDependedProcess;
+        this.dependedProcessIds = dependedProcessIds;
+        this.context = context;
+    }
 }
