@@ -21,8 +21,8 @@ public class WebDavService {
 
     public boolean createFolder(String path) {
         try{
-            //Sardine sardine = SardineFactory.begin(this.user, this.password);
-            Sardine sardine = SardineFactory.begin(null,null);
+            Sardine sardine = SardineFactory.begin(this.user, this.password);
+           // Sardine sardine = SardineFactory.begin(null,null);
             sardine.createDirectory(this.url+path);
             return true;
         }catch (IOException e){

@@ -11,7 +11,7 @@ eureka:
     preferIpAddress: true
 
 webDav:
-  user: username
+  user: admin
   password: admin
   url: http://212.227.165.166/webdav/
 
