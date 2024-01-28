@@ -1,5 +1,6 @@
 package com.apigateway.api.process.model;
 
+
 import lombok.*;
 
 @Data
@@ -13,6 +14,10 @@ public class ExecuteProcess {
     private EProcessEvent processEvent;
 
     private EProcessTyp processTyp;
+
+    private EProcessClassification processClassification;
+
+    private EProcessPlausibility processPlausibility;
 
     private String processName;
 
@@ -30,14 +35,5 @@ public class ExecuteProcess {
 
     private String endTime;
 
-    public ExecuteProcess(EProcessEvent processEvent, EProcessTyp processTyp, String processName, String processText, boolean hasDependedProcess, boolean isDependedProcess, String dependedProcessIds, String context) {
-        this.processEvent = processEvent;
-        this.processTyp = processTyp;
-        this.processName = processName;
-        this.processText = processText;
-        this.hasDependedProcess = hasDependedProcess;
-        this.isDependedProcess = isDependedProcess;
-        this.dependedProcessIds = dependedProcessIds;
-        this.context = context;
-    }
+
 }

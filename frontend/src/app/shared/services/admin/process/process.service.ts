@@ -16,6 +16,8 @@ export interface Process {
   id: number;
   processEvent: string;
   processTyp: string;
+  processClassification: string;
+  processPlausibility: string;
   processName: string;
   processText: string;
   hasDependedProcess: boolean;
@@ -27,6 +29,8 @@ export interface ExecuteProcess {
 
   processEvent: string;
   processTyp: string;
+  processClassification: string;
+  processPlausibility: string;
   processName: string;
   processText: string;
   hasDependedProcess: boolean;
@@ -56,6 +60,8 @@ export class ProcessService {
     let executeProcess:ExecuteProcess ={
       processEvent: process.process.processEvent,
       processTyp: process.process.processTyp,
+      processClassification: process.process.processClassification,
+      processPlausibility: process.process.processPlausibility,
       processName: process.process.processName,
       processText: process.process.processText,
       hasDependedProcess: process.process.hasDependedProcess,
@@ -93,7 +99,6 @@ export class ProcessService {
   }
 
   sortProcess(startProcessList: Process[]) {
-    console.log(startProcessList)
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',

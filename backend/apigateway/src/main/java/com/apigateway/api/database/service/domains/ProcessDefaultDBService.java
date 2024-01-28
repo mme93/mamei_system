@@ -1,10 +1,7 @@
 package com.apigateway.api.database.service.domains;
 
-import com.apigateway.api.eureka.assets.EurekaDiscoveryClientNameTable;
-import com.apigateway.api.process.model.EProcessEvent;
-import com.apigateway.api.process.model.EProcessTyp;
+import com.apigateway.api.process.model.*;
 import com.apigateway.api.process.model.Process;
-import com.apigateway.api.process.model.ProcessDefaultNameTable;
 import com.apigateway.api.process.repository.ProcessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +57,8 @@ public class ProcessDefaultDBService implements IDefaultDBService {
             processRepository.save(new Process(
                     EProcessEvent.DELETE,
                     EProcessTyp.DATA_SET,
+                    EProcessClassification.LOW,
+                    EProcessPlausibility.NONE,
                     ProcessDefaultNameTable.DELETE_DATASET,
                     "Remove all data from Table",
                     false,
@@ -70,6 +69,8 @@ public class ProcessDefaultDBService implements IDefaultDBService {
             processRepository.save(new Process(
                     EProcessEvent.DELETE,
                     EProcessTyp.DATA_SET,
+                    EProcessClassification.LOW,
+                    EProcessPlausibility.NONE,
                     ProcessDefaultNameTable.DELETE_DEFAULT_DATASET,
                     "Remove default data from Table",
                     false,
@@ -80,6 +81,8 @@ public class ProcessDefaultDBService implements IDefaultDBService {
             processRepository.save(new Process(
                     EProcessEvent.RESET,
                     EProcessTyp.TABLE,
+                    EProcessClassification.LOW,
+                    EProcessPlausibility.NONE,
                     ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET,
                     "Reset Table data to default",
                     false,
@@ -90,6 +93,8 @@ public class ProcessDefaultDBService implements IDefaultDBService {
             processRepository.save(new Process(
                     EProcessEvent.RESET,
                     EProcessTyp.TABLE,
+                    EProcessClassification.LOW,
+                    EProcessPlausibility.NONE,
                     ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_DATASET,
                     "Reset all Table data to default",
                     false,
@@ -100,6 +105,8 @@ public class ProcessDefaultDBService implements IDefaultDBService {
             processRepository.save(new Process(
                     EProcessEvent.RESTART,
                     EProcessTyp.MICRO_SERVICES,
+                    EProcessClassification.LOW,
+                    EProcessPlausibility.NONE,
                     ProcessDefaultNameTable.RESTART_MICROSERVICE,
                     "Restart Microservice",
                     false,
@@ -113,6 +120,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
 
     @Override
     public boolean loadDefaultDataIntoDatabase() {
+        /*
         if(!processRepository.existsByProcessName("BACKUP_DATABASE")){
             processRepository.save(new Process(
                     EProcessEvent.BUILD,
@@ -227,6 +235,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                         "[]"));
             }
         }
+         */
         return false;
     }
 }

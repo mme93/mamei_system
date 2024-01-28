@@ -24,6 +24,12 @@ public class Process {
     @Enumerated(EnumType.STRING)
     private EProcessTyp processTyp;
 
+    @Enumerated(EnumType.STRING)
+    private EProcessClassification processClassification;
+
+    @Enumerated(EnumType.STRING)
+    private EProcessPlausibility processPlausibility;
+
     @Column(unique = true, nullable = false)
     private String processName;
 
@@ -36,9 +42,11 @@ public class Process {
     @Column(length = 1000)
     private String dependedProcessIds;
 
-    public Process(EProcessEvent processEvent, EProcessTyp processTyp, String processName, String processText, boolean hasDependedProcess, boolean isDependedProcess, String dependedProcessIds) {
-        this.processTyp = processTyp;
+    public Process(EProcessEvent processEvent, EProcessTyp processTyp, EProcessClassification processClassification, EProcessPlausibility processPlausibility, String processName, String processText, boolean hasDependedProcess, boolean isDependedProcess, String dependedProcessIds) {
         this.processEvent = processEvent;
+        this.processTyp = processTyp;
+        this.processClassification = processClassification;
+        this.processPlausibility = processPlausibility;
         this.processName = processName;
         this.processText = processText;
         this.hasDependedProcess = hasDependedProcess;
