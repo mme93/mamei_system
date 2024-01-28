@@ -1,11 +1,21 @@
 package com.apigateway.api.process.service.processtyp;
 
 import com.apigateway.api.process.model.ExecuteProcess;
+import com.apigateway.microservice.restart.service.MicroServicesRestartService;
 import jakarta.ws.rs.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProcessTypMicroServicesService implements IProcessTypeService {
+
+    private final MicroServicesRestartService microServicesRestartService;
+
+    @Autowired
+    public ProcessTypMicroServicesService(MicroServicesRestartService microServicesRestartService) {
+        this.microServicesRestartService = microServicesRestartService;
+    }
+
     public boolean executeProcess(ExecuteProcess process) {
         return switch (process.getProcessEvent()) {
             case DELETE -> deleteProcess(process);
@@ -27,7 +37,7 @@ public class ProcessTypMicroServicesService implements IProcessTypeService {
 
     @Override
     public boolean restartProcess(ExecuteProcess process) {
-
+        microServicesRestartService.restartService(process.getContext());
         return false;
     }
 }

@@ -39,6 +39,7 @@ public class DiscoveryClientService {
         return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.Mameie_FSM).get(0).getUri().toString();
     }
 
+
     public boolean existEurekaDiscoveryClientByName(String name){
         discoveryClient.getServices().forEach(x-> System.err.println(x));
 
