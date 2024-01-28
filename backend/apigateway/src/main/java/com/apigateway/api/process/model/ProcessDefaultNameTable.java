@@ -18,6 +18,7 @@ public class ProcessDefaultNameTable {
      */
     public final static String RESET_TO_DEFAULT_DATASET = "RESET_TO_DEFAULT_DATASET";
     public final static String RESET_ALL_TO_DEFAULT_DATASET = "RESET_ALL_TO_DEFAULT_DATASET";
+    public final static String DELETE_TABLE = "DELETE_TABLE";
 
 
     /*
@@ -38,6 +39,7 @@ public class ProcessDefaultNameTable {
     public final static String UPDATE_PROCESS_DEPENDED_ARRAY = "UPDATE_PROCESS_DEPENDED_ARRAY";
 
     public final static List<String>processNameList=asList(
-            DELETE_DATASET,DELETE_DEFAULT_DATASET,RESET_TO_DEFAULT_DATASET,RESET_ALL_TO_DEFAULT_DATASET,RESTART_MICROSERVICE
+            DELETE_DATASET,DELETE_DEFAULT_DATASET,RESET_TO_DEFAULT_DATASET,RESET_ALL_TO_DEFAULT_DATASET,RESTART_MICROSERVICE,
+            DELETE_TABLE
     );
 }

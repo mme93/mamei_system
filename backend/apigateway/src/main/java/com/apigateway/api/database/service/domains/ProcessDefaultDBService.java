@@ -89,6 +89,18 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     false,
                     "[]"));
         }
+        if(!processRepository.existsByProcessName(ProcessDefaultNameTable.DELETE_TABLE)){
+            processRepository.save(new Process(
+                    EProcessEvent.DELETE,
+                    EProcessTyp.TABLE,
+                    EProcessClassification.LOW,
+                    EProcessPlausibility.NONE,
+                    ProcessDefaultNameTable.DELETE_TABLE,
+                    "Delete table",
+                    false,
+                    false,
+                    "[]"));
+        }
         if(!processRepository.existsByProcessName(ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_DATASET)){
             processRepository.save(new Process(
                     EProcessEvent.RESET,

@@ -12,7 +12,7 @@ public class TableQueryGenerator {
     }
 
     public String generateQueryDeleteTable(String tableName){
-        return "DROP TABLE IF EXIST "+tableName;
+        return "DROP TABLE IF EXISTS "+tableName;
     }
 
     public String generateQueryCreateTable(TableCreate tableCreate) {

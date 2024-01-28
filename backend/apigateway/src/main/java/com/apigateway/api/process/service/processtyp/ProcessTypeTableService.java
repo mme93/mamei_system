@@ -4,18 +4,17 @@ import com.apigateway.api.database.service.domains.ProcessDefaultDBService;
 import com.apigateway.api.process.model.ExecuteProcess;
 import com.apigateway.api.process.model.ProcessDefaultNameTable;
 import jakarta.ws.rs.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
-public class ProcessTypeTableService implements IProcessTypeService{
+@RequiredArgsConstructor
+public class ProcessTypeTableService implements IProcessTypeService {
 
     private final ProcessDefaultDBService processDefaultDBService;
+    private final WebClient.Builder webClient;
 
-    @Autowired
-    public ProcessTypeTableService(ProcessDefaultDBService processDefaultDBService) {
-        this.processDefaultDBService = processDefaultDBService;
-    }
 
     public boolean executeProcess(ExecuteProcess process) {
         return switch (process.getProcessEvent()) {
@@ -28,12 +27,22 @@ public class ProcessTypeTableService implements IProcessTypeService{
 
     @Override
     public boolean deleteProcess(ExecuteProcess process) {
+        processDefaultDBService.deleteAllDefaultData();
+        String uri = "http://localhost:8998/restTable/delete/CLOUD_XXL/mamei_system/process";
+        webClient
+                .build()
+                .delete()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(Object.class)
+                .block();
+
         return true;
     }
 
     @Override
     public boolean resetProcess(ExecuteProcess process) {
-        if(process.getProcessName().equals(ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET)){
+        if (process.getProcessName().equals(ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET)) {
             processDefaultDBService.deleteAllDefaultData();
             processDefaultDBService.test();
         }

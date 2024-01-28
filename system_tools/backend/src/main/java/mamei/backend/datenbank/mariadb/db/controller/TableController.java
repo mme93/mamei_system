@@ -30,9 +30,9 @@ public class TableController {
         return new ResponseEntity<>(tableService.createTable(tableCreate), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity deleteTable(@RequestBody DatabaseServer databaseServer) {
-        tableService.deleteTable(databaseServer);
+    @DeleteMapping("/delete/{serverName}/{databaseName}/{tableName}")
+    public ResponseEntity deleteTable(@PathVariable String databaseName, @PathVariable String serverName, @PathVariable String tableName) {
+        tableService.deleteTable(new DatabaseServer(serverName,databaseName,tableName));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

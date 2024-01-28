@@ -32,7 +32,6 @@ public class ProcessService {
     }
 
     public boolean startProcess(ExecuteProcess process) {
-
         switch (process.getProcessTyp()) {
             case DATABASE:
                 return processTypDatabaseService.executeProcess(process);
