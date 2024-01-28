@@ -102,4 +102,15 @@ public class TableService {
             return false;
         }
     }
+
+    public void deleteTable(DatabaseServer databaseServer) {
+        try {
+            Connection connection = this.connectionService.createConnection(databaseServer.getServerName(),databaseServer.getDatabaseName());
+            String query=tableQueryGenerator.generateQueryDeleteTable(databaseServer.getTableName());
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

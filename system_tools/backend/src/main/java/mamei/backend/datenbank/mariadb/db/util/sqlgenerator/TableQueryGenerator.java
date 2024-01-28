@@ -11,6 +11,10 @@ public class TableQueryGenerator {
         return "SHOW TABLES";
     }
 
+    public String generateQueryDeleteTable(String tableName){
+        return "DROP TABLE IF EXIST "+tableName;
+    }
+
     public String generateQueryCreateTable(TableCreate tableCreate) {
         StringBuilder queryBuilder= new StringBuilder();
         queryBuilder.append("CREATE TABLE " + tableCreate.getDatabaseServer().getTableName() + " ( \n");

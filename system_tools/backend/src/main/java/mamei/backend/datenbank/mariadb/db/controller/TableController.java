@@ -1,5 +1,6 @@
 package mamei.backend.datenbank.mariadb.db.controller;
 
+import mamei.backend.datenbank.mariadb.db.model.DatabaseServer;
 import mamei.backend.datenbank.mariadb.db.model.report.TableCreateReport;
 import mamei.backend.datenbank.mariadb.db.model.table.TableCreate;
 import mamei.backend.datenbank.mariadb.db.service.TableService;
@@ -21,11 +22,18 @@ public class TableController {
 
     @PostMapping("/validate")
     public ResponseEntity<TableCreateReport> validateTables(@RequestBody TableCreate tableCreate) throws SQLException {
-        return new ResponseEntity<>(tableService .validateCreatTable(tableCreate), HttpStatus.OK);
+        return new ResponseEntity<>(tableService.validateCreatTable(tableCreate), HttpStatus.OK);
     }
+
     @PostMapping("/create")
     public ResponseEntity<Boolean> createTables(@RequestBody TableCreate tableCreate) throws SQLException {
-        return new ResponseEntity<>(tableService .createTable(tableCreate), HttpStatus.OK);
+        return new ResponseEntity<>(tableService.createTable(tableCreate), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity deleteTable(@RequestBody DatabaseServer databaseServer) {
+        tableService.deleteTable(databaseServer);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
