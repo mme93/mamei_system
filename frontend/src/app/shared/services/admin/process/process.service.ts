@@ -45,6 +45,7 @@ export interface ExecuteProcess {
 export class ProcessService {
   private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
   private databaseProcessSortUrl = environment.uri + ':9000/api/process/sort';
+  private databaseProcessesUrl = environment.uri + ':9000/api/process/'
 
   constructor(private http: HttpClient) {
   }
@@ -57,7 +58,7 @@ export class ProcessService {
       }),
       responseType: 'text'
     };
-    let executeProcess:ExecuteProcess ={
+    let executeProcess: ExecuteProcess = {
       processEvent: process.process.processEvent,
       processTyp: process.process.processTyp,
       processClassification: process.process.processClassification,
@@ -67,7 +68,7 @@ export class ProcessService {
       hasDependedProcess: process.process.hasDependedProcess,
       isDependedProcess: process.process.isDependedProcess,
       dependedProcessIds: process.process.dependedProcessIds,
-      context: 'APIGATEWAY'
+      context: 'DASHBOARD'
     }
     // @ts-ignore
     return this.http.post(this.databaseProcessStartUrl, executeProcess, httpOptions).toPromise();
@@ -80,7 +81,7 @@ export class ProcessService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.get<Process[]>("http://localhost:9000/api/process/", httpOptions);
+    return this.http.get<Process[]>(this.databaseProcessesUrl, httpOptions);
   }
 
   getProcess(process: Process[]) {

@@ -28,10 +28,6 @@ public class MicroServicesRestartService {
         return callRestart(microServiceName);
     }
 
-    public boolean callRestart(String microServiceName) {
-        restartEndpoint.restart();
-        return true;
-    }
 
     public boolean isEurekaServiceAvailable(String microServiceName) {
         return discoveryClientService.existEurekaDiscoveryClientByName(microServiceName);
@@ -42,5 +38,16 @@ public class MicroServicesRestartService {
                 EurekaDiscoveryClientNameTable.ApiGateWay
         )
                 .contains(microServiceName);
+    }
+
+    public boolean callRestart(String microServiceName) {
+        switch (microServiceName){
+            case EurekaDiscoveryClientNameTable.ApiGateWay -> restartEndpoint.restart();
+            case EurekaDiscoveryClientNameTable.DashboardAPI -> restartEndpoint.restart();
+            default -> throw new NotFoundException("No Microservice found by name: "+microServiceName);
+        }
+
+        restartEndpoint.restart();
+        return true;
     }
 }

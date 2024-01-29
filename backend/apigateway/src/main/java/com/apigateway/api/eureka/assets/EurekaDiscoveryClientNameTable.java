@@ -28,4 +28,6 @@ public class EurekaDiscoveryClientNameTable {
     public static final List<String> eurekaDiscoverClientNameList = asList("APIGATEWAY", "DASHBOARD", "DATASTORAGE",
             "GAMESMANAGER", "HEALTHMANAGER", "MAMEI_FSM", "SECURITYGATEWAY", "SHOPPINGLIST", "SUDOKU", "SYSTEM", "USER");
 
+    public static final String eurekaDiscoverClientNames = "APIGATEWAY, DASHBOARD, DATASTORAGE, GAMESMANAGER, HEALTHMANAGER, "+
+            "MAMEI_FSM, SECURITYGATEWAY, SHOPPINGLIST, SUDOKU, SYSTEM, USER";
 }

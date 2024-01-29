@@ -41,9 +41,7 @@ public class DiscoveryClientService {
 
 
     public boolean existEurekaDiscoveryClientByName(String name){
-        discoveryClient.getServices().forEach(x-> System.err.println(x));
-
-        return true;
+        return discoveryClient.getServices().stream().filter(microserviceName-> microserviceName.equals(name)).count()==1;
     }
 
 }
