@@ -21,6 +21,9 @@
               </label>
               <div class="icon-container">
                 <mat-icon class="status-icon">{{ item.processStatusIcon }}</mat-icon>
+                <button mat-icon-button *ngIf="item.process.dependedProcessIds.length>3">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
                 <button mat-icon-button>
                   <mat-icon>{{ item.processIcon }}</mat-icon>
                 </button>

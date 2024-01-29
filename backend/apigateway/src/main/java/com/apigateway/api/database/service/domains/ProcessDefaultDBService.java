@@ -1,5 +1,7 @@
 package com.apigateway.api.database.service.domains;
 
+import com.apigateway.api.database.assets.DatabaseTableNames;
+import com.apigateway.api.eureka.assets.EurekaDiscoveryClientNameTable;
 import com.apigateway.api.process.model.*;
 import com.apigateway.api.process.model.Process;
 import com.apigateway.api.process.repository.ProcessRepository;
@@ -54,6 +56,9 @@ public class ProcessDefaultDBService implements IDefaultDBService {
 
     @Override
     public boolean loadDefaultDataIntoDatabase() {
+        String eurekaDiscoverClientNames ="["+ EurekaDiscoveryClientNameTable.eurekaDiscoverClientNames +"]";
+        String tableNames ="["+ DatabaseTableNames.tableNames +"]";
+
         if(!processRepository.existsByProcessName(ProcessDefaultNameTable.DELETE_DATASET)){
             processRepository.save(new Process(
                     EProcessEvent.DELETE,
@@ -64,7 +69,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "Remove all data from Table",
                     false,
                     false,
-                    "[]"));
+                    tableNames));
         }
         if(!processRepository.existsByProcessName(ProcessDefaultNameTable.DELETE_DEFAULT_DATASET)){
             processRepository.save(new Process(
@@ -124,7 +129,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "Restart Microservice",
                     false,
                     false,
-                    "[]"));
+                    eurekaDiscoverClientNames));
         }
         return true;
     }
