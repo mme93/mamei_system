@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatStepperModule} from "@angular/material/stepper";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatStepperModule} from "@angular/material/stepper";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTooltipModule
   ],
   exports: [
     SystemUserComponent,
