@@ -1,6 +1,9 @@
 package com.apigateway.api.process.model;
 
 
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 
 @Data
@@ -25,9 +28,9 @@ public class ExecuteProcess {
 
     private boolean hasDependedProcess;
 
-    private boolean isDependedProcess;
-
     private String dependedProcessIds;
+
+    private String scopes;
 
     private String context;
 

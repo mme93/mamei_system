@@ -1,5 +1,6 @@
 package com.apigateway.api.process.controller;
 
+import com.apigateway.api.database.service.domains.ProcessDefaultDBService;
 import com.apigateway.api.process.model.ExecuteProcess;
 import com.apigateway.api.process.model.Process;
 import com.apigateway.api.process.service.ProcessService;
@@ -15,10 +16,12 @@ import java.util.List;
 public class ProcessController {
 
     private final ProcessService processService;
+    private final ProcessDefaultDBService processDefaultDBService;
 
     @Autowired
-    public ProcessController(ProcessService processService) {
+    public ProcessController(ProcessService processService, ProcessDefaultDBService processDefaultDBService) {
         this.processService = processService;
+        this.processDefaultDBService = processDefaultDBService;
     }
 
 
@@ -42,6 +45,12 @@ public class ProcessController {
     @PutMapping("/sort")
     public ResponseEntity<List<Process>>sortProcessList(@RequestBody List<Process> processList){
         return new ResponseEntity(processService.sortProcessList(processList),HttpStatus.OK);
+    }
+
+    @PostMapping("/set_default")
+    public ResponseEntity setDefault(){
+        processDefaultDBService.loadDefaultDataIntoDatabase();
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }

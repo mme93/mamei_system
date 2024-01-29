@@ -37,12 +37,13 @@ public class Process {
 
     private boolean hasDependedProcess;
 
-    private boolean isDependedProcess;
-
     @Column(length = 1000)
     private String dependedProcessIds;
 
-    public Process(EProcessEvent processEvent, EProcessTyp processTyp, EProcessClassification processClassification, EProcessPlausibility processPlausibility, String processName, String processText, boolean hasDependedProcess, boolean isDependedProcess, String dependedProcessIds) {
+    @Column(length = 1000)
+    private String scopes;
+
+    public Process(EProcessEvent processEvent, EProcessTyp processTyp, EProcessClassification processClassification, EProcessPlausibility processPlausibility, String processName, String processText, boolean hasDependedProcess, String dependedProcessIds, String scopes) {
         this.processEvent = processEvent;
         this.processTyp = processTyp;
         this.processClassification = processClassification;
@@ -50,7 +51,7 @@ public class Process {
         this.processName = processName;
         this.processText = processText;
         this.hasDependedProcess = hasDependedProcess;
-        this.isDependedProcess = isDependedProcess;
         this.dependedProcessIds = dependedProcessIds;
+        this.scopes = scopes;
     }
 }

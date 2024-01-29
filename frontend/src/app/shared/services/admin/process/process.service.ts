@@ -68,7 +68,7 @@ export class ProcessService {
       hasDependedProcess: process.process.hasDependedProcess,
       isDependedProcess: process.process.isDependedProcess,
       dependedProcessIds: process.process.dependedProcessIds,
-      context: 'DASHBOARD'
+      context: 'APIGATEWAY'
     }
     // @ts-ignore
     return this.http.post(this.databaseProcessStartUrl, executeProcess, httpOptions).toPromise();

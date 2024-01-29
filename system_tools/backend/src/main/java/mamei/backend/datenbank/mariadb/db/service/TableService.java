@@ -108,7 +108,9 @@ public class TableService {
             Connection connection = this.connectionService.createConnection(databaseServer.getServerName(),databaseServer.getDatabaseName());
             String query=tableQueryGenerator.generateQueryDeleteTable(databaseServer.getTableName());
             Statement statement = connection.createStatement();
+            statement.execute("SET foreign_key_checks = 0");
             statement.execute(query);
+            statement.execute("SET foreign_key_checks = 1");
         } catch (SQLException e) {
             e.printStackTrace();
         }
