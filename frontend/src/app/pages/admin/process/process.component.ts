@@ -73,15 +73,24 @@ export class ProcessComponent implements OnInit {
     this.isProcessFinish = true;
   }
 
-  changeIcon(index: number, $event: MatCheckboxChange) {
+  changeIcon(microServiceName:string, $event: MatCheckboxChange) {
 
-    if ($event.checked) {
-      this.copyProcessList[index].processActivated = this.processList[index].processActivated;
-      this.processList[index].processStatusIcon = this.processStatusIcon[1];
-    } else {
-      this.processList[index].processStatusIcon = this.processStatusIcon[0];
+    for(let i=0;i<this.processList.length;i++){
+      if(this.processList[i].process.processName === microServiceName){
+        if ($event.checked) {
+          this.processList[i].processStatusIcon = this.processStatusIcon[1];
+        } else {
+          this.processList[i].processStatusIcon = this.processStatusIcon[0];
+        }
+        this.copyProcessList[i].processActivated = this.processList[i].processActivated;
+        this.processList[i].processActivated = $event.checked;
+      }
     }
-    this.processList[index].processActivated = $event.checked;
+    this.copyProcessList.forEach(process =>{
+      if(process.processStatusIcon===this.processStatusIcon[0]){
+        process.processActivated=false;
+      }
+    });
   }
 
   setProcesses() {

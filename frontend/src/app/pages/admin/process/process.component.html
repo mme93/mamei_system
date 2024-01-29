@@ -13,10 +13,10 @@
         </mat-form-field>
         <div class="steps-list">
           <mat-divider></mat-divider>
-          <div class="step-item" *ngFor="let item of processList; index as i">
+          <div class="step-item" *ngFor="let item of processList">
             <div class="step-item-container" *ngIf="item.processIsShowActivated">
               <label class="checkbox-label">
-                <mat-checkbox (change)="changeIcon(i,$event)" [(ngModel)]="item.processActivated"></mat-checkbox>
+                <mat-checkbox (change)="changeIcon(item.process.processName,$event)" [(ngModel)]="item.processActivated"></mat-checkbox>
                 <span class="checkbox-text">{{ item.process.processText }}</span>
               </label>
               <div class="icon-container">
