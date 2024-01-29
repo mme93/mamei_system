@@ -2,6 +2,7 @@ package com.apigateway.api.process.service;
 
 import com.apigateway.api.process.model.ExecuteProcess;
 import com.apigateway.api.process.model.Process;
+import com.apigateway.api.process.model.ui.ProcessElementUI;
 import com.apigateway.api.process.repository.ProcessRepository;
 import com.apigateway.api.process.service.processtyp.ProcessTypDatabaseService;
 import com.apigateway.api.process.service.processtyp.ProcessTypMicroServicesService;
@@ -11,7 +12,12 @@ import jakarta.ws.rs.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 @Service
 public class ProcessService {
@@ -46,9 +52,36 @@ public class ProcessService {
         }
     }
 
+    public List<ProcessElementUI> getProcessElementUI() {
+        List<ProcessElementUI> processElementUIList = new ArrayList<>();
+        for (Process process : processRepository.findAll()) {
+            processElementUIList.add(new ProcessElementUI(
+                    process.getId(),
+                    process.getProcessEvent(),
+                    process.getProcessTyp(),
+                    process.getProcessClassification(),
+                    process.getProcessPlausibility(),
+                    process.getProcessName(),
+                    process.getProcessText(),
+                    process.isHasDependedProcess(),
+                    generateListFromString(process.getDependedProcessIds()),
+                    generateListFromString(process.getScopes())
+            ));
+        }
 
-    public List<Process> getProcesses() {
-        return processRepository.findAll();
+        return processElementUIList;
+    }
+
+    public List<String> generateListFromString(String value) {
+        if (value.contains(",")) {
+            return Arrays.stream(value.split(","))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+        } else if (value.contains("/")) {
+            return asList();
+        }
+        return asList(value.trim());
+
     }
 
     public Object sortProcessList(List<Process> processList) {

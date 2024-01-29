@@ -21,8 +21,8 @@ export interface Process {
   processName: string;
   processText: string;
   hasDependedProcess: boolean;
-  isDependedProcess: boolean;
-  dependedProcessIds: string;
+  dependedProcessIds: string[];
+  scopeList: string[];
 }
 
 export interface ExecuteProcess {
@@ -66,8 +66,8 @@ export class ProcessService {
       processName: process.process.processName,
       processText: process.process.processText,
       hasDependedProcess: process.process.hasDependedProcess,
-      isDependedProcess: process.process.isDependedProcess,
-      dependedProcessIds: process.process.dependedProcessIds,
+      isDependedProcess: false,
+      dependedProcessIds: process.process.dependedProcessIds.toString(),
       context: 'APIGATEWAY'
     }
     // @ts-ignore

@@ -3,6 +3,7 @@ package com.apigateway.api.process.controller;
 import com.apigateway.api.database.service.domains.ProcessDefaultDBService;
 import com.apigateway.api.process.model.ExecuteProcess;
 import com.apigateway.api.process.model.Process;
+import com.apigateway.api.process.model.ui.ProcessElementUI;
 import com.apigateway.api.process.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,9 +38,10 @@ public class ProcessController {
         return new ResponseEntity("Job finished",HttpStatus.OK);
     }
 
+
     @GetMapping("/")
-    public ResponseEntity<List<Process>>getProcessList(){
-        return new ResponseEntity<>(processService.getProcesses(),HttpStatus.OK);
+    public ResponseEntity<List<ProcessElementUI>>getProcessList(){
+        return new ResponseEntity<>(processService.getProcessElementUI(),HttpStatus.OK);
     }
 
     @PutMapping("/sort")
