@@ -44,7 +44,7 @@ public class ProcessTypeTableService implements IProcessTypeService {
     public boolean resetProcess(ExecuteProcess process) {
         if (process.getProcessName().equals(ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET)) {
             processDefaultDBService.deleteAllDefaultData();
-            processDefaultDBService.test();
+            processDefaultDBService.loadDefaultDataIntoDatabase();
         }
         return false;
     }
