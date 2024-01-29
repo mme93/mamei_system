@@ -5,6 +5,8 @@ import {
 } from "../../../shared/services/admin/process/process.service";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {ProcessService} from "../../../shared/services/admin/process/process.service";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.component";
 
 @Component({
   selector: 'app-process',
@@ -26,7 +28,7 @@ export class ProcessComponent implements OnInit {
   isProcessRunning = false;
   isProcessFinish = false;
 
-  constructor(private databaseProcessService: ProcessService) {
+  constructor(private databaseProcessService: ProcessService,public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -97,7 +99,6 @@ export class ProcessComponent implements OnInit {
   }
 
   setProcesses() {
-    console.log(this.copyProcessList)
     this.startProcessList = [];
     this.startProcessList = this.copyProcessList.filter(item => {
         return item.processActivated;
@@ -113,5 +114,11 @@ export class ProcessComponent implements OnInit {
     this.isProcessRunning = true;
   }
 
+  open(scopes:string[]){
+    let dialogRef = this.dialog.open(ScopeDialogComponent, {
+      height: '400px',
+      width: '600px',
+    });
+  }
 
 }

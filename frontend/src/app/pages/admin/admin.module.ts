@@ -14,6 +14,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { ScopeDialogComponent } from './process/dialoag/scope-dialog/scope-dialog.component';
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   exports: [
     SystemUserComponent,
@@ -39,7 +42,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
   ],
   declarations: [
     ProcessComponent,
-    SystemUserComponent
+    SystemUserComponent,
+    ScopeDialogComponent
   ]
 })
 export class AdminModule {
