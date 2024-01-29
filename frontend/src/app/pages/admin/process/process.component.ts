@@ -12,6 +12,7 @@ import {ProcessService} from "../../../shared/services/admin/process/process.ser
   styleUrls: ['./process.component.scss']
 })
 export class ProcessComponent implements OnInit {
+  isProcessSelected = true;
   default = 'Choose your steps for Database Processes';
   incr = 0;
   processStatusIcon = ['play_disabled', 'play_arrow', 'build', 'done', 'error'];
@@ -73,11 +74,9 @@ export class ProcessComponent implements OnInit {
     this.isProcessFinish = true;
   }
 
-  changeIcon(microServiceName:string, $event: MatCheckboxChange) {
-  console.log(microServiceName)
-    console.log(this.processList)
-    for(let i=0;i<this.processList.length;i++){
-      if(this.processList[i].process.processName === microServiceName){
+  changeIcon(microServiceName: string, $event: MatCheckboxChange) {
+    for (let i = 0; i < this.processList.length; i++) {
+      if (this.processList[i].process.processName === microServiceName) {
         if ($event.checked) {
           this.processList[i].processStatusIcon = this.processStatusIcon[1];
           this.copyProcessList[i].processStatusIcon = this.processStatusIcon[1];
@@ -89,11 +88,12 @@ export class ProcessComponent implements OnInit {
         this.processList[i].processActivated = $event.checked;
       }
     }
-    this.copyProcessList.forEach(process =>{
-      if(process.processStatusIcon===this.processStatusIcon[0]){
-        process.processActivated=false;
+    this.copyProcessList.forEach(process => {
+      if (process.processStatusIcon === this.processStatusIcon[0]) {
+        process.processActivated = false;
       }
     });
+    this.isProcessSelected = !(this.copyProcessList.filter(process => process.processStatusIcon === this.processStatusIcon[1]).length > 0);
   }
 
   setProcesses() {
@@ -110,7 +110,7 @@ export class ProcessComponent implements OnInit {
     let sortProcessLists: Process[] = [];
     this.startProcessList.forEach(process => sortProcessLists.push(process.process))
     this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => console.log(value));
-    this.isProcessRunning=true;
+    this.isProcessRunning = true;
   }
 
 

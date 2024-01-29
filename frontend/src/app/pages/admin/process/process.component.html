@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-      <button mat-raised-button color="primary" (click)="stepper.next();setProcesses()" style="width: 100%">
+      <button mat-raised-button color="primary" (click)="stepper.next();setProcesses()" style="width: 100%" [disabled]="isProcessSelected">
         Start Process
       </button>
     </mat-step>
@@ -79,7 +79,7 @@
         </button>
         <button mat-raised-button color="primary" (click)="validateProcess()" style="width: 49%"
                 *ngIf="(!isProcessFinish)&&(!isProcessRunning)">
-          Validate Process Order
+          Validate Process
         </button>
         <button mat-raised-button color="primary" (click)="startProcess()" style="width: 49%"
                 *ngIf="(!isProcessFinish)&&(isProcessRunning)">
