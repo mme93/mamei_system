@@ -74,13 +74,16 @@ export class ProcessComponent implements OnInit {
   }
 
   changeIcon(microServiceName:string, $event: MatCheckboxChange) {
-
+  console.log(microServiceName)
+    console.log(this.processList)
     for(let i=0;i<this.processList.length;i++){
       if(this.processList[i].process.processName === microServiceName){
         if ($event.checked) {
           this.processList[i].processStatusIcon = this.processStatusIcon[1];
+          this.copyProcessList[i].processStatusIcon = this.processStatusIcon[1];
         } else {
-          this.processList[i].processStatusIcon = this.processStatusIcon[0];
+          this.copyProcessList[i].processStatusIcon = this.processStatusIcon[0];
+          this.processList[i].processStatusIcon = this.processStatusIcon[1];
         }
         this.copyProcessList[i].processActivated = this.processList[i].processActivated;
         this.processList[i].processActivated = $event.checked;
@@ -94,6 +97,7 @@ export class ProcessComponent implements OnInit {
   }
 
   setProcesses() {
+    console.log(this.copyProcessList)
     this.startProcessList = [];
     this.startProcessList = this.copyProcessList.filter(item => {
         return item.processActivated;
@@ -108,4 +112,6 @@ export class ProcessComponent implements OnInit {
     this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => console.log(value));
     this.isProcessRunning=true;
   }
+
+
 }

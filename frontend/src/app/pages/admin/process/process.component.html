@@ -21,9 +21,6 @@
               </label>
               <div class="icon-container">
                 <mat-icon class="status-icon">{{ item.processStatusIcon }}</mat-icon>
-                <button mat-icon-button *ngIf="item.process.scopeList.length>0">
-                  <mat-icon>add_circle</mat-icon>
-                </button>
                 <button mat-icon-button>
                   <mat-icon>{{ item.processIcon }}</mat-icon>
                 </button>
@@ -55,6 +52,9 @@
                 </div>
               </label>
               <div class="icon-container">
+                <button mat-icon-button *ngIf="item.process.scopeList.length>0">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
                 <mat-icon class="status-icon">{{ item.processStatusIcon }}</mat-icon>
                 <button mat-icon-button>
                   <mat-icon>{{ item.processIcon }}</mat-icon>
