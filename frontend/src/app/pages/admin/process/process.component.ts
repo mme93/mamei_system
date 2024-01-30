@@ -114,10 +114,15 @@ export class ProcessComponent implements OnInit {
     this.isProcessRunning = true;
   }
 
-  open(scopes:string[]){
+  open(process:Process){
+
     let dialogRef = this.dialog.open(ScopeDialogComponent, {
       height: '400px',
       width: '600px',
+      data: { process: process}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
     });
   }
 

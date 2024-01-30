@@ -23,6 +23,7 @@ export interface Process {
   hasDependedProcess: boolean;
   dependedProcessIds: string[];
   scopeList: string[];
+  selectedScopeList: string[];
 }
 
 export interface ExecuteProcess {
@@ -87,6 +88,7 @@ export class ProcessService {
   getProcess(process: Process[]) {
     let processArray: ProcessUI[] = [];
     process.forEach(process => {
+      process.selectedScopeList=[];
       processArray.push({
         processIcon: 'info',
         process: process,

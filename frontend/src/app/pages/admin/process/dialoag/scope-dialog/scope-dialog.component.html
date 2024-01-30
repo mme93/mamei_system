@@ -1,1 +1,20 @@
-<p>scope-dialog works!</p>
+<article>
+  <div style="text-align: center">
+    <span class="center-text">Scope List</span>
+  </div>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search value">
+  </mat-form-field>
+
+  <div class="step-item" *ngFor="let item of scopes">
+    <label class="checkbox-label">
+      <mat-checkbox></mat-checkbox>
+      <span class="checkbox-text">{{ item }}</span>
+    </label>
+    <mat-divider></mat-divider>
+  </div>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="process" cdkFocusInitial>Ok</button>
+</article>
