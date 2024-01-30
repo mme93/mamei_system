@@ -37,11 +37,13 @@
 
     <mat-step>
       <ng-template matStepLabel>Execute Processes</ng-template>
+
       <div class="article-container">
         <div class="description">
           <span class="center-text">{{itemText}}</span>
         </div>
-        <div class="steps-list">
+        <!--Validate View-->
+        <div class="steps-list" *ngIf="(!isProcessFinish)&&(!isProcessRunning)">
           <mat-divider></mat-divider>
           <div class="step-item" *ngFor="let item of startProcessList; index as i">
             <div class="step-item-container" *ngIf="item.processIsShowActivated">
@@ -55,7 +57,6 @@
                 <button mat-icon-button *ngIf="item.process.scopeList.length>0" (click)="open(item.process)">
                   <mat-icon>add_circle</mat-icon>
                 </button>
-                <mat-icon class="status-icon">{{ item.processStatusIcon }}</mat-icon>
                 <button mat-icon-button>
                   <mat-icon>{{ item.processIcon }}</mat-icon>
                 </button>
@@ -64,6 +65,40 @@
             <mat-divider *ngIf="item.processIsShowActivated"></mat-divider>
           </div>
         </div>
+        <!--Start Process View-->
+        <div class="steps-list" *ngIf="(!isProcessFinish)&&(isProcessRunning)">
+          <mat-divider></mat-divider>
+          <div class="step-item" *ngFor="let main of executeProcessUI.executeMainProcesses; index as i">
+            <div class="step-item-container">
+              <label class="checkbox-label">
+                <span class="checkbox-text">{{i+1}} {{ main.processText }} {{ main.theme }}</span>
+                <div class="spinner-container">
+                  <mat-spinner diameter="20" color="warn"></mat-spinner>
+                </div>
+              </label>
+              <div class="icon-container">
+                <button mat-icon-button>
+                  <mat-icon>report</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="step-item-container" *ngFor="let sub of main.processList; index as j">
+              <label class="checkbox-label">
+                <span class="checkbox-text">{{i+1}}.{{j+1}} {{ sub.processText }} {{ sub.theme }}</span>
+                <div class="spinner-container">
+                  <mat-spinner diameter="20" color="warn"></mat-spinner>
+                </div>
+              </label>
+              <div class="icon-container">
+                <button mat-icon-button>
+                  <mat-icon>report</mat-icon>
+                </button>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+
       </div>
 
       <div style="position: relative" *ngIf="isLoading">

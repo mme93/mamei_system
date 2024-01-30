@@ -121,7 +121,7 @@ export class ProcessComponent implements OnInit {
     //this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => console.log(value));
     sortProcessLists.forEach(process => process.scopeList=process.selectedScopeList);
     this.databaseProcessService.test(sortProcessLists).subscribe(value => this.executeProcessUI=value);
-    //this.isProcessRunning = true;
+    this.isProcessRunning = true;
   }
 
   open(process:Process){
