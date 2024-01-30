@@ -84,7 +84,8 @@ public class ProcessService {
 
     }
 
-    public Object sortProcessList(List<Process> processList) {
+    public Object sortProcessList(List<ProcessElementUI> processList) {
+        System.err.println(processList.size());
         return processList;
     }
 }

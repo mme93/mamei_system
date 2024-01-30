@@ -110,8 +110,10 @@ export class ProcessComponent implements OnInit {
   validateProcess() {
     let sortProcessLists: Process[] = [];
     this.startProcessList.forEach(process => sortProcessLists.push(process.process))
-    this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => console.log(value));
-    this.isProcessRunning = true;
+    //this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => console.log(value));
+    sortProcessLists.forEach(process => process.scopeList=process.selectedScopeList);
+    this.databaseProcessService.test(sortProcessLists).subscribe(value => console.log(value));
+    //this.isProcessRunning = true;
   }
 
   open(process:Process){

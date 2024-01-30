@@ -110,4 +110,14 @@ export class ProcessService {
     };
     return this.http.put<Process[]>(this.databaseProcessSortUrl, startProcessList, httpOptions);
   }
+
+  test(startProcessList: Process[]){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<Process[]>(this.databaseProcessSortUrl, startProcessList, httpOptions);
+  }
 }

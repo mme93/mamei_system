@@ -1,5 +1,9 @@
-package com.apigateway.api.process.model;
+package com.apigateway.api.process.model.ui;
 
+import com.apigateway.api.process.model.EProcessClassification;
+import com.apigateway.api.process.model.EProcessEvent;
+import com.apigateway.api.process.model.EProcessPlausibility;
+import com.apigateway.api.process.model.EProcessTyp;
 import lombok.*;
 
 @Data
@@ -8,7 +12,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExecuteProcess {
+public class ExecuteMainProcess {
 
     private EProcessEvent processEvent;
 
@@ -22,17 +26,10 @@ public class ExecuteProcess {
 
     private String processText;
 
-    private boolean hasDependedProcess;
-
-    private String dependedProcessIds;
-
-    private String scopes;
-
     private String context;
 
     private String startTime;
 
     private String endTime;
-
 
 }

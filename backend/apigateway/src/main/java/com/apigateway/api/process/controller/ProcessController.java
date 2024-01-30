@@ -45,7 +45,7 @@ public class ProcessController {
     }
 
     @PutMapping("/sort")
-    public ResponseEntity<List<Process>>sortProcessList(@RequestBody List<Process> processList){
+    public ResponseEntity<List<Process>>sortProcessList(@RequestBody List<ProcessElementUI> processList){
         return new ResponseEntity(processService.sortProcessList(processList),HttpStatus.OK);
     }
 
