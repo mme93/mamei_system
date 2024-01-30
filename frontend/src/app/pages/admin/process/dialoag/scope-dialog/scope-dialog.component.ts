@@ -1,6 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {Process} from "../../../../../shared/services/admin/process/process.service";
+
+export interface ScopeCheckBox{
+  isSelected:boolean;
+  value:string;
+}
 
 @Component({
   selector: 'app-scope-dialog',
@@ -9,22 +13,28 @@ import {Process} from "../../../../../shared/services/admin/process/process.serv
 })
 export class ScopeDialogComponent {
 
-  scopes:string[]=[];
-  copyScopes:string[]=[];
-  process:Process;
+  scopeCheckbox:ScopeCheckBox[]=[];
+  scopeValues:string[]=[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.scopes=data.process.scopeList;
-    this.copyScopes=data.process.scopeList;
-    this.process=data.process;
+    data.process.scopeList.forEach((scope: any) =>{
+      this.scopeCheckbox.push({
+        isSelected:false,
+        value:scope.toString()
+      })
+    });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.scopes = this.copyScopes.filter(item => {
-        return item.toLowerCase().includes(filterValue.toLowerCase());
+
+  changeCheckbox(value:string, $event: any) {
+    for (let i = 0; i < this.scopeCheckbox.length; i++) {
+      if (this.scopeCheckbox[i].value === value) {
+        if($event.checked){
+          this.scopeValues.push(value);
+        }else{
+          this.scopeValues=this.scopeValues.filter(scope => scope !== value);
+        }
       }
-    );
+    }
   }
-
 }

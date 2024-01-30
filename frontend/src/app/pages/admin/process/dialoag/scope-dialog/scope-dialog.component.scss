@@ -3,8 +3,19 @@
   margin: 20px 0;
   font-size: large;
 }
+
+.scrollable-container {
+  max-height: 200px; /* oder eine andere Höhe, bei der du scrollen möchtest */
+  overflow-y: auto;
+}
+
 .checkbox-label {
   display: flex;
   align-items: center;
   color: white;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
 }

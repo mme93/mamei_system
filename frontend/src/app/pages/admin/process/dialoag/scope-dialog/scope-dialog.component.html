@@ -3,18 +3,18 @@
     <span class="center-text">Scope List</span>
   </div>
 
-  <mat-form-field style="width: 100%;">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Search value">
-  </mat-form-field>
-
-  <div class="step-item" *ngFor="let item of scopes">
-    <label class="checkbox-label">
-      <mat-checkbox></mat-checkbox>
-      <span class="checkbox-text">{{ item }}</span>
-    </label>
-    <mat-divider></mat-divider>
+  <div class="scrollable-container">
+    <div class="step-item" *ngFor="let item of scopeCheckbox; index as i">
+      <label class="checkbox-label">
+        <mat-checkbox (change)="changeCheckbox(item.value,$event)" [ngModel]="item.isSelected"></mat-checkbox>
+        <span class="checkbox-text">{{ item.value }}</span>
+      </label>
+      <mat-divider></mat-divider>
+    </div>
   </div>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="process" cdkFocusInitial>Ok</button>
+
+  <div class="button-container">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="scopeValues" cdkFocusInitial>Ok</button>
+  </div>
 </article>

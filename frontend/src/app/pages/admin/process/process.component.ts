@@ -6,7 +6,7 @@ import {
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {ProcessService} from "../../../shared/services/admin/process/process.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.component";
+import {ScopeCheckBox, ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.component";
 
 @Component({
   selector: 'app-process',
@@ -104,7 +104,7 @@ export class ProcessComponent implements OnInit {
         return item.processActivated;
       }
     );
-    this.itemText = 'Start process - Need to sort.'
+    this.itemText = 'Start process - Need to validate.'
   }
 
   validateProcess() {
@@ -121,7 +121,7 @@ export class ProcessComponent implements OnInit {
       width: '600px',
       data: { process: process}
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
