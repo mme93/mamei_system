@@ -14,6 +14,10 @@ import lombok.*;
 @AllArgsConstructor
 public class ExecuteSubProcess {
 
+    private String signature;
+
+    private String theme;
+
     private EProcessEvent processEvent;
 
     private EProcessTyp processTyp;
@@ -26,9 +30,5 @@ public class ExecuteSubProcess {
 
     private String processText;
 
-    private String context;
-
-    private String startTime;
-
-    private String endTime;
+    private String time;
 }

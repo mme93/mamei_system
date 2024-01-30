@@ -6,6 +6,8 @@ import com.apigateway.api.process.model.EProcessPlausibility;
 import com.apigateway.api.process.model.EProcessTyp;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @Getter
@@ -13,6 +15,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExecuteMainProcess {
+
+    private String signature;
+
+    private String theme;
 
     private EProcessEvent processEvent;
 
@@ -26,10 +32,10 @@ public class ExecuteMainProcess {
 
     private String processText;
 
-    private String context;
+    private int mainProcessAmount;
 
-    private String startTime;
+    private List<ExecuteSubProcess>processList;
 
-    private String endTime;
+    private String time;
 
 }

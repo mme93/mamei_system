@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {
+  ExecuteMainProcess,
+  ExecuteProcessUI,
   Process,
   ProcessUI
 } from "../../../shared/services/admin/process/process.service";
@@ -27,6 +29,12 @@ export class ProcessComponent implements OnInit {
   itemText = this.default;
   isProcessRunning = false;
   isProcessFinish = false;
+  executeProcessUI:ExecuteProcessUI={
+    signature: '',
+    executeMainProcesses: [],
+    mainProcessAmount: 0,
+    processDuration: ''
+  };
 
   constructor(private databaseProcessService: ProcessService,public dialog: MatDialog) {
   }
@@ -112,7 +120,7 @@ export class ProcessComponent implements OnInit {
     this.startProcessList.forEach(process => sortProcessLists.push(process.process))
     //this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => console.log(value));
     sortProcessLists.forEach(process => process.scopeList=process.selectedScopeList);
-    this.databaseProcessService.test(sortProcessLists).subscribe(value => console.log(value));
+    this.databaseProcessService.test(sortProcessLists).subscribe(value => this.executeProcessUI=value);
     //this.isProcessRunning = true;
   }
 

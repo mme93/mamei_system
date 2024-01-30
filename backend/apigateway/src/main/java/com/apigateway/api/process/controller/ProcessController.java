@@ -2,7 +2,7 @@ package com.apigateway.api.process.controller;
 
 import com.apigateway.api.database.service.domains.ProcessDefaultDBService;
 import com.apigateway.api.process.model.ExecuteProcess;
-import com.apigateway.api.process.model.Process;
+import com.apigateway.api.process.model.ui.ExecuteProcessUI;
 import com.apigateway.api.process.model.ui.ProcessElementUI;
 import com.apigateway.api.process.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +45,8 @@ public class ProcessController {
     }
 
     @PutMapping("/sort")
-    public ResponseEntity<List<Process>>sortProcessList(@RequestBody List<ProcessElementUI> processList){
-        return new ResponseEntity(processService.sortProcessList(processList),HttpStatus.OK);
+    public ResponseEntity<ExecuteProcessUI>createSortedExecuteProcessUI(@RequestBody List<ProcessElementUI> processList){
+        return new ResponseEntity(processService.createSortedExecuteProcessUI(processList),HttpStatus.OK);
     }
 
     @PostMapping("/set_default")

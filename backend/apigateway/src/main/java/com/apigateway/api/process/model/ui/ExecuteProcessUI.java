@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ExecuteProcessUI {
 
+    private String signature;
     private List<ExecuteMainProcess>executeMainProcesses;
     private int mainProcessAmount;
     private String processDuration;

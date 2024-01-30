@@ -40,6 +40,40 @@ export interface ExecuteProcess {
   context: string;
 }
 
+export interface ExecuteProcessUI {
+  signature: string;
+  executeMainProcesses: ExecuteMainProcess[];
+  mainProcessAmount: number;
+  processDuration: string;
+}
+
+export interface ExecuteMainProcess {
+  signature: string;
+  theme: string;
+  processEvent: string;
+  processTyp: string;
+  processClassification: string;
+  processPlausibility: string;
+  processName: string;
+  processText: string;
+  mainProcessAmount: string;
+  processList: ExecuteSubProcess[];
+  time: string;
+}
+
+export interface ExecuteSubProcess {
+  signature: string;
+  theme: string;
+  processEvent: string;
+  processTyp: string;
+  processClassification: string;
+  processPlausibility: string;
+  processName: string;
+  processText: string;
+  time: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,7 +81,6 @@ export class ProcessService {
   private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
   private databaseProcessSortUrl = environment.uri + ':9000/api/process/sort';
   private databaseProcessesUrl = environment.uri + ':9000/api/process/'
-
   constructor(private http: HttpClient) {
   }
 
@@ -88,7 +121,7 @@ export class ProcessService {
   getProcess(process: Process[]) {
     let processArray: ProcessUI[] = [];
     process.forEach(process => {
-      process.selectedScopeList=[];
+      process.selectedScopeList = [];
       processArray.push({
         processIcon: 'info',
         process: process,
@@ -111,13 +144,13 @@ export class ProcessService {
     return this.http.put<Process[]>(this.databaseProcessSortUrl, startProcessList, httpOptions);
   }
 
-  test(startProcessList: Process[]){
+  test(startProcessList: Process[]) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
         'Content-Type': 'application/json'
       })
     };
-    return this.http.put<Process[]>(this.databaseProcessSortUrl, startProcessList, httpOptions);
+    return this.http.put<ExecuteProcessUI>(this.databaseProcessSortUrl, startProcessList, httpOptions);
   }
 }

@@ -2,8 +2,10 @@ package com.apigateway.api.process.service;
 
 import com.apigateway.api.process.model.ExecuteProcess;
 import com.apigateway.api.process.model.Process;
+import com.apigateway.api.process.model.ui.ExecuteProcessUI;
 import com.apigateway.api.process.model.ui.ProcessElementUI;
 import com.apigateway.api.process.repository.ProcessRepository;
+import com.apigateway.api.process.service.factory.ExecuteProcessFactory;
 import com.apigateway.api.process.service.processtyp.ProcessTypDatabaseService;
 import com.apigateway.api.process.service.processtyp.ProcessTypMicroServicesService;
 import com.apigateway.api.process.service.processtyp.ProcessTypeDataSetService;
@@ -27,14 +29,16 @@ public class ProcessService {
     private final ProcessTypMicroServicesService processTypMicroServicesService;
     private final ProcessTypeDataSetService processTypeDataSetService;
     private final ProcessTypeTableService processTypeTableService;
+    private final ExecuteProcessFactory processFactory;
 
     @Autowired
-    public ProcessService(ProcessRepository processRepository, ProcessTypDatabaseService processTypDatabaseService, ProcessTypMicroServicesService processTypMicroServicesService, ProcessTypeDataSetService processTypeDataSetService, ProcessTypeTableService processTypeTableService) {
+    public ProcessService(ProcessRepository processRepository, ProcessTypDatabaseService processTypDatabaseService, ProcessTypMicroServicesService processTypMicroServicesService, ProcessTypeDataSetService processTypeDataSetService, ProcessTypeTableService processTypeTableService, ExecuteProcessFactory processFactory) {
         this.processRepository = processRepository;
         this.processTypDatabaseService = processTypDatabaseService;
         this.processTypMicroServicesService = processTypMicroServicesService;
         this.processTypeDataSetService = processTypeDataSetService;
         this.processTypeTableService = processTypeTableService;
+        this.processFactory = processFactory;
     }
 
     public boolean startProcess(ExecuteProcess process) {
@@ -73,19 +77,20 @@ public class ProcessService {
     }
 
     public List<String> generateListFromString(String value) {
-        if (value.contains(",")) {
+        if (value.contains("/")) {
+            return asList();
+        } else if (!value.contains(",")) {
+            return asList(value);
+        } else if (value.contains(",")) {
             return Arrays.stream(value.split(","))
                     .map(String::trim)
                     .collect(Collectors.toList());
-        } else if (value.contains("/")) {
-            return asList();
         }
         return asList(value.trim());
 
     }
 
-    public Object sortProcessList(List<ProcessElementUI> processList) {
-        System.err.println(processList.size());
-        return processList;
+    public ExecuteProcessUI createSortedExecuteProcessUI(List<ProcessElementUI> processList) {
+        return processFactory.createExecuteProcessUI(processList);
     }
 }
