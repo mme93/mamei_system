@@ -18,11 +18,13 @@ export class ScopeDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     data.process.scopeList.forEach((scope: any) =>{
+      let wasSelected=data.process.selectedScopeList.filter((selectedScope: string) => selectedScope ===scope).length===1;
       this.scopeCheckbox.push({
-        isSelected:false,
+        isSelected:wasSelected,
         value:scope.toString()
       })
     });
+    this.scopeValues=data.process.selectedScopeList;
   }
 
 

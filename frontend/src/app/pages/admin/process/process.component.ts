@@ -121,8 +121,12 @@ export class ProcessComponent implements OnInit {
       width: '600px',
       data: { process: process}
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe((result:string[]) => {
+      this.startProcessList.forEach(startProcess =>{
+        if(startProcess.process.id === process.id){
+          startProcess.process.selectedScopeList=result;
+        }
+      })
     });
   }
 
