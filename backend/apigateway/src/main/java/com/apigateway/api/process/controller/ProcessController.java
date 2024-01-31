@@ -2,6 +2,7 @@ package com.apigateway.api.process.controller;
 
 import com.apigateway.api.database.service.domains.ProcessDefaultDBService;
 import com.apigateway.api.process.model.ExecuteProcess;
+import com.apigateway.api.process.model.TestExecuteProcess;
 import com.apigateway.api.process.model.ui.ExecuteProcessUI;
 import com.apigateway.api.process.model.ui.ProcessElementUI;
 import com.apigateway.api.process.service.ProcessService;
@@ -38,6 +39,16 @@ public class ProcessController {
         return new ResponseEntity("Job finished",HttpStatus.OK);
     }
 
+    @PostMapping("/test")
+    public ResponseEntity starTest(@RequestBody TestExecuteProcess process){
+        try {
+            Thread.sleep(3000);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return new ResponseEntity("Job finished",HttpStatus.OK);
+    }
 
     @GetMapping("/")
     public ResponseEntity<List<ProcessElementUI>>getProcessList(){

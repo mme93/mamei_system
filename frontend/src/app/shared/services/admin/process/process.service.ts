@@ -45,6 +45,8 @@ export interface ExecuteProcessUI {
   executeMainProcesses: ExecuteMainProcess[];
   mainProcessAmount: number;
   processDuration: string;
+  isProcessFinish: boolean;
+  isProcessRunning:boolean;
 }
 
 export interface ExecuteMainProcess {
@@ -59,6 +61,8 @@ export interface ExecuteMainProcess {
   mainProcessAmount: string;
   processList: ExecuteSubProcess[];
   time: string;
+  isProcessFinish: boolean;
+  processStatusIcon:string;
 }
 
 export interface ExecuteSubProcess {
@@ -71,6 +75,8 @@ export interface ExecuteSubProcess {
   processName: string;
   processText: string;
   time: string;
+  isProcessFinish: boolean;
+  processStatusIcon:string;
 }
 
 
@@ -78,10 +84,36 @@ export interface ExecuteSubProcess {
   providedIn: 'root'
 })
 export class ProcessService {
+  private databaseProcessTestUrl = environment.uri + ':9000/api/process/test';
   private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
   private databaseProcessSortUrl = environment.uri + ':9000/api/process/sort';
   private databaseProcessesUrl = environment.uri + ':9000/api/process/'
   constructor(private http: HttpClient) {
+  }
+
+
+  startExecuteMainProcess(process:ExecuteMainProcess): Promise<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      }),
+      responseType: 'text'
+    };
+    // @ts-ignore
+    return this.http.post(this.databaseProcessTestUrl, process, httpOptions).toPromise();
+  }
+
+  startExecuteSubProcess(process:ExecuteSubProcess): Promise<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      }),
+      responseType: 'text'
+    };
+    // @ts-ignore
+    return this.http.post(this.databaseProcessTestUrl, process, httpOptions).toPromise();
   }
 
   startProcess(process: ProcessUI): Promise<any> {
@@ -134,17 +166,8 @@ export class ProcessService {
     return processArray;
   }
 
-  sortProcess(startProcessList: Process[]) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': localStorage.getItem('token') + '',
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.put<Process[]>(this.databaseProcessSortUrl, startProcessList, httpOptions);
-  }
 
-  test(startProcessList: Process[]) {
+  sortProcess(startProcessList: Process[]) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',

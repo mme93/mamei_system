@@ -29,14 +29,16 @@ export class ProcessComponent implements OnInit {
   itemText = this.default;
   isProcessRunning = false;
   isProcessFinish = false;
-  executeProcessUI:ExecuteProcessUI={
+  executeProcessUI: ExecuteProcessUI = {
     signature: '',
     executeMainProcesses: [],
     mainProcessAmount: 0,
-    processDuration: ''
+    processDuration: '',
+    isProcessFinish: false,
+    isProcessRunning: false
   };
 
-  constructor(private databaseProcessService: ProcessService,public dialog: MatDialog) {
+  constructor(private databaseProcessService: ProcessService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -55,6 +57,45 @@ export class ProcessComponent implements OnInit {
     );
   }
 
+  async startProcess() {
+    this.isLoading = true;
+
+    this.itemText = 'Process ' + this.incr + '/' + this.executeProcessUI.mainProcessAmount + ' finished.'
+    this.incr++;
+
+    for (const process of this.executeProcessUI.executeMainProcesses) {
+      process.processStatusIcon = this.processStatusIcon[2];
+      try {
+        const result = await this.databaseProcessService.startExecuteMainProcess(process);
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
+      for(const subProcess of process.processList){
+        subProcess.processStatusIcon = this.processStatusIcon[2];
+        try {
+          const result = await this.databaseProcessService.startExecuteSubProcess(process);
+          console.log(result);
+          process.processStatusIcon = this.processStatusIcon[3];
+          process.isProcessFinish = true;
+          this.progress = Number((this.progress + (100 / this.executeProcessUI.mainProcessAmount)).toFixed(2));
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      this.itemText = 'Process ' + this.incr + '/' + this.executeProcessUI.mainProcessAmount + ' finished.'
+      process.processStatusIcon = this.processStatusIcon[3];
+      process.isProcessFinish = true;
+      this.progress = Number((this.progress + (100 / this.executeProcessUI.mainProcessAmount)).toFixed(2));
+      this.incr++;
+    }
+    this.progress = 100;
+    this.incr = 0;
+    this.isLoading = false;
+    this.isProcessFinish = true;
+  }
+
+  /*
   async startProcess() {
     this.isLoading = true;
     const selectedProcess = this.processList.filter(process => {
@@ -83,6 +124,7 @@ export class ProcessComponent implements OnInit {
     this.isLoading = false;
     this.isProcessFinish = true;
   }
+   */
 
   changeIcon(microServiceName: string, $event: MatCheckboxChange) {
     for (let i = 0; i < this.processList.length; i++) {
@@ -118,23 +160,22 @@ export class ProcessComponent implements OnInit {
   validateProcess() {
     let sortProcessLists: Process[] = [];
     this.startProcessList.forEach(process => sortProcessLists.push(process.process))
-    //this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => console.log(value));
-    sortProcessLists.forEach(process => process.scopeList=process.selectedScopeList);
-    this.databaseProcessService.test(sortProcessLists).subscribe(value => this.executeProcessUI=value);
+    sortProcessLists.forEach(process => process.scopeList = process.selectedScopeList);
+    this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => this.executeProcessUI = value);
     this.isProcessRunning = true;
   }
 
-  open(process:Process){
+  open(process: Process) {
 
     let dialogRef = this.dialog.open(ScopeDialogComponent, {
       height: '400px',
       width: '600px',
-      data: { process: process}
+      data: {process: process}
     });
-    dialogRef.afterClosed().subscribe((result:string[]) => {
-      this.startProcessList.forEach(startProcess =>{
-        if(startProcess.process.id === process.id){
-          startProcess.process.selectedScopeList=result;
+    dialogRef.afterClosed().subscribe((result: string[]) => {
+      this.startProcessList.forEach(startProcess => {
+        if (startProcess.process.id === process.id) {
+          startProcess.process.selectedScopeList = result;
         }
       })
     });

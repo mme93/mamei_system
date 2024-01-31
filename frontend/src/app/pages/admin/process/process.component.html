@@ -72,7 +72,7 @@
             <div class="step-item-container">
               <label class="checkbox-label">
                 <span class="checkbox-text">{{i+1}} {{ main.processText }} {{ main.theme }}</span>
-                <div class="spinner-container">
+                <div class="spinner-container" *ngIf="(!main.isProcessFinish) && executeProcessUI.isProcessRunning">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
                 </div>
               </label>
@@ -85,7 +85,7 @@
             <div class="step-item-container" *ngFor="let sub of main.processList; index as j">
               <label class="checkbox-label">
                 <span class="checkbox-text">{{i+1}}.{{j+1}} {{ sub.processText }} {{ sub.theme }}</span>
-                <div class="spinner-container">
+                <div class="spinner-container"  *ngIf="(!sub.isProcessFinish) && executeProcessUI.isProcessRunning">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
                 </div>
               </label>
