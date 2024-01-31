@@ -1,4 +1,4 @@
-package com.apigateway.api.process.model;
+package com.apigateway.api.process.model.process;
 
 public enum EProcessEvent {
     CREATE,

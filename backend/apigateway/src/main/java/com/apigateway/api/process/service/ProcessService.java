@@ -1,7 +1,7 @@
 package com.apigateway.api.process.service;
 
-import com.apigateway.api.process.model.ExecuteProcess;
-import com.apigateway.api.process.model.Process;
+import com.apigateway.api.process.model.process.ExecuteProcess;
+import com.apigateway.api.process.model.process.Process;
 import com.apigateway.api.process.model.ui.ExecuteProcessUI;
 import com.apigateway.api.process.model.ui.ProcessElementUI;
 import com.apigateway.api.process.repository.ProcessRepository;

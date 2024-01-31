@@ -101,7 +101,7 @@ export class ProcessService {
       responseType: 'text'
     };
     // @ts-ignore
-    return this.http.post(this.databaseProcessTestUrl, process, httpOptions).toPromise();
+    return this.http.post(this.databaseProcessStartUrl, process, httpOptions).toPromise();
   }
 
   startExecuteSubProcess(process:ExecuteSubProcess): Promise<any> {
@@ -113,31 +113,7 @@ export class ProcessService {
       responseType: 'text'
     };
     // @ts-ignore
-    return this.http.post(this.databaseProcessTestUrl, process, httpOptions).toPromise();
-  }
-
-  startProcess(process: ProcessUI): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': localStorage.getItem('token') + '',
-        'Content-Type': 'application/json'
-      }),
-      responseType: 'text'
-    };
-    let executeProcess: ExecuteProcess = {
-      processEvent: process.process.processEvent,
-      processTyp: process.process.processTyp,
-      processClassification: process.process.processClassification,
-      processPlausibility: process.process.processPlausibility,
-      processName: process.process.processName,
-      processText: process.process.processText,
-      hasDependedProcess: process.process.hasDependedProcess,
-      isDependedProcess: false,
-      dependedProcessIds: process.process.dependedProcessIds.toString(),
-      context: 'APIGATEWAY'
-    }
-    // @ts-ignore
-    return this.http.post(this.databaseProcessStartUrl, executeProcess, httpOptions).toPromise();
+    return this.http.post(this.databaseProcessStartUrl, process, httpOptions).toPromise();
   }
 
   getProcesses() {

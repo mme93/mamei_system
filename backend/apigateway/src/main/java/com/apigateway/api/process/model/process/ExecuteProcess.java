@@ -1,4 +1,4 @@
-package com.apigateway.api.process.model;
+package com.apigateway.api.process.model.process;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestExecuteProcess {
+public class ExecuteProcess {
 
     private String signature;
     private String theme;

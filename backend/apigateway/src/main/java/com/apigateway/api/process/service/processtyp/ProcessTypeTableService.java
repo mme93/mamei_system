@@ -1,8 +1,8 @@
 package com.apigateway.api.process.service.processtyp;
 
 import com.apigateway.api.database.service.domains.ProcessDefaultDBService;
-import com.apigateway.api.process.model.ExecuteProcess;
-import com.apigateway.api.process.model.ProcessDefaultNameTable;
+import com.apigateway.api.process.model.process.ExecuteProcess;
+import com.apigateway.api.process.model.process.ProcessDefaultNameTable;
 import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

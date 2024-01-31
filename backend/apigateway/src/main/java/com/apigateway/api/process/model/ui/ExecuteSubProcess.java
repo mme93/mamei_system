@@ -1,9 +1,9 @@
 package com.apigateway.api.process.model.ui;
 
-import com.apigateway.api.process.model.EProcessClassification;
-import com.apigateway.api.process.model.EProcessEvent;
-import com.apigateway.api.process.model.EProcessPlausibility;
-import com.apigateway.api.process.model.EProcessTyp;
+import com.apigateway.api.process.model.process.EProcessClassification;
+import com.apigateway.api.process.model.process.EProcessEvent;
+import com.apigateway.api.process.model.process.EProcessPlausibility;
+import com.apigateway.api.process.model.process.EProcessTyp;
 import lombok.*;
 
 @Data

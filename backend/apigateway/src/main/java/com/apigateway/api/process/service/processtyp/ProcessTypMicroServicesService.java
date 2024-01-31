@@ -1,6 +1,6 @@
 package com.apigateway.api.process.service.processtyp;
 
-import com.apigateway.api.process.model.ExecuteProcess;
+import com.apigateway.api.process.model.process.ExecuteProcess;
 import com.apigateway.microservice.restart.service.MicroServicesRestartService;
 import jakarta.ws.rs.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class ProcessTypMicroServicesService implements IProcessTypeService {
 
     @Override
     public boolean restartProcess(ExecuteProcess process) {
-        microServicesRestartService.restartService(process.getContext());
+        microServicesRestartService.restartService(process.getTheme());
         return false;
     }
 }

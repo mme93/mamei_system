@@ -2,8 +2,8 @@ package com.apigateway.api.database.service.domains;
 
 import com.apigateway.api.database.assets.DatabaseTableNames;
 import com.apigateway.api.eureka.assets.EurekaDiscoveryClientNameTable;
-import com.apigateway.api.process.model.*;
-import com.apigateway.api.process.model.Process;
+import com.apigateway.api.process.model.process.*;
+import com.apigateway.api.process.model.process.Process;
 import com.apigateway.api.process.repository.ProcessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

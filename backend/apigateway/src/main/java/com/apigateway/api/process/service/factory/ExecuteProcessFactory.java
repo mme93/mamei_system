@@ -1,6 +1,6 @@
 package com.apigateway.api.process.service.factory;
 
-import com.apigateway.api.process.model.Process;
+import com.apigateway.api.process.model.process.Process;
 import com.apigateway.api.process.model.ui.ExecuteMainProcess;
 import com.apigateway.api.process.model.ui.ExecuteProcessUI;
 import com.apigateway.api.process.model.ui.ExecuteSubProcess;

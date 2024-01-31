@@ -1,6 +1,6 @@
 package com.apigateway.api.process.service.processtyp;
 
-import com.apigateway.api.process.model.ExecuteProcess;
+import com.apigateway.api.process.model.process.ExecuteProcess;
 
 public interface IProcessTypeService {
     boolean deleteProcess(ExecuteProcess process);
