@@ -38,6 +38,6 @@ public class ProcessTypMicroServicesService implements IProcessTypeService {
     @Override
     public boolean restartProcess(ExecuteProcess process) {
         microServicesRestartService.restartService(process.getTheme());
-        return false;
+        return true;
     }
 }

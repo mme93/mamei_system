@@ -19,5 +19,6 @@ public class ExecuteProcess {
     private String processName;
     private String processText;
     private String time;
+    private String taskSignature;
 
 }

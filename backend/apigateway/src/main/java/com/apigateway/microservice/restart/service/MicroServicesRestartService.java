@@ -7,6 +7,9 @@ import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.context.restart.RestartEndpoint;
 import org.springframework.stereotype.Service;
+
+import java.util.Locale;
+
 import static java.util.Arrays.asList;
 
 @Service
@@ -17,11 +20,12 @@ public class MicroServicesRestartService {
     private final RestartEndpoint restartEndpoint;
 
     public boolean restartService(String microServiceName) {
+
         if (!EurekaDiscoveryClientNameTable.eurekaDiscoverClientNameList.contains(microServiceName)) {
             throw new NotFoundException("No Microservices found by Name: " + microServiceName);
         }
         if (!isOnWhiteList(microServiceName)) {
-            if (!isEurekaServiceAvailable(microServiceName)) {
+            if (!isEurekaServiceAvailable(microServiceName.toLowerCase(Locale.ROOT))) {
                 throw new NotFoundException("No Microservices found as EurekaClient by Name: " + microServiceName);
             }
         }
@@ -41,13 +45,14 @@ public class MicroServicesRestartService {
     }
 
     public boolean callRestart(String microServiceName) {
+        System.err.println("CallRestart: "+microServiceName);
         switch (microServiceName){
             case EurekaDiscoveryClientNameTable.ApiGateWay -> restartEndpoint.restart();
-            case EurekaDiscoveryClientNameTable.DataStorageAPI -> restartEndpoint.restart();
+            case EurekaDiscoveryClientNameTable.DashboardAPI -> {
+                return true;
+            }
             default -> throw new NotFoundException("No Microservice found by name: "+microServiceName);
         }
-
-        restartEndpoint.restart();
         return true;
     }
 }

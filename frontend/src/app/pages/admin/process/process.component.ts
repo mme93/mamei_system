@@ -63,6 +63,11 @@ export class ProcessComponent implements OnInit {
     this.itemText = 'Process ' + this.incr + '/' + this.executeProcessUI.mainProcessAmount + ' finished.'
     this.incr++;
 
+    try {
+      await this.databaseProcessService.createTaskProcessProtocol(this.executeProcessUI.signature);
+    } catch (error) {
+      console.log(error)
+    }
     for (const process of this.executeProcessUI.executeMainProcesses) {
       process.processStatusIcon = this.processStatusIcon[2];
       try {
@@ -91,6 +96,11 @@ export class ProcessComponent implements OnInit {
       this.incr++;
     }
     this.progress = 100;
+    try {
+      await this.databaseProcessService.closeTaskProcessProtocol(this.executeProcessUI.signature);
+    } catch (error) {
+      console.log(error)
+    }
     this.incr = 0;
     this.isLoading = false;
     this.isProcessFinish = true;

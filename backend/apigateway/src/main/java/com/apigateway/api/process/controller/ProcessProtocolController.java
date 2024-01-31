@@ -1,29 +1,47 @@
 package com.apigateway.api.process.controller;
 
-import com.apigateway.api.process.service.protocol.TaskProtocolService;
+import com.apigateway.api.process.model.protocol.TaskProcessProtocol;
+import com.apigateway.api.process.service.protocol.TaskProcessProtocolService;
+import com.apigateway.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/protocol")
 public class ProcessProtocolController {
 
-    private final TaskProtocolService taskProtocolService;
+    private final TaskProcessProtocolService taskProcessProtocolService;
+    private final UserService userService;
 
     @Autowired
-    public ProcessProtocolController(TaskProtocolService taskProtocolService) {
-        this.taskProtocolService = taskProtocolService;
+    public ProcessProtocolController(TaskProcessProtocolService taskProcessProtocolService, UserService userService) {
+        this.taskProcessProtocolService = taskProcessProtocolService;
+        this.userService = userService;
     }
 
-    @PostMapping("/{task_signature}")
-    public ResponseEntity createTask(@PathVariable String task_signature){
-        taskProtocolService.createTaskProtocol(task_signature);
+    @PostMapping("/create/{task_signature}")
+    public ResponseEntity createTask(@PathVariable String task_signature) {
+        taskProcessProtocolService.createTaskProtocol(task_signature, userService.getCurrentUsername());
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PostMapping("/close/{task_signature}")
+    public ResponseEntity closeTask(@PathVariable String task_signature) {
+        taskProcessProtocolService.closeTaskProtocol(task_signature);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<TaskProcessProtocol> getTaskProcessProtocols() {
+        return new ResponseEntity(taskProcessProtocolService.getTaskProcessProtocols(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{task_signature}")
+    public ResponseEntity<List<TaskProcessProtocol>> getTaskProcessProtocol(@PathVariable String task_signature) {
+        return new ResponseEntity(taskProcessProtocolService.getTaskProcessProtocol(task_signature), HttpStatus.OK);
+    }
 }

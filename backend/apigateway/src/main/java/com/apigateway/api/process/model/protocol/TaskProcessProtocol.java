@@ -1,7 +1,10 @@
 package com.apigateway.api.process.model.protocol;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Data
@@ -11,33 +14,37 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "task_protocol")
-public class TaskProtocol {
+@Table(name = "task_process_protocol")
+public class TaskProcessProtocol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date executeTaskDate;
-    private Date executeEndTaskDate;
+    private String executeTaskDate;
+
+    private String executeEndTaskDate;
+
+    @Column(unique = true)
     private String signature;
+
     private String mainProcessAmount;
     private String subProcessAmount;
     private String totalProcessAmount;
     private String processDuration;
 
     @Enumerated(EnumType.STRING)
-    private ETaskStatus eTaskStatus;
+    private ETaskProcessStatus eTaskProcessStatus;
 
     private String executeTaskUser;
 
     @Column(length = 1000)
     private String userComment;
 
-    @OneToMany(mappedBy = "taskProtocol", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "taskProcessProtocol", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProcessProtocol> processProtocols = new ArrayList<>();
 
-    public TaskProtocol(Date executeTaskDate, Date executeEndTaskDate, String signature, String mainProcessAmount, String subProcessAmount, String totalProcessAmount, String processDuration, ETaskStatus eTaskStatus, String executeTaskUser, String userComment, List<ProcessProtocol> processProtocols) {
+    public TaskProcessProtocol(String executeTaskDate, String executeEndTaskDate, String signature, String mainProcessAmount, String subProcessAmount, String totalProcessAmount, String processDuration, ETaskProcessStatus eTaskProcessStatus, String executeTaskUser, String userComment, List<ProcessProtocol> processProtocols) {
         this.executeTaskDate = executeTaskDate;
         this.executeEndTaskDate = executeEndTaskDate;
         this.signature = signature;
@@ -45,7 +52,7 @@ public class TaskProtocol {
         this.subProcessAmount = subProcessAmount;
         this.totalProcessAmount = totalProcessAmount;
         this.processDuration = processDuration;
-        this.eTaskStatus = eTaskStatus;
+        this.eTaskProcessStatus = eTaskProcessStatus;
         this.executeTaskUser = executeTaskUser;
         this.userComment = userComment;
         this.processProtocols = processProtocols;

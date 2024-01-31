@@ -1,6 +1,6 @@
 package com.apigateway.api.process.model.protocol;
 
-public enum ETaskStatus {
+public enum ETaskProcessStatus {
     UNRESTRICTED,
     RESTRICTED,
     CANCEL

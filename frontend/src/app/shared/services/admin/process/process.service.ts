@@ -63,6 +63,7 @@ export interface ExecuteMainProcess {
   time: string;
   isProcessFinish: boolean;
   processStatusIcon:string;
+  taskSignature:string;
 }
 
 export interface ExecuteSubProcess {
@@ -77,6 +78,7 @@ export interface ExecuteSubProcess {
   time: string;
   isProcessFinish: boolean;
   processStatusIcon:string;
+  taskSignature:string;
 }
 
 
@@ -84,7 +86,7 @@ export interface ExecuteSubProcess {
   providedIn: 'root'
 })
 export class ProcessService {
-  private databaseProcessTestUrl = environment.uri + ':9000/api/process/test';
+  private processProtocolCreateUrl = environment.uri + ':9000/api/protocol/create/';
   private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
   private databaseProcessSortUrl = environment.uri + ':9000/api/process/sort';
   private databaseProcessesUrl = environment.uri + ':9000/api/process/'
@@ -151,5 +153,25 @@ export class ProcessService {
       })
     };
     return this.http.put<ExecuteProcessUI>(this.databaseProcessSortUrl, startProcessList, httpOptions);
+  }
+
+  createTaskProcessProtocol(signature: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<ExecuteProcessUI>(this.processProtocolCreateUrl+signature, null, httpOptions);
+  }
+
+  closeTaskProcessProtocol(signature: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<ExecuteProcessUI>(this.processProtocolCreateUrl+signature, null, httpOptions);
   }
 }
