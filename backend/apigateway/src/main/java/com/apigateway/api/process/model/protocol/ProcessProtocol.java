@@ -3,6 +3,8 @@ package com.apigateway.api.process.model.protocol;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Date;
+
 @Data
 @Builder
 @Getter
@@ -18,5 +20,19 @@ public class ProcessProtocol {
     private Long id;
 
     private String signature;
+    private String parent_signature;
+    private String processName;
+    private String processText;
+    private Date executeTaskDate;
+    private Date executeEndTaskDate;
+
+    @Enumerated(EnumType.STRING)
     private EProcessTypProtocol eProcessTypProtocol;
+
+    @Column(length = 1000)
+    private String result;
+
+    @ManyToOne
+    @JoinColumn(name = "task_protocol_id")
+    private TaskProtocol taskProtocol;
 }
