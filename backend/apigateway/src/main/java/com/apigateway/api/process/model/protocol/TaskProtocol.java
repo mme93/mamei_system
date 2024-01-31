@@ -10,13 +10,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "process_protocol")
-public class ProcessProtocol {
+@Table(name = "task_protocol")
+public class TaskProtocol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String signature;
-    private EProcessTypProtocol eProcessTypProtocol;
+
 }

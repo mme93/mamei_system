@@ -27,7 +27,7 @@ public class ExecuteProcessFactory {
         List<ExecuteMainProcess>executeMainProcesses=createExecuteMainProcess(processList);
         return ExecuteProcessUI.
                 builder().
-                signature(createSignature("ui_")).
+                signature(createSignature("task_")).
                 executeMainProcesses(executeMainProcesses).
                 processDuration("/").
                 mainProcessAmount(executeMainProcesses.size()).
