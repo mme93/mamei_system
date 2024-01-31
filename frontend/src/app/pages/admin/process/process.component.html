@@ -54,6 +54,7 @@
                 </div>
               </label>
               <div class="icon-container">
+                <mat-icon>processStatusIcon</mat-icon>
                 <button mat-icon-button *ngIf="item.process.scopeList.length>0" (click)="open(item.process)">
                   <mat-icon>add_circle</mat-icon>
                 </button>
@@ -66,7 +67,7 @@
           </div>
         </div>
         <!--Start Process View-->
-        <div class="steps-list" *ngIf="(!isProcessFinish)&&(isProcessRunning)">
+        <div class="steps-list" *ngIf="(!isProcessFinish)&&(isProcessRunning)||(isProcessFinish)&&(isProcessRunning)">
           <mat-divider></mat-divider>
           <div class="step-item" *ngFor="let main of executeProcessUI.executeMainProcesses; index as i">
             <div class="step-item-container">
@@ -77,6 +78,7 @@
                 </div>
               </label>
               <div class="icon-container">
+                <mat-icon>{{main.processStatusIcon}}</mat-icon>
                 <button mat-icon-button>
                   <mat-icon>report</mat-icon>
                 </button>
@@ -90,6 +92,7 @@
                 </div>
               </label>
               <div class="icon-container">
+                <mat-icon>{{sub.processStatusIcon}}</mat-icon>
                 <button mat-icon-button>
                   <mat-icon>report</mat-icon>
                 </button>
@@ -101,7 +104,7 @@
 
       </div>
 
-      <div style="position: relative" *ngIf="isLoading">
+      <div style="position: relative" *ngIf="(!isProcessFinish)&&(isProcessRunning)||(isProcessFinish)&&(isProcessRunning)">
         <mat-progress-bar mode="determinate" [value]="progress" color="warn"></mat-progress-bar>
         <div
           style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; text-align: center; color: white;">

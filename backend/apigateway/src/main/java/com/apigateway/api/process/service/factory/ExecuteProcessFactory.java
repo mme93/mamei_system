@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Arrays.asList;
 
 @Service
 public class ExecuteProcessFactory {
@@ -25,12 +24,13 @@ public class ExecuteProcessFactory {
     }
 
     public ExecuteProcessUI createExecuteProcessUI(List<ProcessElementUI> processList) {
+        List<ExecuteMainProcess>executeMainProcesses=createExecuteMainProcess(processList);
         return ExecuteProcessUI.
                 builder().
                 signature(createSignature("ui_")).
-                executeMainProcesses(createExecuteMainProcess(processList)).
+                executeMainProcesses(executeMainProcesses).
                 processDuration("/").
-                mainProcessAmount(processList.size()).
+                mainProcessAmount(executeMainProcesses.size()).
                 build();
     }
 

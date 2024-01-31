@@ -59,7 +59,7 @@ export class ProcessComponent implements OnInit {
 
   async startProcess() {
     this.isLoading = true;
-
+    this.executeProcessUI.isProcessRunning = true;
     this.itemText = 'Process ' + this.incr + '/' + this.executeProcessUI.mainProcessAmount + ' finished.'
     this.incr++;
 
@@ -67,18 +67,19 @@ export class ProcessComponent implements OnInit {
       process.processStatusIcon = this.processStatusIcon[2];
       try {
         const result = await this.databaseProcessService.startExecuteMainProcess(process);
+        process.isProcessFinish = true;
         console.log(result);
       } catch (error) {
         console.error(error);
       }
-      for(const subProcess of process.processList){
+      for (const subProcess of process.processList) {
         subProcess.processStatusIcon = this.processStatusIcon[2];
         try {
           const result = await this.databaseProcessService.startExecuteSubProcess(process);
+          subProcess.isProcessFinish = true;
           console.log(result);
           process.processStatusIcon = this.processStatusIcon[3];
           process.isProcessFinish = true;
-          this.progress = Number((this.progress + (100 / this.executeProcessUI.mainProcessAmount)).toFixed(2));
         } catch (error) {
           console.error(error);
         }
@@ -95,36 +96,6 @@ export class ProcessComponent implements OnInit {
     this.isProcessFinish = true;
   }
 
-  /*
-  async startProcess() {
-    this.isLoading = true;
-    const selectedProcess = this.processList.filter(process => {
-      process.processIsShowActivated = process.processActivated;
-      return process.processActivated;
-    });
-    this.itemText = 'Process ' + this.incr + '/' + selectedProcess.length + ' finished.'
-    this.incr++;
-    this.isLoading = true;
-    for (const process of this.startProcessList) {
-      process.processStatusIcon = this.processStatusIcon[2];
-      try {
-        const result = await this.databaseProcessService.startProcess(process);
-        console.log(result);
-        this.itemText = 'Process ' + this.incr + '/' + selectedProcess.length + ' finished.'
-        process.processStatusIcon = this.processStatusIcon[3];
-        process.isProcessFinish = true;
-        this.progress = Number((this.progress + (100 / selectedProcess.length)).toFixed(2));
-      } catch (error) {
-        console.error(error);
-      }
-      this.incr++;
-    }
-    this.progress = 100;
-    this.incr = 0;
-    this.isLoading = false;
-    this.isProcessFinish = true;
-  }
-   */
 
   changeIcon(microServiceName: string, $event: MatCheckboxChange) {
     for (let i = 0; i < this.processList.length; i++) {
@@ -161,7 +132,13 @@ export class ProcessComponent implements OnInit {
     let sortProcessLists: Process[] = [];
     this.startProcessList.forEach(process => sortProcessLists.push(process.process))
     sortProcessLists.forEach(process => process.scopeList = process.selectedScopeList);
-    this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => this.executeProcessUI = value);
+    this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => {
+      this.executeProcessUI = value
+      this.executeProcessUI.executeMainProcesses.forEach(main => {
+        main.processStatusIcon = this.processStatusIcon[1];
+        main.processList.forEach(sub => sub.processStatusIcon = this.processStatusIcon[1])
+      })
+    });
     this.isProcessRunning = true;
   }
 
