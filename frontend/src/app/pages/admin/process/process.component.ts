@@ -75,11 +75,11 @@ export class ProcessComponent implements OnInit {
       for (const subProcess of process.processList) {
         subProcess.processStatusIcon = this.processStatusIcon[2];
         try {
-          const result = await this.databaseProcessService.startExecuteSubProcess(process);
+          const result = await this.databaseProcessService.startExecuteSubProcess(subProcess);
           subProcess.isProcessFinish = true;
           console.log(result);
-          process.processStatusIcon = this.processStatusIcon[3];
-          process.isProcessFinish = true;
+          subProcess.processStatusIcon = this.processStatusIcon[3];
+          subProcess.isProcessFinish = true;
         } catch (error) {
           console.error(error);
         }
