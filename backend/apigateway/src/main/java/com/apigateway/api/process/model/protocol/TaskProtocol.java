@@ -2,10 +2,7 @@ package com.apigateway.api.process.model.protocol;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Builder
@@ -39,4 +36,18 @@ public class TaskProtocol {
 
     @OneToMany(mappedBy = "taskProtocol", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProcessProtocol> processProtocols = new ArrayList<>();
+
+    public TaskProtocol(Date executeTaskDate, Date executeEndTaskDate, String signature, String mainProcessAmount, String subProcessAmount, String totalProcessAmount, String processDuration, ETaskStatus eTaskStatus, String executeTaskUser, String userComment, List<ProcessProtocol> processProtocols) {
+        this.executeTaskDate = executeTaskDate;
+        this.executeEndTaskDate = executeEndTaskDate;
+        this.signature = signature;
+        this.mainProcessAmount = mainProcessAmount;
+        this.subProcessAmount = subProcessAmount;
+        this.totalProcessAmount = totalProcessAmount;
+        this.processDuration = processDuration;
+        this.eTaskStatus = eTaskStatus;
+        this.executeTaskUser = executeTaskUser;
+        this.userComment = userComment;
+        this.processProtocols = processProtocols;
+    }
 }
