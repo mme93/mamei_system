@@ -27,7 +27,6 @@ public class ProcessController {
 
     @PostMapping("/newJob")
     public ResponseEntity<Boolean> startNewJob(@RequestBody ExecuteProcess process){
-        System.err.println(process.getTaskSignature());
         try {
             Thread.sleep(3000);
             return new ResponseEntity<>(processService.startProcess(process),HttpStatus.OK);

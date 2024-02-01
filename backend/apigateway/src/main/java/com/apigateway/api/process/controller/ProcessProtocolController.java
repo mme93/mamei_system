@@ -36,12 +36,12 @@ public class ProcessProtocolController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<TaskProcessProtocol> getTaskProcessProtocols() {
+    public ResponseEntity<List<TaskProcessProtocol>> getTaskProcessProtocols() {
         return new ResponseEntity(taskProcessProtocolService.getTaskProcessProtocols(), HttpStatus.OK);
     }
 
     @GetMapping("/{task_signature}")
-    public ResponseEntity<List<TaskProcessProtocol>> getTaskProcessProtocol(@PathVariable String task_signature) {
+    public ResponseEntity<TaskProcessProtocol> getTaskProcessProtocol(@PathVariable String task_signature) {
         return new ResponseEntity(taskProcessProtocolService.getTaskProcessProtocol(task_signature), HttpStatus.OK);
     }
 }

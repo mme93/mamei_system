@@ -23,8 +23,8 @@ public class ProcessProtocol {
     private String parent_signature;
     private String processName;
     private String processText;
-    private Date executeTaskDate;
-    private Date executeEndTaskDate;
+    private String executeProcessDate;
+    private String executeEndProcessDate;
 
     @Enumerated(EnumType.STRING)
     private EProcessTypProtocol eProcessTypProtocol;

@@ -71,6 +71,7 @@ export class ProcessComponent implements OnInit {
     for (const process of this.executeProcessUI.executeMainProcesses) {
       process.processStatusIcon = this.processStatusIcon[2];
       try {
+        process.taskSignature=this.executeProcessUI.signature;
         const result = await this.databaseProcessService.startExecuteMainProcess(process);
         process.isProcessFinish = true;
         console.log(result);
@@ -80,6 +81,7 @@ export class ProcessComponent implements OnInit {
       for (const subProcess of process.processList) {
         subProcess.processStatusIcon = this.processStatusIcon[2];
         try {
+          subProcess.taskSignature=this.executeProcessUI.signature;
           const result = await this.databaseProcessService.startExecuteSubProcess(subProcess);
           subProcess.isProcessFinish = true;
           console.log(result);

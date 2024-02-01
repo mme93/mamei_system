@@ -45,7 +45,6 @@ public class MicroServicesRestartService {
     }
 
     public boolean callRestart(String microServiceName) {
-        System.err.println("CallRestart: "+microServiceName);
         switch (microServiceName){
             case EurekaDiscoveryClientNameTable.ApiGateWay -> restartEndpoint.restart();
             case EurekaDiscoveryClientNameTable.DashboardAPI -> {

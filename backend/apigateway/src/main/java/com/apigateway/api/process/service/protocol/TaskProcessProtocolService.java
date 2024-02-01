@@ -1,6 +1,7 @@
 package com.apigateway.api.process.service.protocol;
 
 import com.apigateway.api.process.model.protocol.*;
+import com.apigateway.api.process.repository.ProcessProtocolRepository;
 import com.apigateway.api.process.repository.TaskProcessProtocolRepository;
 import jakarta.ws.rs.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
@@ -20,12 +22,14 @@ import static java.util.Arrays.asList;
 public class TaskProcessProtocolService {
 
     private final TaskProcessProtocolRepository taskProcessProtocolRepository;
+    private final ProcessProtocolRepository processProtocolRepository;
     private final String dateTimePattern = "yyyy-MM-dd/HH:mm:ss.SS";
 
 
     @Autowired
-    public TaskProcessProtocolService(TaskProcessProtocolRepository taskProcessProtocolRepository) {
+    public TaskProcessProtocolService(TaskProcessProtocolRepository taskProcessProtocolRepository, ProcessProtocolRepository processProtocolRepository) {
         this.taskProcessProtocolRepository = taskProcessProtocolRepository;
+        this.processProtocolRepository = processProtocolRepository;
     }
 
     public TaskProcessProtocol getTaskProcessProtocol(String task_signature) {
@@ -77,14 +81,17 @@ public class TaskProcessProtocolService {
             throw new NotFoundException("No Task Process Protocol found by signature: " + task_signature);
         }
         TaskProcessProtocol taskProcessProtocol = taskProcessProtocolOpt.get();
-        List<Long> amount = getAmountListForProcessTask(taskProcessProtocol.getProcessProtocols());
+        List<ProcessProtocol> processProtocols = processProtocolRepository.findAll().stream()
+                .filter(processProtocol -> processProtocol.getParent_signature().equals(task_signature)).collect(Collectors.toList());
+        List<Long> amount = getAmountListForProcessTask(processProtocols);
         String dateTime = generateLocalTimeDate();
         taskProcessProtocol.setMainProcessAmount(amount.get(0).toString());
         taskProcessProtocol.setSubProcessAmount(amount.get(1).toString());
         taskProcessProtocol.setTotalProcessAmount(amount.get(2).toString());
-        taskProcessProtocol.setETaskProcessStatus(getTaskProcessStatus(taskProcessProtocol.getProcessProtocols()));
+        taskProcessProtocol.setETaskProcessStatus(getTaskProcessStatus(processProtocols));
         taskProcessProtocol.setExecuteEndTaskDate(dateTime);
         taskProcessProtocol.setProcessDuration(getDuration(dateTime, taskProcessProtocol.getExecuteTaskDate()));
+        taskProcessProtocolRepository.save(taskProcessProtocol);
     }
 
     public List<Long> getAmountListForProcessTask(List<ProcessProtocol> processProtocols) {

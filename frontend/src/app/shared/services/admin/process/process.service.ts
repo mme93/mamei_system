@@ -86,6 +86,7 @@ export interface ExecuteSubProcess {
   providedIn: 'root'
 })
 export class ProcessService {
+  private processProtocolCloseUrl = environment.uri + ':9000/api/protocol/close/';
   private processProtocolCreateUrl = environment.uri + ':9000/api/protocol/create/';
   private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
   private databaseProcessSortUrl = environment.uri + ':9000/api/process/sort';
@@ -155,23 +156,23 @@ export class ProcessService {
     return this.http.put<ExecuteProcessUI>(this.databaseProcessSortUrl, startProcessList, httpOptions);
   }
 
-  createTaskProcessProtocol(signature: string) {
+  createTaskProcessProtocol(signature: string): Promise<any>  {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<ExecuteProcessUI>(this.processProtocolCreateUrl+signature, null, httpOptions);
+    return this.http.post<ExecuteProcessUI>(this.processProtocolCreateUrl+signature, null, httpOptions).toPromise();
   }
 
-  closeTaskProcessProtocol(signature: string) {
+  closeTaskProcessProtocol(signature: string): Promise<any>  {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<ExecuteProcessUI>(this.processProtocolCreateUrl+signature, null, httpOptions);
+    return this.http.post<ExecuteProcessUI>(this.processProtocolCloseUrl+signature, null, httpOptions).toPromise();
   }
 }
