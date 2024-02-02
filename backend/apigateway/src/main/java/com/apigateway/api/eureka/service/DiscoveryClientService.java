@@ -39,6 +39,13 @@ public class DiscoveryClientService {
         return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.Mameie_FSM).get(0).getUri().toString();
     }
 
+    public String getDatastorageManagerClientAdress(){
+        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.DataStorageAPI).get(0).getUri().toString();
+    }
+
+    public String getClientAdressByName(String clientName){
+        return discoveryClient.getInstances(clientName).get(0).getUri().toString();
+    }
 
     public boolean existEurekaDiscoveryClientByName(String name){
         return discoveryClient.getServices().stream().filter(microserviceName-> microserviceName.equals(name)).count()==1;

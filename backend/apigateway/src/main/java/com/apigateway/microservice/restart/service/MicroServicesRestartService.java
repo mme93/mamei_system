@@ -2,11 +2,13 @@ package com.apigateway.microservice.restart.service;
 
 
 import com.apigateway.api.eureka.assets.EurekaDiscoveryClientNameTable;
+import com.apigateway.api.eureka.assets.table.DatastorageManagerRouteTable;
 import com.apigateway.api.eureka.service.DiscoveryClientService;
 import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.context.restart.RestartEndpoint;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Locale;
 
@@ -18,6 +20,7 @@ public class MicroServicesRestartService {
 
     private final DiscoveryClientService discoveryClientService;
     private final RestartEndpoint restartEndpoint;
+    private final WebClient.Builder webClient;
 
     public boolean restartService(String microServiceName) {
 
@@ -48,13 +51,32 @@ public class MicroServicesRestartService {
         switch (microServiceName){
             case EurekaDiscoveryClientNameTable.ApiGateWay -> restartEndpoint.restart();
             case EurekaDiscoveryClientNameTable.DashboardAPI,
-                    EurekaDiscoveryClientNameTable.DataStorageAPI,
                     EurekaDiscoveryClientNameTable.GamesManager,
                     EurekaDiscoveryClientNameTable.HealthManagerAPI -> {
                 return true;
+            }
+            case EurekaDiscoveryClientNameTable.DataStorageAPI -> {
+                return x(EurekaDiscoveryClientNameTable.DataStorageAPI, DatastorageManagerRouteTable.RESTART_END_POINT);
             }
             default -> throw new NotFoundException("No Microservice found by name: "+microServiceName);
         }
         return true;
     }
+
+    public boolean x(String clientName, String restartEndpoint){
+        System.err.println(clientName);
+        if(!discoveryClientService.existEurekaDiscoveryClientByName(clientName.toLowerCase(Locale.ROOT))){
+            return false;
+        }
+        String clientAdressByName = discoveryClientService.getClientAdressByName(clientName);
+        String uri = clientAdressByName+restartEndpoint;
+        webClient
+                .build()
+                .post()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(Object.class).block();
+        return true;
+    }
+
 }

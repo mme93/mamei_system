@@ -3,6 +3,8 @@ spring:
     name: datastorage
 server:
   port: 9005
+  servlet:
+    context-path: /datastorage
 eureka:
   client:
     serviceUrl:
