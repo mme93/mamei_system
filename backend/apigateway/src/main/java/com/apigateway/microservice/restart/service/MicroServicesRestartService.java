@@ -47,7 +47,10 @@ public class MicroServicesRestartService {
     public boolean callRestart(String microServiceName) {
         switch (microServiceName){
             case EurekaDiscoveryClientNameTable.ApiGateWay -> restartEndpoint.restart();
-            case EurekaDiscoveryClientNameTable.DashboardAPI -> {
+            case EurekaDiscoveryClientNameTable.DashboardAPI,
+                    EurekaDiscoveryClientNameTable.DataStorageAPI,
+                    EurekaDiscoveryClientNameTable.GamesManager,
+                    EurekaDiscoveryClientNameTable.HealthManagerAPI -> {
                 return true;
             }
             default -> throw new NotFoundException("No Microservice found by name: "+microServiceName);

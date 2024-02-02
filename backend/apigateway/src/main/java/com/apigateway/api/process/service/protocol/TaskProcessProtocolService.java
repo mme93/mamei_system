@@ -3,13 +3,11 @@ package com.apigateway.api.process.service.protocol;
 import com.apigateway.api.process.model.protocol.*;
 import com.apigateway.api.process.repository.ProcessProtocolRepository;
 import com.apigateway.api.process.repository.TaskProcessProtocolRepository;
+import com.apigateway.util.LocalDateTimeFactory;
 import jakarta.ws.rs.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,13 +21,14 @@ public class TaskProcessProtocolService {
 
     private final TaskProcessProtocolRepository taskProcessProtocolRepository;
     private final ProcessProtocolRepository processProtocolRepository;
-    private final String dateTimePattern = "yyyy-MM-dd/HH:mm:ss.SS";
+    private final LocalDateTimeFactory localDateTimeFactory;
 
 
     @Autowired
-    public TaskProcessProtocolService(TaskProcessProtocolRepository taskProcessProtocolRepository, ProcessProtocolRepository processProtocolRepository) {
+    public TaskProcessProtocolService(TaskProcessProtocolRepository taskProcessProtocolRepository, ProcessProtocolRepository processProtocolRepository, LocalDateTimeFactory localDateTimeFactory) {
         this.taskProcessProtocolRepository = taskProcessProtocolRepository;
         this.processProtocolRepository = processProtocolRepository;
+        this.localDateTimeFactory = localDateTimeFactory;
     }
 
     public TaskProcessProtocol getTaskProcessProtocol(String task_signature) {
@@ -44,7 +43,7 @@ public class TaskProcessProtocolService {
 
     public void createTaskProtocol(String task_signature, String userName) {
         taskProcessProtocolRepository.save(new TaskProcessProtocol(
-                generateLocalTimeDate(),
+                localDateTimeFactory.generateLocalTimeDate(),
                 null,
                 task_signature,
                 null,
@@ -59,40 +58,21 @@ public class TaskProcessProtocolService {
 
     }
 
-    public String generateLocalTimeDate() {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimePattern);
-        return currentDateTime.format(formatter);
-    }
-
-    public String getDuration(String startLocalDateTime, String endLocalDateTime) {
-        LocalDateTime dateTime1 = LocalDateTime.parse(startLocalDateTime, DateTimeFormatter.ofPattern(dateTimePattern));
-        LocalDateTime dateTime2 = LocalDateTime.parse(endLocalDateTime, DateTimeFormatter.ofPattern(dateTimePattern));
-        Duration duration = Duration.between(dateTime1, dateTime2);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(duration.toHours() + ":");
-        stringBuilder.append(duration.toMinutesPart() + ":");
-        stringBuilder.append(duration.toSecondsPart() + ":");
-        stringBuilder.append(duration.toMillisPart());
-        return stringBuilder.toString();
-    }
-
     public void closeTaskProtocol(String task_signature) {
         Optional<TaskProcessProtocol> taskProcessProtocolOpt = taskProcessProtocolRepository.findBySignature(task_signature);
         if (!taskProcessProtocolOpt.isPresent()) {
             throw new NotFoundException("No Task Process Protocol found by signature: " + task_signature);
         }
         TaskProcessProtocol taskProcessProtocol = taskProcessProtocolOpt.get();
-        List<ProcessProtocol> processProtocols = processProtocolRepository.findAll().stream()
-                .filter(processProtocol -> processProtocol.getParentSignature().equals(task_signature)).collect(Collectors.toList());
+        List<ProcessProtocol> processProtocols = processProtocolRepository.findAllByParentSignature(task_signature);
         List<Long> amount = getAmountListForProcessTask(processProtocols);
-        String dateTime = generateLocalTimeDate();
+        String dateTime = localDateTimeFactory.generateLocalTimeDate();
         taskProcessProtocol.setMainProcessAmount(amount.get(0).toString());
         taskProcessProtocol.setSubProcessAmount(amount.get(1).toString());
         taskProcessProtocol.setTotalProcessAmount(amount.get(2).toString());
         taskProcessProtocol.setETaskProcessStatus(getTaskProcessStatus(processProtocols));
         taskProcessProtocol.setExecuteEndTaskDate(dateTime);
-        taskProcessProtocol.setProcessDuration(getDuration(dateTime, taskProcessProtocol.getExecuteTaskDate()));
+        taskProcessProtocol.setProcessDuration(localDateTimeFactory.getDuration(dateTime, taskProcessProtocol.getExecuteTaskDate()));
         taskProcessProtocolRepository.save(taskProcessProtocol);
     }
 

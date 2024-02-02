@@ -24,7 +24,7 @@ public class ProcessProtocolService {
         this.taskProcessProtocolRepository = taskProcessProtocolRepository;
     }
 
-    public boolean createProcessProtocol(boolean isSuccessful, ExecuteProcess process, LocalDateTime start, LocalDateTime end) {
+    public boolean createProcessProtocol(boolean isSuccessful, ExecuteProcess process, String start, String end) {
         Optional<TaskProcessProtocol> taskProcessProtocolOpt = taskProcessProtocolRepository.findBySignature(process.getTaskSignature());
         if (!taskProcessProtocolOpt.isPresent()) {
             return false;
@@ -51,8 +51,8 @@ public class ProcessProtocolService {
                 .parentSignature(process.getTaskSignature())
                 .processName(process.getProcessName())
                 .processText(process.getProcessText()+" "+process.getTheme())
-                .executeProcessDate(start.toString())
-                .executeEndProcessDate(end.toString())
+                .executeProcessDate(start)
+                .executeEndProcessDate(end)
                 .eProcessTypProtocol(eProcessTypProtocol)
                 .eProcessStatus(eProcessStatus)
                 .result(generateResult(isSuccessful,process))
