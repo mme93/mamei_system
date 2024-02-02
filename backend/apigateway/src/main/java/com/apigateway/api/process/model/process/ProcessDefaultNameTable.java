@@ -26,6 +26,7 @@ public class ProcessDefaultNameTable {
      */
     public final static String DELETE_DATASET="DELETE_DATASET";
     public final static String DELETE_DEFAULT_DATASET="DELETE_DEFAULT_DATASET";
+    public final static String CREATE_DEFAULT_DATASET="CREATE_DEFAULT_DATASET";
 
     /*
     MicroServices
@@ -40,6 +41,6 @@ public class ProcessDefaultNameTable {
 
     public final static List<String>processNameList=asList(
             DELETE_DATASET,DELETE_DEFAULT_DATASET,RESET_TO_DEFAULT_DATASET,RESET_ALL_TO_DEFAULT_DATASET,RESTART_MICROSERVICE,
-            DELETE_TABLE
+            DELETE_TABLE,CREATE_DEFAULT_DATASET
     );
 }

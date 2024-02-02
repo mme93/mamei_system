@@ -49,6 +49,7 @@ public class ProcessController {
 
     @PostMapping("/set_default")
     public ResponseEntity setDefault(){
+        processDefaultDBService.deleteAllDefaultData();
         processDefaultDBService.loadDefaultDataIntoDatabase();
         return new ResponseEntity(HttpStatus.OK);
     }
