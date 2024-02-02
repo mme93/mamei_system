@@ -38,7 +38,7 @@ public class TaskProcessProtocolService {
             throw new NotFoundException("No Task Process Protocol found by signature: " + task_signature);
         }
         TaskProcessProtocol taskProcessProtocol = taskProcessProtocolOpt.get();
-        //taskProcessProtocol.setProcessProtocols(processProtocolRepository.findAllByParent_signature(taskProcessProtocol.getSignature()));
+        taskProcessProtocol.setProcessProtocols(processProtocolRepository.findAllByParentSignature(taskProcessProtocol.getSignature()));
         return taskProcessProtocol;
     }
 
@@ -84,7 +84,7 @@ public class TaskProcessProtocolService {
         }
         TaskProcessProtocol taskProcessProtocol = taskProcessProtocolOpt.get();
         List<ProcessProtocol> processProtocols = processProtocolRepository.findAll().stream()
-                .filter(processProtocol -> processProtocol.getParent_signature().equals(task_signature)).collect(Collectors.toList());
+                .filter(processProtocol -> processProtocol.getParentSignature().equals(task_signature)).collect(Collectors.toList());
         List<Long> amount = getAmountListForProcessTask(processProtocols);
         String dateTime = generateLocalTimeDate();
         taskProcessProtocol.setMainProcessAmount(amount.get(0).toString());

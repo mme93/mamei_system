@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ProcessProtocolRepository extends JpaRepository<ProcessProtocol, Long> {
-    List<ProcessProtocol>findAllByParent_signature(String parentSignature);
+    List<ProcessProtocol>findAllByParentSignature(String parentSignature);
 
 }

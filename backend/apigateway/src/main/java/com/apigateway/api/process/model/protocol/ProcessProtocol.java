@@ -20,7 +20,7 @@ public class ProcessProtocol {
     private Long id;
 
     private String signature;
-    private String parent_signature;
+    private String parentSignature;
     private String processName;
     private String processText;
     private String executeProcessDate;

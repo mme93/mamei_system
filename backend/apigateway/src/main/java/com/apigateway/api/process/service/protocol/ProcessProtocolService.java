@@ -48,7 +48,7 @@ public class ProcessProtocolService {
 
         ProcessProtocol processProtocol = ProcessProtocol.builder()
                 .signature(process.getSignature())
-                .parent_signature(process.getTaskSignature())
+                .parentSignature(process.getTaskSignature())
                 .processName(process.getProcessName())
                 .processText(process.getProcessText()+" "+process.getTheme())
                 .executeProcessDate(start.toString())
