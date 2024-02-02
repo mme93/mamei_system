@@ -91,9 +91,19 @@ export class ProcessService {
   private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
   private databaseProcessSortUrl = environment.uri + ':9000/api/process/sort';
   private databaseProcessesUrl = environment.uri + ':9000/api/process/'
+  private processesProtocolUrl = environment.uri + ':9000/api/protocol/'
   constructor(private http: HttpClient) {
   }
 
+  getProtocol(signature:string){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.get<Process[]>(this.processesProtocolUrl+signature, httpOptions);
+  }
 
   startExecuteMainProcess(process:ExecuteMainProcess): Promise<any> {
     const httpOptions = {

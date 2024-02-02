@@ -37,7 +37,9 @@ public class TaskProcessProtocolService {
         if (!taskProcessProtocolOpt.isPresent()) {
             throw new NotFoundException("No Task Process Protocol found by signature: " + task_signature);
         }
-        return taskProcessProtocolOpt.get();
+        TaskProcessProtocol taskProcessProtocol = taskProcessProtocolOpt.get();
+        //taskProcessProtocol.setProcessProtocols(processProtocolRepository.findAllByParent_signature(taskProcessProtocol.getSignature()));
+        return taskProcessProtocol;
     }
 
     public void createTaskProtocol(String task_signature, String userName) {
