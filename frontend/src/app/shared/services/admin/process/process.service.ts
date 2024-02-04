@@ -2,6 +2,52 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../../../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
+// ProtocolSubResult.ts
+interface ProtocolSubResult {
+  id: number;
+  signature: string;
+  parentSignature: string;
+  processName: string;
+  processText: string;
+  executeProcessDate: string;
+  executeEndProcessDate: string;
+  eProcessTypProtocol: string;
+  eProcessStatus: string;
+  result: string;
+}
+
+// ProtocolMainResult.ts
+interface ProtocolMainResult {
+  id: number;
+  signature: string;
+  parentSignature: string;
+  processName: string;
+  processText: string;
+  executeProcessDate: string;
+  executeEndProcessDate: string;
+  eProcessTypProtocol: string;
+  eProcessStatus: string;
+  result: string;
+  protocolSubResults: ProtocolSubResult[];
+}
+
+// ProtocolResultUI.ts
+interface ProtocolResultUI {
+  id: number;
+  executeTaskDate: string;
+  executeEndTaskDate: string;
+  signature: string;
+  mainProcessAmount: string;
+  subProcessAmount: string;
+  totalProcessAmount: string;
+  processDuration: string;
+  eTaskProcessStatus: string;
+  executeTaskUser: string;
+  userComment: string;
+  protocolMainResults: ProtocolMainResult[];
+}
+
+
 export interface ProcessUI {
   processIcon: string;
   process: Process;
@@ -46,7 +92,7 @@ export interface ExecuteProcessUI {
   mainProcessAmount: number;
   processDuration: string;
   isProcessFinish: boolean;
-  isProcessRunning:boolean;
+  isProcessRunning: boolean;
 }
 
 export interface ExecuteMainProcess {
@@ -62,8 +108,8 @@ export interface ExecuteMainProcess {
   processList: ExecuteSubProcess[];
   time: string;
   isProcessFinish: boolean;
-  processStatusIcon:string;
-  taskSignature:string;
+  processStatusIcon: string;
+  taskSignature: string;
 }
 
 export interface ExecuteSubProcess {
@@ -77,8 +123,8 @@ export interface ExecuteSubProcess {
   processText: string;
   time: string;
   isProcessFinish: boolean;
-  processStatusIcon:string;
-  taskSignature:string;
+  processStatusIcon: string;
+  taskSignature: string;
 }
 
 
@@ -86,26 +132,28 @@ export interface ExecuteSubProcess {
   providedIn: 'root'
 })
 export class ProcessService {
+  private x = environment.uri + ':9000/api/protocol/x/';
   private processProtocolCloseUrl = environment.uri + ':9000/api/protocol/close/';
   private processProtocolCreateUrl = environment.uri + ':9000/api/protocol/create/';
   private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
   private databaseProcessSortUrl = environment.uri + ':9000/api/process/sort';
   private databaseProcessesUrl = environment.uri + ':9000/api/process/'
   private processesProtocolUrl = environment.uri + ':9000/api/protocol/'
+
   constructor(private http: HttpClient) {
   }
 
-  getProtocol(signature:string){
+  getProtocol(signature: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
         'Content-Type': 'application/json'
       })
     };
-    return this.http.get<Process[]>(this.processesProtocolUrl+signature, httpOptions);
+    return this.http.get<Process[]>(this.processesProtocolUrl + signature, httpOptions);
   }
 
-  startExecuteMainProcess(process:ExecuteMainProcess): Promise<any> {
+  startExecuteMainProcess(process: ExecuteMainProcess): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
@@ -117,7 +165,7 @@ export class ProcessService {
     return this.http.post(this.databaseProcessStartUrl, process, httpOptions).toPromise();
   }
 
-  startExecuteSubProcess(process:ExecuteSubProcess): Promise<any> {
+  startExecuteSubProcess(process: ExecuteSubProcess): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
@@ -166,23 +214,34 @@ export class ProcessService {
     return this.http.put<ExecuteProcessUI>(this.databaseProcessSortUrl, startProcessList, httpOptions);
   }
 
-  createTaskProcessProtocol(signature: string): Promise<any>  {
+  createTaskProcessProtocol(signature: string): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<ExecuteProcessUI>(this.processProtocolCreateUrl+signature, null, httpOptions).toPromise();
+    return this.http.post<ExecuteProcessUI>(this.processProtocolCreateUrl + signature, null, httpOptions).toPromise();
   }
 
-  closeTaskProcessProtocol(signature: string): Promise<any>  {
+  closeTaskProcessProtocol(signature: string): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<ExecuteProcessUI>(this.processProtocolCloseUrl+signature, null, httpOptions).toPromise();
+    return this.http.post<ExecuteProcessUI>(this.processProtocolCloseUrl + signature, null, httpOptions).toPromise();
+  }
+
+  loadProtocols(executeTaskSignature: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    //return this.http.get(this.x + executeTaskSignature, httpOptions);
+    return this.http.get<ProtocolResultUI>(this.x + "task_cTw20EMR", httpOptions);
   }
 }

@@ -123,7 +123,7 @@
                 *ngIf="(!isProcessFinish)&&(isProcessRunning)">
           Start Process
         </button>
-        <button mat-raised-button color="primary" (click)="stepper.next()" style="width: 49%"
+        <button mat-raised-button color="primary" (click)="stepper.next() ; loadProtocols()" style="width: 49%"
                 *ngIf="(isProcessFinish)&&(isProcessRunning)">
           Display Protocol
         </button>
@@ -134,7 +134,7 @@
       <ng-template matStepLabel>Process Result Overview</ng-template>
       <p>You are now done.</p>
       <div>
-        <button mat-raised-button (click)="stepper.reset()" style="width: 100%" color="primary">Got to Start</button>
+        <button mat-raised-button (click)="loadProtocols()" style="width: 100%" color="primary">Got to Start</button>
       </div>
     </mat-step>
 

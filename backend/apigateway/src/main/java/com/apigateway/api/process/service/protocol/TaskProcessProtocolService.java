@@ -3,6 +3,7 @@ package com.apigateway.api.process.service.protocol;
 import com.apigateway.api.process.model.protocol.*;
 import com.apigateway.api.process.model.protocol.ui.ProtocolMainResult;
 import com.apigateway.api.process.model.protocol.ui.ProtocolResultUI;
+import com.apigateway.api.process.model.protocol.ui.ProtocolSubResult;
 import com.apigateway.api.process.repository.ProcessProtocolRepository;
 import com.apigateway.api.process.repository.TaskProcessProtocolRepository;
 import com.apigateway.util.LocalDateTimeFactory;
@@ -131,7 +132,12 @@ public class TaskProcessProtocolService {
 
     public List<ProtocolMainResult> convertToProtocolMainResult(List<ProcessProtocol> processProtocols) {
         List<ProtocolMainResult> protocolMainResults = new ArrayList<>();
-        for(ProcessProtocol processProtocol:processProtocols){
+        processProtocols = processProtocols
+                .stream()
+                .filter(processProtocol -> processProtocol.getEProcessTypProtocol().equals(EProcessTypProtocol.MAIN))
+                .collect(Collectors.toList());
+
+        for (ProcessProtocol processProtocol : processProtocols) {
             protocolMainResults.add(new ProtocolMainResult(
                     processProtocol.getId(),
                     processProtocol.getSignature(),
@@ -143,9 +149,15 @@ public class TaskProcessProtocolService {
                     processProtocol.getEProcessTypProtocol(),
                     processProtocol.getEProcessStatus(),
                     processProtocol.getResult(),
-                    asList()
+                    createSubProtocol()
             ));
         }
         return protocolMainResults;
+    }
+
+    private List<ProtocolSubResult> createSubProtocol() {
+        List<ProtocolSubResult> protocolSubResults= new ArrayList<>();
+
+        return protocolSubResults;
     }
 }

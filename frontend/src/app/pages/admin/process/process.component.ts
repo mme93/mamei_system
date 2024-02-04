@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  ExecuteMainProcess,
   ExecuteProcessUI,
   Process,
   ProcessUI
 } from "../../../shared/services/admin/process/process.service";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {ProcessService} from "../../../shared/services/admin/process/process.service";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {ScopeCheckBox, ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.component";
 
 @Component({
   selector: 'app-process',
@@ -16,6 +15,7 @@ import {ScopeCheckBox, ScopeDialogComponent} from "./dialoag/scope-dialog/scope-
   styleUrls: ['./process.component.scss']
 })
 export class ProcessComponent implements OnInit {
+  executeTaskSignature = "";
   isProcessSelected = true;
   default = 'Choose your steps for Database Processes';
   incr = 0;
@@ -57,6 +57,16 @@ export class ProcessComponent implements OnInit {
     );
   }
 
+  loadProtocols() {
+    this.databaseProcessService.loadProtocols(this.executeTaskSignature).subscribe(
+      (value) => {
+        console.log(value)
+        console.log(value.protocolMainResults)
+        console.log(value.protocolMainResults[0].protocolSubResults)
+      }
+    );
+  }
+
   async startProcess() {
     this.isLoading = true;
     this.executeProcessUI.isProcessRunning = true;
@@ -68,10 +78,11 @@ export class ProcessComponent implements OnInit {
     } catch (error) {
       console.log(error)
     }
+    this.executeTaskSignature = this.executeProcessUI.signature;
     for (const process of this.executeProcessUI.executeMainProcesses) {
       process.processStatusIcon = this.processStatusIcon[2];
       try {
-        process.taskSignature=this.executeProcessUI.signature;
+        process.taskSignature = this.executeProcessUI.signature;
         const result = await this.databaseProcessService.startExecuteMainProcess(process);
         process.isProcessFinish = true;
         console.log(result);
@@ -81,7 +92,7 @@ export class ProcessComponent implements OnInit {
       for (const subProcess of process.processList) {
         subProcess.processStatusIcon = this.processStatusIcon[2];
         try {
-          subProcess.taskSignature=this.executeProcessUI.signature;
+          subProcess.taskSignature = this.executeProcessUI.signature+"|"+process.signature;
           const result = await this.databaseProcessService.startExecuteSubProcess(subProcess);
           subProcess.isProcessFinish = true;
           console.log(result);

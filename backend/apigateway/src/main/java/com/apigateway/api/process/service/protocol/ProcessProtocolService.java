@@ -23,37 +23,44 @@ public class ProcessProtocolService {
     }
 
     public boolean createProcessProtocol(boolean isSuccessful, ExecuteProcess process, String start, String end) {
-        Optional<TaskProcessProtocol> taskProcessProtocolOpt = taskProcessProtocolRepository.findBySignature(process.getTaskSignature());
+        String taskSignature = process.getTaskSignature();
+        String parentSignature = process.getTaskSignature();
+        if (process.getTaskSignature().contains("|")) {
+            String[] taskSignatures = process.getTaskSignature().split("\\|");
+            taskSignature = taskSignatures[0];
+            parentSignature = taskSignatures[1];
+        }
+        Optional<TaskProcessProtocol> taskProcessProtocolOpt = taskProcessProtocolRepository.findBySignature(taskSignature);
         if (!taskProcessProtocolOpt.isPresent()) {
             return false;
         }
         TaskProcessProtocol taskProcessProtocol = taskProcessProtocolOpt.get();
 
-        EProcessTypProtocol eProcessTypProtocol=null;
-        EProcessStatus eProcessStatus=null;
+        EProcessTypProtocol eProcessTypProtocol = null;
+        EProcessStatus eProcessStatus = null;
 
-        if(process.getSignature().contains("main")){
+        if (process.getSignature().contains("main")) {
             eProcessTypProtocol = EProcessTypProtocol.MAIN;
-        }else if(process.getSignature().contains("sub")){
+        } else if (process.getSignature().contains("sub")) {
             eProcessTypProtocol = EProcessTypProtocol.SUB;
         }
 
-        if(isSuccessful){
+        if (isSuccessful) {
             eProcessStatus = EProcessStatus.PASSED;
-        }else {
+        } else {
             eProcessStatus = EProcessStatus.FAILED;
         }
 
         ProcessProtocol processProtocol = ProcessProtocol.builder()
                 .signature(process.getSignature())
-                .parentSignature(process.getTaskSignature())
+                .parentSignature(parentSignature)
                 .processName(process.getProcessName())
-                .processText(process.getProcessText()+" "+process.getTheme())
+                .processText(process.getProcessText() + " " + process.getTheme())
                 .executeProcessDate(start)
                 .executeEndProcessDate(end)
                 .eProcessTypProtocol(eProcessTypProtocol)
                 .eProcessStatus(eProcessStatus)
-                .result(generateResult(isSuccessful,process))
+                .result(generateResult(isSuccessful, process))
                 .build();
 
         List<ProcessProtocol> resultProcessProtocols = taskProcessProtocol.getProcessProtocols();
@@ -63,7 +70,7 @@ public class ProcessProtocolService {
         return true;
     }
 
-    public String generateResult(boolean isSuccessful,ExecuteProcess process){
+    public String generateResult(boolean isSuccessful, ExecuteProcess process) {
         return "Result";
     }
 
