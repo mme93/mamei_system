@@ -11,8 +11,8 @@ export interface ProtocolSubResult {
   processText: string;
   executeProcessDate: string;
   executeEndProcessDate: string;
-  eProcessTypProtocol: string;
-  eProcessStatus: string;
+  eprocessTypProtocol: string;
+  eprocessStatus: string;
   result: string;
 }
 
@@ -25,8 +25,8 @@ export interface ProtocolMainResult {
   processText: string;
   executeProcessDate: string;
   executeEndProcessDate: string;
-  eProcessTypProtocol: string;
-  eProcessStatus: string;
+  eprocessTypProtocol: string;
+  eprocessStatus: string;
   result: string;
   protocolSubResults: ProtocolSubResult[];
 }
@@ -41,7 +41,7 @@ export interface ProtocolResultUI {
   subProcessAmount: string;
   totalProcessAmount: string;
   processDuration: string;
-  eTaskProcessStatus: string;
+  etaskProcessStatus: string;
   executeTaskUser: string;
   userComment: string;
   protocolMainResults: ProtocolMainResult[];

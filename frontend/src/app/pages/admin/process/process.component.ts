@@ -24,7 +24,7 @@ export class ProcessComponent implements OnInit {
     subProcessAmount:  '',
     totalProcessAmount:  '',
     processDuration:  '',
-    eTaskProcessStatus:  '',
+    etaskProcessStatus:  '',
     executeTaskUser:  '',
     userComment:  '',
     protocolMainResults: []

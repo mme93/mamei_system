@@ -131,7 +131,13 @@
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Process Result Overview</ng-template>
+      <ng-template matStepLabel>Result</ng-template>
+      <div style="text-align: center">
+        <span >Process Result Overview</span>
+        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='RESTRICTED'" style="color: yellow">warning</mat-icon>
+        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='UNRESTRICTED'" style="color: green">check</mat-icon>
+        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='CANCEL'" style="color: red">close</mat-icon>
+      </div>
       <div>
         <span>{{protocolResultUI.executeTaskDate}} - {{protocolResultUI.executeEndTaskDate}} | Duration {{protocolResultUI.processDuration}}</span>
       </div>
@@ -139,10 +145,14 @@
         <span>Task Signature: {{protocolResultUI.signature}}</span>
       </div>
       <mat-divider></mat-divider>
-      <div *ngFor="let mainProtocol of protocolResultUI.protocolMainResults; index as i">
-        <span>{{i+1}} {{mainProtocol.processText}}</span>
-          <div *ngFor="let sub of mainProtocol.protocolSubResults; index as j">
+      <div *ngFor="let main of protocolResultUI.protocolMainResults; index as i">
+        <span>{{i+1}} {{main.processText}}</span>
+        <mat-icon *ngIf="main.eprocessStatus==='PASSED'" style="color: green">check</mat-icon>
+        <mat-icon *ngIf="main.eprocessStatus!=='PASSED'" style="color: red">close</mat-icon>
+          <div *ngFor="let sub of main.protocolSubResults; index as j">
               <span>{{i+1}}.{{j}} {{sub.processText}}</span>
+            <mat-icon *ngIf="sub.eprocessStatus==='PASSED'" style="color: green">check</mat-icon>
+            <mat-icon *ngIf="sub.eprocessStatus!=='PASSED'" style="color: red">close</mat-icon>
           </div>
         <mat-divider></mat-divider>
       </div>
