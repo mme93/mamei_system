@@ -1,6 +1,5 @@
 package com.apigateway.api.process.service.protocol;
 
-import com.apigateway.api.process.model.process.EProcessTyp;
 import com.apigateway.api.process.model.process.ExecuteProcess;
 import com.apigateway.api.process.model.protocol.EProcessStatus;
 import com.apigateway.api.process.model.protocol.EProcessTypProtocol;
@@ -10,7 +9,6 @@ import com.apigateway.api.process.repository.TaskProcessProtocolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
