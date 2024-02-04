@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   ExecuteProcessUI,
   Process,
-  ProcessUI
+  ProcessUI, ProtocolMainResult, ProtocolResultUI
 } from "../../../shared/services/admin/process/process.service";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {ProcessService} from "../../../shared/services/admin/process/process.service";
@@ -15,6 +15,20 @@ import {ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.componen
   styleUrls: ['./process.component.scss']
 })
 export class ProcessComponent implements OnInit {
+  protocolResultUI: ProtocolResultUI = {
+    id: 0,
+    executeTaskDate: '',
+    executeEndTaskDate: '',
+    signature:  '',
+    mainProcessAmount:  '',
+    subProcessAmount:  '',
+    totalProcessAmount:  '',
+    processDuration:  '',
+    eTaskProcessStatus:  '',
+    executeTaskUser:  '',
+    userComment:  '',
+    protocolMainResults: []
+  };
   executeTaskSignature = "";
   isProcessSelected = true;
   default = 'Choose your steps for Database Processes';
@@ -60,9 +74,8 @@ export class ProcessComponent implements OnInit {
   loadProtocols() {
     this.databaseProcessService.loadProtocols(this.executeTaskSignature).subscribe(
       (value) => {
+        this.protocolResultUI = value
         console.log(value)
-        console.log(value.protocolMainResults)
-        console.log(value.protocolMainResults[0].protocolSubResults)
       }
     );
   }
@@ -92,7 +105,7 @@ export class ProcessComponent implements OnInit {
       for (const subProcess of process.processList) {
         subProcess.processStatusIcon = this.processStatusIcon[2];
         try {
-          subProcess.taskSignature = this.executeProcessUI.signature+"|"+process.signature;
+          subProcess.taskSignature = this.executeProcessUI.signature + "|" + process.signature;
           const result = await this.databaseProcessService.startExecuteSubProcess(subProcess);
           subProcess.isProcessFinish = true;
           console.log(result);

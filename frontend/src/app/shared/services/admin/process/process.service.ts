@@ -3,7 +3,7 @@ import {environment} from "../../../../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 // ProtocolSubResult.ts
-interface ProtocolSubResult {
+export interface ProtocolSubResult {
   id: number;
   signature: string;
   parentSignature: string;
@@ -17,7 +17,7 @@ interface ProtocolSubResult {
 }
 
 // ProtocolMainResult.ts
-interface ProtocolMainResult {
+export interface ProtocolMainResult {
   id: number;
   signature: string;
   parentSignature: string;
@@ -32,7 +32,7 @@ interface ProtocolMainResult {
 }
 
 // ProtocolResultUI.ts
-interface ProtocolResultUI {
+export interface ProtocolResultUI {
   id: number;
   executeTaskDate: string;
   executeEndTaskDate: string;
@@ -242,6 +242,6 @@ export class ProcessService {
       })
     };
     //return this.http.get(this.x + executeTaskSignature, httpOptions);
-    return this.http.get<ProtocolResultUI>(this.x + "task_cTw20EMR", httpOptions);
+    return this.http.get<ProtocolResultUI>(this.x + "task_YDPoVHOw", httpOptions);
   }
 }

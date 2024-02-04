@@ -132,7 +132,20 @@
 
     <mat-step>
       <ng-template matStepLabel>Process Result Overview</ng-template>
-      <p>You are now done.</p>
+      <div>
+        <span>{{protocolResultUI.executeTaskDate}} - {{protocolResultUI.executeEndTaskDate}} | Duration {{protocolResultUI.processDuration}}</span>
+      </div>
+      <div>
+        <span>Task Signature: {{protocolResultUI.signature}}</span>
+      </div>
+      <mat-divider></mat-divider>
+      <div *ngFor="let mainProtocol of protocolResultUI.protocolMainResults; index as i">
+        <span>{{i+1}} {{mainProtocol.processText}}</span>
+          <div *ngFor="let sub of mainProtocol.protocolSubResults; index as j">
+              <span>{{i+1}}.{{j}} {{sub.processText}}</span>
+          </div>
+        <mat-divider></mat-divider>
+      </div>
       <div>
         <button mat-raised-button (click)="loadProtocols()" style="width: 100%" color="primary">Got to Start</button>
       </div>
