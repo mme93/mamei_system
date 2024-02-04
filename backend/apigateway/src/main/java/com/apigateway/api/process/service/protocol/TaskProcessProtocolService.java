@@ -132,10 +132,6 @@ public class TaskProcessProtocolService {
 
     public List<ProtocolMainResult> convertToProtocolMainResult(List<ProcessProtocol> processProtocols) {
         List<ProtocolMainResult> protocolMainResults = new ArrayList<>();
-        processProtocols = processProtocols
-                .stream()
-                .filter(processProtocol -> processProtocol.getEProcessTypProtocol().equals(EProcessTypProtocol.MAIN))
-                .collect(Collectors.toList());
 
         for (ProcessProtocol processProtocol : processProtocols) {
             protocolMainResults.add(new ProtocolMainResult(
@@ -149,15 +145,28 @@ public class TaskProcessProtocolService {
                     processProtocol.getEProcessTypProtocol(),
                     processProtocol.getEProcessStatus(),
                     processProtocol.getResult(),
-                    createSubProtocol()
+                    createSubProtocol(processProtocolRepository.findAllByParentSignature(processProtocol.getSignature()))
             ));
         }
         return protocolMainResults;
     }
 
-    private List<ProtocolSubResult> createSubProtocol() {
-        List<ProtocolSubResult> protocolSubResults= new ArrayList<>();
-
+    private List<ProtocolSubResult> createSubProtocol(List<ProcessProtocol> processSubProtocols) {
+        List<ProtocolSubResult> protocolSubResults = new ArrayList<>();
+        for (ProcessProtocol processSubProtocol : processSubProtocols) {
+            protocolSubResults.add(new ProtocolSubResult(
+                    processSubProtocol.getId(),
+                    processSubProtocol.getSignature(),
+                    processSubProtocol.getParentSignature(),
+                    processSubProtocol.getProcessName(),
+                    processSubProtocol.getProcessText(),
+                    processSubProtocol.getExecuteProcessDate(),
+                    processSubProtocol.getExecuteEndProcessDate(),
+                    processSubProtocol.getEProcessTypProtocol(),
+                    processSubProtocol.getEProcessStatus(),
+                    processSubProtocol.getResult()
+            ));
+        }
         return protocolSubResults;
     }
 }
