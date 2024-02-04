@@ -39,6 +39,20 @@ public class ProcessDefaultNameTable {
     public final static String CREATE_PROCESS_SET = "CREATE_PROCESS_SET";
     public final static String UPDATE_PROCESS_DEPENDED_ARRAY = "UPDATE_PROCESS_DEPENDED_ARRAY";
 
+    public final static List<String>processTableNameList=asList(
+            RESET_TO_DEFAULT_DATASET,RESET_ALL_TO_DEFAULT_DATASET,CREATE_DEFAULT_DATASET
+    );
+    public final static List<String>processDataSetNameList=asList(
+            DELETE_DATASET,DELETE_DEFAULT_DATASET,CREATE_DEFAULT_DATASET
+    );
+    public final static List<String>processMicroServiceNameList=asList(
+            RESTART_MICROSERVICE
+    );
+    public final static List<String>processDatabaseNameList=asList(
+    );
+    public final static List<String>processProcessNameList=asList(
+    );
+
     public final static List<String>processNameList=asList(
             DELETE_DATASET,DELETE_DEFAULT_DATASET,RESET_TO_DEFAULT_DATASET,RESET_ALL_TO_DEFAULT_DATASET,RESTART_MICROSERVICE,
             DELETE_TABLE,CREATE_DEFAULT_DATASET

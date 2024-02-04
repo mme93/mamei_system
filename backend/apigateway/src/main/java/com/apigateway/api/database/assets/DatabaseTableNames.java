@@ -24,6 +24,8 @@ public class DatabaseTableNames {
     public static final String tableNames = "account, account_seq, depended_process, micro_service, privileges, " +
             "privileges_seq, process, security_user, sudoku, sudoku_level_list_item, task";
 
+    public static final  List<String> apiTableNameList= asList(PROCESS);
+
 }
 
 

@@ -23,7 +23,7 @@ public class MicroServicesRestartService {
     private final WebClient.Builder webClient;
 
     public boolean restartService(String microServiceName) {
-
+        System.err.println(microServiceName);
         if (!EurekaDiscoveryClientNameTable.eurekaDiscoverClientNameList.contains(microServiceName)) {
             throw new NotFoundException("No Microservices found by Name: " + microServiceName);
         }

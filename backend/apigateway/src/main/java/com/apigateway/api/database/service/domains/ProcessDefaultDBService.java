@@ -157,12 +157,10 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                 StringBuilder sb = new StringBuilder();
                 process.setHasDependedProcess(true);
                 processList.stream().forEach(result -> {
-                    if (result.getProcessName().equals(ProcessDefaultNameTable.RESTART_MICROSERVICE)) {
-                        sb.append(result.getId().toString()+", ");
-                    } else if (result.getProcessName().equals(ProcessDefaultNameTable.DELETE_DATASET)) {
-                        sb.append(result.getId().toString()+", ");
-                    }else if (result.getProcessName().equals(ProcessDefaultNameTable.CREATE_DEFAULT_DATASET)) {
-                        sb.append(result.getId().toString()+", ");
+                    if (result.getProcessName().equals(ProcessDefaultNameTable.DELETE_DATASET)) {
+                        sb.append(result.getId().toString() + ", ");
+                    } else if (result.getProcessName().equals(ProcessDefaultNameTable.CREATE_DEFAULT_DATASET)) {
+                        sb.append(result.getId().toString() + ", ");
                     }
                 });
                 sb.delete(sb.length() - 2, sb.length());
@@ -181,7 +179,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
         return true;
     }
 
-    public void sortDependedProcessIdsFromProcess(){
+    public void sortDependedProcessIdsFromProcess() {
 
     }
 

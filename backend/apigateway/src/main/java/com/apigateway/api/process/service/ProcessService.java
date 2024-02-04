@@ -49,6 +49,10 @@ public class ProcessService {
         this.localDateTimeFactory = localDateTimeFactory;
     }
 
+    public void deleteAllProcess(){
+        processRepository.deleteAll();
+    }
+
     public boolean startProcess(ExecuteProcess process) {
         if (processRuleService.isProcedure(process)) {
             return protocolService.createProcessProtocol(true, process, localDateTimeFactory.generateLocalTimeDate(), "");

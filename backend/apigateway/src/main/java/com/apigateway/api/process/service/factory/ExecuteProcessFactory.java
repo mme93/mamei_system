@@ -44,20 +44,6 @@ public class ExecuteProcessFactory {
         for (ProcessElementUI elementUI : processList) {
             if (elementUI.getScopeList().size() > 0) {
                 executeMainProcesses.addAll(createExecuteMainProcessIfScopeExist(elementUI));
-            } else {
-                executeMainProcesses.add(new ExecuteMainProcess(
-                        createSignature("main_"),
-                        "No  Theme",
-                        elementUI.getProcessEvent(),
-                        elementUI.getProcessTyp(),
-                        elementUI.getProcessClassification(),
-                        elementUI.getProcessPlausibility(),
-                        elementUI.getProcessName(),
-                        elementUI.getProcessText(),
-                        elementUI.getDependedProcessIds().size(),
-                        createExecuteSubProcess(elementUI),
-                        ""
-                ));
             }
         }
         return executeMainProcesses;
@@ -76,7 +62,7 @@ public class ExecuteProcessFactory {
                     elementUI.getProcessName(),
                     elementUI.getProcessText(),
                     elementUI.getDependedProcessIds().size(),
-                    createExecuteSubProcess(elementUI),
+                    createExecuteSubProcess(elementUI,scope),
                     ""
             ));
         }
@@ -84,7 +70,7 @@ public class ExecuteProcessFactory {
         return executeMainProcesses;
     }
 
-    public List<ExecuteSubProcess> createExecuteSubProcess(ProcessElementUI elementUI) {
+    public List<ExecuteSubProcess> createExecuteSubProcess(ProcessElementUI elementUI, String theme) {
         List<ExecuteSubProcess> executeSubProcesses = new ArrayList<>();
         if (elementUI.getDependedProcessIds().size() == 0) {
             return executeSubProcesses;
@@ -95,7 +81,7 @@ public class ExecuteProcessFactory {
                 Process process = processOpt.get();
                 executeSubProcesses.add(new ExecuteSubProcess(
                         createSignature("sub_"),
-                        processRuleService.getThemeFromProcedureForProcess(null, process),
+                        processRuleService.getThemeFromProcedureForProcess(elementUI,process,theme),
                         process.getProcessEvent(),
                         process.getProcessTyp(),
                         process.getProcessClassification(),
