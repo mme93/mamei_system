@@ -1,6 +1,7 @@
 package com.apigateway.api.process.controller;
 
 import com.apigateway.api.process.model.protocol.TaskProcessProtocol;
+import com.apigateway.api.process.model.protocol.ui.ProtocolResultUI;
 import com.apigateway.api.process.service.protocol.TaskProcessProtocolService;
 import com.apigateway.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class ProcessProtocolController {
     @GetMapping("/")
     public ResponseEntity<List<TaskProcessProtocol>> getTaskProcessProtocols() {
         return new ResponseEntity(taskProcessProtocolService.getTaskProcessProtocols(), HttpStatus.OK);
+    }
+
+    @GetMapping("/x/{task_signature}")
+    public ResponseEntity<ProtocolResultUI> getX(@PathVariable String task_signature) {
+        return new ResponseEntity(taskProcessProtocolService.getX(task_signature), HttpStatus.OK);
     }
 
     @GetMapping("/{task_signature}")

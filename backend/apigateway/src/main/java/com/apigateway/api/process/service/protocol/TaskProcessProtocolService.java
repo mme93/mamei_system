@@ -1,6 +1,8 @@
 package com.apigateway.api.process.service.protocol;
 
 import com.apigateway.api.process.model.protocol.*;
+import com.apigateway.api.process.model.protocol.ui.ProtocolMainResult;
+import com.apigateway.api.process.model.protocol.ui.ProtocolResultUI;
 import com.apigateway.api.process.repository.ProcessProtocolRepository;
 import com.apigateway.api.process.repository.TaskProcessProtocolRepository;
 import com.apigateway.util.LocalDateTimeFactory;
@@ -99,5 +101,51 @@ public class TaskProcessProtocolService {
 
     public List<TaskProcessProtocol> getTaskProcessProtocols() {
         return taskProcessProtocolRepository.findAll();
+    }
+
+    public ProtocolResultUI getX(String signature) {
+        ProtocolResultUI protocolResultUI = null;
+        Optional<TaskProcessProtocol> taskProcessProtocolOpt = taskProcessProtocolRepository.findBySignature(signature);
+        if (taskProcessProtocolOpt.isPresent()) {
+            TaskProcessProtocol taskProcessProtocol = taskProcessProtocolOpt.get();
+            List<ProcessProtocol> processMainProtocols = processProtocolRepository.findAllByParentSignature(taskProcessProtocol.getSignature());
+            List<ProtocolMainResult> protocolMainResults = convertToProtocolMainResult(processMainProtocols);
+            protocolResultUI = new ProtocolResultUI(
+                    taskProcessProtocol.getId(),
+                    taskProcessProtocol.getExecuteTaskDate(),
+                    taskProcessProtocol.getExecuteEndTaskDate(),
+                    taskProcessProtocol.getSignature(),
+                    taskProcessProtocol.getMainProcessAmount(),
+                    taskProcessProtocol.getSubProcessAmount(),
+                    taskProcessProtocol.getTotalProcessAmount(),
+                    taskProcessProtocol.getProcessDuration(),
+                    taskProcessProtocol.getETaskProcessStatus(),
+                    taskProcessProtocol.getExecuteTaskUser(),
+                    taskProcessProtocol.getUserComment(),
+                    protocolMainResults
+            );
+        }
+
+        return protocolResultUI;
+    }
+
+    public List<ProtocolMainResult> convertToProtocolMainResult(List<ProcessProtocol> processProtocols) {
+        List<ProtocolMainResult> protocolMainResults = new ArrayList<>();
+        for(ProcessProtocol processProtocol:processProtocols){
+            protocolMainResults.add(new ProtocolMainResult(
+                    processProtocol.getId(),
+                    processProtocol.getSignature(),
+                    processProtocol.getParentSignature(),
+                    processProtocol.getProcessName(),
+                    processProtocol.getProcessText(),
+                    processProtocol.getExecuteProcessDate(),
+                    processProtocol.getExecuteEndProcessDate(),
+                    processProtocol.getEProcessTypProtocol(),
+                    processProtocol.getEProcessStatus(),
+                    processProtocol.getResult(),
+                    asList()
+            ));
+        }
+        return protocolMainResults;
     }
 }
