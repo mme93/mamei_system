@@ -10,6 +10,8 @@ import com.apigateway.api.process.service.processtyp.ProcessTypDatabaseService;
 import com.apigateway.api.process.service.processtyp.ProcessTypMicroServicesService;
 import com.apigateway.api.process.service.processtyp.ProcessTypeDataSetService;
 import com.apigateway.api.process.service.processtyp.ProcessTypeTableService;
+import com.apigateway.api.process.service.protocol.ProcessProtocolService;
+import com.apigateway.util.LocalDateTimeFactory;
 import jakarta.ws.rs.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,30 +32,46 @@ public class ProcessService {
     private final ProcessTypeDataSetService processTypeDataSetService;
     private final ProcessTypeTableService processTypeTableService;
     private final ExecuteProcessFactory processFactory;
+    private final ProcessRuleService processRuleService;
+    private final ProcessProtocolService protocolService;
+    private final LocalDateTimeFactory localDateTimeFactory;
 
     @Autowired
-    public ProcessService(ProcessRepository processRepository, ProcessTypDatabaseService processTypDatabaseService, ProcessTypMicroServicesService processTypMicroServicesService, ProcessTypeDataSetService processTypeDataSetService, ProcessTypeTableService processTypeTableService, ExecuteProcessFactory processFactory) {
+    public ProcessService(ProcessRepository processRepository, ProcessTypDatabaseService processTypDatabaseService, ProcessTypMicroServicesService processTypMicroServicesService, ProcessTypeDataSetService processTypeDataSetService, ProcessTypeTableService processTypeTableService, ExecuteProcessFactory processFactory, ProcessRuleService processRuleService, ProcessProtocolService protocolService, LocalDateTimeFactory localDateTimeFactory) {
         this.processRepository = processRepository;
         this.processTypDatabaseService = processTypDatabaseService;
         this.processTypMicroServicesService = processTypMicroServicesService;
         this.processTypeDataSetService = processTypeDataSetService;
         this.processTypeTableService = processTypeTableService;
         this.processFactory = processFactory;
+        this.processRuleService = processRuleService;
+        this.protocolService = protocolService;
+        this.localDateTimeFactory = localDateTimeFactory;
     }
 
     public boolean startProcess(ExecuteProcess process) {
+        if (processRuleService.isProcedure(process)) {
+            return protocolService.createProcessProtocol(true, process, localDateTimeFactory.generateLocalTimeDate(), "");
+        }
+        String start = localDateTimeFactory.generateLocalTimeDate();
+        boolean isPassed;
         switch (process.getProcessTyp()) {
             case DATABASE:
-                return processTypDatabaseService.executeProcess(process);
+                isPassed = processTypDatabaseService.executeProcess(process);
+                break;
             case MICRO_SERVICES:
-                return processTypMicroServicesService.executeProcess(process);
+                isPassed = processTypMicroServicesService.executeProcess(process);
+                break;
             case DATA_SET:
-                return processTypeDataSetService.executeProcess(process);
+                isPassed = processTypeDataSetService.executeProcess(process);
+                break;
             case TABLE:
-                return processTypeTableService.executeProcess(process);
+                isPassed = processTypeTableService.executeProcess(process);
+                break;
             default:
                 throw new NotFoundException("No Process Typ found by Name: " + process.getProcessTyp());
         }
+        return protocolService.createProcessProtocol(isPassed, process, start, localDateTimeFactory.generateLocalTimeDate());
     }
 
     public List<ProcessElementUI> getProcessElementUI() {

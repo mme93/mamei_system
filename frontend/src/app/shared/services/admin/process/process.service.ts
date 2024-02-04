@@ -163,6 +163,7 @@ export class ProcessService {
         'Content-Type': 'application/json'
       })
     };
+    console.log(startProcessList)
     return this.http.put<ExecuteProcessUI>(this.databaseProcessSortUrl, startProcessList, httpOptions);
   }
 

@@ -1,6 +1,7 @@
 package com.apigateway.api.process.service.processtyp;
 
 import com.apigateway.api.process.model.process.ExecuteProcess;
+import com.apigateway.api.process.model.process.ProcessDefaultNameTable;
 import jakarta.ws.rs.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,9 @@ public class ProcessTypeDataSetService implements IProcessTypeService{
 
     @Override
     public boolean deleteProcess(ExecuteProcess process) {
-
+        if(process.getProcessName().equals(ProcessDefaultNameTable.DELETE_DATASET)){
+            System.err.println(process.getTheme());
+        }
         return false;
     }
 

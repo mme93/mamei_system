@@ -6,6 +6,8 @@ import com.apigateway.api.process.model.ui.ExecuteProcessUI;
 import com.apigateway.api.process.model.ui.ExecuteSubProcess;
 import com.apigateway.api.process.model.ui.ProcessElementUI;
 import com.apigateway.api.process.repository.ProcessRepository;
+import com.apigateway.api.process.service.ProcessRuleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -18,13 +20,16 @@ import java.util.Optional;
 public class ExecuteProcessFactory {
 
     private final ProcessRepository processRepository;
+    private final ProcessRuleService processRuleService;
 
-    public ExecuteProcessFactory(ProcessRepository processRepository) {
+    @Autowired
+    public ExecuteProcessFactory(ProcessRepository processRepository, ProcessRuleService processRuleService) {
         this.processRepository = processRepository;
+        this.processRuleService = processRuleService;
     }
 
     public ExecuteProcessUI createExecuteProcessUI(List<ProcessElementUI> processList) {
-        List<ExecuteMainProcess>executeMainProcesses=createExecuteMainProcess(processList);
+        List<ExecuteMainProcess> executeMainProcesses = createExecuteMainProcess(processList);
         return ExecuteProcessUI.
                 builder().
                 signature(createSignature("task_")).
@@ -36,10 +41,10 @@ public class ExecuteProcessFactory {
 
     public List<ExecuteMainProcess> createExecuteMainProcess(List<ProcessElementUI> processList) {
         List<ExecuteMainProcess> executeMainProcesses = new ArrayList<>();
-        for(ProcessElementUI elementUI:processList){
-            if(elementUI.getScopeList().size()>0){
+        for (ProcessElementUI elementUI : processList) {
+            if (elementUI.getScopeList().size() > 0) {
                 executeMainProcesses.addAll(createExecuteMainProcessIfScopeExist(elementUI));
-            }else{
+            } else {
                 executeMainProcesses.add(new ExecuteMainProcess(
                         createSignature("main_"),
                         "No  Theme",
@@ -60,7 +65,7 @@ public class ExecuteProcessFactory {
 
     public List<ExecuteMainProcess> createExecuteMainProcessIfScopeExist(ProcessElementUI elementUI) {
         List<ExecuteMainProcess> executeMainProcesses = new ArrayList<>();
-        for(String scope:elementUI.getScopeList()){
+        for (String scope : elementUI.getScopeList()) {
             executeMainProcesses.add(new ExecuteMainProcess(
                     createSignature("main_"),
                     scope,
@@ -81,16 +86,16 @@ public class ExecuteProcessFactory {
 
     public List<ExecuteSubProcess> createExecuteSubProcess(ProcessElementUI elementUI) {
         List<ExecuteSubProcess> executeSubProcesses = new ArrayList<>();
-        if(elementUI.getDependedProcessIds().size()==0){
+        if (elementUI.getDependedProcessIds().size() == 0) {
             return executeSubProcesses;
         }
-        for(String id:elementUI.getDependedProcessIds()){
-            Optional<Process>processOpt=processRepository.findById(Long.valueOf(id));
-            if(processOpt.isPresent()){
-                Process process=processOpt.get();
+        for (String id : elementUI.getDependedProcessIds()) {
+            Optional<Process> processOpt = processRepository.findById(Long.valueOf(id));
+            if (processOpt.isPresent()) {
+                Process process = processOpt.get();
                 executeSubProcesses.add(new ExecuteSubProcess(
                         createSignature("sub_"),
-                        null,
+                        processRuleService.getThemeFromProcedureForProcess(null, process),
                         process.getProcessEvent(),
                         process.getProcessTyp(),
                         process.getProcessClassification(),
@@ -104,7 +109,7 @@ public class ExecuteProcessFactory {
         return executeSubProcesses;
     }
 
-    public String createSignature(String type){
+    public String createSignature(String type) {
         String ALLOWED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         StringBuilder randomStringBuilder = new StringBuilder(10);
         SecureRandom random = new SecureRandom();
@@ -115,7 +120,7 @@ public class ExecuteProcessFactory {
             randomStringBuilder.append(randomChar);
         }
 
-        return type+randomStringBuilder.toString();
+        return type + randomStringBuilder.toString();
     }
 
 }

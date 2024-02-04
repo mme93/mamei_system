@@ -48,7 +48,7 @@ public class MicroServicesRestartService {
     }
 
     public boolean callRestart(String microServiceName) {
-        switch (microServiceName){
+        switch (microServiceName) {
             case EurekaDiscoveryClientNameTable.ApiGateWay -> restartEndpoint.restart();
             case EurekaDiscoveryClientNameTable.DashboardAPI,
                     EurekaDiscoveryClientNameTable.GamesManager,
@@ -58,18 +58,18 @@ public class MicroServicesRestartService {
             case EurekaDiscoveryClientNameTable.DataStorageAPI -> {
                 return x(EurekaDiscoveryClientNameTable.DataStorageAPI, DatastorageManagerRouteTable.RESTART_END_POINT);
             }
-            default -> throw new NotFoundException("No Microservice found by name: "+microServiceName);
+            default -> throw new NotFoundException("No Microservice found by name: " + microServiceName);
         }
         return true;
     }
 
-    public boolean x(String clientName, String restartEndpoint){
+    public boolean x(String clientName, String restartEndpoint) {
         System.err.println(clientName);
-        if(!discoveryClientService.existEurekaDiscoveryClientByName(clientName.toLowerCase(Locale.ROOT))){
+        if (!discoveryClientService.existEurekaDiscoveryClientByName(clientName.toLowerCase(Locale.ROOT))) {
             return false;
         }
         String clientAdressByName = discoveryClientService.getClientAdressByName(clientName);
-        String uri = clientAdressByName+restartEndpoint;
+        String uri = clientAdressByName + restartEndpoint;
         webClient
                 .build()
                 .post()

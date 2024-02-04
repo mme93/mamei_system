@@ -27,6 +27,7 @@ public class ProcessController {
 
     @PostMapping("/newJob")
     public ResponseEntity<Boolean> startNewJob(@RequestBody ExecuteProcess process){
+       /*
         try {
             Thread.sleep(3000);
             return new ResponseEntity<>(processService.startProcess(process),HttpStatus.OK);
@@ -34,6 +35,9 @@ public class ProcessController {
             Thread.currentThread().interrupt();
         }
         return new ResponseEntity("Job finished",HttpStatus.OK);
+
+        */
+        return new ResponseEntity<>(processService.startProcess(process),HttpStatus.OK);
     }
 
 

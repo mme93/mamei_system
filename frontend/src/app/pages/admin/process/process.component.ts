@@ -146,12 +146,13 @@ export class ProcessComponent implements OnInit {
     sortProcessLists.forEach(process => process.scopeList = process.selectedScopeList);
     this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => {
       this.executeProcessUI = value
+      console.log(value)
       this.executeProcessUI.executeMainProcesses.forEach(main => {
         main.processStatusIcon = this.processStatusIcon[1];
         main.processList.forEach(sub => sub.processStatusIcon = this.processStatusIcon[1])
       })
     });
-    this.isProcessRunning = true;
+    //this.isProcessRunning = true;
   }
 
   open(process: Process) {

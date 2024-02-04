@@ -2,7 +2,6 @@ package com.apigateway.api.process.service.processtyp;
 
 import com.apigateway.api.database.service.domains.ProcessDefaultDBService;
 import com.apigateway.api.process.model.process.ExecuteProcess;
-import com.apigateway.api.process.model.process.ProcessDefaultNameTable;
 import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -42,10 +41,6 @@ public class ProcessTypeTableService implements IProcessTypeService {
 
     @Override
     public boolean resetProcess(ExecuteProcess process) {
-        if (process.getProcessName().equals(ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET)) {
-            processDefaultDBService.deleteAllDefaultData();
-            processDefaultDBService.loadDefaultDataIntoDatabase();
-        }
         return false;
     }
 
