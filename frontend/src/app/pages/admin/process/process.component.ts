@@ -51,7 +51,8 @@ export class ProcessComponent implements OnInit {
     isProcessFinish: false,
     isProcessRunning: false
   };
-
+  canExecute=false;
+  canDisplay=false
   constructor(private databaseProcessService: ProcessService, public dialog: MatDialog) {
   }
 
@@ -130,6 +131,7 @@ export class ProcessComponent implements OnInit {
     this.incr = 0;
     this.isLoading = false;
     this.isProcessFinish = true;
+    this.canDisplay=true;
   }
 
 
@@ -153,6 +155,7 @@ export class ProcessComponent implements OnInit {
       }
     });
     this.isProcessSelected = !(this.copyProcessList.filter(process => process.processStatusIcon === this.processStatusIcon[1]).length > 0);
+    this.canExecute=this.copyProcessList.filter(process => process.processStatusIcon === this.processStatusIcon[1]).length > 0;
   }
 
   setProcesses() {

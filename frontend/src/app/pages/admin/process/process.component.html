@@ -1,6 +1,6 @@
 <article class="container">
-  <mat-stepper #stepper>
-    <mat-step>
+  <mat-stepper #stepper [linear]="true">>
+    <mat-step [completed]="canExecute">
       <ng-template matStepLabel>Choose your processes</ng-template>
       <div class="article-container">
         <div class="description">
@@ -37,7 +37,7 @@
       </button>
     </mat-step>
 
-    <mat-step>
+    <mat-step [completed]="canDisplay">
       <ng-template matStepLabel>Execute Processes</ng-template>
 
       <div class="article-container">
