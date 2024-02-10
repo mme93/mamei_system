@@ -115,7 +115,7 @@
         </div>
       </div>
       <div>
-        <button mat-raised-button color="primary" (click)="stepper.reset()" style="width: 49%">
+        <button mat-raised-button color="primary" (click)="stepper.reset();resetAll()" style="width: 49%">
           Reset
         </button>
         <button mat-raised-button color="primary" (click)="validateProcess()" style="width: 49%"
@@ -198,7 +198,8 @@
             <td colspan="2">
               <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Comment:</mat-label>
-                <textarea matInput class="comment-input" rows="7" maxlength="500">{{protocolResultUI.userComment}}</textarea>
+                <textarea matInput class="comment-input" rows="7" maxlength="500" [(ngModel)]="originComment">{{originComment}}</textarea>
+                <button mat-raised-button (click)="saveUserComment()" style="width: 100%" color="primary">Save Comment</button>
               </mat-form-field>
             </td>
           </tr>

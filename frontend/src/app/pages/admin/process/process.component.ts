@@ -53,6 +53,7 @@ export class ProcessComponent implements OnInit {
   };
   canExecute=false;
   canDisplay=false
+  originComment='';
   constructor(private databaseProcessService: ProcessService, public dialog: MatDialog) {
   }
 
@@ -143,7 +144,7 @@ export class ProcessComponent implements OnInit {
           this.copyProcessList[i].processStatusIcon = this.processStatusIcon[1];
         } else {
           this.copyProcessList[i].processStatusIcon = this.processStatusIcon[0];
-          this.processList[i].processStatusIcon = this.processStatusIcon[1];
+          this.processList[i].processStatusIcon = this.processStatusIcon[0];
         }
         this.copyProcessList[i].processActivated = this.processList[i].processActivated;
         this.processList[i].processActivated = $event.checked;
@@ -173,16 +174,29 @@ export class ProcessComponent implements OnInit {
     sortProcessLists.forEach(process => process.scopeList = process.selectedScopeList);
     this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => {
       this.executeProcessUI = value
-      this.executeProcessUI.executeMainProcesses.forEach(main => {
-        main.processStatusIcon = this.processStatusIcon[1];
-        main.processList.forEach(sub => sub.processStatusIcon = this.processStatusIcon[1])
-      })
+      if(value.executeMainProcesses.length===0){
+        this.itemText='No Main-Process found by this Processes';
+      }else{
+        this.executeProcessUI.executeMainProcesses.forEach(main => {
+          main.processStatusIcon = this.processStatusIcon[1];
+          main.processList.forEach(sub => sub.processStatusIcon = this.processStatusIcon[1])
+        })
+        this.isProcessRunning = true;
+      }
     });
-    this.isProcessRunning = true;
+  }
+
+  resetAll(){
+    /*
+    this.processList.forEach(process =>{
+      process.processActivated=false
+      process.processStatusIcon = this.processStatusIcon[0];
+    })
+    this.isProcessSelected=false;
+     */
   }
 
   open(process: Process) {
-
     let dialogRef = this.dialog.open(ScopeDialogComponent, {
       height: '400px',
       width: '600px',
@@ -197,4 +211,7 @@ export class ProcessComponent implements OnInit {
     });
   }
 
+  saveUserComment() {
+   console.log(this.originComment)
+  }
 }
