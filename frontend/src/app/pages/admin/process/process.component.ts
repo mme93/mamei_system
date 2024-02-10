@@ -183,16 +183,6 @@ export class ProcessComponent implements OnInit {
     });
   }
 
-  resetAll() {
-    /*
-    this.processList.forEach(process =>{
-      process.processActivated=false
-      process.processStatusIcon = this.processStatusIcon[0];
-    })
-    this.isProcessSelected=false;
-     */
-  }
-
   open(process: Process) {
     let dialogRef = this.dialog.open(ScopeDialogComponent, {
       height: '400px',

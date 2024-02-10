@@ -55,11 +55,13 @@
   margin-top: 20px;
 }
 
-.container {
-  background-color: #5c5c5c;
-}
+
 mat-progress-bar {
   margin-bottom: 15px;
+}
+
+.menu-container {
+  display: flex;
 }
 
 .protocol-details {
@@ -88,5 +90,10 @@ mat-progress-bar {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.description {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Zentriert den Text horizontal */
 }
 

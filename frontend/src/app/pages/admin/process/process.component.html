@@ -1,9 +1,15 @@
 <article class="container">
-  <mat-stepper #stepper [linear]="true">>
+
+  <mat-stepper #stepper [linear]="true">
     <mat-step [completed]="canExecute">
       <ng-template matStepLabel>Choose your processes</ng-template>
       <div class="article-container">
         <div class="description">
+          <div class="menu-container">
+            <button mat-icon-button>
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
           <span class="center-text">{{itemText}}</span>
         </div>
 
@@ -42,6 +48,11 @@
 
       <div class="article-container">
         <div class="description">
+          <div class="menu-container">
+            <button mat-icon-button>
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
           <span class="center-text">{{itemText}}</span>
         </div>
         <!--Validate View-->
@@ -115,18 +126,15 @@
         </div>
       </div>
       <div>
-        <button mat-raised-button color="primary" (click)="stepper.reset();resetAll()" style="width: 49%">
-          Reset
-        </button>
-        <button mat-raised-button color="primary" (click)="validateProcess()" style="width: 49%"
+        <button mat-raised-button color="primary" (click)="validateProcess()" style="width: 100%"
                 *ngIf="(!isProcessFinish)&&(!isProcessRunning)">
           Validate Process
         </button>
-        <button mat-raised-button color="primary" (click)="startProcess()" style="width: 49%"
+        <button mat-raised-button color="primary" (click)="startProcess()" style="width: 100%"
                 *ngIf="(!isProcessFinish)&&(isProcessRunning)">
           Start Process
         </button>
-        <button mat-raised-button color="primary" (click)="stepper.next() ; loadProtocols()" style="width: 49%"
+        <button mat-raised-button color="primary" (click)="stepper.next() ; loadProtocols()" style="width: 100%"
                 *ngIf="(isProcessFinish)&&(isProcessRunning)">
           Display Protocol
         </button>
@@ -134,8 +142,15 @@
     </mat-step>
     <!--Result-->
     <mat-step>
+
+
       <ng-template matStepLabel>Process Result Overview</ng-template>
       <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;font-size: 24px;">
+        <div class="menu-container">
+          <button mat-icon-button>
+            <mat-icon>start</mat-icon>
+          </button>
+        </div>
         <span style="margin-right: 5px;"><strong>Process Result Overview</strong></span>
         <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='RESTRICTED'" style="color: yellow; font-size: 24px;">
           warning
@@ -151,7 +166,8 @@
         <table>
           <tr>
             <td style="width: 50%;" class="mat-body-1"><strong>Date Range:</strong></td>
-            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.executeTaskDate}} - {{protocolResultUI.executeEndTaskDate}}</strong></td>
+            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.executeTaskDate}}
+              - {{protocolResultUI.executeEndTaskDate}}</strong></td>
           </tr>
           <tr>
             <td style="width: 50%;" class="mat-body-1"><strong>Duration:</strong></td>
@@ -198,8 +214,10 @@
             <td colspan="2">
               <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Comment:</mat-label>
-                <textarea matInput class="comment-input" rows="7" maxlength="500" [(ngModel)]="originComment">{{originComment}}</textarea>
-                <button mat-raised-button (click)="saveUserComment()" style="width: 100%" color="primary">Save Comment</button>
+                <textarea matInput class="comment-input" rows="7" maxlength="500"
+                          [(ngModel)]="originComment">{{originComment}}</textarea>
+                <button mat-raised-button (click)="saveUserComment()" style="width: 100%" color="primary">Save Comment
+                </button>
               </mat-form-field>
             </td>
           </tr>
