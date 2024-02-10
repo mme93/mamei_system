@@ -16,7 +16,8 @@
           <div class="step-item" *ngFor="let item of processList">
             <div class="step-item-container" *ngIf="item.processIsShowActivated">
               <label class="checkbox-label">
-                <mat-checkbox (change)="changeIcon(item.process.processName,$event)" [(ngModel)]="item.processActivated"></mat-checkbox>
+                <mat-checkbox (change)="changeIcon(item.process.processName,$event)"
+                              [(ngModel)]="item.processActivated"></mat-checkbox>
                 <span class="checkbox-text">{{ item.process.processText }}</span>
               </label>
               <div class="icon-container">
@@ -30,7 +31,8 @@
           </div>
         </div>
       </div>
-      <button mat-raised-button color="primary" (click)="stepper.next();setProcesses()" style="width: 100%" [disabled]="isProcessSelected">
+      <button mat-raised-button color="primary" (click)="stepper.next();setProcesses()" style="width: 100%"
+              [disabled]="isProcessSelected">
         Start Process
       </button>
     </mat-step>
@@ -72,7 +74,7 @@
           <div class="step-item" *ngFor="let main of executeProcessUI.executeMainProcesses; index as i">
             <div class="step-item-container">
               <label class="checkbox-label">
-                <span class="checkbox-text">{{i+1}} {{ main.processText }} {{ main.theme }}</span>
+                <span class="checkbox-text">{{i + 1}} {{ main.processText }} {{ main.theme }}</span>
                 <div class="spinner-container" *ngIf="(!main.isProcessFinish) && executeProcessUI.isProcessRunning">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
                 </div>
@@ -86,8 +88,8 @@
             </div>
             <div class="step-item-container" *ngFor="let sub of main.processList; index as j">
               <label class="checkbox-label">
-                <span class="checkbox-text">{{i+1}}.{{j+1}} {{ sub.processText }} {{ sub.theme }}</span>
-                <div class="spinner-container"  *ngIf="(!sub.isProcessFinish) && executeProcessUI.isProcessRunning">
+                <span class="checkbox-text">{{i + 1}}.{{j + 1}} {{ sub.processText }} {{ sub.theme }}</span>
+                <div class="spinner-container" *ngIf="(!sub.isProcessFinish) && executeProcessUI.isProcessRunning">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
                 </div>
               </label>
@@ -104,7 +106,8 @@
 
       </div>
 
-      <div style="position: relative" *ngIf="(!isProcessFinish)&&(isProcessRunning)||(isProcessFinish)&&(isProcessRunning)">
+      <div style="position: relative"
+           *ngIf="(!isProcessFinish)&&(isProcessRunning)||(isProcessFinish)&&(isProcessRunning)">
         <mat-progress-bar mode="determinate" [value]="progress" color="warn"></mat-progress-bar>
         <div
           style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; text-align: center; color: white;">
@@ -129,31 +132,89 @@
         </button>
       </div>
     </mat-step>
-
+    <!--Result-->
     <mat-step>
-      <ng-template matStepLabel>Result</ng-template>
-      <div style="text-align: center">
-        <span >Process Result Overview</span>
-        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='RESTRICTED'" style="color: yellow">warning</mat-icon>
-        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='UNRESTRICTED'" style="color: green">check</mat-icon>
-        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='CANCEL'" style="color: red">close</mat-icon>
+      <ng-template matStepLabel>Process Result Overview</ng-template>
+      <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;font-size: 24px;">
+        <span style="margin-right: 5px;"><strong>Process Result Overview</strong></span>
+        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='RESTRICTED'" style="color: yellow; font-size: 24px;">
+          warning
+        </mat-icon>
+        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='UNRESTRICTED'" style="color: green; font-size: 24px;">
+          check
+        </mat-icon>
+        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='CANCEL'" style="color: red; font-size: 24px;">close
+        </mat-icon>
       </div>
-      <div>
-        <span>{{protocolResultUI.executeTaskDate}} - {{protocolResultUI.executeEndTaskDate}} | Duration {{protocolResultUI.processDuration}}</span>
+
+      <div class="protocol-details">
+        <table>
+          <tr>
+            <td style="width: 50%;" class="mat-body-1"><strong>Date Range:</strong></td>
+            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.executeTaskDate}} - {{protocolResultUI.executeEndTaskDate}}</strong></td>
+          </tr>
+          <tr>
+            <td style="width: 50%;" class="mat-body-1"><strong>Duration:</strong></td>
+            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.processDuration}}</strong></td>
+          </tr>
+          <tr>
+            <td style="width: 50%;" class="mat-body-1"><strong>Task Signature:</strong></td>
+            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.signature}}</strong></td>
+          </tr>
+          <tr>
+            <td style="width: 50%;" class="mat-body-1"><strong>User ID:</strong></td>
+            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.id}}</strong></td>
+          </tr>
+          <tr>
+            <td style="width: 50%;" class="mat-body-1"><strong>User:</strong></td>
+            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.executeTaskUser}}</strong></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <table style="width: 100%;">
+                <tr>
+                  <td style="width: 50%;" class="mat-body-1"><strong>Process Amounts:</strong></td>
+                  <td style="width: 50%;" class="mat-body-1">
+                    <table>
+                      <tr>
+                        <td class="mat-body-1">Total:</td>
+                        <td class="mat-body-1">{{protocolResultUI.totalProcessAmount}}</td>
+                      </tr>
+                      <tr>
+                        <td class="mat-body-1">Main:</td>
+                        <td class="mat-body-1">{{protocolResultUI.mainProcessAmount}}</td>
+                      </tr>
+                      <tr>
+                        <td class="mat-body-1">Sub:</td>
+                        <td class="mat-body-1">{{protocolResultUI.subProcessAmount}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Comment:</mat-label>
+                <textarea matInput class="comment-input" rows="7" maxlength="500">{{protocolResultUI.userComment}}</textarea>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
       </div>
-      <div>
-        <span>Task Signature: {{protocolResultUI.signature}}</span>
-      </div>
+
       <mat-divider></mat-divider>
       <div *ngFor="let main of protocolResultUI.protocolMainResults; index as i">
-        <span>{{i+1}} {{main.processText}}</span>
+        <span>{{i + 1}} {{main.processText}}</span>
         <mat-icon *ngIf="main.eprocessStatus==='PASSED'" style="color: green">check</mat-icon>
         <mat-icon *ngIf="main.eprocessStatus!=='PASSED'" style="color: red">close</mat-icon>
-          <div *ngFor="let sub of main.protocolSubResults; index as j">
-              <span>{{i+1}}.{{j}} {{sub.processText}}</span>
-            <mat-icon *ngIf="sub.eprocessStatus==='PASSED'" style="color: green">check</mat-icon>
-            <mat-icon *ngIf="sub.eprocessStatus!=='PASSED'" style="color: red">close</mat-icon>
-          </div>
+        <div *ngFor="let sub of main.protocolSubResults; index as j">
+          <span>{{i + 1}}.{{j + 1}} {{sub.processText}}</span>
+          <mat-icon *ngIf="sub.eprocessStatus==='PASSED'" style="color: green">check</mat-icon>
+          <mat-icon *ngIf="sub.eprocessStatus!=='PASSED'" style="color: red">close</mat-icon>
+        </div>
         <mat-divider></mat-divider>
       </div>
       <div>
