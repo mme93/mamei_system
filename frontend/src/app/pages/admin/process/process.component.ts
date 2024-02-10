@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  ExecuteProcessUI,
-  Process,
-  ProcessUI, ProtocolResultUI
-} from "../../../shared/services/admin/process/process.service";
+
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {ProcessService} from "../../../shared/services/admin/process/process.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.component";
+import { ExecuteProcessUI,
+  Process,
+  ProcessUI, ProtocolResultUI} from "../../../shared/model/admin/process/ProcessApiEntity";
 
 @Component({
   selector: 'app-process',

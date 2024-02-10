@@ -42,13 +42,8 @@ public class ProcessProtocolController {
         return new ResponseEntity(taskProcessProtocolService.getTaskProcessProtocols(), HttpStatus.OK);
     }
 
-    @GetMapping("/x/{task_signature}")
-    public ResponseEntity<ProtocolResultUI> getX(@PathVariable String task_signature) {
-        return new ResponseEntity(taskProcessProtocolService.getX(task_signature), HttpStatus.OK);
-    }
-
-    @GetMapping("/{task_signature}")
-    public ResponseEntity<TaskProcessProtocol> getTaskProcessProtocol(@PathVariable String task_signature) {
+    @GetMapping("/load/{task_signature}")
+    public ResponseEntity<ProtocolResultUI> loadProtocols(@PathVariable String task_signature) {
         return new ResponseEntity(taskProcessProtocolService.getTaskProcessProtocol(task_signature), HttpStatus.OK);
     }
 

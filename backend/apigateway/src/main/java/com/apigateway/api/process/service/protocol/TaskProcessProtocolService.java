@@ -34,16 +34,6 @@ public class TaskProcessProtocolService {
         this.localDateTimeFactory = localDateTimeFactory;
     }
 
-    public TaskProcessProtocol getTaskProcessProtocol(String task_signature) {
-        Optional<TaskProcessProtocol> taskProcessProtocolOpt = taskProcessProtocolRepository.findBySignature(task_signature);
-        if (!taskProcessProtocolOpt.isPresent()) {
-            throw new NotFoundException("No Task Process Protocol found by signature: " + task_signature);
-        }
-        TaskProcessProtocol taskProcessProtocol = taskProcessProtocolOpt.get();
-        taskProcessProtocol.setProcessProtocols(processProtocolRepository.findAllByParentSignature(taskProcessProtocol.getSignature()));
-        return taskProcessProtocol;
-    }
-
     public void createTaskProtocol(String task_signature, String userName) {
         taskProcessProtocolRepository.save(new TaskProcessProtocol(
                 localDateTimeFactory.generateLocalTimeDate(),
@@ -104,7 +94,7 @@ public class TaskProcessProtocolService {
         return taskProcessProtocolRepository.findAll();
     }
 
-    public ProtocolResultUI getX(String signature) {
+    public ProtocolResultUI getTaskProcessProtocol(String signature) {
         ProtocolResultUI protocolResultUI = null;
         Optional<TaskProcessProtocol> taskProcessProtocolOpt = taskProcessProtocolRepository.findBySignature(signature);
         if (taskProcessProtocolOpt.isPresent()) {
