@@ -6,7 +6,7 @@
       <div class="article-container">
         <div class="description">
           <div class="menu-container">
-            <button mat-icon-button>
+            <button mat-icon-button (click)="resetProcessSelection()">
               <mat-icon>restart_alt</mat-icon>
             </button>
           </div>
@@ -49,7 +49,7 @@
       <div class="article-container">
         <div class="description">
           <div class="menu-container">
-            <button mat-icon-button>
+            <button mat-icon-button (click)="resetExecuteProcess();stepper.reset()">
               <mat-icon>restart_alt</mat-icon>
             </button>
           </div>
@@ -143,14 +143,8 @@
     <!--Result-->
     <mat-step>
 
-
       <ng-template matStepLabel>Process Result Overview</ng-template>
       <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;font-size: 24px;">
-        <div class="menu-container">
-          <button mat-icon-button>
-            <mat-icon>start</mat-icon>
-          </button>
-        </div>
         <span style="margin-right: 5px;"><strong>Process Result Overview</strong></span>
         <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='RESTRICTED'" style="color: yellow; font-size: 24px;">
           warning
@@ -237,7 +231,7 @@
         <mat-divider></mat-divider>
       </div>
       <div>
-        <button mat-raised-button (click)="loadProtocols()" style="width: 100%" color="primary">Got to Start</button>
+        <button mat-raised-button (click)="newProcess()" style="width: 100%" color="primary">Got to Start</button>
       </div>
     </mat-step>
 

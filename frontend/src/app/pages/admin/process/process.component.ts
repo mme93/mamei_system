@@ -199,6 +199,59 @@ export class ProcessComponent implements OnInit {
   }
 
   saveUserComment() {
-    this.databaseProcessService.updateComment(this.originComment,this.executeTaskSignature);
+    this.databaseProcessService.updateComment(this.originComment, this.executeTaskSignature);
+  }
+
+  resetProcessSelection() {
+    this.processList.forEach(process => {
+      process.processStatusIcon = this.processStatusIcon[0];
+      process.processActivated = false;
+    })
+  }
+
+  resetExecuteProcess() {
+    this.resetProcessSelection();
+
+    this.protocolResultUI = {
+      id: 0,
+      executeTaskDate: '',
+      executeEndTaskDate: '',
+      signature: '',
+      mainProcessAmount: '',
+      subProcessAmount: '',
+      totalProcessAmount: '',
+      processDuration: '',
+      etaskProcessStatus: '',
+      executeTaskUser: '',
+      userComment: '',
+      protocolMainResults: []
+    };
+    this.executeTaskSignature = "";
+    this.isProcessSelected = true;
+    this.startProcessList=[];
+    this.isLoading = false;
+    this.itemText = 'Choose your steps for Database Processes';
+    this.isProcessRunning = false;
+    this.isProcessFinish = false;
+    this.executeProcessUI = {
+      signature: '',
+      executeMainProcesses: [],
+      mainProcessAmount: 0,
+      processDuration: '',
+      isProcessFinish: false,
+      isProcessRunning: false
+    };
+    this.canExecute = false;
+    this.canDisplay = false
+    this.originComment = '';
+    this.databaseProcessService.getProcesses().subscribe((process: Process[]) => {
+      this.processList = this.databaseProcessService.getProcess(process);
+      this.copyProcessList = this.databaseProcessService.getProcess(process)
+    });
+
+  }
+
+  newProcess() {
+    this.resetExecuteProcess();
   }
 }
