@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   ExecuteProcessUI,
   Process,
-  ProcessUI, ProtocolMainResult, ProtocolResultUI
+  ProcessUI, ProtocolResultUI
 } from "../../../shared/services/admin/process/process.service";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {ProcessService} from "../../../shared/services/admin/process/process.service";
@@ -19,14 +19,14 @@ export class ProcessComponent implements OnInit {
     id: 0,
     executeTaskDate: '',
     executeEndTaskDate: '',
-    signature:  '',
-    mainProcessAmount:  '',
-    subProcessAmount:  '',
-    totalProcessAmount:  '',
-    processDuration:  '',
-    etaskProcessStatus:  '',
-    executeTaskUser:  '',
-    userComment:  '',
+    signature: '',
+    mainProcessAmount: '',
+    subProcessAmount: '',
+    totalProcessAmount: '',
+    processDuration: '',
+    etaskProcessStatus: '',
+    executeTaskUser: '',
+    userComment: '',
     protocolMainResults: []
   };
   executeTaskSignature = "";
@@ -51,9 +51,10 @@ export class ProcessComponent implements OnInit {
     isProcessFinish: false,
     isProcessRunning: false
   };
-  canExecute=false;
-  canDisplay=false
-  originComment='';
+  canExecute = false;
+  canDisplay = false
+  originComment = '';
+
   constructor(private databaseProcessService: ProcessService, public dialog: MatDialog) {
   }
 
@@ -75,11 +76,7 @@ export class ProcessComponent implements OnInit {
 
   loadProtocols() {
     this.databaseProcessService.loadProtocols(this.executeTaskSignature).subscribe(
-      (value) => {
-        this.protocolResultUI = value
-        console.log(value)
-      }
-    );
+      (value) => this.protocolResultUI = value);
   }
 
   async startProcess() {
@@ -132,7 +129,7 @@ export class ProcessComponent implements OnInit {
     this.incr = 0;
     this.isLoading = false;
     this.isProcessFinish = true;
-    this.canDisplay=true;
+    this.canDisplay = true;
   }
 
 
@@ -156,7 +153,7 @@ export class ProcessComponent implements OnInit {
       }
     });
     this.isProcessSelected = !(this.copyProcessList.filter(process => process.processStatusIcon === this.processStatusIcon[1]).length > 0);
-    this.canExecute=this.copyProcessList.filter(process => process.processStatusIcon === this.processStatusIcon[1]).length > 0;
+    this.canExecute = this.copyProcessList.filter(process => process.processStatusIcon === this.processStatusIcon[1]).length > 0;
   }
 
   setProcesses() {
@@ -174,9 +171,9 @@ export class ProcessComponent implements OnInit {
     sortProcessLists.forEach(process => process.scopeList = process.selectedScopeList);
     this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => {
       this.executeProcessUI = value
-      if(value.executeMainProcesses.length===0){
-        this.itemText='No Main-Process found by this Processes';
-      }else{
+      if (value.executeMainProcesses.length === 0) {
+        this.itemText = 'No Main-Process found by this Processes';
+      } else {
         this.executeProcessUI.executeMainProcesses.forEach(main => {
           main.processStatusIcon = this.processStatusIcon[1];
           main.processList.forEach(sub => sub.processStatusIcon = this.processStatusIcon[1])
@@ -186,7 +183,7 @@ export class ProcessComponent implements OnInit {
     });
   }
 
-  resetAll(){
+  resetAll() {
     /*
     this.processList.forEach(process =>{
       process.processActivated=false
@@ -212,6 +209,6 @@ export class ProcessComponent implements OnInit {
   }
 
   saveUserComment() {
-   console.log(this.originComment)
+    console.log(this.originComment)
   }
 }
