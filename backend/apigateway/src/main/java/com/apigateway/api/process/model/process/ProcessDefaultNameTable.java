@@ -57,4 +57,8 @@ public class ProcessDefaultNameTable {
             DELETE_DATASET,DELETE_DEFAULT_DATASET,RESET_TO_DEFAULT_DATASET,RESET_ALL_TO_DEFAULT_DATASET,RESTART_MICROSERVICE,
             DELETE_TABLE,CREATE_DEFAULT_DATASET
     );
+
+    public final static List<String>procedureProcessNameList=asList(
+            RESET_TO_DEFAULT_DATASET
+    );
 }

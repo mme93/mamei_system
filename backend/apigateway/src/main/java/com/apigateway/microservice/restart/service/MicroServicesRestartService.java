@@ -23,7 +23,6 @@ public class MicroServicesRestartService {
     private final WebClient.Builder webClient;
 
     public boolean restartService(String microServiceName) {
-        System.err.println(microServiceName);
         if (!EurekaDiscoveryClientNameTable.eurekaDiscoverClientNameList.contains(microServiceName)) {
             throw new NotFoundException("No Microservices found by Name: " + microServiceName);
         }
@@ -64,7 +63,6 @@ public class MicroServicesRestartService {
     }
 
     public boolean x(String clientName, String restartEndpoint) {
-        System.err.println(clientName);
         if (!discoveryClientService.existEurekaDiscoveryClientByName(clientName.toLowerCase(Locale.ROOT))) {
             return false;
         }

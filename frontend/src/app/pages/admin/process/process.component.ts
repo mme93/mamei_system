@@ -163,6 +163,7 @@ export class ProcessComponent implements OnInit {
       }
     );
     this.itemText = 'Start process - Need to validate.'
+    this.progress=0;
   }
 
   validateProcess() {

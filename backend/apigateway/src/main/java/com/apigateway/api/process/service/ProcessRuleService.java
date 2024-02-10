@@ -20,7 +20,7 @@ public class ProcessRuleService {
      * @return
      */
     public boolean isProcedure(ExecuteProcess process) {
-        return ProcessDefaultNameTable.processNameList.contains(process);
+        return ProcessDefaultNameTable.procedureProcessNameList.stream().anyMatch(processName -> process.getProcessName().equals(processName));
     }
 
     /**

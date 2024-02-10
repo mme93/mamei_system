@@ -106,7 +106,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "Delete table",
                     false,
                     "/",
-                    "/"));
+                    tableNames));
         }
         if (!processRepository.existsByProcessName(ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_DATASET)) {
             processRepository.save(new Process(
@@ -118,7 +118,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "Reset all Table data to default",
                     false,
                     "/",
-                    "/"));
+                    tableNames));
         }
         if (!processRepository.existsByProcessName(ProcessDefaultNameTable.RESTART_MICROSERVICE)) {
             processRepository.save(new Process(
