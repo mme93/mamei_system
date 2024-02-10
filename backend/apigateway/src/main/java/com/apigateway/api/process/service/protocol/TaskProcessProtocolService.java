@@ -169,4 +169,13 @@ public class TaskProcessProtocolService {
         }
         return protocolSubResults;
     }
+
+    public void updateUserComment(ProtocolUserComment userComment) {
+        Optional<TaskProcessProtocol> taskOpt = taskProcessProtocolRepository.findBySignature(userComment.getTaskSignature());
+        if(taskOpt.isPresent()){
+            TaskProcessProtocol taskProcessProtocol = taskOpt.get();
+            taskProcessProtocol.setUserComment(userComment.getUserComment());
+            taskProcessProtocolRepository.save(taskProcessProtocol);
+        }
+    }
 }

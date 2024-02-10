@@ -199,6 +199,6 @@ export class ProcessComponent implements OnInit {
   }
 
   saveUserComment() {
-    console.log(this.originComment)
+    this.databaseProcessService.updateComment(this.originComment,this.executeTaskSignature);
   }
 }

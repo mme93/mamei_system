@@ -127,12 +127,17 @@ export interface ExecuteSubProcess {
   taskSignature: string;
 }
 
+export interface UserComment {
+  userComment: string;
+  taskSignature: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessService {
   private x = environment.uri + ':9000/api/protocol/x/';
+  private processProtocolUpdateCommentUrl = environment.uri + ':9000/api/protocol/comment/update';
   private processProtocolCloseUrl = environment.uri + ':9000/api/protocol/close/';
   private processProtocolCreateUrl = environment.uri + ':9000/api/protocol/create/';
   private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
@@ -241,7 +246,22 @@ export class ProcessService {
         'Content-Type': 'application/json'
       })
     };
-    //return this.http.get(this.x + executeTaskSignature, httpOptions);
-    return this.http.get<ProtocolResultUI>(this.x + "task_YDPoVHOw", httpOptions);
+    return this.http.get<ProtocolResultUI>(this.x + executeTaskSignature, httpOptions);
+    //return this.http.get<ProtocolResultUI>(this.x + "task_YDPoVHOw", httpOptions);
+  }
+
+  updateComment(originComment: string, executeTaskSignature: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    this.http.post(this.processProtocolUpdateCommentUrl,
+      {
+        userComment: originComment,
+        taskSignature: executeTaskSignature
+      },
+      httpOptions).subscribe();
   }
 }

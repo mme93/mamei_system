@@ -1,5 +1,6 @@
 package com.apigateway.api.process.controller;
 
+import com.apigateway.api.process.model.protocol.ProtocolUserComment;
 import com.apigateway.api.process.model.protocol.TaskProcessProtocol;
 import com.apigateway.api.process.model.protocol.ui.ProtocolResultUI;
 import com.apigateway.api.process.service.protocol.TaskProcessProtocolService;
@@ -49,5 +50,11 @@ public class ProcessProtocolController {
     @GetMapping("/{task_signature}")
     public ResponseEntity<TaskProcessProtocol> getTaskProcessProtocol(@PathVariable String task_signature) {
         return new ResponseEntity(taskProcessProtocolService.getTaskProcessProtocol(task_signature), HttpStatus.OK);
+    }
+
+    @PostMapping("/comment/update")
+    public ResponseEntity updateUserComment(@RequestBody ProtocolUserComment userComment){
+        taskProcessProtocolService.updateUserComment(userComment);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
