@@ -4,9 +4,13 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
 import {ProcessService} from "../../../shared/services/admin/process/process.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.component";
-import { ExecuteProcessUI,
+import {
+  ExecuteProcessUI,
   Process,
-  ProcessUI, ProtocolResultUI} from "../../../shared/model/admin/process/ProcessApiEntity";
+  ProcessUI, ProtocolResultUI
+} from "../../../shared/model/admin/process/ProcessApiEntity";
+import {StepperProcessUI} from "../../../shared/model/admin/process/ProcessUIElements";
+import {ProcessStepperService} from "../../../shared/services/admin/process/ui/process-stepper.service";
 
 @Component({
   selector: 'app-process',
@@ -14,6 +18,8 @@ import { ExecuteProcessUI,
   styleUrls: ['./process.component.scss']
 })
 export class ProcessComponent implements OnInit {
+
+  stepperProcessUI: StepperProcessUI = this.processStepperUiService.createProcessStepperUI();
   protocolResultUI: ProtocolResultUI = {
     id: 0,
     executeTaskDate: '',
@@ -54,7 +60,7 @@ export class ProcessComponent implements OnInit {
   canDisplay = false
   originComment = '';
 
-  constructor(private databaseProcessService: ProcessService, public dialog: MatDialog) {
+  constructor(private databaseProcessService: ProcessService, public dialog: MatDialog, private processStepperUiService: ProcessStepperService) {
   }
 
   ngOnInit(): void {
@@ -162,7 +168,7 @@ export class ProcessComponent implements OnInit {
       }
     );
     this.itemText = 'Start process - Need to validate.'
-    this.progress=0;
+    this.progress = 0;
   }
 
   validateProcess() {
@@ -228,7 +234,7 @@ export class ProcessComponent implements OnInit {
     };
     this.executeTaskSignature = "";
     this.isProcessSelected = true;
-    this.startProcessList=[];
+    this.startProcessList = [];
     this.isLoading = false;
     this.itemText = 'Choose your steps for Database Processes';
     this.isProcessRunning = false;
