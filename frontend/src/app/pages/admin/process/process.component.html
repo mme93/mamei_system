@@ -1,7 +1,7 @@
 <article class="container">
 
   <mat-stepper #stepper [linear]="true">
-    <mat-step [completed]="canExecute">
+    <mat-step [completed]="stepperProcessUI.canExecute">
       <ng-template matStepLabel>Choose your processes</ng-template>
       <div class="article-container">
         <div class="description">
@@ -43,7 +43,7 @@
       </button>
     </mat-step>
 
-    <mat-step [completed]="canDisplay">
+    <mat-step [completed]="stepperProcessUI.canDisplay">
       <ng-template matStepLabel>Execute Processes</ng-template>
 
       <div class="article-container">
@@ -119,10 +119,10 @@
 
       <div style="position: relative"
            *ngIf="(!isProcessFinish)&&(isProcessRunning)||(isProcessFinish)&&(isProcessRunning)">
-        <mat-progress-bar mode="determinate" [value]="progress" color="warn"></mat-progress-bar>
+        <mat-progress-bar mode="determinate" [value]="stepperProcessUI.secondStepProcessUI.progress" color="warn"></mat-progress-bar>
         <div
           style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; text-align: center; color: white;">
-          {{progress}}%
+          {{stepperProcessUI.secondStepProcessUI.progress}}%
         </div>
       </div>
       <div>

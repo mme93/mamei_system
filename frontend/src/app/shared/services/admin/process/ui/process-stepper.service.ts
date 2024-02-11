@@ -11,6 +11,8 @@ export class ProcessStepperService {
       processStatusIcon: ['play_disabled', 'play_arrow', 'build', 'done', 'error'],
       processStepText: 'Choose your steps for Database Processes',
       defaultProcessStepText: 'Choose your steps for Database Processes',
+      canExecute: false,
+      canDisplay: false,
       firstStepProcessUI: {
         canStartProcess: false,
         isProcessSelected: false,
@@ -18,6 +20,8 @@ export class ProcessStepperService {
         copyProcessList: [],
       },
       secondStepProcessUI: {
+        incr: 0,
+        progress: 0,
         executeProcessUI: {
           signature: '',
           executeMainProcesses: [],

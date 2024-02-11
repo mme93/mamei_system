@@ -4,6 +4,8 @@ export interface StepperProcessUI {
   processStatusIcon: string[];
   processStepText: string;
   defaultProcessStepText: string;
+  canExecute: boolean;
+  canDisplay: boolean;
   firstStepProcessUI: FirstStepProcessUI;
   secondStepProcessUI: SecondStepProcessUI;
   lastStepProcessUI: LastStepProcessUI
@@ -17,6 +19,8 @@ export interface FirstStepProcessUI {
 }
 
 export interface SecondStepProcessUI {
+  incr:number;
+  progress:number;
   executeProcessUI: ExecuteProcessUI;
 }
 
