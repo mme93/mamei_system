@@ -96,27 +96,8 @@ export class ProcessComponent implements OnInit {
 
 
   changeIcon(microServiceName: string, $event: MatCheckboxChange) {
-    for (let i = 0; i < this.stepperProcessUI.firstStepProcessUI.processList.length; i++) {
-      if (this.stepperProcessUI.firstStepProcessUI.processList[i].process.processName === microServiceName) {
-        if ($event.checked) {
-          this.stepperProcessUI.firstStepProcessUI.processList[i].processStatusIcon = this.stepperProcessUI.processStatusIcon[1];
-          this.stepperProcessUI.firstStepProcessUI.copyProcessList[i].processStatusIcon = this.stepperProcessUI.processStatusIcon[1];
-        } else {
-          this.stepperProcessUI.firstStepProcessUI.copyProcessList[i].processStatusIcon = this.stepperProcessUI.processStatusIcon[0];
-          this.stepperProcessUI.firstStepProcessUI.processList[i].processStatusIcon = this.stepperProcessUI.processStatusIcon[0];
-        }
-        this.stepperProcessUI.firstStepProcessUI.copyProcessList[i].processActivated = this.stepperProcessUI.firstStepProcessUI.processList[i].processActivated;
-        this.stepperProcessUI.firstStepProcessUI.processList[i].processActivated = $event.checked;
-      }
-    }
-    this.stepperProcessUI.firstStepProcessUI.copyProcessList.forEach(process => {
-      if (process.processStatusIcon === this.stepperProcessUI.processStatusIcon[0]) {
-        process.processActivated = false;
-      }
-    });
-    this.stepperProcessUI.firstStepProcessUI.isProcessSelected = !(this.stepperProcessUI.firstStepProcessUI.copyProcessList.filter(process => process.processStatusIcon === this.stepperProcessUI.processStatusIcon[1]).length > 0);
-    this.stepperProcessUI.canExecute = this.stepperProcessUI.firstStepProcessUI.copyProcessList.filter(process => process.processStatusIcon === this.stepperProcessUI.processStatusIcon[1]).length > 0;
-  }
+    this.stepperProcessUI=this.processStepperUiService.changeIcon(microServiceName,$event,this.stepperProcessUI);
+     }
 
   setProcesses() {
     this.stepperProcessUI.secondStepProcessUI.startProcessList = [];
@@ -166,55 +147,14 @@ export class ProcessComponent implements OnInit {
   }
 
   resetProcessSelection() {
-    this.stepperProcessUI.firstStepProcessUI.processList.forEach(process => {
-      process.processStatusIcon = this.stepperProcessUI.processStatusIcon[0];
-      process.processActivated = false;
-    })
+    this.stepperProcessUI = this.processStepperUiService.resetProcessSelection(this.stepperProcessUI);
   }
 
   resetExecuteProcess() {
-    this.resetProcessSelection();
-
-    this.stepperProcessUI.lastStepProcessUI.protocolResultUI = {
-      id: 0,
-      executeTaskDate: '',
-      executeEndTaskDate: '',
-      signature: '',
-      mainProcessAmount: '',
-      subProcessAmount: '',
-      totalProcessAmount: '',
-      processDuration: '',
-      etaskProcessStatus: '',
-      executeTaskUser: '',
-      userComment: '',
-      protocolMainResults: []
-    };
-    this.stepperProcessUI.secondStepProcessUI.executeTaskSignature = "";
-    this.stepperProcessUI.firstStepProcessUI.isProcessSelected = true;
-    this.stepperProcessUI.secondStepProcessUI.startProcessList = [];
-    this.stepperProcessUI.secondStepProcessUI.isLoading = false;
-    this.stepperProcessUI.processStepText = 'Choose your steps for Database Processes';
-    this.stepperProcessUI.secondStepProcessUI.isProcessRunning = false;
-    this.stepperProcessUI.secondStepProcessUI.isProcessFinish = false;
-    this.stepperProcessUI.secondStepProcessUI.executeProcessUI = {
-      signature: '',
-      executeMainProcesses: [],
-      mainProcessAmount: 0,
-      processDuration: '',
-      isProcessFinish: false,
-      isProcessRunning: false
-    };
-    this.stepperProcessUI.canExecute = false;
-    this.stepperProcessUI.canDisplay = false
-    this.stepperProcessUI.lastStepProcessUI.userComment.userComment = '';
-    this.databaseProcessService.getProcesses().subscribe((process: Process[]) => {
-      this.stepperProcessUI.firstStepProcessUI.processList = this.databaseProcessService.getProcess(process);
-      this.stepperProcessUI.firstStepProcessUI.copyProcessList = this.databaseProcessService.getProcess(process)
-    });
-
+    this.stepperProcessUI = this.processStepperUiService.resetExecuteProcess(this.stepperProcessUI);
   }
 
   newProcess() {
-    this.resetExecuteProcess();
+    this.stepperProcessUI = this.processStepperUiService.newProcess(this.stepperProcessUI);
   }
 }
