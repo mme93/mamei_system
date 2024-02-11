@@ -38,7 +38,7 @@
         </div>
       </div>
       <button mat-raised-button color="primary" (click)="stepper.next();setProcesses()" style="width: 100%"
-              [disabled]="isProcessSelected">
+              [disabled]="stepperProcessUI.firstStepProcessUI.isProcessSelected">
         Start Process
       </button>
     </mat-step>
@@ -220,7 +220,7 @@
               <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Comment:</mat-label>
                 <textarea matInput class="comment-input" rows="7" maxlength="500"
-                          [(ngModel)]="originComment">{{originComment}}</textarea>
+                          [(ngModel)]="stepperProcessUI.lastStepProcessUI.userComment.userComment">{{stepperProcessUI.lastStepProcessUI.userComment.userComment}}</textarea>
                 <button mat-raised-button (click)="saveUserComment()" style="width: 100%" color="primary">Save Comment
                 </button>
               </mat-form-field>

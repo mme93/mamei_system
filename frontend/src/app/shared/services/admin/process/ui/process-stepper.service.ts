@@ -22,6 +22,7 @@ export class ProcessStepperService {
       secondStepProcessUI: {
         incr: 0,
         progress: 0,
+        executeTaskSignature : '',
         executeProcessUI: {
           signature: '',
           executeMainProcesses: [],

@@ -21,6 +21,7 @@ export interface FirstStepProcessUI {
 export interface SecondStepProcessUI {
   incr:number;
   progress:number;
+  executeTaskSignature:string;
   executeProcessUI: ExecuteProcessUI;
 }
 
