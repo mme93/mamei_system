@@ -19,7 +19,7 @@
         </mat-form-field>
         <div class="steps-list">
           <mat-divider></mat-divider>
-          <div class="step-item" *ngFor="let item of processList">
+          <div class="step-item" *ngFor="let item of stepperProcessUI.firstStepProcessUI.processList">
             <div class="step-item-container" *ngIf="item.processIsShowActivated">
               <label class="checkbox-label">
                 <mat-checkbox (change)="changeIcon(item.process.processName,$event)"
@@ -146,13 +146,16 @@
       <ng-template matStepLabel>Process Result Overview</ng-template>
       <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;font-size: 24px;">
         <span style="margin-right: 5px;"><strong>Process Result Overview</strong></span>
-        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='RESTRICTED'" style="color: yellow; font-size: 24px;">
+        <mat-icon *ngIf="stepperProcessUI.lastStepProcessUI.protocolResultUI.etaskProcessStatus==='RESTRICTED'"
+                  style="color: yellow; font-size: 24px;">
           warning
         </mat-icon>
-        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='UNRESTRICTED'" style="color: green; font-size: 24px;">
+        <mat-icon *ngIf="stepperProcessUI.lastStepProcessUI.protocolResultUI.etaskProcessStatus==='UNRESTRICTED'"
+                  style="color: green; font-size: 24px;">
           check
         </mat-icon>
-        <mat-icon *ngIf="protocolResultUI.etaskProcessStatus==='CANCEL'" style="color: red; font-size: 24px;">close
+        <mat-icon *ngIf="stepperProcessUI.lastStepProcessUI.protocolResultUI.etaskProcessStatus==='CANCEL'"
+                  style="color: red; font-size: 24px;">close
         </mat-icon>
       </div>
 
@@ -160,24 +163,29 @@
         <table>
           <tr>
             <td style="width: 50%;" class="mat-body-1"><strong>Date Range:</strong></td>
-            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.executeTaskDate}}
-              - {{protocolResultUI.executeEndTaskDate}}</strong></td>
+            <td style="width: 50%;" class="mat-body-1">
+              <strong>{{stepperProcessUI.lastStepProcessUI.protocolResultUI.executeTaskDate}}
+                - {{stepperProcessUI.lastStepProcessUI.protocolResultUI.executeEndTaskDate}}</strong></td>
           </tr>
           <tr>
             <td style="width: 50%;" class="mat-body-1"><strong>Duration:</strong></td>
-            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.processDuration}}</strong></td>
+            <td style="width: 50%;" class="mat-body-1">
+              <strong>{{stepperProcessUI.lastStepProcessUI.protocolResultUI.processDuration}}</strong></td>
           </tr>
           <tr>
             <td style="width: 50%;" class="mat-body-1"><strong>Task Signature:</strong></td>
-            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.signature}}</strong></td>
+            <td style="width: 50%;" class="mat-body-1">
+              <strong>{{stepperProcessUI.lastStepProcessUI.protocolResultUI.signature}}</strong></td>
           </tr>
           <tr>
             <td style="width: 50%;" class="mat-body-1"><strong>User ID:</strong></td>
-            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.id}}</strong></td>
+            <td style="width: 50%;" class="mat-body-1">
+              <strong>{{stepperProcessUI.lastStepProcessUI.protocolResultUI.id}}</strong></td>
           </tr>
           <tr>
             <td style="width: 50%;" class="mat-body-1"><strong>User:</strong></td>
-            <td style="width: 50%;" class="mat-body-1"><strong>{{protocolResultUI.executeTaskUser}}</strong></td>
+            <td style="width: 50%;" class="mat-body-1">
+              <strong>{{stepperProcessUI.lastStepProcessUI.protocolResultUI.executeTaskUser}}</strong></td>
           </tr>
           <tr>
             <td colspan="2">
@@ -188,15 +196,18 @@
                     <table>
                       <tr>
                         <td class="mat-body-1"><strong>Total:</strong></td>
-                        <td class="mat-body-1">{{protocolResultUI.totalProcessAmount}}</td>
+                        <td
+                          class="mat-body-1">{{stepperProcessUI.lastStepProcessUI.protocolResultUI.totalProcessAmount}}</td>
                       </tr>
                       <tr>
                         <td class="mat-body-1"><strong>Main:</strong></td>
-                        <td class="mat-body-1">{{protocolResultUI.mainProcessAmount}}</td>
+                        <td
+                          class="mat-body-1">{{stepperProcessUI.lastStepProcessUI.protocolResultUI.mainProcessAmount}}</td>
                       </tr>
                       <tr>
                         <td class="mat-body-1"><strong>Sub:</strong></td>
-                        <td class="mat-body-1">{{protocolResultUI.subProcessAmount}}</td>
+                        <td
+                          class="mat-body-1">{{stepperProcessUI.lastStepProcessUI.protocolResultUI.subProcessAmount}}</td>
                       </tr>
                     </table>
                   </td>
@@ -219,7 +230,7 @@
       </div>
 
       <mat-divider></mat-divider>
-      <div *ngFor="let main of protocolResultUI.protocolMainResults; index as i">
+      <div *ngFor="let main of stepperProcessUI.lastStepProcessUI.protocolResultUI.protocolMainResults; index as i">
         <span>{{i + 1}} {{main.processText}}</span>
         <mat-icon *ngIf="main.eprocessStatus==='PASSED'" style="color: green">check</mat-icon>
         <mat-icon *ngIf="main.eprocessStatus!=='PASSED'" style="color: red">close</mat-icon>
@@ -231,7 +242,9 @@
         <mat-divider></mat-divider>
       </div>
       <div>
-        <button mat-raised-button (click)="newProcess();stepper.reset()" style="width: 100%" color="primary">Got to Start</button>
+        <button mat-raised-button (click)="newProcess();stepper.reset()" style="width: 100%" color="primary">Got to
+          Start
+        </button>
       </div>
     </mat-step>
 

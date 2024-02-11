@@ -13,9 +13,31 @@ export class ProcessStepperService {
       defaultProcessStepText: 'Choose your steps for Database Processes',
       firstStepProcessUI: {
         canStartProcess: false,
+        isProcessSelected: false,
         processList: [],
+        copyProcessList: [],
       },
-      secondStepProcessUI: {}
+      secondStepProcessUI: {},
+      lastStepProcessUI: {
+        protocolResultUI: {
+          id: 0,
+          executeTaskDate: '',
+          executeEndTaskDate: '',
+          signature: '',
+          mainProcessAmount: '',
+          subProcessAmount: '',
+          totalProcessAmount: '',
+          processDuration: '',
+          etaskProcessStatus: '',
+          executeTaskUser: '',
+          userComment: '',
+          protocolMainResults: []
+        },
+        userComment: {
+          userComment: '',
+          taskSignature: '',
+        }
+      }
     }
   };
 
