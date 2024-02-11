@@ -1,4 +1,4 @@
-import {ProcessUI, ProtocolResultUI, UserComment} from "./ProcessApiEntity";
+import {ExecuteProcessUI, ProcessUI, ProtocolResultUI, UserComment} from "./ProcessApiEntity";
 
 export interface StepperProcessUI {
   processStatusIcon: string[];
@@ -17,7 +17,7 @@ export interface FirstStepProcessUI {
 }
 
 export interface SecondStepProcessUI {
-
+  executeProcessUI: ExecuteProcessUI;
 }
 
 export interface LastStepProcessUI {

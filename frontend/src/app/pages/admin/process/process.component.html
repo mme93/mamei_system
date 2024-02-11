@@ -53,7 +53,7 @@
               <mat-icon>restart_alt</mat-icon>
             </button>
           </div>
-          <span class="center-text">{{itemText}}</span>
+          <span class="center-text">{{stepperProcessUI.processStepText}}</span>
         </div>
         <!--Validate View-->
         <div class="steps-list" *ngIf="(!isProcessFinish)&&(!isProcessRunning)">
@@ -82,11 +82,11 @@
         <!--Start Process View-->
         <div class="steps-list" *ngIf="(!isProcessFinish)&&(isProcessRunning)||(isProcessFinish)&&(isProcessRunning)">
           <mat-divider></mat-divider>
-          <div class="step-item" *ngFor="let main of executeProcessUI.executeMainProcesses; index as i">
+          <div class="step-item" *ngFor="let main of stepperProcessUI.secondStepProcessUI.executeProcessUI.executeMainProcesses; index as i">
             <div class="step-item-container">
               <label class="checkbox-label">
                 <span class="checkbox-text">{{i + 1}} {{ main.processText }} {{ main.theme }}</span>
-                <div class="spinner-container" *ngIf="(!main.isProcessFinish) && executeProcessUI.isProcessRunning">
+                <div class="spinner-container" *ngIf="(!main.isProcessFinish) && stepperProcessUI.secondStepProcessUI.executeProcessUI.isProcessRunning">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
                 </div>
               </label>
@@ -100,7 +100,7 @@
             <div class="step-item-container" *ngFor="let sub of main.processList; index as j">
               <label class="checkbox-label">
                 <span class="checkbox-text">{{i + 1}}.{{j + 1}} {{ sub.processText }} {{ sub.theme }}</span>
-                <div class="spinner-container" *ngIf="(!sub.isProcessFinish) && executeProcessUI.isProcessRunning">
+                <div class="spinner-container" *ngIf="(!sub.isProcessFinish) && stepperProcessUI.secondStepProcessUI.executeProcessUI.isProcessRunning">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
                 </div>
               </label>

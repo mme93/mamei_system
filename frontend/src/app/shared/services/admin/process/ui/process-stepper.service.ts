@@ -17,7 +17,16 @@ export class ProcessStepperService {
         processList: [],
         copyProcessList: [],
       },
-      secondStepProcessUI: {},
+      secondStepProcessUI: {
+        executeProcessUI: {
+          signature: '',
+          executeMainProcesses: [],
+          mainProcessAmount: 0,
+          processDuration: '',
+          isProcessFinish: false,
+          isProcessRunning: false
+        }
+      },
       lastStepProcessUI: {
         protocolResultUI: {
           id: 0,

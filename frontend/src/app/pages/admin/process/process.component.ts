@@ -4,11 +4,7 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
 import {ProcessService} from "../../../shared/services/admin/process/process.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.component";
-import {
-  ExecuteProcessUI,
-  Process,
-  ProcessUI, ProtocolResultUI
-} from "../../../shared/model/admin/process/ProcessApiEntity";
+import {Process, ProcessUI} from "../../../shared/model/admin/process/ProcessApiEntity";
 import {StepperProcessUI} from "../../../shared/model/admin/process/ProcessUIElements";
 import {ProcessStepperService} from "../../../shared/services/admin/process/ui/process-stepper.service";
 
@@ -28,17 +24,8 @@ export class ProcessComponent implements OnInit {
   currentProcess = 1;
   progress = 0;
   isLoading = false;
-  itemText = this.default;
   isProcessRunning = false;
   isProcessFinish = false;
-  executeProcessUI: ExecuteProcessUI = {
-    signature: '',
-    executeMainProcesses: [],
-    mainProcessAmount: 0,
-    processDuration: '',
-    isProcessFinish: false,
-    isProcessRunning: false
-  };
   canExecute = false;
   canDisplay = false
   originComment = '';
@@ -69,20 +56,20 @@ export class ProcessComponent implements OnInit {
 
   async startProcess() {
     this.isLoading = true;
-    this.executeProcessUI.isProcessRunning = true;
-    this.itemText = 'Process ' + this.incr + '/' + this.executeProcessUI.mainProcessAmount + ' finished.'
+    this.stepperProcessUI.secondStepProcessUI.executeProcessUI.isProcessRunning = true;
+    this.stepperProcessUI.processStepText = 'Process ' + this.incr + '/' + this.stepperProcessUI.secondStepProcessUI.executeProcessUI.mainProcessAmount + ' finished.'
     this.incr++;
 
     try {
-      await this.databaseProcessService.createTaskProcessProtocol(this.executeProcessUI.signature);
+      await this.databaseProcessService.createTaskProcessProtocol(this.stepperProcessUI.secondStepProcessUI.executeProcessUI.signature);
     } catch (error) {
       console.log(error)
     }
-    this.executeTaskSignature = this.executeProcessUI.signature;
-    for (const process of this.executeProcessUI.executeMainProcesses) {
-      process.processStatusIcon =  this.stepperProcessUI.processStatusIcon[2];
+    this.executeTaskSignature = this.stepperProcessUI.secondStepProcessUI.executeProcessUI.signature;
+    for (const process of this.stepperProcessUI.secondStepProcessUI.executeProcessUI.executeMainProcesses) {
+      process.processStatusIcon = this.stepperProcessUI.processStatusIcon[2];
       try {
-        process.taskSignature = this.executeProcessUI.signature;
+        process.taskSignature = this.stepperProcessUI.secondStepProcessUI.executeProcessUI.signature;
         const result = await this.databaseProcessService.startExecuteMainProcess(process);
         process.isProcessFinish = true;
         console.log(result);
@@ -92,7 +79,7 @@ export class ProcessComponent implements OnInit {
       for (const subProcess of process.processList) {
         subProcess.processStatusIcon = this.stepperProcessUI.processStatusIcon[2];
         try {
-          subProcess.taskSignature = this.executeProcessUI.signature + "|" + process.signature;
+          subProcess.taskSignature = this.stepperProcessUI.secondStepProcessUI.executeProcessUI.signature + "|" + process.signature;
           const result = await this.databaseProcessService.startExecuteSubProcess(subProcess);
           subProcess.isProcessFinish = true;
           console.log(result);
@@ -102,15 +89,15 @@ export class ProcessComponent implements OnInit {
           console.error(error);
         }
       }
-      this.itemText = 'Process ' + this.incr + '/' + this.executeProcessUI.mainProcessAmount + ' finished.'
+      this.stepperProcessUI.processStepText = 'Process ' + this.incr + '/' + this.stepperProcessUI.secondStepProcessUI.executeProcessUI.mainProcessAmount + ' finished.'
       process.processStatusIcon = this.stepperProcessUI.processStatusIcon[3];
       process.isProcessFinish = true;
-      this.progress = Number((this.progress + (100 / this.executeProcessUI.mainProcessAmount)).toFixed(2));
+      this.progress = Number((this.progress + (100 / this.stepperProcessUI.secondStepProcessUI.executeProcessUI.mainProcessAmount)).toFixed(2));
       this.incr++;
     }
     this.progress = 100;
     try {
-      await this.databaseProcessService.closeTaskProcessProtocol(this.executeProcessUI.signature);
+      await this.databaseProcessService.closeTaskProcessProtocol(this.stepperProcessUI.secondStepProcessUI.executeProcessUI.signature);
     } catch (error) {
       console.log(error)
     }
@@ -150,7 +137,7 @@ export class ProcessComponent implements OnInit {
         return item.processActivated;
       }
     );
-    this.itemText = 'Start process - Need to validate.'
+    this.stepperProcessUI.processStepText = 'Start process - Need to validate.'
     this.progress = 0;
   }
 
@@ -159,11 +146,11 @@ export class ProcessComponent implements OnInit {
     this.startProcessList.forEach(process => sortProcessLists.push(process.process))
     sortProcessLists.forEach(process => process.scopeList = process.selectedScopeList);
     this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => {
-      this.executeProcessUI = value
+      this.stepperProcessUI.secondStepProcessUI.executeProcessUI = value
       if (value.executeMainProcesses.length === 0) {
-        this.itemText = 'No Main-Process found by this Processes';
+        this.stepperProcessUI.processStepText = 'No Main-Process found by this Processes';
       } else {
-        this.executeProcessUI.executeMainProcesses.forEach(main => {
+        this.stepperProcessUI.secondStepProcessUI.executeProcessUI.executeMainProcesses.forEach(main => {
           main.processStatusIcon = this.stepperProcessUI.processStatusIcon[1];
           main.processList.forEach(sub => sub.processStatusIcon = this.stepperProcessUI.processStatusIcon[1])
         })
@@ -219,10 +206,10 @@ export class ProcessComponent implements OnInit {
     this.isProcessSelected = true;
     this.startProcessList = [];
     this.isLoading = false;
-    this.itemText = 'Choose your steps for Database Processes';
+    this.stepperProcessUI.processStepText = 'Choose your steps for Database Processes';
     this.isProcessRunning = false;
     this.isProcessFinish = false;
-    this.executeProcessUI = {
+    this.stepperProcessUI.secondStepProcessUI.executeProcessUI = {
       signature: '',
       executeMainProcesses: [],
       mainProcessAmount: 0,
