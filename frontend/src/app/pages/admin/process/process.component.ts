@@ -4,7 +4,7 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
 import {ProcessService} from "../../../shared/services/admin/process/process.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ScopeDialogComponent} from "./dialoag/scope-dialog/scope-dialog.component";
-import {Process, ProcessUI} from "../../../shared/model/admin/process/ProcessApiEntity";
+import {Process} from "../../../shared/model/admin/process/ProcessApiEntity";
 import {StepperProcessUI} from "../../../shared/model/admin/process/ProcessUIElements";
 import {ProcessStepperService} from "../../../shared/services/admin/process/ui/process-stepper.service";
 
@@ -16,14 +16,6 @@ import {ProcessStepperService} from "../../../shared/services/admin/process/ui/p
 export class ProcessComponent implements OnInit {
 
   stepperProcessUI: StepperProcessUI = this.processStepperUiService.createProcessStepperUI();
-
-
-  startProcessList: ProcessUI[] = [];
-  isLoading = false;
-  isProcessRunning = false;
-  isProcessFinish = false;
-  //originComment = '';
-
 
   constructor(private databaseProcessService: ProcessService, public dialog: MatDialog, private processStepperUiService: ProcessStepperService) {
   }
@@ -50,7 +42,7 @@ export class ProcessComponent implements OnInit {
   }
 
   async startProcess() {
-    this.isLoading = true;
+    this.stepperProcessUI.secondStepProcessUI.isLoading = true;
     this.stepperProcessUI.secondStepProcessUI.executeProcessUI.isProcessRunning = true;
     this.stepperProcessUI.processStepText = 'Process ' + this.stepperProcessUI.secondStepProcessUI.incr + '/' + this.stepperProcessUI.secondStepProcessUI.executeProcessUI.mainProcessAmount + ' finished.'
     this.stepperProcessUI.secondStepProcessUI.incr++;
@@ -97,8 +89,8 @@ export class ProcessComponent implements OnInit {
       console.log(error)
     }
     this.stepperProcessUI.secondStepProcessUI.incr = 0;
-    this.isLoading = false;
-    this.isProcessFinish = true;
+    this.stepperProcessUI.secondStepProcessUI.isLoading = false;
+    this.stepperProcessUI.secondStepProcessUI.isProcessFinish = true;
     this.stepperProcessUI.canDisplay = true;
   }
 
@@ -127,8 +119,8 @@ export class ProcessComponent implements OnInit {
   }
 
   setProcesses() {
-    this.startProcessList = [];
-    this.startProcessList = this.stepperProcessUI.firstStepProcessUI.copyProcessList.filter(item => {
+    this.stepperProcessUI.secondStepProcessUI.startProcessList = [];
+    this.stepperProcessUI.secondStepProcessUI.startProcessList = this.stepperProcessUI.firstStepProcessUI.copyProcessList.filter(item => {
         return item.processActivated;
       }
     );
@@ -138,7 +130,7 @@ export class ProcessComponent implements OnInit {
 
   validateProcess() {
     let sortProcessLists: Process[] = [];
-    this.startProcessList.forEach(process => sortProcessLists.push(process.process))
+    this.stepperProcessUI.secondStepProcessUI.startProcessList.forEach(process => sortProcessLists.push(process.process))
     sortProcessLists.forEach(process => process.scopeList = process.selectedScopeList);
     this.databaseProcessService.sortProcess(sortProcessLists).subscribe(value => {
       this.stepperProcessUI.secondStepProcessUI.executeProcessUI = value
@@ -149,7 +141,7 @@ export class ProcessComponent implements OnInit {
           main.processStatusIcon = this.stepperProcessUI.processStatusIcon[1];
           main.processList.forEach(sub => sub.processStatusIcon = this.stepperProcessUI.processStatusIcon[1])
         })
-        this.isProcessRunning = true;
+        this.stepperProcessUI.secondStepProcessUI.isProcessRunning = true;
       }
     });
   }
@@ -161,7 +153,7 @@ export class ProcessComponent implements OnInit {
       data: {process: process}
     });
     dialogRef.afterClosed().subscribe((result: string[]) => {
-      this.startProcessList.forEach(startProcess => {
+      this.stepperProcessUI.secondStepProcessUI.startProcessList.forEach(startProcess => {
         if (startProcess.process.id === process.id) {
           startProcess.process.selectedScopeList = result;
         }
@@ -199,11 +191,11 @@ export class ProcessComponent implements OnInit {
     };
     this.stepperProcessUI.secondStepProcessUI.executeTaskSignature = "";
     this.stepperProcessUI.firstStepProcessUI.isProcessSelected = true;
-    this.startProcessList = [];
-    this.isLoading = false;
+    this.stepperProcessUI.secondStepProcessUI.startProcessList = [];
+    this.stepperProcessUI.secondStepProcessUI.isLoading = false;
     this.stepperProcessUI.processStepText = 'Choose your steps for Database Processes';
-    this.isProcessRunning = false;
-    this.isProcessFinish = false;
+    this.stepperProcessUI.secondStepProcessUI.isProcessRunning = false;
+    this.stepperProcessUI.secondStepProcessUI.isProcessFinish = false;
     this.stepperProcessUI.secondStepProcessUI.executeProcessUI = {
       signature: '',
       executeMainProcesses: [],

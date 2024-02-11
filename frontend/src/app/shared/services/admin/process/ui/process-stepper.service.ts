@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {StepperProcessUI} from "../../../../model/admin/process/ProcessUIElements";
+import {ProcessUI} from "../../../../model/admin/process/ProcessApiEntity";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,10 @@ export class ProcessStepperService {
       secondStepProcessUI: {
         incr: 0,
         progress: 0,
-        executeTaskSignature : '',
+        executeTaskSignature: '',
+        isLoading: false,
+        isProcessRunning: false,
+        isProcessFinish: false,
         executeProcessUI: {
           signature: '',
           executeMainProcesses: [],
@@ -30,7 +34,8 @@ export class ProcessStepperService {
           processDuration: '',
           isProcessFinish: false,
           isProcessRunning: false
-        }
+        },
+        startProcessList: []
       },
       lastStepProcessUI: {
         protocolResultUI: {

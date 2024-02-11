@@ -56,13 +56,15 @@
           <span class="center-text">{{stepperProcessUI.processStepText}}</span>
         </div>
         <!--Validate View-->
-        <div class="steps-list" *ngIf="(!isProcessFinish)&&(!isProcessRunning)">
+        <div class="steps-list"
+             *ngIf="(!stepperProcessUI.secondStepProcessUI.isProcessFinish)&&(!stepperProcessUI.secondStepProcessUI.isProcessRunning)">
           <mat-divider></mat-divider>
-          <div class="step-item" *ngFor="let item of startProcessList; index as i">
+          <div class="step-item" *ngFor="let item of stepperProcessUI.secondStepProcessUI.startProcessList; index as i">
             <div class="step-item-container" *ngIf="item.processIsShowActivated">
               <label class="checkbox-label">
                 <span class="checkbox-text">{{ item.process.processText }}</span>
-                <div class="spinner-container" *ngIf="isLoading && (!item.isProcessFinish)">
+                <div class="spinner-container"
+                     *ngIf="stepperProcessUI.secondStepProcessUI.isLoading && (!item.isProcessFinish)">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
                 </div>
               </label>
@@ -80,13 +82,16 @@
           </div>
         </div>
         <!--Start Process View-->
-        <div class="steps-list" *ngIf="(!isProcessFinish)&&(isProcessRunning)||(isProcessFinish)&&(isProcessRunning)">
+        <div class="steps-list" *ngIf="(!stepperProcessUI.secondStepProcessUI.isProcessFinish)&&(stepperProcessUI.secondStepProcessUI.isProcessRunning)
+        ||(stepperProcessUI.secondStepProcessUI.isProcessFinish)&&(stepperProcessUI.secondStepProcessUI.isProcessRunning)">
           <mat-divider></mat-divider>
-          <div class="step-item" *ngFor="let main of stepperProcessUI.secondStepProcessUI.executeProcessUI.executeMainProcesses; index as i">
+          <div class="step-item"
+               *ngFor="let main of stepperProcessUI.secondStepProcessUI.executeProcessUI.executeMainProcesses; index as i">
             <div class="step-item-container">
               <label class="checkbox-label">
                 <span class="checkbox-text">{{i + 1}} {{ main.processText }} {{ main.theme }}</span>
-                <div class="spinner-container" *ngIf="(!main.isProcessFinish) && stepperProcessUI.secondStepProcessUI.executeProcessUI.isProcessRunning">
+                <div class="spinner-container"
+                     *ngIf="(!main.isProcessFinish) && stepperProcessUI.secondStepProcessUI.executeProcessUI.isProcessRunning">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
                 </div>
               </label>
@@ -100,7 +105,8 @@
             <div class="step-item-container" *ngFor="let sub of main.processList; index as j">
               <label class="checkbox-label">
                 <span class="checkbox-text">{{i + 1}}.{{j + 1}} {{ sub.processText }} {{ sub.theme }}</span>
-                <div class="spinner-container" *ngIf="(!sub.isProcessFinish) && stepperProcessUI.secondStepProcessUI.executeProcessUI.isProcessRunning">
+                <div class="spinner-container"
+                     *ngIf="(!sub.isProcessFinish) && stepperProcessUI.secondStepProcessUI.executeProcessUI.isProcessRunning">
                   <mat-spinner diameter="20" color="warn"></mat-spinner>
                 </div>
               </label>
@@ -118,8 +124,10 @@
       </div>
 
       <div style="position: relative"
-           *ngIf="(!isProcessFinish)&&(isProcessRunning)||(isProcessFinish)&&(isProcessRunning)">
-        <mat-progress-bar mode="determinate" [value]="stepperProcessUI.secondStepProcessUI.progress" color="warn"></mat-progress-bar>
+           *ngIf="(!stepperProcessUI.secondStepProcessUI.isProcessFinish)&&(stepperProcessUI.secondStepProcessUI.isProcessRunning)
+           ||(stepperProcessUI.secondStepProcessUI.isProcessFinish)&&(stepperProcessUI.secondStepProcessUI.isProcessRunning)">
+        <mat-progress-bar mode="determinate" [value]="stepperProcessUI.secondStepProcessUI.progress"
+                          color="warn"></mat-progress-bar>
         <div
           style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; text-align: center; color: white;">
           {{stepperProcessUI.secondStepProcessUI.progress}}%
@@ -127,15 +135,15 @@
       </div>
       <div>
         <button mat-raised-button color="primary" (click)="validateProcess()" style="width: 100%"
-                *ngIf="(!isProcessFinish)&&(!isProcessRunning)">
+                *ngIf="(!stepperProcessUI.secondStepProcessUI.isProcessFinish)&&(!stepperProcessUI.secondStepProcessUI.isProcessRunning)">
           Validate Process
         </button>
         <button mat-raised-button color="primary" (click)="startProcess()" style="width: 100%"
-                *ngIf="(!isProcessFinish)&&(isProcessRunning)">
+                *ngIf="(!stepperProcessUI.secondStepProcessUI.isProcessFinish)&&(stepperProcessUI.secondStepProcessUI.isProcessRunning)">
           Start Process
         </button>
         <button mat-raised-button color="primary" (click)="stepper.next() ; loadProtocols()" style="width: 100%"
-                *ngIf="(isProcessFinish)&&(isProcessRunning)">
+                *ngIf="(stepperProcessUI.secondStepProcessUI.isProcessFinish)&&(stepperProcessUI.secondStepProcessUI.isProcessRunning)">
           Display Protocol
         </button>
       </div>

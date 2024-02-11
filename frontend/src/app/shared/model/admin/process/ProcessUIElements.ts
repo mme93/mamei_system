@@ -19,10 +19,14 @@ export interface FirstStepProcessUI {
 }
 
 export interface SecondStepProcessUI {
-  incr:number;
-  progress:number;
-  executeTaskSignature:string;
+  incr: number;
+  progress: number;
+  executeTaskSignature: string;
+  isLoading: boolean;
+  isProcessRunning: boolean;
+  isProcessFinish: boolean;
   executeProcessUI: ExecuteProcessUI;
+  startProcessList: ProcessUI[];
 }
 
 export interface LastStepProcessUI {
