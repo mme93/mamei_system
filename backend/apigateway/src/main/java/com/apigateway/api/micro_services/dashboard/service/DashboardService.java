@@ -1,6 +1,6 @@
 package com.apigateway.api.micro_services.dashboard.service;
 
-import com.apigateway.api.eureka.discoveryclient.assets.table.DashboardRouterTable;
+import com.apigateway.api.eureka.assets.table.DashboardRouterTable;
 import com.apigateway.api.eureka.service.DiscoveryClientService;
 import com.apigateway.security.service.UserService;
 import lombok.RequiredArgsConstructor;

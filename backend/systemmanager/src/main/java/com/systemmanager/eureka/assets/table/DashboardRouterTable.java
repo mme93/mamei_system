@@ -1,4 +1,4 @@
-package com.apigateway.api.eureka.assets.table;
+package com.systemmanager.eureka.assets.table;
 
 public class DashboardRouterTable {
     public static final String DASH_BOARD_ID="DASHBOARD";

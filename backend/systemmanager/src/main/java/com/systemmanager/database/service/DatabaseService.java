@@ -1,18 +1,13 @@
-package com.apigateway.api.database.service;
+package com.systemmanager.database.service;
 
-import com.apigateway.api.database.service.domains.ProcessDefaultDBService;
-import com.apigateway.api.eureka.assets.EurekaDiscoveryClientNameTable;
-import com.apigateway.api.eureka.assets.table.UserRouterTable;
-import com.apigateway.api.eureka.service.DiscoveryClientService;
-import com.apigateway.security.SecurityUserEntityRepository;
-import com.apigateway.security.model.entity.SecurityUserEntity;
-import com.apigateway.security.model.entity.UserCollection;
-import com.apigateway.microservice.status.model.entity.MicroServiceEntity;
-import com.apigateway.microservice.status.repository.MicroServiceRepository;
+import com.systemmanager.database.service.domains.ProcessDefaultDBService;
+import com.systemmanager.eureka.assets.EurekaDiscoveryClientNameTable;
+import com.systemmanager.eureka.assets.table.UserRouterTable;
+import com.systemmanager.eureka.service.DiscoveryClientService;
+import com.systemmanager.microservice.status.model.entity.MicroServiceEntity;
+import com.systemmanager.microservice.status.repository.MicroServiceRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -27,7 +22,7 @@ public class DatabaseService {
 
     private final DiscoveryClientService clientService;
     private final WebClient.Builder webClient;
-    private final SecurityUserEntityRepository securityUserEntityRepository;
+    //private final SecurityUserEntityRepository securityUserEntityRepository;
     private final MicroServiceRepository microServiceRepository;
     private final ProcessDefaultDBService processDefaultDBService;
 
@@ -43,7 +38,7 @@ public class DatabaseService {
     public void initDatabase() {
         System.err.println("Init Database");
         cleanSecurityUser(asList("admin", "superAdmin", "user", "guest", "root"));
-        initSecurityUser();
+        //initSecurityUser();
         for (String uri : createList(asList(UserRouterTable.USER_ID))) {
             //callInit(uri);
         }
@@ -54,7 +49,7 @@ public class DatabaseService {
     @Transactional
     private void cleanSecurityUser(List<String> userNamelist) {
         for (String userName : userNamelist) {
-            securityUserEntityRepository.deleteByUsername(userName);
+            //securityUserEntityRepository.deleteByUsername(userName);
         }
     }
 
@@ -197,7 +192,7 @@ public class DatabaseService {
             ));
         }
     }
-
+    /*
     public void initSecurityUser() {
         PasswordEncoder pw = new BCryptPasswordEncoder();
 
@@ -237,4 +232,5 @@ public class DatabaseService {
             ));
         }
     }
+     */
 }

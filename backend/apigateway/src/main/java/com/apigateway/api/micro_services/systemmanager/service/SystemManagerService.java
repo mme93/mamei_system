@@ -1,6 +1,6 @@
 package com.apigateway.api.micro_services.systemmanager.service;
 
-import com.apigateway.api.eureka.discoveryclient.assets.table.SystemManagerRouterTable;
+import com.apigateway.api.eureka.assets.table.SystemManagerRouterTable;
 import com.apigateway.api.eureka.service.DiscoveryClientService;
 import com.apigateway.api.micro_services.securitygateway.service.SecurityGatewayService;
 import lombok.RequiredArgsConstructor;

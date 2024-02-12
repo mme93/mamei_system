@@ -1,6 +1,6 @@
 package com.apigateway.api.micro_services.securitygateway.service;
 
-import com.apigateway.api.eureka.discoveryclient.assets.table.SecurityGatewayRouterTable;
+import com.apigateway.api.eureka.assets.table.SecurityGatewayRouterTable;
 import com.apigateway.api.eureka.service.DiscoveryClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;

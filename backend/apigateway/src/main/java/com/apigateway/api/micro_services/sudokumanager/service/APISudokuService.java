@@ -1,6 +1,7 @@
 package com.apigateway.api.micro_services.sudokumanager.service;
 
-import com.apigateway.api.eureka.discoveryclient.assets.table.SudokuRouteTable;
+
+import com.apigateway.api.eureka.assets.table.SudokuRouteTable;
 import com.apigateway.api.eureka.service.DiscoveryClientService;
 import com.apigateway.api.micro_services.sudokumanager.model.dto.APISudokuLevelRequest;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.apigateway.api.eureka.assets.table;
+package com.systemmanager.eureka.assets.table;
 
 public class SecurityGatewayRouterTable {
     public static final String SECURITY_GATEWAY_ID="SECURITY";
