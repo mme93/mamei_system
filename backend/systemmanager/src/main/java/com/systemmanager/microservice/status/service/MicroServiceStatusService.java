@@ -24,7 +24,7 @@ public class MicroServiceStatusService {
     public List<MicroServiceDto> getMicroServicesStatus() {
         List<MicroServiceDto>microServiceDtos= new ArrayList<>();
         List<String>serviceNames=discoveryClient.getServices();
-        serviceNames.add("apigateway");
+        serviceNames.add("system");
         for(MicroServiceEntity microServiceEntity:microServiceRepository.findAll()){
             if(serviceNames.contains(microServiceEntity.getEurekaServiceName().toLowerCase(Locale.ROOT))){
                 microServiceDtos.add(new MicroServiceDto(microServiceEntity.getEurekaServiceName(),

@@ -15,13 +15,13 @@ import {
 })
 export class ProcessService {
 
-  private loadProcessProtocol = environment.uri + ':9000/api/protocol/load/';
-  private processProtocolUpdateCommentUrl = environment.uri + ':9000/api/protocol/comment/update';
-  private processProtocolCloseUrl = environment.uri + ':9000/api/protocol/close/';
-  private processProtocolCreateUrl = environment.uri + ':9000/api/protocol/create/';
-  private databaseProcessStartUrl = environment.uri + ':9000/api/process/newJob';
-  private databaseProcessSortUrl = environment.uri + ':9000/api/process/sort';
-  private databaseProcessesUrl = environment.uri + ':9000/api/process/'
+  private loadProcessProtocol = environment.uri + ':9000/api/system/process/controller/load/';
+  private processProtocolUpdateCommentUrl = environment.uri + ':9000/api/system/process/protocol/comment/update';
+  private processProtocolCloseUrl = environment.uri + ':9000/api/system/process/protocol/close/';
+  private processProtocolCreateUrl = environment.uri + ':9000/api/system/process/protocol/create/';
+  private databaseProcessStartUrl = environment.uri + ':9000/api/system/process/newJob';
+  private databaseProcessSortUrl = environment.uri + ':9000/api/system/process/sort';
+  private databaseProcessesUrl = environment.uri + ':9000/api/system/process'
 
   constructor(private http: HttpClient) {
   }

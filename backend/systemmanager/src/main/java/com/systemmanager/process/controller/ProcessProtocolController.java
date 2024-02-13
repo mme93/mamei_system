@@ -16,18 +16,16 @@ import java.util.List;
 public class ProcessProtocolController {
 
     private final TaskProcessProtocolService taskProcessProtocolService;
-    //private final UserService userService;
 
     @Autowired
-    public ProcessProtocolController(TaskProcessProtocolService taskProcessProtocolService //, UserService userService
+    public ProcessProtocolController(TaskProcessProtocolService taskProcessProtocolService
     ) {
         this.taskProcessProtocolService = taskProcessProtocolService;
-        //this.userService = userService;
     }
 
-    @PostMapping("/create/{task_signature}")
-    public ResponseEntity createTask(@PathVariable String task_signature) {
-       // taskProcessProtocolService.createTaskProtocol(task_signature, userService.getCurrentUsername());
+    @PostMapping("/create/{task_signature}/{currentUsername}")
+    public ResponseEntity createTask(@PathVariable String task_signature, @PathVariable String currentUsername) {
+        taskProcessProtocolService.createTaskProtocol(task_signature, currentUsername);
         return new ResponseEntity(HttpStatus.OK);
     }
 
