@@ -8,6 +8,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SystemManagerService {
@@ -27,4 +29,23 @@ public class SystemManagerService {
                 .bodyToMono(String.class).block();
     }
 
+    public Object getMicroServiceStatus(String microServiceName) {
+        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_microservices_status+"/"+microServiceName;
+        return webClient
+                .build()
+                .get()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(Object.class).block();
+    }
+
+    public List<Object> getMicroServicesStatus() {
+        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_microservices_status;
+        return webClient
+                .build()
+                .get()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(List.class).block();
+    }
 }
