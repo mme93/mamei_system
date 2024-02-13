@@ -59,7 +59,7 @@ public class SystemManagerService {
     }
 
     public List<Object> getProcessElementUI() {
-        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_microservices_status;
+        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_process_ui;
         return webClient
                 .build()
                 .get()
@@ -69,17 +69,18 @@ public class SystemManagerService {
     }
 
     public Object createSortedExecuteProcessUI(List<Object> processList) {
-        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_microservices_status;
+        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_sort_process;
         return webClient
                 .build()
-                .get()
+                .put()
                 .uri(uri)
+                .bodyValue(processList)
                 .retrieve()
                 .bodyToMono(Object.class).block();
     }
 
     public void setDefault() {
-        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_microservices_status;
+        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_process_set_default;
         webClient
                 .build()
                 .get()

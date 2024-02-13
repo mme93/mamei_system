@@ -8,5 +8,7 @@ public class SystemManagerRouterTable {
     public static final String uri_system_get_task_protocol = "/system/protocol/";
     public static final String uri_system_get_load_task_protocol = "/system/protocol/load";
     public static final String uri_system_post_comment = "/system/protocol/comment/update";
-
+    public static final String uri_system_get_process_ui = "/system/process/";
+    public static final String uri_system_get_sort_process = "/system/process/sort";
+    public static final String uri_system_get_process_set_default= "/system/process/set_default";
 }
