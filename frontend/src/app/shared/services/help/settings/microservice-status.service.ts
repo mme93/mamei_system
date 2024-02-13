@@ -8,7 +8,7 @@ import {MicroService} from "../../../model/MicroSerivce";
 })
 export class MicroserviceStatusService {
 
-  private microServiceStatusUrl = environment.uri + ':9000/api/service_status';
+  private microServiceStatusUrl = environment.uri + ':9000/api/system/service_status';
 
   constructor(private http: HttpClient) {
   }
