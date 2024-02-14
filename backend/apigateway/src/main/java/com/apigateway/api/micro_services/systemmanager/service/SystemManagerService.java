@@ -49,11 +49,12 @@ public class SystemManagerService {
 
 
     public Boolean startProcess(Object process) {
-        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_microservices_status;
+        String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_process_new_job;
         return webClient
                 .build()
-                .get()
+                .post()
                 .uri(uri)
+                .bodyValue(process)
                 .retrieve()
                 .bodyToMono(Boolean.class).block();
     }
@@ -93,7 +94,7 @@ public class SystemManagerService {
         String uri = clientService.getSystemClientAdress() + SystemManagerRouterTable.uri_system_get_create_task+"/"+task_signature+"/"+currentUsername;
         webClient
                 .build()
-                .get()
+                .post()
                 .uri(uri)
                 .retrieve()
                 .bodyToMono(Void.class).block();

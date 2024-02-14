@@ -15,7 +15,7 @@ import {
 })
 export class ProcessService {
 
-  private loadProcessProtocol = environment.uri + ':9000/api/system/process/controller/load/';
+  private loadProcessProtocol = environment.uri + ':9000/api/system/process/protocol/load/';
   private processProtocolUpdateCommentUrl = environment.uri + ':9000/api/system/process/protocol/comment/update';
   private processProtocolCloseUrl = environment.uri + ':9000/api/system/process/protocol/close/';
   private processProtocolCreateUrl = environment.uri + ':9000/api/system/process/protocol/create/';
