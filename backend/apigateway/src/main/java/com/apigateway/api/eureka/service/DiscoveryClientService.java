@@ -31,6 +31,10 @@ public class DiscoveryClientService {
         return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.DashboardAPI).get(0).getUri().toString();
     }
 
+    public String getMassDataPoolClientAdress(){
+        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.MassDataPoolAPI).get(0).getUri().toString();
+    }
+
     public String getGamesManagerClientAdress(){
         return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.GamesManager).get(0).getUri().toString();
     }

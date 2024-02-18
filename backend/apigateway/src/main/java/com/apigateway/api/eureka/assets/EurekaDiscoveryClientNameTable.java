@@ -16,6 +16,7 @@ public class EurekaDiscoveryClientNameTable {
     public static final String HealthManagerAPI = "HEALTHMANAGER";
     public static final String SecurityGatewayAPI = "SECURITYGATEWAY";
     public static final String DataStorageAPI = "DATASTORAGE";
+    public static final String MassDataPoolAPI = "MASSDATAPOOL";
 
     //Project Services Range 9050-9099
     public static final String UserAPI = "USER";
@@ -26,8 +27,8 @@ public class EurekaDiscoveryClientNameTable {
     public static final String Mameie_FSM = "MAMEI_FSM";
 
     public static final List<String> eurekaDiscoverClientNameList = asList("APIGATEWAY", "DASHBOARD", "DATASTORAGE",
-            "GAMESMANAGER", "HEALTHMANAGER", "MAMEI_FSM", "SECURITYGATEWAY", "SHOPPINGLIST", "SUDOKU", "SYSTEM", "USER");
+            "GAMESMANAGER", "HEALTHMANAGER", "MAMEI_FSM", "SECURITYGATEWAY", "SHOPPINGLIST", "SUDOKU", "SYSTEM", "USER",MassDataPoolAPI);
 
     public static final String eurekaDiscoverClientNames = "APIGATEWAY, DASHBOARD, DATASTORAGE, GAMESMANAGER, HEALTHMANAGER, "+
-            "MAMEI_FSM, SECURITYGATEWAY, SHOPPINGLIST, SUDOKU, SYSTEM, USER";
+            "MAMEI_FSM, SECURITYGATEWAY, SHOPPINGLIST, SUDOKU, SYSTEM, USER, MassDataPoolAPI";
 }
