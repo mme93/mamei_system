@@ -5,6 +5,6 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 
 FROM openjdk:17-alpine
-COPY --from=build /home/app/target/massdatapool-0.0.1-SNAPSHOT.jar /usr/local/lib/datastoragemanager.jar
+COPY --from=build /home/app/target/massdatapool-0.0.1-SNAPSHOT.jar /usr/local/lib/massdatapool.jar
 EXPOSE 9005
 ENTRYPOINT ["java","-jar","/usr/local/lib/massdatapool.jar"]
