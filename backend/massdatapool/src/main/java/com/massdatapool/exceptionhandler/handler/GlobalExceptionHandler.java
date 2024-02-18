@@ -1,4 +1,4 @@
-package com.massdatapool.exceptionhandler;
+package com.massdatapool.exceptionhandler.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
