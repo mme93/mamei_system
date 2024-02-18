@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: massdatapool
+server:
+  port: 9006
+  servlet:
+    context-path: /massdatapool
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true

@@ -29,6 +29,7 @@ Furthermore, the project in the backend directory the Docker-Compose file can be
 | HealtmanagerApplication        | 9003 | HEALTHMANAGER             |
 | SecuritygatewayApplication     | 9004 | SECURITYGATEWAY           |
 | SecuritygatewayApplication     | 9005 | SECURITYGATEWAY           |
+| MassdatapoolApplication        | 9006 | MASSDATAPOOL              |
 
 ### Project Services Range 9050-9099
 

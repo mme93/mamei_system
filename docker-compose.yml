@@ -43,6 +43,17 @@ services:
     environment:
       - EUREKA_URI=http://serviceregistry:8761/eureka
 
+  massdatapool:
+    build:
+      context: backend/massdatapool
+      dockerfile: Dockerfile
+    ports:
+      - "9006:9006"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
   user:
     build:
       context: backend/user
