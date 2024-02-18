@@ -16,6 +16,8 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { ScopeDialogComponent } from './process/dialoag/scope-dialog/scope-dialog.component';
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import { LogfilesComponent } from './logfiles/logfiles.component';
+import { CronjobsComponent } from './cronjobs/cronjobs.component';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
   declarations: [
     ProcessComponent,
     SystemUserComponent,
-    ScopeDialogComponent
+    ScopeDialogComponent,
+    LogfilesComponent,
+    CronjobsComponent
   ]
 })
 export class AdminModule {
