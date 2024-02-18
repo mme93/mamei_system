@@ -40,7 +40,9 @@ import { CronjobsComponent } from './cronjobs/cronjobs.component';
   ],
   exports: [
     SystemUserComponent,
-    ProcessComponent
+    ProcessComponent,
+    CronjobsComponent,
+    LogfilesComponent
   ],
   declarations: [
     ProcessComponent,

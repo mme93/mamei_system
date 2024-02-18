@@ -1,4 +1,14 @@
 <article style="padding-bottom: 30px">
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span matLine>Logfiles</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-logfiles></app-logfiles>
+  </mat-expansion-panel>
+
   <mat-expansion-panel >
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -8,7 +18,7 @@
     <app-system-user></app-system-user>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="true">
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span matLine>Start Process-Jobs</span>
@@ -16,6 +26,16 @@
     </mat-expansion-panel-header>
     <app-process></app-process>
   </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span matLine>CronJobs</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-cronjobs></app-cronjobs>
+  </mat-expansion-panel>
+
 </article>
 
 
