@@ -60,7 +60,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch (ExpiredJwtException e) {
             userLogger.error("Token is Expired: "+e.fillInStackTrace());
-            e.printStackTrace();
         }
 
         filterChain.doFilter(request, response);
