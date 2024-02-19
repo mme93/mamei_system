@@ -22,28 +22,11 @@
         </triggeringPolicy>
     </appender>
 
-    <appender name="FILE-EXCEPTION" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/exception_${myTimestamp}.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{15} - %msg%n</Pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/exception_%i.log</fileNamePattern>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>10MB</maxFileSize>
-        </triggeringPolicy>
-    </appender>
 
 
     <logger name="user" level="info">
         <appender-ref ref="FILE-USER"/>
     </logger>
-
-    <logger name="general.exception.error" level="error">
-        <appender-ref ref="FILE-EXCEPTION"/>
-    </logger>
-
 
     <root level="info">
         <appender-ref ref="STDOUT"/>
