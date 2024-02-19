@@ -27,7 +27,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserService userService;
-    private Logger logger= LoggerFactory.getLogger("com.example.info");
+    private Logger userLogger= LoggerFactory.getLogger("user");
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -54,7 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 context.setAuthentication(authToken);
                 SecurityContextHolder.setContext(context);
-                logger.info("Update Token with Username: "+authToken.getName());
+                userLogger.info("Update Token with Username: "+authToken.getName());
             }
         }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
+    <timestamp key="myTimestamp" datePattern="dd-MM-yyyy"/>
     <property name="LOG_PATH" value="backend/apigateway/src/main/resources/logs"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -9,13 +9,13 @@
         </encoder>
     </appender>
 
-    <appender name="FILE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/info.log</file>
+    <appender name="FILE-USER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/user_${myTimestamp}.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{15} - %msg%n</Pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/info_%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/user_%i.log</fileNamePattern>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <maxFileSize>10MB</maxFileSize>
@@ -23,7 +23,7 @@
     </appender>
 
     <appender name="FILE-EXCEPTION" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/exception.log</file>
+        <file>${LOG_PATH}/exception_${myTimestamp}.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{15} - %msg%n</Pattern>
         </encoder>
@@ -36,8 +36,8 @@
     </appender>
 
 
-    <logger name="com.example.info" level="info">
-        <appender-ref ref="FILE-INFO"/>
+    <logger name="user" level="info">
+        <appender-ref ref="FILE-USER"/>
     </logger>
 
     <logger name="general.exception.error" level="error">
