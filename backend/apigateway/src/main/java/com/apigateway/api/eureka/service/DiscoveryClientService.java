@@ -47,6 +47,14 @@ public class DiscoveryClientService {
         return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.DataStorageAPI).get(0).getUri().toString();
     }
 
+    public String getHealtManagerAdressByName(){
+        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.HealthManagerAPI).get(0).getUri().toString();
+    }
+
+    public String getShoppingListAdressByName(){
+        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.ShoppinglistAPI).get(0).getUri().toString();
+    }
+
     public String getClientAdressByName(String clientName){
         return discoveryClient.getInstances(clientName).get(0).getUri().toString();
     }
