@@ -26,9 +26,10 @@ public class EurekaDiscoveryClientNameTable {
     public static final String GamesManager = "GAMESMANAGER";
     public static final String Mameie_FSM = "MAMEI_FSM";
 
-    public static final List<String> eurekaDiscoverClientNameList = asList("APIGATEWAY", "DASHBOARD", "DATASTORAGE",
-            "GAMESMANAGER", "HEALTHMANAGER", "MAMEI_FSM", "SECURITYGATEWAY", "SHOPPINGLIST", "SUDOKU", "SYSTEM", "USER",MassDataPoolAPI);
+    public static final List<String> eurekaDiscoverClientNameList = asList(ApiGateWay, DashboardAPI, DataStorageAPI,
+            GamesManager, HealthManagerAPI, Mameie_FSM, SecurityGatewayAPI, ShoppinglistAPI, SudokuAPI, SystemManagerAPI,
+            UserAPI, MassDataPoolAPI);
 
-    public static final String eurekaDiscoverClientNames = "APIGATEWAY, DASHBOARD, DATASTORAGE, GAMESMANAGER, HEALTHMANAGER, "+
-            "MAMEI_FSM, SECURITYGATEWAY, SHOPPINGLIST, SUDOKU, SYSTEM, USER, MassDataPoolAPI";
+    public static final String eurekaDiscoverClientNames = "APIGATEWAY, DASHBOARD, DATASTORAGE, GAMESMANAGER, HEALTHMANAGER, " +
+            "MAMEI_FSM, SECURITYGATEWAY, SHOPPINGLIST, SUDOKU, SYSTEM, USER, MASSDATAPOOL";
 }
