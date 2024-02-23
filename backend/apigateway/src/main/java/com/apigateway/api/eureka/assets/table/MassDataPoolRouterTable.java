@@ -1,7 +1,13 @@
 package com.apigateway.api.eureka.assets.table;
 
+/**
+ * Router table for Mass Data Pool service.
+ */
 public class MassDataPoolRouterTable {
-    public static final String RESTART_END_POINT="/massdatapool/restart/";
-    public static final String LOAD_INFO_LOG="/massdatapool/info-log";
-    public static final String LOAD_EXCEPTION_LOG="/massdatapool/restart/";
+    /** URI for restarting the endpoint. */
+    public static final String RESTART_END_POINT = "/massdatapool/restart/";
+
+    /** URI for loading information logs. */
+    public static final String LOAD_INFO_LOG = "/massdatapool/info-log";
+
 }
