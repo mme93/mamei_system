@@ -171,6 +171,37 @@ public class DiscoveryClientServiceTest {
         Assertions.assertEquals(mameie_fsm, resultAddress);
     }
 
+    /**
+     * Tests the existence of Eureka discovery clients by name.
+     */
+    @Test
+    public void testExistEurekaDiscoveryClientByName() {
+        for (String clientName : EurekaDiscoveryClientNameTable.eurekaDiscoverClientNameList) {
+            Mockito.when(discoveryClient.getServices()).thenReturn(EurekaDiscoveryClientNameTable.eurekaDiscoverClientNameList);
+            Assertions.assertTrue(discoveryClientService.existEurekaDiscoveryClientByName(clientName));
+        }
+    }
+
+    /**
+     * Tests the non-existence of Eureka discovery clients by name.
+     */
+    @Test
+    public void testNotExistEurekaDiscoveryClientByName() {
+        Assertions.assertFalse(discoveryClientService.existEurekaDiscoveryClientByName("Test"));
+    }
+
+    /**
+     * Tests getting the client address by name.
+     */
+    @Test
+    public void testGetClientAdressByName() {
+        for (String clientName : EurekaDiscoveryClientNameTable.eurekaDiscoverClientNameList) {
+            mockDiscoveryClient(clientName);
+            Assertions.assertEquals(clientName, discoveryClientService.getClientAdressByName(clientName));
+        }
+
+    }
+
 
     /**
      * Mocks the behavior of the DiscoveryClient for a given service name.
