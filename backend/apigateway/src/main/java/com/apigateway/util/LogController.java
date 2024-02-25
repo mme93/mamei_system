@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Controller class for handling log-related requests.
+ */
 @RestController
 @RequestMapping("/log")
 public class LogController {
@@ -21,6 +24,11 @@ public class LogController {
             LocalDate.now(ZoneId.of("Europe/Berlin")).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
             +".log";
 
+    /**
+     * Endpoint to retrieve the user log file.
+     *
+     * @return ResponseEntity containing the user log file content.
+     */
     @GetMapping("/user")
     public ResponseEntity<byte[]> getUserLog() {
 

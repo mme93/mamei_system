@@ -1,6 +1,5 @@
 package com.apigateway.security.config;
 
-
 import com.apigateway.security.filter.JwtAuthenticationFilter;
 import com.apigateway.security.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,14 +22,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-
+/**
+ * Configuration class for security settings.
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration {
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
 
+    /**
+     * Configures security filter chain.
+     * @param http HttpSecurity object to configure security settings.
+     * @return SecurityFilterChain instance representing the configured security filter chain.
+     * @throws Exception if an error occurs during configuration.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -48,11 +56,19 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    /**
+     * Creates a BCrypt password encoder bean.
+     * @return BCryptPasswordEncoder instance for password encoding.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Creates an authentication provider bean.
+     * @return AuthenticationProvider instance for authentication.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -61,12 +77,22 @@ public class SecurityConfiguration {
         return authProvider;
     }
 
+    /**
+     * Creates an authentication manager bean.
+     * @param config AuthenticationConfiguration object for authentication configuration.
+     * @return AuthenticationManager instance for managing authentication.
+     * @throws Exception if an error occurs during creation.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
             throws Exception {
         return config.getAuthenticationManager();
     }
 
+    /**
+     * Configures CORS settings.
+     * @return WebMvcConfigurer instance for configuring CORS.
+     */
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {

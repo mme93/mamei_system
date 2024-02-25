@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller class responsible for handling security-related endpoints.
+ */
 @RestController
 @RequestMapping("/security")
 public class SecurityGatewayController {
@@ -20,11 +23,24 @@ public class SecurityGatewayController {
         this.securityGatewayService = securityGatewayService;
     }
 
+    /**
+     * Handles the login request.
+     *
+     * @param request The login request object.
+     * @return ResponseEntity containing the result of the login operation.
+     */
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody Object request){
+    public ResponseEntity<Object> login(@RequestBody Object request) {
         return new ResponseEntity<>(securityGatewayService.login(request), HttpStatus.OK);
     }
 
+
+    /**
+     * Handles the registration request.
+     *
+     * @param request The registration request object.
+     * @throws Exception if registration fails.
+     */
     @PostMapping("/registration")
     public void registration(@RequestBody Object request) throws Exception {
         securityGatewayService.registration(request);

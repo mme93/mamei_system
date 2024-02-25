@@ -1,4 +1,4 @@
-package com.apigateway.api.eureka.service.table;
+package com.apigateway.api.eureka.assets;
 
 import com.apigateway.api.eureka.assets.EurekaDiscoveryClientNameTable;
 import org.junit.Test;

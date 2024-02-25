@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Service class for generating and validating JWT tokens.
+ */
 @Service
 public class JwtService {
     @Value("${token.signing.key}")

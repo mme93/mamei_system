@@ -22,6 +22,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * Filter class for JWT authentication.
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -30,6 +33,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final UserService userService;
     private Logger userLogger = LoggerFactory.getLogger("user");
 
+
+    /**
+     * Method to perform authentication using JWT token.
+     * @param request HttpServletRequest object representing the request.
+     * @param response HttpServletResponse object representing the response.
+     * @param filterChain FilterChain object for chaining multiple filters.
+     * @throws ServletException if an exception occurs during the servlet processing.
+     * @throws IOException if an I/O error occurs during the servlet processing.
+     */
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)

@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Service class for managing user-related operations.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -19,15 +22,32 @@ public class UserService {
     private final SecurityUserEntityRepository securityUserEntityRepository;
     private final JwtService jwtService;
 
+    /**
+     * Retrieves a UserDetailsService implementation for the specified username.
+     *
+     * @return A UserDetailsService implementation.
+     */
     public UserDetailsService userDetailsService() {
         return username -> securityUserEntityRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
+    /**
+     * Loads a user by username.
+     *
+     * @param securityUserEntity The SecurityUserEntity object containing the username.
+     * @return An optional containing the SecurityUserEntity if found, empty otherwise.
+     */
     public Optional<SecurityUserEntity> loadUser(SecurityUserEntity securityUserEntity) {
         return securityUserEntityRepository.findByUsername(securityUserEntity.getUsername());
     }
 
+    /**
+     * Generates a new JWT token based on an existing token.
+     *
+     * @param jwtToken The existing JWT token.
+     * @return The new JWT token.
+     */
     public JwtToken generateNewToken(JwtToken jwtToken) {
         String token = jwtToken.getToken();
         if (token.startsWith("Bearer ")) {
@@ -40,7 +60,11 @@ public class UserService {
         return new JwtToken(jwtService.generateToken(securityUserEntityRepository.findByUsername(userName).get()));
     }
 
-
+    /**
+     * Retrieves the username of the currently authenticated user.
+     *
+     * @return The username of the currently authenticated user, or null if not authenticated.
+     */
     public String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
@@ -49,6 +73,11 @@ public class UserService {
         return null;
     }
 
+    /**
+     * Retrieves the ID of the currently authenticated user.
+     *
+     * @return The ID of the currently authenticated user, or -1 if not authenticated or user not found.
+     */
     public int getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<SecurityUserEntity>user=securityUserEntityRepository.findByUsername(authentication.getName());

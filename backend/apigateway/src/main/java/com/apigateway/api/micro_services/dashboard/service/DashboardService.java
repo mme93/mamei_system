@@ -9,6 +9,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
+/**
+ * Service class responsible for interacting with the dashboard microservice.
+ */
 @Service
 @RequiredArgsConstructor
 public class DashboardService {
@@ -17,6 +20,11 @@ public class DashboardService {
     private final WebClient.Builder webClient;
     private final UserService userService;
 
+    /**
+     * Creates a new task via the dashboard microservice.
+     * @param task The task object to be created.
+     * @return The response object from the dashboard microservice.
+     */
     public Object createTask(Object task) {
         String uri = clientService.getDashboardClientAdress()+ DashboardRouterTable.URI_DASH_BOARD_CREATE_TASK;
         return webClient
@@ -29,7 +37,12 @@ public class DashboardService {
                 .retrieve()
                 .bodyToMono(String.class).block();
     }
-    //TODO überprüfen woher die ID kommt, da sie nicht aus dem SecurityContext kommen kann
+
+    /**
+     * Retrieves a task by its ID from the dashboard microservice.
+     * @param id The ID of the task to retrieve.
+     * @return The task object corresponding to the given ID.
+     */
     public Object getTaskById(Long id){
         String uri = clientService.getDashboardClientAdress()+ DashboardRouterTable.URI_DASH_BOARD_GET_TASK_BY_ID+id;
         return webClient
@@ -40,8 +53,11 @@ public class DashboardService {
                 .bodyToMono(Object.class).block();
     }
 
+    /**
+     * Retrieves all tasks from the dashboard microservice.
+     * @return A list of task objects.
+     */
     public List<Object> getAllTask(){
-
         String uri = clientService.getDashboardClientAdress()+ DashboardRouterTable.URI_DASH_BOARD_GET_ALL_TASK;
         return webClient
                 .build()

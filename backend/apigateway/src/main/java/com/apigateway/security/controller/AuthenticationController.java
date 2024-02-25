@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controller class handling authentication-related endpoints.
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
@@ -21,6 +24,12 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final JwtService jwtService;
 
+    /**
+     * Constructor for AuthenticationController.
+     * @param userService UserService object for user-related operations.
+     * @param authenticationService AuthenticationService object for authentication-related operations.
+     * @param jwtService JwtService object for JWT-related operations.
+     */
     @Autowired
     public AuthenticationController(UserService userService, AuthenticationService authenticationService, JwtService jwtService) {
         this.userService = userService;
@@ -28,6 +37,11 @@ public class AuthenticationController {
         this.jwtService = jwtService;
     }
 
+    /**
+     * Endpoint for user login.
+     * @param securityUserEntity SecurityUserEntity object representing the user credentials.
+     * @return ResponseEntity containing a JwtToken if login is successful, or NOT_FOUND status if user not found.
+     */
     @PostMapping("/login")
     public ResponseEntity<JwtToken> login(@RequestBody SecurityUserEntity securityUserEntity) {
         Optional<SecurityUserEntity> userOpt = userService.loadUser(securityUserEntity);
@@ -38,6 +52,11 @@ public class AuthenticationController {
 
     }
 
+    /**
+     * Endpoint for user registration.
+     * @param securityUserEntity SecurityUserEntity object representing the user details.
+     * @return ResponseEntity with OK status if registration is successful, or CONFLICT status if registration fails.
+     */
     @PostMapping("/registration")
     public ResponseEntity registration(@RequestBody SecurityUserEntity securityUserEntity) {
         if (authenticationService.registration(securityUserEntity)) {
@@ -46,6 +65,11 @@ public class AuthenticationController {
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
+    /**
+     * Endpoint for checking if a JWT token is expired.
+     * @param jwtToken JwtToken object representing the JWT token.
+     * @return ResponseEntity containing a new JwtToken if token is not expired, or FORBIDDEN status if token is expired.
+     */
     @PostMapping("/isTokenExpired")
     public ResponseEntity<JwtToken> isTokenExpired(@RequestBody JwtToken jwtToken){
        try{
@@ -56,6 +80,10 @@ public class AuthenticationController {
 
     }
 
+    /**
+     * Endpoint for testing server availability.
+     * @return ResponseEntity with a "Ping" message and OK status.
+     */
     @GetMapping("/ping")
     public ResponseEntity<String> ping() {
         return new ResponseEntity<>("Ping", HttpStatus.OK);
