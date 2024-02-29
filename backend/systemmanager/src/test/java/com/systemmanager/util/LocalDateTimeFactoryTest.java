@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Unit tests for the LocalDateTimeFactory class.
+ */
 @SpringBootTest(classes = {LocalDateTimeFactory.class})
 public class LocalDateTimeFactoryTest {
 
@@ -20,17 +23,26 @@ public class LocalDateTimeFactoryTest {
     @InjectMocks
     private LocalDateTimeFactory localDateTimeFactory;
 
+    /**
+     * Initializes Mockito annotations before each test method.
+     */
     @BeforeEach
     public void init() {
         MockitoAnnotations.openMocks(this);
     }
 
+    /**
+     * Tests the generateLocalTimeDate method to validate the format of the generated local date and time string.
+     */
     @Test
     public void testGenerateLocalTimeDateValidateFormat() {
         String resultLocalTimeDate = localDateTimeFactory.generateLocalTimeDate();
         Assertions.assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm:ss.SS")), resultLocalTimeDate);
     }
 
+    /**
+     * Tests the getDuration method with valid start and end date times.
+     */
     @Test
     public void testGetDurationOnlyTime() {
         String startDate = "2024-02-25/13:40:00.13";
@@ -40,6 +52,9 @@ public class LocalDateTimeFactoryTest {
         Assertions.assertEquals(resultDuration, expectedDuration);
     }
 
+    /**
+     * Tests the getDuration method with start and end dates differing by exactly one year.
+     */
     @Test
     public void testGetDurationOnlyDate() {
         String startDate = "2024-02-25/12:00:00.00";
@@ -49,6 +64,9 @@ public class LocalDateTimeFactoryTest {
         Assertions.assertEquals(resultDuration, expectedDurationOneYearAsHour);
     }
 
+    /**
+     * Tests the getDuration method with invalid date-time format, expecting a DateTimeParseException.
+     */
     @Test
     public void testGetDurationWithDateTimeParseException() {
         String startDate = "2024-02-25/12:01:00.00";
@@ -60,6 +78,9 @@ public class LocalDateTimeFactoryTest {
                 , thrown.getMessage());
     }
 
+    /**
+     * Tests the getDuration method with null start and end date-time strings, expecting a LocalTimeNullPointerException.
+     */
     @Test
     public void testGetDurationWithNullPointerException() {
         LocalTimeNullPointerException thrown = Assertions.assertThrows(LocalTimeNullPointerException.class, () ->

@@ -41,7 +41,8 @@ public class MicroServicesRestartService {
 
     public boolean isOnWhiteList(String microServiceName) {
         return asList(
-                EurekaDiscoveryClientNameTable.ApiGateWay
+                EurekaDiscoveryClientNameTable.ApiGateWay,
+                EurekaDiscoveryClientNameTable.SystemManagerAPI
         )
                 .contains(microServiceName);
     }
@@ -55,14 +56,15 @@ public class MicroServicesRestartService {
                 return true;
             }
             case EurekaDiscoveryClientNameTable.DataStorageAPI -> {
-                return x(EurekaDiscoveryClientNameTable.DataStorageAPI, DatastorageManagerRouteTable.RESTART_END_POINT);
+                return restartDataStorageApi(EurekaDiscoveryClientNameTable.DataStorageAPI, DatastorageManagerRouteTable.RESTART_END_POINT);
             }
             default -> throw new NotFoundException("No Microservice found by name: " + microServiceName);
         }
         return true;
     }
 
-    public boolean x(String clientName, String restartEndpoint) {
+    //TODO: Returned immer true!
+    public boolean restartDataStorageApi(String clientName, String restartEndpoint) {
         if (!discoveryClientService.existEurekaDiscoveryClientByName(clientName.toLowerCase(Locale.ROOT))) {
             return false;
         }
