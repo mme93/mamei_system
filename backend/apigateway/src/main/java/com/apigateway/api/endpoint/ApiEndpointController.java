@@ -2,7 +2,7 @@ package com.apigateway.api.endpoint;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.context.restart.RestartEndpoint;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +19,7 @@ public class ApiEndpointController {
     /**
      * Restarts the application.
      */
-    @GetMapping("/restart")
+    @PostMapping("/restart")
     public void restart(){
         restartEndpoint.restart();
     }
