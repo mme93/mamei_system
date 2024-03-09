@@ -30,4 +30,6 @@ public class EurekaDiscoveryClientNameTable {
 
     public static final String eurekaDiscoverClientNames = "APIGATEWAY, DASHBOARD, DATASTORAGE, GAMESMANAGER, HEALTHMANAGER, "+
             "MAMEI_FSM, SECURITYGATEWAY, SHOPPINGLIST, SUDOKU, SYSTEM, USER";
+
+    public static final List<String> restartDiscoverClientNames = asList(ApiGateWay,SystemManagerAPI,DataStorageAPI,DashboardAPI);
 }

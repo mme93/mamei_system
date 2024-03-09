@@ -3,6 +3,7 @@ package com.systemmanager.microservice.restart.service;
 
 import com.systemmanager.eureka.assets.EurekaDiscoveryClientNameTable;
 import com.systemmanager.eureka.assets.table.ApiGatewayRouterTable;
+import com.systemmanager.eureka.assets.table.DashboardRouterTable;
 import com.systemmanager.eureka.assets.table.DatastorageManagerRouteTable;
 import com.systemmanager.eureka.service.DiscoveryClientService;
 import jakarta.ws.rs.NotFoundException;
@@ -51,23 +52,21 @@ public class MicroServicesRestartService {
     public boolean callRestart(String microServiceName) {
         switch (microServiceName) {
             case EurekaDiscoveryClientNameTable.SystemManagerAPI -> restartEndpoint.restart();
-            case EurekaDiscoveryClientNameTable.DashboardAPI,
-                    EurekaDiscoveryClientNameTable.GamesManager,
-                    EurekaDiscoveryClientNameTable.HealthManagerAPI -> {
-                return true;
+            case EurekaDiscoveryClientNameTable.DashboardAPI -> {
+                return restartMicroService(EurekaDiscoveryClientNameTable.DashboardAPI, DashboardRouterTable.RESTART_END_POINT);
             }
             case EurekaDiscoveryClientNameTable.ApiGateWay -> {
-                return restartDataStorageApi(EurekaDiscoveryClientNameTable.ApiGateWay, ApiGatewayRouterTable.RESTART_END_POINT);
+                return restartMicroService(EurekaDiscoveryClientNameTable.ApiGateWay, ApiGatewayRouterTable.RESTART_END_POINT);
             }
             case EurekaDiscoveryClientNameTable.DataStorageAPI -> {
-                return restartDataStorageApi(EurekaDiscoveryClientNameTable.DataStorageAPI, DatastorageManagerRouteTable.RESTART_END_POINT);
+                return restartMicroService(EurekaDiscoveryClientNameTable.DataStorageAPI, DatastorageManagerRouteTable.RESTART_END_POINT);
             }
             default -> throw new NotFoundException("No Microservice found by name: " + microServiceName);
         }
         return false;
     }
 
-    public boolean restartDataStorageApi(String clientName, String restartEndpoint) {
+    public boolean restartMicroService(String clientName, String restartEndpoint) {
         if (!discoveryClientService.existEurekaDiscoveryClientByName(clientName.toLowerCase(Locale.ROOT))) {
             return false;
         }

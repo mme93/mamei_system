@@ -7,19 +7,24 @@ import com.systemmanager.process.model.process.EProcessTyp;
 import com.systemmanager.process.model.process.Process;
 import com.systemmanager.process.model.process.ProcessDefaultNameTable;
 import com.systemmanager.process.repository.ProcessRepository;
+import com.systemmanager.util.ConstantHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.systemmanager.eureka.assets.EurekaDiscoveryClientNameTable.restartDiscoverClientNames;
+
 @Service
 public class ProcessDefaultDBService implements IDefaultDBService {
 
     private final ProcessRepository processRepository;
+    private final ConstantHelper constantHelper;
 
     @Autowired
-    public ProcessDefaultDBService(ProcessRepository processRepository) {
+    public ProcessDefaultDBService(ProcessRepository processRepository, ConstantHelper constantHelper) {
         this.processRepository = processRepository;
+        this.constantHelper = constantHelper;
     }
 
     public boolean updateProcessDependentArray() {
@@ -96,7 +101,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "Reset Table data to default",
                     false,
                     "/",
-                    tableNames));
+                    constantHelper.arrayListToString(DatabaseTableNames.defaultTableNameList)));
         }
         if (!processRepository.existsByProcessName(ProcessDefaultNameTable.DELETE_TABLE)) {
             processRepository.save(new Process(
@@ -132,7 +137,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "Restart Microservice",
                     false,
                     "/",
-                    eurekaDiscoverClientNames));
+                    constantHelper.arrayListToString(restartDiscoverClientNames)));
         }
         if (!processRepository.existsByProcessName(ProcessDefaultNameTable.CREATE_DEFAULT_DATASET)) {
             processRepository.save(new Process(
@@ -179,10 +184,6 @@ public class ProcessDefaultDBService implements IDefaultDBService {
         }
         processRepository.saveAll(processList);
         return true;
-    }
-
-    public void sortDependedProcessIdsFromProcess() {
-
     }
 
 }
