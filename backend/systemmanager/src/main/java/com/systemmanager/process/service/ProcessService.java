@@ -23,6 +23,9 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Service class for managing processes.
+ */
 @Service
 public class ProcessService {
 
@@ -49,10 +52,11 @@ public class ProcessService {
         this.localDateTimeFactory = localDateTimeFactory;
     }
 
-    public void deleteAllProcess(){
-        processRepository.deleteAll();
-    }
-
+    /**
+     * Starts a process.
+     * @param process the process to start
+     * @return true if the process started successfully, otherwise false
+     */
     public boolean startProcess(ExecuteProcess process) {
         if (processRuleService.isProcedure(process)) {
             return protocolService.createProcessProtocol(true, process, localDateTimeFactory.generateLocalTimeDate(), "");
@@ -78,6 +82,10 @@ public class ProcessService {
         return protocolService.createProcessProtocol(isPassed, process, start, localDateTimeFactory.generateLocalTimeDate());
     }
 
+    /**
+     * Retrieves a list of process element UI.
+     * @return a list of process element UI
+     */
     public List<ProcessElementUI> getProcessElementUI() {
         List<ProcessElementUI> processElementUIList = new ArrayList<>();
         for (Process process : processRepository.findAll()) {
@@ -98,6 +106,11 @@ public class ProcessService {
         return processElementUIList;
     }
 
+    /**
+     * Generates a list of strings from a comma-separated string.
+     * @param value the comma-separated string
+     * @return a list of strings
+     */
     public List<String> generateListFromString(String value) {
         if (value.contains("/")) {
             return asList();
@@ -112,6 +125,11 @@ public class ProcessService {
 
     }
 
+    /**
+     * Creates a sorted ExecuteProcessUI from a list of process element UI.
+     * @param processList the list of process element UI
+     * @return a sorted ExecuteProcessUI
+     */
     public ExecuteProcessUI createSortedExecuteProcessUI(List<ProcessElementUI> processList) {
         return processFactory.createExecuteProcessUI(processList);
     }

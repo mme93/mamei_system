@@ -1,6 +1,5 @@
 package com.systemmanager.microservice.status.service;
 
-import com.systemmanager.microservice.restart.service.MicroServicesRestartService;
 import com.systemmanager.microservice.status.model.dto.EServiceStatus;
 import com.systemmanager.microservice.status.model.dto.MicroServiceDto;
 import com.systemmanager.microservice.status.model.entity.MicroServiceEntity;

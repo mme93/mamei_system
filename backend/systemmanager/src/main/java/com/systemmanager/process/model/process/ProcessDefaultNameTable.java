@@ -16,8 +16,8 @@ public class ProcessDefaultNameTable {
     /*
     Table
      */
-    public final static String RESET_TO_DEFAULT_DATASET = "RESET_TO_DEFAULT_DATASET";
-    public final static String RESET_ALL_TO_DEFAULT_DATASET = "RESET_ALL_TO_DEFAULT_DATASET";
+    public final static String RESET_TO_DEFAULT_TABLE = "RESET_TO_DEFAULT_TABLE";
+    public final static String RESET_ALL_TO_DEFAULT_TABLE = "RESET_ALL_TO_DEFAULT_TABLE";
     public final static String DELETE_TABLE = "DELETE_TABLE";
 
 
@@ -27,6 +27,7 @@ public class ProcessDefaultNameTable {
     public final static String DELETE_DATASET="DELETE_DATASET";
     public final static String DELETE_DEFAULT_DATASET="DELETE_DEFAULT_DATASET";
     public final static String CREATE_DEFAULT_DATASET="CREATE_DEFAULT_DATASET";
+    public final static String RESET_SECURITY_USER_TO_DEFAULT_DATASET="RESET_SECURITY_USER_TO_DEFAULT_DATASET";
 
     /*
     MicroServices
@@ -40,7 +41,7 @@ public class ProcessDefaultNameTable {
     public final static String UPDATE_PROCESS_DEPENDED_ARRAY = "UPDATE_PROCESS_DEPENDED_ARRAY";
 
     public final static List<String>processTableNameList=asList(
-            RESET_TO_DEFAULT_DATASET,RESET_ALL_TO_DEFAULT_DATASET,CREATE_DEFAULT_DATASET
+            RESET_TO_DEFAULT_TABLE, RESET_ALL_TO_DEFAULT_TABLE,CREATE_DEFAULT_DATASET
     );
     public final static List<String>processDataSetNameList=asList(
             DELETE_DATASET,DELETE_DEFAULT_DATASET,CREATE_DEFAULT_DATASET
@@ -54,11 +55,11 @@ public class ProcessDefaultNameTable {
     );
 
     public final static List<String>processNameList=asList(
-            DELETE_DATASET,DELETE_DEFAULT_DATASET,RESET_TO_DEFAULT_DATASET,RESET_ALL_TO_DEFAULT_DATASET,RESTART_MICROSERVICE,
+            DELETE_DATASET,DELETE_DEFAULT_DATASET, RESET_TO_DEFAULT_TABLE, RESET_ALL_TO_DEFAULT_TABLE,RESTART_MICROSERVICE,
             DELETE_TABLE,CREATE_DEFAULT_DATASET
     );
 
     public final static List<String>procedureProcessNameList=asList(
-            RESET_TO_DEFAULT_DATASET
+            RESET_TO_DEFAULT_TABLE
     );
 }

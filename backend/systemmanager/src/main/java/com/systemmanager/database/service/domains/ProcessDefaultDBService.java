@@ -1,7 +1,6 @@
 package com.systemmanager.database.service.domains;
 
 import com.systemmanager.database.assets.DatabaseTableNames;
-import com.systemmanager.eureka.assets.EurekaDiscoveryClientNameTable;
 import com.systemmanager.process.model.process.*;
 import com.systemmanager.process.model.process.EProcessTyp;
 import com.systemmanager.process.model.process.Process;
@@ -15,29 +14,40 @@ import java.util.List;
 
 import static com.systemmanager.eureka.assets.EurekaDiscoveryClientNameTable.restartDiscoverClientNames;
 
+/**
+ * Service class for managing default data in the database.
+ */
 @Service
 public class ProcessDefaultDBService implements IDefaultDBService {
 
     private final ProcessRepository processRepository;
     private final ConstantHelper constantHelper;
 
+    /**
+     * Constructor for ProcessDefaultDBService.
+     * @param processRepository the repository for processes
+     * @param constantHelper utility class for constants
+     */
     @Autowired
     public ProcessDefaultDBService(ProcessRepository processRepository, ConstantHelper constantHelper) {
         this.processRepository = processRepository;
         this.constantHelper = constantHelper;
     }
 
-    public boolean updateProcessDependentArray() {
-
-        return true;
-    }
-
+    /**
+     * Deletes all data from the process table.
+     * @return true if all data is deleted successfully, otherwise false
+     */
     @Override
     public boolean deleteAllData() {
         this.processRepository.deleteAll();
         return true;
     }
 
+    /**
+     * Deletes all default data from the process table.
+     * @return true if all default data is deleted successfully, otherwise false
+     */
     @Override
     public boolean deleteAllDefaultData() {
         this.processRepository.findAll().stream().forEach(process -> {
@@ -63,9 +73,12 @@ public class ProcessDefaultDBService implements IDefaultDBService {
         return false;
     }
 
+    /**
+     * Loads default data into the database.
+     * @return true if the default data is loaded successfully, otherwise false
+     */
     @Override
     public boolean loadDefaultDataIntoDatabase() {
-        String eurekaDiscoverClientNames = EurekaDiscoveryClientNameTable.eurekaDiscoverClientNames;
         String tableNames = DatabaseTableNames.tableNames;
         if (!processRepository.existsByProcessName(ProcessDefaultNameTable.DELETE_DATASET)) {
             processRepository.save(new Process(
@@ -79,6 +92,18 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "/",
                     tableNames));
         }
+        if (!processRepository.existsByProcessName(ProcessDefaultNameTable.RESET_SECURITY_USER_TO_DEFAULT_DATASET)) {
+            processRepository.save(new Process(
+                    EProcessEvent.RESET,
+                    EProcessTyp.DATA_SET,
+                    EProcessClassification.CRITICAL,
+                    EProcessPlausibility.PLAUSIBLE,
+                    ProcessDefaultNameTable.RESET_SECURITY_USER_TO_DEFAULT_DATASET,
+                    "Reset Security User to default",
+                    false,
+                    "/",
+                    DatabaseTableNames.SECURITY_USER));
+        }
         if (!processRepository.existsByProcessName(ProcessDefaultNameTable.DELETE_DEFAULT_DATASET)) {
             processRepository.save(new Process(
                     EProcessEvent.DELETE,
@@ -89,19 +114,31 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "Remove default data from Table",
                     false,
                     "/",
-                    "/"));
+                    constantHelper.arrayListToString(DatabaseTableNames.allowedDeleteDefaultTableNameList)));
         }
-        if (!processRepository.existsByProcessName(ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET)) {
+        if (!processRepository.existsByProcessName(ProcessDefaultNameTable.RESET_TO_DEFAULT_TABLE)) {
             processRepository.save(new Process(
                     EProcessEvent.RESET,
                     EProcessTyp.TABLE,
                     EProcessClassification.LOW,
                     EProcessPlausibility.NONE,
-                    ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET,
+                    ProcessDefaultNameTable.RESET_TO_DEFAULT_TABLE,
                     "Reset Table data to default",
                     false,
                     "/",
-                    constantHelper.arrayListToString(DatabaseTableNames.defaultTableNameList)));
+                    constantHelper.arrayListToString(DatabaseTableNames.resetDefaultTableNameList)));
+        }
+        if (!processRepository.existsByProcessName(ProcessDefaultNameTable.CREATE_DEFAULT_DATASET)) {
+            processRepository.save(new Process(
+                    EProcessEvent.CREATE,
+                    EProcessTyp.DATA_SET,
+                    EProcessClassification.LOW,
+                    EProcessPlausibility.NONE,
+                    ProcessDefaultNameTable.CREATE_DEFAULT_DATASET,
+                    "Create default Dataset",
+                    false,
+                    "/",
+                    tableNames));
         }
         if (!processRepository.existsByProcessName(ProcessDefaultNameTable.DELETE_TABLE)) {
             processRepository.save(new Process(
@@ -115,13 +152,13 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "/",
                     tableNames));
         }
-        if (!processRepository.existsByProcessName(ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_DATASET)) {
+        if (!processRepository.existsByProcessName(ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_TABLE)) {
             processRepository.save(new Process(
                     EProcessEvent.RESET,
                     EProcessTyp.TABLE,
                     EProcessClassification.LOW,
                     EProcessPlausibility.NONE,
-                    ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_DATASET,
+                    ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_TABLE,
                     "Reset all Table data to default",
                     false,
                     "/",
@@ -139,28 +176,19 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                     "/",
                     constantHelper.arrayListToString(restartDiscoverClientNames)));
         }
-        if (!processRepository.existsByProcessName(ProcessDefaultNameTable.CREATE_DEFAULT_DATASET)) {
-            processRepository.save(new Process(
-                    EProcessEvent.CREATE,
-                    EProcessTyp.DATA_SET,
-                    EProcessClassification.LOW,
-                    EProcessPlausibility.NONE,
-                    ProcessDefaultNameTable.CREATE_DEFAULT_DATASET,
-                    "Create default Dataset",
-                    false,
-                    "/",
-                    tableNames));
-        }
 
         return addDependedProcessIdsToProcess();
     }
 
-
+    /**
+     * Adds depended process IDs to the processes.
+     * @return true if the process IDs are added successfully, otherwise false
+     */
     public boolean addDependedProcessIdsToProcess() {
         List<Process> processList = processRepository.findAll();
 
         for (Process process : processList) {
-            if (process.getProcessName().equals(ProcessDefaultNameTable.RESET_TO_DEFAULT_DATASET)) {
+            if (process.getProcessName().equals(ProcessDefaultNameTable.RESET_TO_DEFAULT_TABLE)) {
                 StringBuilder sb = new StringBuilder();
                 process.setHasDependedProcess(true);
                 processList.stream().forEach(result -> {
@@ -172,7 +200,7 @@ public class ProcessDefaultDBService implements IDefaultDBService {
                 });
                 sb.delete(sb.length() - 2, sb.length());
                 process.setDependedProcessIds(sb.toString());
-            } else if (process.getProcessName().equals(ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_DATASET)) {
+            } else if (process.getProcessName().equals(ProcessDefaultNameTable.RESET_ALL_TO_DEFAULT_TABLE)) {
                 process.setHasDependedProcess(true);
                 processList.stream().forEach(result -> {
                     if (result.getProcessName().equals(ProcessDefaultNameTable.RESTART_MICROSERVICE)) {

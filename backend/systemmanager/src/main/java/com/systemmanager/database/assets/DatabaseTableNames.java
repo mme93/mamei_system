@@ -29,7 +29,16 @@ public class DatabaseTableNames {
 
     public static final  List<String> apiTableNameList= asList(PROCESS);
 
-    public static final List<String> defaultTableNameList = asList(PROCESS);
+
+    /**
+     * List with all tables to reset the default data
+     */
+    public static final List<String> resetDefaultTableNameList = asList(PROCESS,MICRO_SERVICE);
+
+    /**
+     * List with all tables whose default data can be deleted.
+     */
+    public static final List<String> allowedDeleteDefaultTableNameList = asList(PROCESS);
 
 }
 

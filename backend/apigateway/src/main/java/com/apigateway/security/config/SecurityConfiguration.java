@@ -35,6 +35,7 @@ public class SecurityConfiguration {
 
     /**
      * Configures security filter chain.
+     *
      * @param http HttpSecurity object to configure security settings.
      * @return SecurityFilterChain instance representing the configured security filter chain.
      * @throws Exception if an error occurs during configuration.
@@ -46,7 +47,14 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authorizeHttpRequests(request ->
-                        request.requestMatchers("/auth/login", "/auth/registration", "/database/rebuild", "/database/init", "/auth/isTokenExpired")
+                        request.requestMatchers(
+                                        "/auth/login",
+                                        "/auth/registration",
+                                        "/database/rebuild",
+                                        "/database/init",
+                                        "/auth/isTokenExpired",
+                                "/defaultDB/reload/security_user"
+                                )
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
@@ -58,6 +66,7 @@ public class SecurityConfiguration {
 
     /**
      * Creates a BCrypt password encoder bean.
+     *
      * @return BCryptPasswordEncoder instance for password encoding.
      */
     @Bean
@@ -67,6 +76,7 @@ public class SecurityConfiguration {
 
     /**
      * Creates an authentication provider bean.
+     *
      * @return AuthenticationProvider instance for authentication.
      */
     @Bean
@@ -79,6 +89,7 @@ public class SecurityConfiguration {
 
     /**
      * Creates an authentication manager bean.
+     *
      * @param config AuthenticationConfiguration object for authentication configuration.
      * @return AuthenticationManager instance for managing authentication.
      * @throws Exception if an error occurs during creation.
@@ -91,6 +102,7 @@ public class SecurityConfiguration {
 
     /**
      * Configures CORS settings.
+     *
      * @return WebMvcConfigurer instance for configuring CORS.
      */
     @Bean
