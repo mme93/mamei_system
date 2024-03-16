@@ -33,12 +33,12 @@ public class DatabaseTableNames {
     /**
      * List with all tables to reset the default data
      */
-    public static final List<String> resetDefaultTableNameList = asList(PROCESS,MICRO_SERVICE);
+    public static final List<String> resetDefaultTableNameList = asList(PROCESS,MICRO_SERVICE,ACCOUNT,PRIVILEGES);
 
     /**
      * List with all tables whose default data can be deleted.
      */
-    public static final List<String> allowedDeleteDefaultTableNameList = asList(PROCESS);
+    public static final List<String> allowedDeleteDefaultTableNameList = asList(PROCESS,MICRO_SERVICE);
 
 }
 

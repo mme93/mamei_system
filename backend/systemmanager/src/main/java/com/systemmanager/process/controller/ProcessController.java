@@ -1,5 +1,6 @@
 package com.systemmanager.process.controller;
 
+import com.systemmanager.database.service.domains.AccountDefaultDBService;
 import com.systemmanager.database.service.domains.ProcessDefaultDBService;
 import com.systemmanager.process.model.process.ExecuteProcess;
 import com.systemmanager.process.model.ui.ExecuteProcessUI;
@@ -18,11 +19,13 @@ public class ProcessController {
 
     private final ProcessService processService;
     private final ProcessDefaultDBService processDefaultDBService;
+    private final AccountDefaultDBService accountDefaultDBService;
 
     @Autowired
-    public ProcessController(ProcessService processService, ProcessDefaultDBService processDefaultDBService) {
+    public ProcessController(ProcessService processService, ProcessDefaultDBService processDefaultDBService, AccountDefaultDBService accountDefaultDBService) {
         this.processService = processService;
         this.processDefaultDBService = processDefaultDBService;
+        this.accountDefaultDBService = accountDefaultDBService;
     }
 
     @PostMapping("/newJob")
@@ -46,6 +49,11 @@ public class ProcessController {
         processDefaultDBService.deleteAllDefaultData();
         processDefaultDBService.loadDefaultDataIntoDatabase();
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/test")
+    public void test(){
+        accountDefaultDBService.deleteAllData();
     }
 
 }

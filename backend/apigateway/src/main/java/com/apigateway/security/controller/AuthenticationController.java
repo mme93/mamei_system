@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -87,6 +88,21 @@ public class AuthenticationController {
     @GetMapping("/ping")
     public ResponseEntity<String> ping() {
         return new ResponseEntity<>("Ping", HttpStatus.OK);
+    }
+
+    /**
+     * Retrieves all security users from the database.
+     *
+     * @return ResponseEntity containing a list of SecurityUserEntity objects if users are found,
+     *         otherwise returns HTTP status NOT_FOUND.
+     */
+    @GetMapping("/securityUser")
+    public ResponseEntity<SecurityUserEntity> getAllSecurityUser() {
+        List<SecurityUserEntity> securityUserEntities = userService.loadUsers();
+        if(securityUserEntities.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(securityUserEntities, HttpStatus.OK);
     }
 
 }

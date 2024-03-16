@@ -1,7 +1,9 @@
 package com.systemmanager.process.service.processtyp;
 
 import com.systemmanager.database.assets.DatabaseTableNames;
+import com.systemmanager.database.service.domains.AccountDefaultDBService;
 import com.systemmanager.database.service.domains.MicroServiceDomainDefaultDBService;
+import com.systemmanager.database.service.domains.PrivilegesDefaultDBService;
 import com.systemmanager.database.service.domains.ProcessDefaultDBService;
 import com.systemmanager.database.service.system.SecurityUserDefaultDBService;
 import com.systemmanager.process.model.process.ExecuteProcess;
@@ -21,13 +23,17 @@ public class ProcessTypeDataSetService implements IProcessTypeService {
     private final ProcessDefaultDBService processDefaultDBService;
     private final SecurityUserDefaultDBService securityUserDefaultDBService;
     private final MicroServiceDomainDefaultDBService microServiceDomainDefaultDBService;
+    private final PrivilegesDefaultDBService privilegesDefaultDBService;
+    private final AccountDefaultDBService accountDefaultDBService;
 
     @Autowired
-    public ProcessTypeDataSetService(ProcessRepository processRepository, ProcessDefaultDBService processDefaultDBService, SecurityUserDefaultDBService securityUserDefaultDBService, MicroServiceDomainDefaultDBService microServiceDomainDefaultDBService) {
+    public ProcessTypeDataSetService(ProcessRepository processRepository, ProcessDefaultDBService processDefaultDBService, SecurityUserDefaultDBService securityUserDefaultDBService, MicroServiceDomainDefaultDBService microServiceDomainDefaultDBService, PrivilegesDefaultDBService privilegesDefaultDBService, AccountDefaultDBService accountDefaultDBService) {
         this.processRepository = processRepository;
         this.processDefaultDBService = processDefaultDBService;
         this.securityUserDefaultDBService = securityUserDefaultDBService;
         this.microServiceDomainDefaultDBService = microServiceDomainDefaultDBService;
+        this.privilegesDefaultDBService = privilegesDefaultDBService;
+        this.accountDefaultDBService = accountDefaultDBService;
     }
 
     /**
@@ -56,6 +62,10 @@ public class ProcessTypeDataSetService implements IProcessTypeService {
                 return processDefaultDBService.loadDefaultDataIntoDatabase();
             }else if (process.getTheme().equals(DatabaseTableNames.MICRO_SERVICE)) {
                 microServiceDomainDefaultDBService.loadDefaultDataIntoDatabase();
+            }else if (process.getTheme().equals(DatabaseTableNames.ACCOUNT)) {
+                accountDefaultDBService.loadDefaultDataIntoDatabase();
+            }else if (process.getTheme().equals(DatabaseTableNames.PRIVILEGES)) {
+                privilegesDefaultDBService.loadDefaultDataIntoDatabase();
             }
         }
         return true;
@@ -73,6 +83,10 @@ public class ProcessTypeDataSetService implements IProcessTypeService {
                 processDefaultDBService.deleteAllData();
             }else if (process.getTheme().equals(DatabaseTableNames.MICRO_SERVICE)) {
                 microServiceDomainDefaultDBService.deleteAllData();
+            }else if (process.getTheme().equals(DatabaseTableNames.ACCOUNT)) {
+                accountDefaultDBService.deleteAllData();
+            }else if (process.getTheme().equals(DatabaseTableNames.PRIVILEGES)) {
+                privilegesDefaultDBService.deleteAllData();
             }
         }
         return true;

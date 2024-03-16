@@ -12,3 +12,7 @@ eureka:
   instance:
     preferIpAddress: true
 
+securityUser:
+  username: root
+  password: dGVzdDEyMw==
+  userCollection: SYSTEM_ADMIN
