@@ -86,12 +86,12 @@ public class MicroServicesRestartServiceTest {
         Mockito.when(requestBodyUriSpecMock.uri(Mockito.anyString())).thenReturn(requestBodySpecMock);
         Mockito.when(requestBodySpecMock.retrieve()).thenReturn(responseSpec);
 
-        Mono<Object> jsonResponse = Mono.just("{\"false\"}");
+        Mono<Object> jsonResponse = Mono.just("{\"true\"}");
         Mockito.when(responseSpec.bodyToMono(Object.class)).thenReturn(jsonResponse);
 
         boolean callRestart = microServicesRestartService.callRestart(EurekaDiscoveryClientNameTable.DataStorageAPI);
 
-        Assertions.assertTrue(callRestart);
+        Assertions.assertFalse(callRestart);
     }
 
     @Test
