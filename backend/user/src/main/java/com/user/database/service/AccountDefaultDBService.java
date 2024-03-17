@@ -1,4 +1,4 @@
-package com.user.service.defaultdb;
+package com.user.database.service;
 
 import com.user.model.entity.AccountEntity;
 import com.user.model.entity.SecurityUserEntity;
@@ -51,7 +51,8 @@ public class AccountDefaultDBService {
                     securityUserEntity.getUsername(),
                     "0201/2147899",
                     getEmail(securityUserEntity.getUsername()),
-                    role
+                    role,
+                    null
             ));
         }
     }

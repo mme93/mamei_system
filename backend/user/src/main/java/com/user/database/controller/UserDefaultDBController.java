@@ -1,7 +1,6 @@
-package com.user.controller;
+package com.user.database.controller;
 
-import com.user.service.defaultdb.AccountDefaultDBService;
-import com.user.service.defaultdb.PrivilegesDefaultDBService;
+import com.user.database.service.AccountDefaultDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,38 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/defaultDB")
 public class UserDefaultDBController {
 
-    private final PrivilegesDefaultDBService privilegesDefaultDBService;
     private final AccountDefaultDBService accountDefaultDBService;
 
     @Autowired
-    public UserDefaultDBController(PrivilegesDefaultDBService privilegesDefaultDBService, AccountDefaultDBService accountDefaultDBService) {
-        this.privilegesDefaultDBService = privilegesDefaultDBService;
+    public UserDefaultDBController(AccountDefaultDBService accountDefaultDBService) {
         this.accountDefaultDBService = accountDefaultDBService;
-    }
-
-
-    /**
-     * Creates default dataset for privileges in the default database.
-     */
-    @PostMapping("/create/privileges/default/dataset")
-    public void createPrivilegesDefaultDataSet() {
-        privilegesDefaultDBService.createDefaultDataSet();
-    }
-
-    /**
-     * Deletes all privileges data from the database.
-     */
-    @DeleteMapping("/delete/privileges/all")
-    public void deletePrivilegesAllData() {
-        privilegesDefaultDBService.deleteAllData();
-    }
-
-    /**
-     * Deletes the default dataset for privileges from the database.
-     */
-    @DeleteMapping("/delete/privileges/default/dataset")
-    public void deletePrivilegesDefaultDataset() {
-        privilegesDefaultDBService.deleteDefaultDataset();
     }
 
     /**

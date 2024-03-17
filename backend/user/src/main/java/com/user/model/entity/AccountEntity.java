@@ -24,6 +24,7 @@ public class AccountEntity {
     private Long userId;
 
     private String firstName;
+
     private String lastName;
 
     @Column(unique = true)
@@ -37,7 +38,9 @@ public class AccountEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public AccountEntity(Long userId, String firstName, String lastName, String username, String callNumber, String email, Role role) {
+    private String microServices;
+
+    public AccountEntity(Long userId, String firstName, String lastName, String username, String callNumber, String email, Role role, String microServices) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,5 +48,6 @@ public class AccountEntity {
         this.callNumber = callNumber;
         this.email = email;
         this.role = role;
+        this.microServices = microServices;
     }
 }
