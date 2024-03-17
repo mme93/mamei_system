@@ -1,5 +1,6 @@
 package com.systemmanager.database.service.domains;
 
+import com.systemmanager.eureka.assets.table.AccountRouterTable;
 import com.systemmanager.eureka.assets.table.ApiGatewayRouterTable;
 import com.systemmanager.eureka.service.DiscoveryClientService;
 import com.systemmanager.token.model.JwtToken;
@@ -44,13 +45,13 @@ public class AccountDefaultDBService implements IDefaultDBService {
         List<SecurityUser>securityUserList=loadSecurityUser();
         System.err.println(securityUserList.size());
 
-        String apiGateURI = discoveryClientService.getClientAdressByName(APIGATEWAY) + ApiGatewayRouterTable.DEFAULT_DB_RELOAD_SECURITY_USER;
+        String userURI = discoveryClientService.getClientAdressByName(AccountRouterTable.USER) + AccountRouterTable.CREATE_DEFAULT_ACCOUNT_DATASET;
         webClient
                 .build()
                 .post()
-                .uri(apiGateURI)
+                .uri(userURI)
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(Boolean.class)
                 .block();
         return false;
     }
@@ -58,13 +59,13 @@ public class AccountDefaultDBService implements IDefaultDBService {
     @Override
     public boolean deleteAllData() {
 
-        String apiGateURI = discoveryClientService.getClientAdressByName(APIGATEWAY) + ApiGatewayRouterTable.DEFAULT_DB_RELOAD_SECURITY_USER;
+        String userURI = discoveryClientService.getClientAdressByName(AccountRouterTable.USER) + AccountRouterTable.DELETE_ALL_ACCOUNT_DATA;
         webClient
                 .build()
-                .post()
-                .uri(apiGateURI)
+                .delete()
+                .uri(userURI)
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(Boolean.class)
                 .block();
 
         return false;
@@ -72,13 +73,13 @@ public class AccountDefaultDBService implements IDefaultDBService {
 
     @Override
     public boolean deleteAllDefaultData() {
-        String apiGateURI = discoveryClientService.getClientAdressByName(APIGATEWAY) + ApiGatewayRouterTable.DEFAULT_DB_RELOAD_SECURITY_USER;
+        String userURI = discoveryClientService.getClientAdressByName(AccountRouterTable.USER) + AccountRouterTable.DELETE_ALL_ACCOUNT_DATA;
         webClient
                 .build()
-                .post()
-                .uri(apiGateURI)
+                .delete()
+                .uri(userURI)
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(Boolean.class)
                 .block();
         return false;
     }

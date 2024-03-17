@@ -3,6 +3,8 @@ spring:
     name: user
 server:
   port: 9050
+  servlet:
+    context-path: /user
 eureka:
   client:
     serviceUrl:
