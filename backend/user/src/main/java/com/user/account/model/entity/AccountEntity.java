@@ -1,6 +1,6 @@
-package com.user.model.entity;
+package com.user.account.model.entity;
 
-import com.user.model.entity_enum.Role;
+import com.user.account.model.entity_enum.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

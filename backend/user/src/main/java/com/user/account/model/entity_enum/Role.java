@@ -1,4 +1,4 @@
-package com.user.model.entity_enum;
+package com.user.account.model.entity_enum;
 
 public enum Role {
     USER,
