@@ -9,12 +9,14 @@ import com.user.account.repository.SecurityUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Service class for managing default database operations related to user accounts.
+ */
 @Service
 public class AccountDefaultDBService {
 
@@ -27,6 +29,9 @@ public class AccountDefaultDBService {
         this.securityUserRepository = securityUserRepository;
     }
 
+    /**
+     * Creates a default dataset for user accounts based on existing security users.
+     */
     public void createDefaultDataSet() {
         List<SecurityUserEntity> securityUserEntityList = securityUserRepository.findAll();
         for (SecurityUserEntity securityUserEntity : securityUserEntityList) {
@@ -45,6 +50,12 @@ public class AccountDefaultDBService {
 
     }
 
+    /**
+     * Creates an account for the given security user with the specified role.
+     *
+     * @param securityUserEntity The security user entity for which the account is to be created.
+     * @param role               The role to assign to the account.
+     */
     private void createAccount(SecurityUserEntity securityUserEntity, Role role) {
         if (!accountRepository.existsByUserId(Long.valueOf(securityUserEntity.getId()))) {
             String userName = securityUserEntity.getUsername();
@@ -61,6 +72,12 @@ public class AccountDefaultDBService {
         }
     }
 
+    /**
+     * Generates a comma-separated string representation of a list.
+     *
+     * @param list The list to generate the string from.
+     * @return A string representation of the list, with elements separated by commas.
+     */
     private String generateStringFromList(List<String> list) {
         if (list.isEmpty()) {
             return "";
@@ -78,6 +95,12 @@ public class AccountDefaultDBService {
         return sb.toString();
     }
 
+    /**
+     * Retrieves the microservices privileges for the given user.
+     *
+     * @param userName The username for which privileges are to be retrieved.
+     * @return A list of microservices privileges for the user.
+     */
     private List<String> getMicroServicesPrivileges(String userName) {
         if (userName.equals("admin")) {
             return asList(ServicesPrivileges.ALL.name());
@@ -93,14 +116,26 @@ public class AccountDefaultDBService {
         return asList();
     }
 
+    /**
+     * Generates an email address based on the username.
+     *
+     * @param username The username to generate the email address from.
+     * @return The generated email address.
+     */
     private String getEmail(String username) {
         return username + "@test-mail.de";
     }
 
+    /**
+     * Deletes all account data from the default database.
+     */
     public void deleteAllData() {
         accountRepository.deleteAll();
     }
 
+    /**
+     * Deletes the default dataset for user accounts from the default database.
+     */
     public void deleteDefaultDataset() {
         List<SecurityUserEntity> securityUserEntityList = securityUserRepository.findAll();
         for (SecurityUserEntity securityUserEntity : securityUserEntityList) {
@@ -118,6 +153,11 @@ public class AccountDefaultDBService {
         }
     }
 
+    /**
+     * Removes the account associated with the given user ID.
+     *
+     * @param id The ID of the user whose account is to be removed.
+     */
     private void removeAccount(int id) {
         Optional<AccountEntity> accountOpt = accountRepository.findByUserId(Long.valueOf(id));
         if (accountOpt.isPresent()) {
