@@ -1,5 +1,6 @@
 package com.user.database.controller;
 
+import com.user.account.model.entity.AccountEntity;
 import com.user.database.service.AccountDefaultDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 /**
  * Controller class for managing operations related to default database entities.
@@ -28,8 +31,11 @@ public class UserDefaultDBController {
      */
     @PostMapping("/create/account/default/dataset")
     public ResponseEntity<Boolean> createAccountDefaultDataSet() {
-        accountDefaultDBService.createDefaultDataSet();
-        return new ResponseEntity<>(true, HttpStatus.OK);
+        Optional<AccountEntity> accountEntityOpt = accountDefaultDBService.createDefaultDataSet();
+        if(accountEntityOpt.isPresent()){
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(true, HttpStatus.CONFLICT);
     }
 
     /**

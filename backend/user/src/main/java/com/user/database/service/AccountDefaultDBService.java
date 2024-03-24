@@ -32,22 +32,22 @@ public class AccountDefaultDBService {
     /**
      * Creates a default dataset for user accounts based on existing security users.
      */
-    public void createDefaultDataSet() {
+    public Optional<AccountEntity> createDefaultDataSet() {
         List<SecurityUserEntity> securityUserEntityList = securityUserRepository.findAll();
         for (SecurityUserEntity securityUserEntity : securityUserEntityList) {
             if (securityUserEntity.getUsername().equals("admin")) {
-                createAccount(securityUserEntity, Role.ADMIN);
+                return createAccount(securityUserEntity, Role.ADMIN);
             } else if (securityUserEntity.getUsername().equals("superAdmin")) {
-                createAccount(securityUserEntity, Role.ADMIN);
+                return createAccount(securityUserEntity, Role.ADMIN);
             } else if (securityUserEntity.getUsername().equals("user")) {
-                createAccount(securityUserEntity, Role.USER);
+                return createAccount(securityUserEntity, Role.USER);
             } else if (securityUserEntity.getUsername().equals("guest")) {
-                createAccount(securityUserEntity, Role.GUEST);
+                return createAccount(securityUserEntity, Role.GUEST);
             } else if (securityUserEntity.getUsername().equals("root")) {
-                createAccount(securityUserEntity, Role.SYSTEM);
+                return createAccount(securityUserEntity, Role.SYSTEM);
             }
         }
-
+        return Optional.ofNullable(null);
     }
 
     /**
@@ -56,20 +56,22 @@ public class AccountDefaultDBService {
      * @param securityUserEntity The security user entity for which the account is to be created.
      * @param role               The role to assign to the account.
      */
-    private void createAccount(SecurityUserEntity securityUserEntity, Role role) {
+    public Optional<AccountEntity> createAccount(SecurityUserEntity securityUserEntity, Role role) {
         if (!accountRepository.existsByUserId(Long.valueOf(securityUserEntity.getId()))) {
             String userName = securityUserEntity.getUsername();
-            accountRepository.save(new AccountEntity(
-                    Long.valueOf(securityUserEntity.getId()),
-                    userName,
-                    userName,
-                    userName,
-                    "0201/2147899",
-                    getEmail(securityUserEntity.getUsername()),
-                    role,
-                    generateStringFromList(getMicroServicesPrivileges(userName))
-            ));
+            return Optional.ofNullable(accountRepository.save(
+                    new AccountEntity(
+                            Long.valueOf(securityUserEntity.getId()),
+                            userName,
+                            userName,
+                            userName,
+                            "0201/2147899",
+                            getEmail(securityUserEntity.getUsername()),
+                            role,
+                            generateStringFromList(getMicroServicesPrivileges(userName))
+                    )));
         }
+        return Optional.ofNullable(null);
     }
 
     /**
@@ -78,7 +80,7 @@ public class AccountDefaultDBService {
      * @param list The list to generate the string from.
      * @return A string representation of the list, with elements separated by commas.
      */
-    private String generateStringFromList(List<String> list) {
+    public String generateStringFromList(List<String> list) {
         if (list.isEmpty()) {
             return "";
         }
@@ -101,7 +103,7 @@ public class AccountDefaultDBService {
      * @param userName The username for which privileges are to be retrieved.
      * @return A list of microservices privileges for the user.
      */
-    private List<String> getMicroServicesPrivileges(String userName) {
+    public List<String> getMicroServicesPrivileges(String userName) {
         if (userName.equals("admin")) {
             return asList(ServicesPrivileges.ALL.name());
         } else if (userName.equals("superAdmin")) {
@@ -122,7 +124,7 @@ public class AccountDefaultDBService {
      * @param username The username to generate the email address from.
      * @return The generated email address.
      */
-    private String getEmail(String username) {
+    public String getEmail(String username) {
         return username + "@test-mail.de";
     }
 
@@ -158,7 +160,7 @@ public class AccountDefaultDBService {
      *
      * @param id The ID of the user whose account is to be removed.
      */
-    private void removeAccount(int id) {
+    public void removeAccount(int id) {
         Optional<AccountEntity> accountOpt = accountRepository.findByUserId(Long.valueOf(id));
         if (accountOpt.isPresent()) {
             accountRepository.delete(accountOpt.get());
