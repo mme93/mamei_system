@@ -15,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -79,9 +78,9 @@ public class AccountDefaultDBServiceTest {
             when(accountRepository.existsByUserId(any())).thenReturn(false);
             when(accountRepository.save(any())).thenReturn(accountEntity);
             accountEntity.setEmail(accountDefaultDBService.getEmail(userName));
-            Optional<AccountEntity> resultOpt = accountDefaultDBService.createDefaultDataSet();
-            assertTrue(resultOpt.isPresent());
-            AccountEntity result = resultOpt.get();
+            List<AccountEntity> resultOpt = accountDefaultDBService.createDefaultDataSet();
+            assertFalse(resultOpt.isEmpty());
+            AccountEntity result = resultOpt.get(0);
             assertEquals(result.getUserId(), Long.valueOf(securityUserEntity.getId()));
             assertEquals(result.getRole().toString(), securityUserEntity.getUserCollection().toString());
             assertEquals(result.getUsername(), userName);
@@ -98,8 +97,8 @@ public class AccountDefaultDBServiceTest {
         when(securityUserRepository.findAll()).thenReturn(asList(securityUserEntity));
         when(accountRepository.existsByUserId(any())).thenReturn(false);
         when(accountRepository.save(any())).thenReturn(accountEntity);
-        Optional<AccountEntity> resultOpt = accountDefaultDBService.createDefaultDataSet();
-        assertFalse(resultOpt.isPresent());
+        List<AccountEntity> resultOpt = accountDefaultDBService.createDefaultDataSet();
+        assertTrue(resultOpt.isEmpty());
     }
 
     /**

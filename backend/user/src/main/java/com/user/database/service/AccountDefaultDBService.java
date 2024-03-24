@@ -9,6 +9,7 @@ import com.user.account.repository.SecurityUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,22 +33,23 @@ public class AccountDefaultDBService {
     /**
      * Creates a default dataset for user accounts based on existing security users.
      */
-    public Optional<AccountEntity> createDefaultDataSet() {
+    public List<AccountEntity> createDefaultDataSet() {
         List<SecurityUserEntity> securityUserEntityList = securityUserRepository.findAll();
+        List<AccountEntity> accountEntityList = new ArrayList<>();
         for (SecurityUserEntity securityUserEntity : securityUserEntityList) {
             if (securityUserEntity.getUsername().equals("admin")) {
-                return createAccount(securityUserEntity, Role.ADMIN);
+                accountEntityList.add(createAccount(securityUserEntity, Role.ADMIN).get());
             } else if (securityUserEntity.getUsername().equals("superAdmin")) {
-                return createAccount(securityUserEntity, Role.ADMIN);
+                accountEntityList.add(createAccount(securityUserEntity, Role.ADMIN).get());
             } else if (securityUserEntity.getUsername().equals("user")) {
-                return createAccount(securityUserEntity, Role.USER);
+                accountEntityList.add(createAccount(securityUserEntity, Role.USER).get());
             } else if (securityUserEntity.getUsername().equals("guest")) {
-                return createAccount(securityUserEntity, Role.GUEST);
+                accountEntityList.add(createAccount(securityUserEntity, Role.GUEST).get());
             } else if (securityUserEntity.getUsername().equals("root")) {
-                return createAccount(securityUserEntity, Role.SYSTEM);
+                accountEntityList.add(createAccount(securityUserEntity, Role.SYSTEM).get());
             }
         }
-        return Optional.ofNullable(null);
+        return accountEntityList;
     }
 
     /**
@@ -57,6 +59,7 @@ public class AccountDefaultDBService {
      * @param role               The role to assign to the account.
      */
     public Optional<AccountEntity> createAccount(SecurityUserEntity securityUserEntity, Role role) {
+        System.err.println(!accountRepository.existsByUserId(Long.valueOf(securityUserEntity.getId())));
         if (!accountRepository.existsByUserId(Long.valueOf(securityUserEntity.getId()))) {
             String userName = securityUserEntity.getUsername();
             return Optional.ofNullable(accountRepository.save(

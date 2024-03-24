@@ -14,8 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Optional;
-
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -53,7 +53,7 @@ public class UserDefaultDBControllerTest {
      */
     @Test
     void testCreateAccountDefaultDataSetStatusConflict() throws Exception {
-        when(accountDefaultDBService.createDefaultDataSet()).thenReturn(Optional.empty());
+        when(accountDefaultDBService.createDefaultDataSet()).thenReturn(emptyList());
         mockMvc.perform(MockMvcRequestBuilders.post("/defaultDB/create/account/default/dataset")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -68,7 +68,7 @@ public class UserDefaultDBControllerTest {
      */
     @Test
     void testCreateAccountDefaultDataSetStatusCreated() throws Exception {
-        when(accountDefaultDBService.createDefaultDataSet()).thenReturn(Optional.of(new AccountEntity()));
+        when(accountDefaultDBService.createDefaultDataSet()).thenReturn(asList(new AccountEntity()));
         mockMvc.perform(MockMvcRequestBuilders.post("/defaultDB/create/account/default/dataset")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -83,7 +83,7 @@ public class UserDefaultDBControllerTest {
      */
     @Test
     void testDeleteAccountAllDataStatusOk() throws Exception {
-        when(accountDefaultDBService.createDefaultDataSet()).thenReturn(Optional.of(new AccountEntity()));
+        when(accountDefaultDBService.createDefaultDataSet()).thenReturn(asList(new AccountEntity()));
         mockMvc.perform(MockMvcRequestBuilders.delete("/defaultDB/delete/account/all")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -98,7 +98,7 @@ public class UserDefaultDBControllerTest {
      */
     @Test
     void testDeleteAccountDefaultDatasetStatusOk() throws Exception {
-        when(accountDefaultDBService.createDefaultDataSet()).thenReturn(Optional.of(new AccountEntity()));
+        when(accountDefaultDBService.createDefaultDataSet()).thenReturn(asList(new AccountEntity()));
         mockMvc.perform(MockMvcRequestBuilders.delete("/defaultDB/delete/account/default/dataset")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())

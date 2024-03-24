@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+import java.util.List;
 
 /**
  * Controller class for managing operations related to default database entities.
@@ -31,11 +31,11 @@ public class UserDefaultDBController {
      */
     @PostMapping("/create/account/default/dataset")
     public ResponseEntity<Boolean> createAccountDefaultDataSet() {
-        Optional<AccountEntity> accountEntityOpt = accountDefaultDBService.createDefaultDataSet();
-        if(accountEntityOpt.isPresent()){
+        List<AccountEntity> accountEntityOpt = accountDefaultDBService.createDefaultDataSet();
+        if(accountEntityOpt.isEmpty()){
             return new ResponseEntity<>(true, HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(true, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
     /**
