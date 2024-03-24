@@ -57,7 +57,7 @@ public class UserDefaultDBControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/defaultDB/create/account/default/dataset")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isConflict())
+                .andExpect(status().isOk())
                 .andReturn();
     }
 

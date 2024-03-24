@@ -32,7 +32,7 @@ public class UserDefaultDBController {
     @PostMapping("/create/account/default/dataset")
     public ResponseEntity<Boolean> createAccountDefaultDataSet() {
         List<AccountEntity> accountEntityOpt = accountDefaultDBService.createDefaultDataSet();
-        if(accountEntityOpt.isEmpty()){
+        if(!accountEntityOpt.isEmpty()){
             return new ResponseEntity<>(true, HttpStatus.CREATED);
         }
         return new ResponseEntity<>(true, HttpStatus.OK);
