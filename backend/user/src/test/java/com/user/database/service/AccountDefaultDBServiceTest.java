@@ -78,6 +78,7 @@ public class AccountDefaultDBServiceTest {
             when(securityUserRepository.findAll()).thenReturn(asList(securityUserEntity));
             when(accountRepository.existsByUserId(any())).thenReturn(false);
             when(accountRepository.save(any())).thenReturn(accountEntity);
+            accountEntity.setEmail(accountDefaultDBService.getEmail(userName));
             Optional<AccountEntity> resultOpt = accountDefaultDBService.createDefaultDataSet();
             assertTrue(resultOpt.isPresent());
             AccountEntity result = resultOpt.get();
