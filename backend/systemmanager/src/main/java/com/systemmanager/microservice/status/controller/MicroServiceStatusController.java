@@ -1,7 +1,5 @@
 package com.systemmanager.microservice.status.controller;
 
-import com.systemmanager.eureka.assets.EurekaDiscoveryClientNameTable;
-import com.systemmanager.microservice.restart.service.MicroServicesRestartService;
 import com.systemmanager.microservice.status.model.dto.MicroServiceDto;
 import com.systemmanager.microservice.status.service.MicroServiceStatusService;
 import jakarta.ws.rs.NotFoundException;
@@ -15,24 +13,39 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller class for managing microservice status.
+ */
 @RestController
 @RequestMapping("/service_status")
 public class MicroServiceStatusController {
 
     private final MicroServiceStatusService microServiceStatusService;
-    private final MicroServicesRestartService microServicesRestartService;
 
+    /**
+     * Constructs a MicroServiceStatusController object with the specified MicroServiceStatusService.
+     * @param microServiceStatusService the microservice status service to be injected
+     */
     @Autowired
-    public MicroServiceStatusController(MicroServiceStatusService microServiceStatusService, MicroServicesRestartService microServicesRestartService) {
+    public MicroServiceStatusController(MicroServiceStatusService microServiceStatusService) {
         this.microServiceStatusService = microServiceStatusService;
-        this.microServicesRestartService = microServicesRestartService;
     }
 
+    /**
+     * Retrieves the status of all microservices.
+     * @return a ResponseEntity containing a list of MicroServiceDto and HTTP status OK
+     */
     @GetMapping("")
     public ResponseEntity<List<MicroServiceDto>> getMicroServicesStatus() {
         return new ResponseEntity<>(microServiceStatusService.getMicroServicesStatus(), HttpStatus.OK);
     }
 
+    /**
+     * Retrieves the status of a specific microservice.
+     * @param microServiceName the name of the microservice
+     * @return a ResponseEntity containing the MicroServiceDto for the specified microservice and HTTP status OK,
+     *         or HTTP status NOT_FOUND if the microservice is not found
+     */
     @GetMapping("/{microServiceName}")
     public ResponseEntity<MicroServiceDto> getMicroServiceStatus(@PathVariable String microServiceName) {
         try {
@@ -40,12 +53,6 @@ public class MicroServiceStatusController {
         } catch (NotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @GetMapping("/test")
-    public void test(){
-        boolean b = microServicesRestartService.callRestart(EurekaDiscoveryClientNameTable.ApiGateWay);
-        System.err.println(b);
     }
 
 }
