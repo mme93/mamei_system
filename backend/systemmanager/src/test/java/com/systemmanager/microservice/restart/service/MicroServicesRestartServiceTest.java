@@ -74,7 +74,7 @@ public class MicroServicesRestartServiceTest {
     public void testCallRestartDataStorageAPI() {
 
         Mockito.when(discoveryClientService.existEurekaDiscoveryClientByName(any())).thenReturn(true);
-        Mockito.when(discoveryClientService.getClientAdressByName(any())).thenReturn("http://127.0.0.1:9005/DATASTORAGE");
+        Mockito.when(discoveryClientService.getClientAddressByName(any())).thenReturn("http://127.0.0.1:9005/DATASTORAGE");
 
         WebClient webClientMock= Mockito.mock(WebClient.class);
         WebClient.RequestBodyUriSpec requestBodyUriSpecMock=Mockito.mock(WebClient.RequestBodyUriSpec.class);

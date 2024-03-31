@@ -1,6 +1,5 @@
 package com.systemmanager.eureka.service;
 
-import com.systemmanager.eureka.assets.EurekaDiscoveryClientNameTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ public class DiscoveryClientService {
      * @param clientName the name of the client
      * @return the address of the client
      */
-    public String getClientAdressByName(String clientName){
+    public String getClientAddressByName(String clientName){
         return discoveryClient.getInstances(clientName).get(0).getUri().toString();
     }
 

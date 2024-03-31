@@ -24,7 +24,7 @@ public class SecurityUserDefaultDBService {
      * @return true if the operation is successful, otherwise false
      */
     public boolean reloadDefaultDataIntoDatabase() {
-        String apiGateURI = discoveryClientService.getClientAdressByName(APIGATEWAY) + ApiGatewayRouterTable.DEFAULT_DB_RELOAD_SECURITY_USER;
+        String apiGateURI = discoveryClientService.getClientAddressByName(APIGATEWAY) + ApiGatewayRouterTable.DEFAULT_DB_RELOAD_SECURITY_USER;
         webClient
                 .build()
                 .post()

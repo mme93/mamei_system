@@ -6,7 +6,6 @@ import com.systemmanager.token.model.JwtToken;
 import com.systemmanager.token.model.SecurityUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -44,7 +43,7 @@ public class TokenService {
         byte[] decodedBytes = Base64.getDecoder().decode(password);
         String decodedPassword = new String(decodedBytes);
         SecurityUser securityUser = new SecurityUser(userName,decodedPassword,userCollection);
-        String apiGateURI = discoveryClientService.getClientAdressByName(APIGATEWAY) + ApiGatewayRouterTable.GENERATE_TOKEN;
+        String apiGateURI = discoveryClientService.getClientAddressByName(APIGATEWAY) + ApiGatewayRouterTable.GENERATE_TOKEN;
         return webClient
                 .build()
                 .post()

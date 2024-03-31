@@ -70,7 +70,7 @@ public class MicroServicesRestartService {
         if (!discoveryClientService.existEurekaDiscoveryClientByName(clientName.toLowerCase(Locale.ROOT))) {
             return false;
         }
-        String clientAdressByName = discoveryClientService.getClientAdressByName(clientName);
+        String clientAdressByName = discoveryClientService.getClientAddressByName(clientName);
         String uri = clientAdressByName + restartEndpoint;
         Object result = webClient
                 .build()

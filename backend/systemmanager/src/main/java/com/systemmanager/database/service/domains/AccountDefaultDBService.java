@@ -7,9 +7,7 @@ import com.systemmanager.token.model.JwtToken;
 import com.systemmanager.token.model.SecurityUser;
 import com.systemmanager.token.service.TokenService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
@@ -28,7 +26,7 @@ public class AccountDefaultDBService implements IDefaultDBService {
     private List<SecurityUser> loadSecurityUser() {
         JwtToken jwtToken = tokenService.generateToken();
         jwtToken.setSignature();
-        String apiGateURI = discoveryClientService.getClientAdressByName(APIGATEWAY) + ApiGatewayRouterTable.LOAD_ALL_SECURITY_USER;
+        String apiGateURI = discoveryClientService.getClientAddressByName(APIGATEWAY) + ApiGatewayRouterTable.LOAD_ALL_SECURITY_USER;
 
         return webClient
                 .build()
@@ -45,7 +43,7 @@ public class AccountDefaultDBService implements IDefaultDBService {
         List<SecurityUser>securityUserList=loadSecurityUser();
         System.err.println(securityUserList.size());
 
-        String userURI = discoveryClientService.getClientAdressByName(AccountRouterTable.USER) + AccountRouterTable.CREATE_DEFAULT_ACCOUNT_DATASET;
+        String userURI = discoveryClientService.getClientAddressByName(AccountRouterTable.USER) + AccountRouterTable.CREATE_DEFAULT_ACCOUNT_DATASET;
         webClient
                 .build()
                 .post()
@@ -59,7 +57,7 @@ public class AccountDefaultDBService implements IDefaultDBService {
     @Override
     public boolean deleteAllData() {
 
-        String userURI = discoveryClientService.getClientAdressByName(AccountRouterTable.USER) + AccountRouterTable.DELETE_ALL_ACCOUNT_DATA;
+        String userURI = discoveryClientService.getClientAddressByName(AccountRouterTable.USER) + AccountRouterTable.DELETE_ALL_ACCOUNT_DATA;
         webClient
                 .build()
                 .delete()
@@ -73,7 +71,7 @@ public class AccountDefaultDBService implements IDefaultDBService {
 
     @Override
     public boolean deleteAllDefaultData() {
-        String userURI = discoveryClientService.getClientAdressByName(AccountRouterTable.USER) + AccountRouterTable.DELETE_ALL_ACCOUNT_DATA;
+        String userURI = discoveryClientService.getClientAddressByName(AccountRouterTable.USER) + AccountRouterTable.DELETE_ALL_ACCOUNT_DATA;
         webClient
                 .build()
                 .delete()

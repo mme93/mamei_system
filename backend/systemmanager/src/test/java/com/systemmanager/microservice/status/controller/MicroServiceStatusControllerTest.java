@@ -1,7 +1,6 @@
-package com.systemmanager.microservice.status;
+package com.systemmanager.microservice.status.controller;
 
 import com.systemmanager.eureka.assets.EurekaDiscoveryClientNameTable;
-import com.systemmanager.microservice.status.controller.MicroServiceStatusController;
 import com.systemmanager.microservice.status.model.dto.EServiceStatus;
 import com.systemmanager.microservice.status.model.dto.MicroServiceDto;
 import com.systemmanager.microservice.status.service.MicroServiceStatusService;
