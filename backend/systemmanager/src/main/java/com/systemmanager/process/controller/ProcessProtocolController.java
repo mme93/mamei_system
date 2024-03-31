@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing process protocols.
+ */
 @RestController
 @RequestMapping("/protocol")
 public class ProcessProtocolController {
