@@ -1,8 +1,8 @@
 package com.gamesmanager.game.sudoku.controller;
 
-import com.sudokumanager.model.dto.SudokuLevel;
-import com.sudokumanager.model.dto.SudokuLevelRequest;
-import com.sudokumanager.service.SudokuService;
+import com.gamesmanager.game.sudoku.model.dto.SudokuLevel;
+import com.gamesmanager.game.sudoku.model.dto.SudokuLevelRequest;
+import com.gamesmanager.game.sudoku.service.SudokuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

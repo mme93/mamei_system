@@ -1,6 +1,6 @@
 package com.gamesmanager.game.sudoku.model.dto;
 
-import com.sudokumanager.model.entities.DifficultyLevel;
+import com.gamesmanager.game.sudoku.model.entities.DifficultyLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

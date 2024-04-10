@@ -1,6 +1,7 @@
 package com.gamesmanager.game.sudoku.repository;
 
-import com.sudokumanager.model.entities.SudokuLevelListItemEntity;
+
+import com.gamesmanager.game.sudoku.model.entities.SudokuLevelListItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

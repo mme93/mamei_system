@@ -1,10 +1,10 @@
 package com.gamesmanager.game.sudoku.service;
 
-import com.sudokumanager.model.entities.DifficultyLevel;
-import com.sudokumanager.model.entities.SudokuEntity;
-import com.sudokumanager.model.entities.SudokuLevelListItemEntity;
-import com.sudokumanager.repository.SudokuLevelListRepository;
-import com.sudokumanager.repository.SudokuRepository;
+import com.gamesmanager.game.sudoku.model.entities.DifficultyLevel;
+import com.gamesmanager.game.sudoku.model.entities.SudokuEntity;
+import com.gamesmanager.game.sudoku.model.entities.SudokuLevelListItemEntity;
+import com.gamesmanager.game.sudoku.repository.SudokuLevelListRepository;
+import com.gamesmanager.game.sudoku.repository.SudokuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
