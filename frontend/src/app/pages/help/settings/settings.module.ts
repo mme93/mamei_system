@@ -15,7 +15,8 @@ import { UiSettingsComponent } from './ui-settings/ui-settings.component';
 import {MatListModule} from "@angular/material/list";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import {FormsModule} from "@angular/forms";
     MatListModule,
     MatExpansionModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   declarations: [SettingsComponent, ServiceStatusComponent, AdminstrationComponent,AccountComponent, UiSettingsComponent]
 })
