@@ -36,11 +36,9 @@ Furthermore, the project in the backend directory the Docker-Compose file can be
 | Services                | Port | Name          |
 |-------------------------|------|---------------|
 | UserApplication         | 9050 | USER          |
-| SudokumanagerApplication| 9051 | SUDOKU        |
 | DashboardApplication    | 9052 | DASHBOARD     |
-| ShoppinglistApplication | 9053 | SHOPPINGLIST  |
 | GamesManagerApplication | 9054 | GAMESMANAGER  |
-| MameieFSM               | 9055 | MAMEI_FSM  |
+| MameieFSM               | 9055 | MAMEI_FSM     |
 
 ## Service Description
 
