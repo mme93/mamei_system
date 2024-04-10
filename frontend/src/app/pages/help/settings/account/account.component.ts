@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AccountService} from "../../../../shared/services/help/account/account.service";
 
 @Component({
   selector: 'app-account',
@@ -18,6 +19,10 @@ export class AccountComponent {
   };
 
   isEditing = false;
+
+  constructor(private service:AccountService) {
+    service.loadAccount().subscribe(result => console.log(result));
+  }
 
   startEditing(): void {
     this.isEditing = true;

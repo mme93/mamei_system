@@ -12,4 +12,7 @@ public class UserRouterTable {
 
     /** URI for initializing the user database. */
     public static final String URI_USER_DATABASE_INIT = "/user/db/init";
+
+    public static final String ACCOUNT_BY_USER_ID="/user/account/userId/";
+
 }

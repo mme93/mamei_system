@@ -29,4 +29,8 @@ export class AppComponent implements AfterViewInit  {
     this.isSidenavDisabled = false;
     this.router.navigate(['/login'])
   }
+
+  openAccount() {
+    this.router.navigate(['/help/settings/account'])
+  }
 }
