@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+/**
+ * Controller class responsible for handling user management related HTTP requests.
+ */
 @RestController
 @RequestMapping("/user")
 public class UserManagerController {
@@ -24,7 +27,7 @@ public class UserManagerController {
     /**
      * Retrieves an account by user ID.
      *
-     * @return ResponseEntity<AccountEntity> The ResponseEntity containing the account entity if found, otherwise NOT_FOUND status
+     * @return ResponseEntity<Object> The ResponseEntity containing the account entity if found, otherwise NOT_FOUND status
      */
     @GetMapping("/account")
     public ResponseEntity<Object> getAccountByUserId() {

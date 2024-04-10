@@ -9,6 +9,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Optional;
 
+/**
+ * Service class responsible for interacting with the user manager microservice.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserManagerService {
