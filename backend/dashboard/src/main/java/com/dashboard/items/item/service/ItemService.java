@@ -1,4 +1,4 @@
-package com.dashboard.items.service;
+package com.dashboard.items.item.service;
 
 import org.springframework.stereotype.Service;
 

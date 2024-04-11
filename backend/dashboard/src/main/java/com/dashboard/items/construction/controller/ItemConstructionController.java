@@ -1,9 +1,9 @@
-package com.dashboard.items.controller;
+package com.dashboard.items.construction.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/item")
-public class ItemController {
+@RequestMapping("/construction")
+public class ItemConstructionController {
 }
