@@ -63,8 +63,10 @@
 
     </mat-card-content>
     <mat-card-actions>
+      <!--
       <button mat-raised-button color="primary" *ngIf="!isEditing" (click)="startEditing()">Edit</button>
       <button mat-raised-button color="primary" *ngIf="!isEditing" (click)="startEditing()">Change Password</button>
+      -->
       <button mat-raised-button color="primary" *ngIf="isEditing" (click)="saveChanges()">Save</button>
     </mat-card-actions>
   </mat-card>
