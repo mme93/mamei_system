@@ -1,9 +1,9 @@
-package com.dashboard.entities.primary.controller;
+package com.dashboard.items.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/primary")
-public class PrimaryEntityController {
+@RequestMapping("/item")
+public class ItemController {
 }
