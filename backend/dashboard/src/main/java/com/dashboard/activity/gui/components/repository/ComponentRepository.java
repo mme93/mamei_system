@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ComponentRepository extends JpaRepository<ComponentEntity, Long> {
+
+    boolean existsByName(String name);
+    void deleteByName(String name);
 }

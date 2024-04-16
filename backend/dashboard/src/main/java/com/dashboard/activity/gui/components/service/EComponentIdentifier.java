@@ -4,12 +4,12 @@ public enum EComponentIdentifier {
 
     TEXT_BLOCK_FIELD,
     TEXT_FIELD,
-    NUMBER_FIELD,
+    LIST,
     CHECK_BOX,
     CHOICE_BOX,
     LABEL,
     SEPARATOR,
     IMAGE,
-    COMPONENT_LABEL
+    DATA_STORE
 
 }

@@ -20,12 +20,19 @@ public class ComponentEntity {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(unique = true)
     private String name;
 
     private String valueTyp;
 
+    @Enumerated(EnumType.STRING)
     private EComponentIdentifier componentIdentifier;
 
-    private String defaultValue;
 
+
+    public ComponentEntity(String name, String valueTyp, EComponentIdentifier componentIdentifier) {
+        this.name = name;
+        this.valueTyp = valueTyp;
+        this.componentIdentifier = componentIdentifier;
+    }
 }
