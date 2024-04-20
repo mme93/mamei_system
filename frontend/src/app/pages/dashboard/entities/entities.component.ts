@@ -31,6 +31,11 @@ export class EntitiesComponent implements OnInit{
     this.eventService.updateTitle('Dashboard - Entities')
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue)
+  }
+
   navigateTo(route: string) {
     this.router.navigate([route]);
   }
