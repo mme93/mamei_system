@@ -32,6 +32,11 @@ const routes: Routes = [
     path: 'entities',
     loadChildren: () => import('./entities/entities.module').then(m => m.EntitiesModule),
     canActivate: [SecurityGuard]
+  },
+  {
+    path: 'item',
+    loadChildren: () => import('./item/item.module').then(m => m.ItemModule),
+    canActivate: [SecurityGuard]
   }
 
 

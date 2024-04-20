@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
@@ -15,8 +15,8 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {EntitiesRoutingModule} from "./entites-routing.module";
-import { CreateEntitiesComponent } from './create-entities/create-entities.component';
-import { EditEntitiesComponent } from './edit-entities/edit-entities.component';
+import {CreateEntitiesComponent} from './create-entities/create-entities.component';
+import {EditEntitiesComponent} from './edit-entities/edit-entities.component';
 
 
 @NgModule({
@@ -40,9 +40,10 @@ import { EditEntitiesComponent } from './edit-entities/edit-entities.component';
     FlexLayoutModule
   ],
   declarations: [
-  
+
     CreateEntitiesComponent,
-       EditEntitiesComponent
+    EditEntitiesComponent
   ]
 })
-export class EntitiesModule {}
+export class EntitiesModule {
+}
