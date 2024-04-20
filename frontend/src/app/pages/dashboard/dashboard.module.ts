@@ -24,6 +24,9 @@ import {CreateTaskComponent} from "./utils/task/create-task/create-task.componen
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { EntitiesComponent } from './entities/entities.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { ItemComponent } from './item/item.component';
+import { CreateItemComponent } from './item/create-item/create-item.component';
+import { EditItemComponent } from './item/edit-item/edit-item.component';
 
 
 @NgModule({
@@ -50,6 +53,6 @@ import {MatMenuModule} from "@angular/material/menu";
   exports: [
     UtilsComponent
   ],
-  declarations: [DashboardComponent, TaskComponent, OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, UtilsComponent, EntitiesComponent]
+  declarations: [DashboardComponent, TaskComponent, OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, UtilsComponent, EntitiesComponent, ItemComponent, CreateItemComponent, EditItemComponent]
 })
 export class DashboardModule {}
