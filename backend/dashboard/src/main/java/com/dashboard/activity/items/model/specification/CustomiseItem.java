@@ -11,15 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "ticket_item")
-public class TicketItem {
+@Table(name = "customise_item")
+public class CustomiseItem {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Long schemeIds;
+    private String schemeIds;
 
     private String name;
 

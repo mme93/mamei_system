@@ -1,4 +1,4 @@
-package com.dashboard.activity.items.model.specification;
+package com.dashboard.activity.items.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,20 +11,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "ticket_item")
-public class TicketItem {
+@Table(name = "item_names")
+public class ItemNames {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Long schemeIds;
+    private String itemName;
 
-    private String name;
+    private Long itemId;
 
-    private String description;
-
-    private String icon;
-
+    @Enumerated(EnumType.STRING)
+    private EItemTyp eItemTyp;
 }

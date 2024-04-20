@@ -1,7 +1,6 @@
 package com.dashboard.activity.items.model.basic;
 
 
-import com.dashboard.activity.items.model.DefaultItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,11 +13,25 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "basic_item")
-public class BasicItem extends DefaultItem {
+public class BasicItem {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    private Long schemeId;
+
+    private String name;
+
+    private String description;
+
+    private String icon;
+
+    public BasicItem(Long schemeId, String name, String description, String icon) {
+        this.schemeId = schemeId;
+        this.name = name;
+        this.description = description;
+        this.icon = icon;
+    }
 }

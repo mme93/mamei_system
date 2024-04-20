@@ -24,16 +24,23 @@ public class DefaultDatabaseSchemeService {
 
     public List<SchemeEntity> createDefaultDataSet() {
         List<SchemeEntity> schemeEntityList = new ArrayList<>();
-        if (!schemeRepository.existsByName(SchemeName.SHOPPING_LIST)) {
+        if (!schemeRepository.existsByName(SchemeName.CHECK_LIST)) {
             SchemeEntity schemeEntity = new SchemeEntity(
-                    SchemeName.SHOPPING_LIST,String.format("%s, %s",TITLE,CHECK_LIST_WITH_COUNT),true);
+                    SchemeName.CHECK_LIST,String.format("%s, %s",TITLE,CHECK_LIST),true);
+            schemeRepository.save(schemeEntity);
+            schemeEntityList.add(schemeEntity);
+        }
+
+        if (!schemeRepository.existsByName(SchemeName.CHECK_LIST_WITH_COUNT)) {
+            SchemeEntity schemeEntity = new SchemeEntity(
+                    SchemeName.CHECK_LIST_WITH_COUNT,String.format("%s, %s",TITLE,CHECK_LIST_WITH_COUNT),true);
             schemeRepository.save(schemeEntity);
             schemeEntityList.add(schemeEntity);
         }
 
         if (!schemeRepository.existsByName(SchemeName.FORM)) {
             SchemeEntity schemeEntity = new SchemeEntity(
-                    SchemeName.SHOPPING_LIST,String.format("%s, %s",TITLE,INPUT_FIELD_ANY),true);
+                    SchemeName.FORM,String.format("%s, %s",TITLE,INPUT_FIELD_ANY),true);
             schemeRepository.save(schemeEntity);
             schemeEntityList.add(schemeEntity);
         }
