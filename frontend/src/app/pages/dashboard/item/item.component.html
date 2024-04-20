@@ -1,1 +1,29 @@
-<p>item works!</p>
+<article>
+  <div class="menu-container">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>build</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="navigateTo('/dashboard/entities/edit')">
+        <mat-icon>add</mat-icon>
+        <span>Create Entity</span>
+      </button>
+    </mat-menu>
+
+    <mat-form-field style="width: 100%;">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search value">
+    </mat-form-field>
+  </div>
+
+  <div class="content">
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let item of gridItems" (click)="navigateTo(item.route)">
+        <mat-card class="custom-card">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <p>{{ item.text }}</p>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</article>
