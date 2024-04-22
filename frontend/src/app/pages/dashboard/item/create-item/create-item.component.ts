@@ -37,7 +37,7 @@ const ELEMENT_DATA: SchemeList[] = [
   styleUrls: ['./create-item.component.scss']
 })
 export class CreateItemComponent implements OnInit {
-  columns: string[] = ['position', 'name', 'valueTypes', 'description'];
+  columns: string[] = ['position', 'name', 'valueTypes', 'description','open'];
   dataSource =  new MatTableDataSource<SchemeList>(ELEMENT_DATA);
   counter = 3;
   selectedValueComponents = '';
@@ -112,6 +112,32 @@ export class CreateItemComponent implements OnInit {
     });
     this.counter++;
     this.dataSource = new MatTableDataSource<SchemeList>(this.schemeList);
+  }
+
+  removeComponent(i:number) {
+    this.schemeList.splice(i,1);
+    this.updatePosition();
+  }
+
+  moveComponentUp(i:number) {
+    let temp =  this.schemeList[i];
+    this.schemeList[i] =  this.schemeList[i-1];
+    this.schemeList[i-1] = temp;
+    this.updatePosition();
+  }
+
+  moveComponentDown(i:number) {
+    let temp =  this.schemeList[i];
+    this.schemeList[i] =  this.schemeList[i+1];
+    this.schemeList[i+1] = temp;
+    this.updatePosition();
+  }
+  updatePosition(){
+    for(let i=0;i<this.schemeList.length;i++){
+      this.schemeList[i].position=i+1;
+    }
+    this.dataSource = new MatTableDataSource<SchemeList>(this.schemeList);
+    this.counter=this.schemeList.length;
   }
 }
 
