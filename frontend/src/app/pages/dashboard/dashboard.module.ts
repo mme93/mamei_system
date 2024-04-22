@@ -25,6 +25,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import { EntitiesComponent } from './entities/entities.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { ItemComponent } from './item/item.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
@@ -46,7 +48,8 @@ import { ItemComponent } from './item/item.component';
     MatNativeDateModule,
     MatTableModule,
     FlexLayoutModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDividerModule
   ],
   exports: [
     UtilsComponent

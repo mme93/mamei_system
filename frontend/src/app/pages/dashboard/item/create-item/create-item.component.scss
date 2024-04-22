@@ -1,0 +1,20 @@
+article {
+  display: flex;
+  justify-content: center;
+}
+
+article > div {
+  width: 80%;
+  padding: 3% 10%;
+  overflow-y: auto;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+}
+

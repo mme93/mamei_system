@@ -9,7 +9,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
@@ -17,6 +17,9 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {CreateItemComponent} from "./create-item/create-item.component";
 import {EditItemComponent} from "./edit-item/edit-item.component";
 import {ItemRoutingModule} from "./item-routing.module";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   imports: [
@@ -36,7 +39,11 @@ import {ItemRoutingModule} from "./item-routing.module";
     MatProgressBarModule,
     MatNativeDateModule,
     MatTableModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSelectModule,
+    FormsModule,
+    MatDividerModule,
+    MatListModule
   ],
   declarations: [
     CreateItemComponent,

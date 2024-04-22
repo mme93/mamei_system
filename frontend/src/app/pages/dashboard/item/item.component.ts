@@ -21,39 +21,6 @@ export class ItemComponent {
     { icon: 'cloud_download', text: 'Data Cloud' ,route:''},
     { icon: 'insert_chart', text: 'Dashboard' ,route:''},
     { icon: 'email', text: 'Message' ,route:''},
-    { icon: 'event', text: 'Calendar' ,route:''},
-    { icon: 'feed', text: 'Entities',route:'/dashboard/entities/menu' },
-    { icon: 'inventory', text: 'Task',route:'' },
-    { icon: 'checklist', text: 'Checklist',route:'' },
-    { icon: 'sports_esports', text: 'Games' ,route:''},
-    { icon: 'settings', text: 'Settings' ,route:'/help/settings/board'},
-    { icon: 'admin_panel_settings', text: 'Admin' ,route:'/admin/menu'},
-    { icon: 'storage', text: 'Database Manager',route:'' },
-    { icon: 'cloud_download', text: 'Data Cloud' ,route:''},
-    { icon: 'insert_chart', text: 'Dashboard' ,route:''},
-    { icon: 'email', text: 'Message' ,route:''},
-    { icon: 'event', text: 'Calendar' ,route:''},
-    { icon: 'feed', text: 'Entities',route:'/dashboard/entities/menu' },
-    { icon: 'inventory', text: 'Task',route:'' },
-    { icon: 'checklist', text: 'Checklist',route:'' },
-    { icon: 'sports_esports', text: 'Games' ,route:''},
-    { icon: 'settings', text: 'Settings' ,route:'/help/settings/board'},
-    { icon: 'admin_panel_settings', text: 'Admin' ,route:'/admin/menu'},
-    { icon: 'storage', text: 'Database Manager',route:'' },
-    { icon: 'cloud_download', text: 'Data Cloud' ,route:''},
-    { icon: 'insert_chart', text: 'Dashboard' ,route:''},
-    { icon: 'email', text: 'Message' ,route:''},
-    { icon: 'event', text: 'Calendar' ,route:''},
-    { icon: 'feed', text: 'Entities',route:'/dashboard/entities/menu' },
-    { icon: 'inventory', text: 'Task',route:'' },
-    { icon: 'checklist', text: 'Checklist',route:'' },
-    { icon: 'sports_esports', text: 'Games' ,route:''},
-    { icon: 'settings', text: 'Settings' ,route:'/help/settings/board'},
-    { icon: 'admin_panel_settings', text: 'Admin' ,route:'/admin/menu'},
-    { icon: 'storage', text: 'Database Manager',route:'' },
-    { icon: 'cloud_download', text: 'Data Cloud' ,route:''},
-    { icon: 'insert_chart', text: 'Dashboard' ,route:''},
-    { icon: 'email', text: 'Message' ,route:''},
     { icon: 'event', text: 'Calendar' ,route:''}
   ];
 
@@ -61,7 +28,7 @@ export class ItemComponent {
   }
 
   ngOnInit(): void {
-    this.eventService.updateTitle('Dashboard - Entities')
+    this.eventService.updateTitle('Dashboard - Item')
   }
 
   applyFilter(event: Event) {
