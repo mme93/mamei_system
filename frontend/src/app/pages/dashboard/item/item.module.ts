@@ -20,6 +20,9 @@ import {ItemRoutingModule} from "./item-routing.module";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatListModule} from "@angular/material/list";
+import { SchemeComponent } from './scheme/scheme.component';
+import { ViewSchemeComponent } from './scheme/view-scheme/view-scheme.component';
+import { EditSchemeComponent } from './scheme/edit-scheme/edit-scheme.component';
 
 @NgModule({
   imports: [
@@ -47,7 +50,10 @@ import {MatListModule} from "@angular/material/list";
   ],
   declarations: [
     CreateItemComponent,
-    EditItemComponent
+    EditItemComponent,
+    SchemeComponent,
+    ViewSchemeComponent,
+    EditSchemeComponent
   ]
 })
 export class ItemModule {}

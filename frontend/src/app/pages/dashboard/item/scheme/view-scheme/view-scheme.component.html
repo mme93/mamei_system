@@ -1,0 +1,9 @@
+<article>
+  <h4>View-Schema</h4>
+  <button mat-raised-button (click)="printData()" style="width: 100%">Print Data</button>
+  <div *ngFor="let scheme of data">
+    <label *ngIf="scheme.name === 'label'">{{scheme.description}}</label>
+    <input *ngIf="scheme.name === 'input_text'" type="{{scheme.valueTypes}}">
+    <textarea *ngIf="scheme.name === 'input_text_area'"></textarea>
+  </div>
+</article>

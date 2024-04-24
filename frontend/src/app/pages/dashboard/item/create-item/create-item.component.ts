@@ -18,18 +18,12 @@ interface SelectedComponentValueTyp {
   viewValue: string;
 }
 
-interface SchemeList {
+export interface SchemeList {
   position: number;
   name: string;
   valueTypes: string;
   description: string;
 }
-
-const ELEMENT_DATA: SchemeList[] = [
-  {position: 1, name: 'label', valueTypes: 'STRING', description: 'XXX'},
-  {position: 2, name: 'input_text', valueTypes: 'STRING', description: 'XXX'},
-  {position: 3, name: 'input_text', valueTypes: 'NUMBER', description: 'XXX'},
-];
 
 @Component({
   selector: 'app-create-item',
@@ -38,11 +32,16 @@ const ELEMENT_DATA: SchemeList[] = [
 })
 export class CreateItemComponent implements OnInit {
   columns: string[] = ['position', 'name', 'valueTypes', 'description','open'];
-  dataSource =  new MatTableDataSource<SchemeList>(ELEMENT_DATA);
+  showSchemeView: boolean = false;
   counter = 3;
   selectedValueComponents = '';
   selectedValueScheme = '';
-  schemeList: SchemeList[] = ELEMENT_DATA;
+  schemeList: SchemeList[] = [
+    {position: 1, name: 'label', valueTypes: 'STRING', description: 'XXX'},
+    {position: 2, name: 'input_text', valueTypes: 'STRING', description: 'XXX'},
+    {position: 3, name: 'input_text', valueTypes: 'NUMBER', description: 'XXX'},
+  ];
+  dataSource =  new MatTableDataSource<SchemeList>(this.schemeList);
 
   componentScheme = new FormGroup({
     number: new FormControl('', [Validators.required, Validators.minLength(1)]),
@@ -132,6 +131,7 @@ export class CreateItemComponent implements OnInit {
     this.schemeList[i+1] = temp;
     this.updatePosition();
   }
+
   updatePosition(){
     for(let i=0;i<this.schemeList.length;i++){
       this.schemeList[i].position=i+1;
@@ -139,5 +139,6 @@ export class CreateItemComponent implements OnInit {
     this.dataSource = new MatTableDataSource<SchemeList>(this.schemeList);
     this.counter=this.schemeList.length;
   }
+
 }
 
