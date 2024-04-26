@@ -21,8 +21,10 @@ interface SelectedComponentValueTyp {
 export interface SchemeList {
   position: number;
   name: string;
-  valueTypes: string;
+  spezification: string;
   description: string;
+  styleClass: string[];
+  spezificationList: string[];
 }
 
 @Component({
@@ -37,9 +39,14 @@ export class CreateItemComponent implements OnInit {
   selectedValueComponents = '';
   selectedValueScheme = '';
   schemeList: SchemeList[] = [
-    {position: 1, name: 'label', valueTypes: 'STRING', description: 'XXX'},
-    {position: 2, name: 'input_text', valueTypes: 'STRING', description: 'XXX'},
-    {position: 3, name: 'input_text', valueTypes: 'NUMBER', description: 'XXX'},
+    {position: 1, name: 'label', spezification: 'STRING', description: 'Label',styleClass:['default'],spezificationList:['default']},
+    {position: 2, name: 'input_text', spezification: 'STRING', description: 'Input Text Type String',styleClass:['default'],spezificationList:['default']},
+    {position: 3, name: 'input_text', spezification: 'NUMBER', description: 'Input Text Type Number',styleClass:['default'],spezificationList:['default']},
+    {position: 4, name: 'input_text_area', spezification: 'STRING', description: 'Input Text Area',styleClass:['default'],spezificationList:['default']},
+    {position: 5, name: 'list_checkbox', spezification: 'boolean', description: 'List with Checkbox',styleClass:['default'],spezificationList:['default']},
+    {position: 6, name: 'checkbox', spezification: 'BOOLEAN', description: 'Checkbox',styleClass:['default'],spezificationList:['default']},
+    {position: 7, name: 'checkbox_with_sub_checks', spezification: 'BOOLEAN', description: 'Checkbox with Subchecks',styleClass:['default'],spezificationList:['default']},
+    {position: 8, name: 'radio_button', spezification: 'BOOLEAN', description: 'Radion Buttons',styleClass:['default'],spezificationList:['default']},
   ];
   dataSource =  new MatTableDataSource<SchemeList>(this.schemeList);
 
@@ -73,10 +80,14 @@ export class CreateItemComponent implements OnInit {
   itemComponents: SelectedComponent[] = [
     {value: 'label', viewValue: 'Label'},
     {value: 'list', viewValue: 'List'},
+    {value: 'list_checkbox', viewValue: 'List Checkbox'},
     {value: 'input_text', viewValue: 'Text Field'},
     {value: 'input_number', viewValue: 'Number Field'},
     {value: 'input_date', viewValue: 'Date Field'},
     {value: 'input_text_area', viewValue: 'Text Area'},
+    {value: 'checkbox', viewValue: 'Checkbox'},
+    {value: 'checkbox_with_sub_checks', viewValue: 'Checkbox with Subchecks'},
+    {value: 'radio_button', viewValue: 'Radio Buttons'},
   ];
 
   constructor(private eventService: TitleEventService) {
@@ -106,8 +117,10 @@ export class CreateItemComponent implements OnInit {
     this.schemeList.push({
       position:this.counter,
       name: this.selectedValueComponents,
-      valueTypes: '',
+      spezification: '',
+      spezificationList:['default'],
       description: '',
+      styleClass:['default']
     });
     this.counter++;
     this.dataSource = new MatTableDataSource<SchemeList>(this.schemeList);

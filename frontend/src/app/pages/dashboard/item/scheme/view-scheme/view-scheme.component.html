@@ -1,9 +1,62 @@
 <article>
   <h4>View-Schema</h4>
-  <button mat-raised-button (click)="printData()" style="width: 100%">Print Data</button>
   <div *ngFor="let scheme of data">
+
     <label *ngIf="scheme.name === 'label'">{{scheme.description}}</label>
-    <input *ngIf="scheme.name === 'input_text'" type="{{scheme.valueTypes}}">
-    <textarea *ngIf="scheme.name === 'input_text_area'"></textarea>
+
+    <form *ngIf="scheme.name === 'input_text'">
+      <mat-form-field>
+        <mat-label>{{scheme.description}}</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </form>
+
+    <form *ngIf="scheme.name === 'input_text_area'">
+      <mat-form-field>
+        <mat-label>{{scheme.description}}</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </form>
+
+    <section *ngIf="scheme.name === 'checkbox'">
+      <mat-checkbox>{{scheme.description}}</mat-checkbox>
+    </section>
+
+    <section *ngIf="scheme.name === 'checkbox_with_sub_checks'" class="example-section">
+      <span class="example-list-section">
+        <mat-checkbox > <!--
+                      [checked]="allComplete"
+                      [color]="task.color"
+                      [indeterminate]="someComplete()"
+                      (change)="setAll($event.checked)">
+                      -->
+          {{scheme.description}}
+        </mat-checkbox>
+      </span>
+      <span  class="example-list-section">
+          <ul>
+            <li>
+              <mat-checkbox class="example-margin"> <!--
+                            [(ngModel)]="subtask.completed"
+                            [color]="subtask.color"
+                            (ngModelChange)="updateAllComplete()">
+                            -->
+                  First Subtask
+                </mat-checkbox>
+              </li>
+            <li>
+              <mat-checkbox class="example-margin"> <!--
+                            [(ngModel)]="subtask.completed"
+                            [color]="subtask.color"
+                            (ngModelChange)="updateAllComplete()">
+                            -->
+                  Second Subtask
+                </mat-checkbox>
+              </li>
+          </ul>
+      </span>
+    </section>
+
+
   </div>
 </article>
