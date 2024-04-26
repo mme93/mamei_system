@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {TitleEventService} from "../../../../shared/event/title-event.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { MatTableDataSource } from '@angular/material/table';
+import {StandardService} from "../../../../shared/services/dashboard/component/standard/standard.service";
+import {StandardComponent} from "../../../../shared/model/dashboard/Components";
 
 interface SelectedComponent {
   value: string;
@@ -77,25 +79,15 @@ export class CreateItemComponent implements OnInit {
     {value: 'todo_scheme', viewValue: 'ToDo List'}
   ];
 
-  itemComponents: SelectedComponent[] = [
-    {value: 'label', viewValue: 'Label'},
-    {value: 'list', viewValue: 'List'},
-    {value: 'list_checkbox', viewValue: 'List Checkbox'},
-    {value: 'input_text', viewValue: 'Text Field'},
-    {value: 'input_number', viewValue: 'Number Field'},
-    {value: 'input_date', viewValue: 'Date Field'},
-    {value: 'input_text_area', viewValue: 'Text Area'},
-    {value: 'checkbox', viewValue: 'Checkbox'},
-    {value: 'checkbox_with_sub_checks', viewValue: 'Checkbox with Subchecks'},
-    {value: 'radio_button', viewValue: 'Radio Buttons'},
-  ];
+  standardComponents:StandardComponent[]=[];
 
-  constructor(private eventService: TitleEventService) {
+  constructor(private eventService: TitleEventService, private standardService:StandardService) {
   }
 
 
   ngOnInit(): void {
     this.eventService.updateTitle('Dashboard - Create Item');
+    this.standardService.getAllStandardComponents().subscribe(result => this.standardComponents=result);
   }
 
   getErrorMessage() {

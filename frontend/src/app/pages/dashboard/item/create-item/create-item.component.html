@@ -47,8 +47,8 @@
       <mat-form-field style=" flex: 1;  margin-right: 10px; ">
         <mat-label>Components</mat-label>
         <mat-select [(ngModel)]="selectedValueComponents">
-          <mat-option *ngFor="let itemComponent of itemComponents"
-                      [value]="itemComponent.value">{{itemComponent.viewValue}}</mat-option>
+          <mat-option *ngFor="let standardComponent of standardComponents"
+                      [value]="standardComponent.value">{{standardComponent.viewValue}}</mat-option>
         </mat-select>
       </mat-form-field>
       <button mat-raised-button (click)="addComponent()">
