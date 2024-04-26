@@ -21,7 +21,7 @@ interface SelectedComponentValueTyp {
 export interface SchemeList {
   position: number;
   name: string;
-  spezification: string;
+  specification: string;
   description: string;
   styleClass: string[];
   spezificationList: string[];
@@ -39,14 +39,14 @@ export class CreateItemComponent implements OnInit {
   selectedValueComponents = '';
   selectedValueScheme = '';
   schemeList: SchemeList[] = [
-    {position: 1, name: 'label', spezification: 'STRING', description: 'Label',styleClass:['default'],spezificationList:['default']},
-    {position: 2, name: 'input_text', spezification: 'STRING', description: 'Input Text Type String',styleClass:['default'],spezificationList:['default']},
-    {position: 3, name: 'input_text', spezification: 'NUMBER', description: 'Input Text Type Number',styleClass:['default'],spezificationList:['default']},
-    {position: 4, name: 'input_text_area', spezification: 'STRING', description: 'Input Text Area',styleClass:['default'],spezificationList:['default']},
-    {position: 5, name: 'list_checkbox', spezification: 'boolean', description: 'List with Checkbox',styleClass:['default'],spezificationList:['default']},
-    {position: 6, name: 'checkbox', spezification: 'BOOLEAN', description: 'Checkbox',styleClass:['default'],spezificationList:['default']},
-    {position: 7, name: 'checkbox_with_sub_checks', spezification: 'BOOLEAN', description: 'Checkbox with Subchecks',styleClass:['default'],spezificationList:['default']},
-    {position: 8, name: 'radio_button', spezification: 'BOOLEAN', description: 'Radion Buttons',styleClass:['default'],spezificationList:['default']},
+    {position: 1, name: 'label', specification: 'STRING', description: 'Label',styleClass:['default'],spezificationList:['default']},
+    {position: 2, name: 'input_text', specification: 'STRING', description: 'Input Text Type String',styleClass:['default'],spezificationList:['default']},
+    {position: 3, name: 'input_text', specification: 'NUMBER', description: 'Input Text Type Number',styleClass:['default'],spezificationList:['default']},
+    {position: 4, name: 'input_text_area', specification: 'STRING', description: 'Input Text Area',styleClass:['default'],spezificationList:['default']},
+    {position: 5, name: 'list_checkbox', specification: 'boolean', description: 'List with Checkbox',styleClass:['default'],spezificationList:['default']},
+    {position: 6, name: 'checkbox', specification: 'BOOLEAN', description: 'Checkbox',styleClass:['default'],spezificationList:['default']},
+    {position: 7, name: 'checkbox_with_sub_checks', specification: 'BOOLEAN', description: 'Checkbox with Subchecks',styleClass:['default'],spezificationList:['default']},
+    {position: 8, name: 'radio_button', specification: 'BOOLEAN', description: 'Radion Buttons',styleClass:['default'],spezificationList:['default']},
   ];
   dataSource =  new MatTableDataSource<SchemeList>(this.schemeList);
 
@@ -117,7 +117,7 @@ export class CreateItemComponent implements OnInit {
     this.schemeList.push({
       position:this.counter,
       name: this.selectedValueComponents,
-      spezification: '',
+      specification: '',
       spezificationList:['default'],
       description: '',
       styleClass:['default']

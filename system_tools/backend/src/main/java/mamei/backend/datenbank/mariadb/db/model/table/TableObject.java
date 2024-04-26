@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mamei.backend.datenbank.mariadb.db.model.DatabaseServer;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.sql.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -49,7 +52,13 @@ public class TableObject {
              ResultSet resultSet = preparedStatement.executeQuery()) {
             int index = 0;
             while (resultSet.next()) {
-                tableMetaRows.add(generateTableMetaRow(resultSet, index));
+                try {
+                    tableMetaRows.add(generateTableMetaRow(resultSet, index));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 index++;
             }
             if (!checkTableHasIdCol()) {
@@ -62,7 +71,7 @@ public class TableObject {
         return this;
     }
 
-    private TableMetaRow generateTableMetaRow(ResultSet resultSet, int index) throws SQLException {
+    private TableMetaRow generateTableMetaRow(ResultSet resultSet, int index) throws SQLException, IOException, ClassNotFoundException {
         TableMetaRow tableMetaRow = new TableMetaRow();
         tableMetaRow.setIndex(index);
         List<TableMetaColumn> tableMetaColumns = new ArrayList<>();
@@ -108,7 +117,20 @@ public class TableObject {
                 tableMetaColumn.setColumnName(tableColumn.getColumnName());
                 tableMetaColumn.setValue(String.valueOf(result));
                 tableMetaColumns.add(tableMetaColumn);
-            }  else {
+            } else if (matchColumnType(tableColumn.getColumnType(), Byte.class)) {
+                TableMetaColumn tableMetaColumn = new TableMetaColumn();
+                InputStream binaryStream  = resultSet.getBinaryStream(tableColumn.getColumnName());
+                ObjectInputStream objectInputStream = new ObjectInputStream(binaryStream);
+                Object object = objectInputStream.readObject();
+                String result="";
+                if (object instanceof ArrayList<?>) {
+                    ArrayList<String> arrayList = (ArrayList<String>) object;
+                    result=arrayList.toString();
+                }
+                tableMetaColumn.setColumnName(tableColumn.getColumnName());
+                tableMetaColumn.setValue(String.valueOf(result));
+                tableMetaColumns.add(tableMetaColumn);
+            } else {
                 throw new SQLException("No column typ found from typ: " + tableColumn.getColumnType()+" and ColName: "+tableColumn.getColumnName());
             }
         }
@@ -123,6 +145,7 @@ public class TableObject {
         String[] enumTypes = {"enum"};
         String[] dateTypes = {"date", "time"};
         String[] booleanTypes={"bit"};
+        String[] binary={"varbinary"};
         switch (getTypeClassSimpleName(typeClass)) {
             case "String":
                 if (containsColumnTypes(columnType, stringTypes)) return true;
@@ -141,6 +164,9 @@ public class TableObject {
                 break;
             case "Boolean":
                 if (containsColumnTypes(columnType, booleanTypes)) return true;
+                break;
+            case "Byte":
+                if (containsColumnTypes(columnType, binary)) return true;
                 break;
             default:
                 return false;
