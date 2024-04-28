@@ -1,28 +1,28 @@
 <article>
   <h4>View-Schema</h4>
+  {{data[0].standardComponent.value}}
   <div *ngFor="let scheme of data">
+    <label *ngIf="scheme.standardComponent.value === 'LABEL'">{{scheme.content}}</label>
 
-    <label *ngIf="scheme.name === 'label'">{{scheme.description}}</label>
-
-    <form *ngIf="scheme.name === 'input_text'">
+    <form *ngIf="scheme.standardComponent.value === 'INPUT_FIELD'">
       <mat-form-field>
-        <mat-label>{{scheme.description}}</mat-label>
+        <mat-label>{{scheme.content}}</mat-label>
         <input matInput>
       </mat-form-field>
     </form>
 
-    <form *ngIf="scheme.name === 'input_text_area'">
+    <form *ngIf="scheme.standardComponent.value === 'input_text_area'">
       <mat-form-field>
-        <mat-label>{{scheme.description}}</mat-label>
+        <mat-label>{{scheme.content}}</mat-label>
         <textarea matInput></textarea>
       </mat-form-field>
     </form>
 
-    <section *ngIf="scheme.name === 'checkbox'">
-      <mat-checkbox>{{scheme.description}}</mat-checkbox>
+    <section *ngIf="scheme.standardComponent.value === 'checkbox'">
+      <mat-checkbox>{{scheme.content}}</mat-checkbox>
     </section>
 
-    <section *ngIf="scheme.name === 'checkbox_with_sub_checks'" class="example-section">
+    <section *ngIf="scheme.standardComponent.value === 'checkbox_with_sub_checks'" class="example-section">
       <span class="example-list-section">
         <mat-checkbox > <!--
                       [checked]="allComplete"
@@ -30,7 +30,7 @@
                       [indeterminate]="someComplete()"
                       (change)="setAll($event.checked)">
                       -->
-          {{scheme.description}}
+          {{scheme.content}}
         </mat-checkbox>
       </span>
       <span  class="example-list-section">

@@ -21,3 +21,11 @@ export interface StandardComponentSettings{
   subContent:string[];
   errorMsg:string;
 }
+
+export interface Component{
+  position:number;
+  content:String;
+  group:number;
+  standardComponentSettings:StandardComponentSettings;
+}
+
