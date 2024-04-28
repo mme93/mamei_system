@@ -57,7 +57,7 @@
       </button>
     </div>
 
-    <div *ngIf="this.itemSetup.standardComponentSetUps.length !== 0">
+    <div *ngIf="this.tableData.length !== 0">
       <h4>Component List</h4>
 
       <table mat-table [dataSource]="dataSource">
@@ -112,7 +112,7 @@
               <mat-icon>north</mat-icon>
             </button>
             <button mat-icon-butto (click)="moveComponentDown(i)" style="margin: 2px;"
-                    *ngIf="i !== this.itemSetup.standardComponentSetUps.length-1">
+                    *ngIf="i !== this.tableData.length-1">
               <mat-icon>south</mat-icon>
             </button>
           </td>
@@ -123,14 +123,14 @@
       </table>
     </div>
 
-    <div *ngIf="this.itemSetup.standardComponentSetUps.length !== 0">
+    <div *ngIf="this.tableData.length !== 0">
       <button *ngIf="showSchemeView" mat-raised-button style="width: 100%" color="primary"
               (click)="showSchemeView= !showSchemeView">Close Scheme View
       </button>
       <button *ngIf="!showSchemeView" mat-raised-button style="width: 100%" color="primary"
               (click)="showSchemeView= !showSchemeView">Open Scheme View
       </button>
-      <app-view-scheme *ngIf="showSchemeView" [data]="itemSetup.standardComponentSetUps"></app-view-scheme>
+      <app-view-scheme *ngIf="showSchemeView" [data]="tableData"></app-view-scheme>
     </div>
 
 

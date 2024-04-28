@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {StandardComponentSetUp} from "../../../../../shared/model/dashboard/Components";
+import { StandardComponentTable} from "../../../../../shared/model/dashboard/Components";
 
 @Component({
   selector: 'app-view-scheme',
@@ -7,5 +7,5 @@ import {StandardComponentSetUp} from "../../../../../shared/model/dashboard/Comp
   styleUrls: ['./view-scheme.component.scss']
 })
 export class ViewSchemeComponent {
-  @Input() data: StandardComponentSetUp[] = [];
+  @Input() data: StandardComponentTable[] = [];
 }

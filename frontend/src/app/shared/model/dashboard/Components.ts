@@ -7,7 +7,7 @@ export interface StandardComponent {
   description: string;
 }
 
-export interface StandardComponentSetUp {
+export interface StandardComponentTable {
   position:number;
   standardComponent: StandardComponent;
   content:String;

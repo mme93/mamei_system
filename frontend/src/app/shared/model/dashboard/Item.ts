@@ -1,8 +1,8 @@
-import {StandardComponentSetUp} from "./Components";
+import { StandardComponentTable} from "./Components";
 import {ItemScheme} from "./Scheme";
 
 export interface ItemSetUp{
-  standardComponentSetUps:StandardComponentSetUp[];
+  standardComponentSetUps:StandardComponentTable[];
   isNewScheme:boolean;
   scheme:string;
   itemName:string;

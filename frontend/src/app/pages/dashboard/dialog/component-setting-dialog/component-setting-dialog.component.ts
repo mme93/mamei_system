@@ -14,12 +14,12 @@ export class ComponentSettingDialogComponent {
   }
 
   removeContent(removeContent:string) {
-    this.data.standardComponentSetUp.standardComponentSettings.subContent=
-      this.data.standardComponentSetUp.standardComponentSettings.subContent.filter( (item: string) => item !== removeContent);
+    this.data.tableData.standardComponentSettings.subContent=
+      this.data.tableData.standardComponentSettings.subContent.filter( (item: string) => item !== removeContent);
   }
 
   addContent() {
-    this.data.standardComponentSetUp.standardComponentSettings.subContent.push(this.inputValue);
+    this.data.tableData.standardComponentSettings.subContent.push(this.inputValue);
     this.inputValue='';
   }
 }
