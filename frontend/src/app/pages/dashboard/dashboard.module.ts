@@ -12,7 +12,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
@@ -27,6 +27,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import { ItemComponent } from './item/item.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatDividerModule} from "@angular/material/divider";
+import { ComponentSettingDialogComponent } from './dialog/component-setting-dialog/component-setting-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatListModule} from "@angular/material/list";
 
 
 @NgModule({
@@ -49,11 +52,15 @@ import {MatDividerModule} from "@angular/material/divider";
     MatTableModule,
     FlexLayoutModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatListModule,
+    FormsModule
   ],
   exports: [
     UtilsComponent
   ],
-  declarations: [DashboardComponent, TaskComponent, OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, UtilsComponent, EntitiesComponent, ItemComponent]
+  declarations: [DashboardComponent, TaskComponent, OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, UtilsComponent, EntitiesComponent, ItemComponent, ComponentSettingDialogComponent]
 })
 export class DashboardModule {}

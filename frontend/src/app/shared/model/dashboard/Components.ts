@@ -8,7 +8,16 @@ export interface StandardComponent {
 }
 
 export interface StandardComponentSetUp {
+  position:number;
   standardComponent: StandardComponent;
   content:String;
   group:number;
+  standardComponentSettings:StandardComponentSettings;
+}
+
+export interface StandardComponentSettings{
+  specification:string;
+  styleClass:string;
+  subContent:string[];
+  errorMsg:string;
 }
