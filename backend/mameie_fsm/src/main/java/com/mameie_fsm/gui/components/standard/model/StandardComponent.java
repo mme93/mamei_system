@@ -1,5 +1,6 @@
 package com.mameie_fsm.gui.components.standard.model;
 
+import com.mameie_fsm.gui.scheme.model.SchemeComponent;
 import jakarta.persistence.*;
 import lombok.*;
 

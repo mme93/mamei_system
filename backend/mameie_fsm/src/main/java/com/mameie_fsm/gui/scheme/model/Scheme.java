@@ -22,23 +22,23 @@ public class Scheme {
     private Long id;
 
     @Column(unique = true)
-    private String schemeName;
+    private String name;
 
-    @Column(unique = true)
-    private String schemeViewName;
-
-    private boolean isPrivate;
-
+    @Column(nullable = false)
     private String styleClass;
 
-    @Lob
-    private List<SchemeGroup> schemeGroupList;
+    private String description;
 
-    public Scheme(String schemeName, String schemeViewName, boolean isPrivate, String styleClass, List<SchemeGroup> schemeGroupList) {
-        this.schemeName = schemeName;
-        this.schemeViewName = schemeViewName;
-        this.isPrivate = isPrivate;
+    private boolean isOpenSource;
+
+    @Lob
+    private List<Long> componentIds;
+
+    public Scheme(String name, String styleClass, String description, boolean isOpenSource, List<Long> componentIds) {
+        this.name = name;
         this.styleClass = styleClass;
-        this.schemeGroupList = schemeGroupList;
+        this.description = description;
+        this.isOpenSource = isOpenSource;
+        this.componentIds = componentIds;
     }
 }

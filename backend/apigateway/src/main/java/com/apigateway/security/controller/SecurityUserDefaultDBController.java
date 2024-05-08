@@ -32,11 +32,10 @@ public class SecurityUserDefaultDBController {
      */
     @PostMapping("/reload/security_user")
     public ResponseEntity<String> saveTableSecurityUserDataset(){
-        if(!securityUserDefaultDBService.deleteTableSecurityUserDataset().isBlank()){
-            String result=securityUserDefaultDBService.saveTableSecurityUserDataset();
-            if(!result.isBlank()){
-                return new ResponseEntity("Save Security User: "+result,HttpStatus.OK);
-            }
+        securityUserDefaultDBService.deleteTableSecurityUserDataset();
+        String result=securityUserDefaultDBService.saveTableSecurityUserDataset();
+        if(!result.isBlank()){
+            return new ResponseEntity("Save Security User: "+result,HttpStatus.OK);
         }
         return new ResponseEntity("No Security User save.",HttpStatus.OK);
     }

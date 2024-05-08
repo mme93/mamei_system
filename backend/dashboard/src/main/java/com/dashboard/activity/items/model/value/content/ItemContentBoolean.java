@@ -19,8 +19,6 @@ public class ItemContentBoolean {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Boolean check;
-
     private String contentName;
 
 }

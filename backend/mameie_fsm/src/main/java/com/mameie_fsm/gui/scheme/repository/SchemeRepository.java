@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SchemeRepository extends JpaRepository<Scheme, Long> {
-        boolean existsBySchemeName(String schemeName);
-        void deleteBySchemeName(String schemeName);
+    boolean existsByName(String name);
+    void deleteByName(String name);
 }
