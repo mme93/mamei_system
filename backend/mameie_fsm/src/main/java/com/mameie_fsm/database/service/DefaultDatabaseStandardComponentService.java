@@ -1,6 +1,7 @@
 package com.mameie_fsm.database.service;
 
 import com.mameie_fsm.database.constant.StandardComponentName;
+import com.mameie_fsm.database.constant.component.ComponentLabel;
 import com.mameie_fsm.gui.components.standard.model.StandardComponent;
 import com.mameie_fsm.gui.components.standard.repository.StandardComponentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mameie_fsm.database.constant.StandardComponentName.standardComponentNameList;
+import static com.mameie_fsm.database.constant.component.ComponentInputField.COMPONENT_INPUT_FIELD_LIST;
 import static java.util.Arrays.asList;
 
 @Service
@@ -45,7 +47,7 @@ public class DefaultDatabaseStandardComponentService {
             standardComponentRepository.save(new StandardComponent(
                     "Label",
                     StandardComponentName.LABEL,
-                    asList("TITLE","H1","H2","H3","H4","P"),
+                    ComponentLabel.COMPONENT_LABEL_LIST,
                     asList("default"),
                     "From title over subtitles to normal paragraphs."
             ));
@@ -72,7 +74,7 @@ public class DefaultDatabaseStandardComponentService {
             standardComponentRepository.save(new StandardComponent(
                     "Input field",
                     StandardComponentName.INPUT_FIELD,
-                    asList("TEXT","AREA","NUMBER","DATE"),
+                    COMPONENT_INPUT_FIELD_LIST,
                     asList("default"),
                     "Different types of input fields like number or string input."
             ));
@@ -81,7 +83,7 @@ public class DefaultDatabaseStandardComponentService {
             standardComponentRepository.save(new StandardComponent(
                     "Radio Button",
                     StandardComponentName.RADIO_BUTTON,
-                    asList("STANDARD"),
+                    asList("RADIO_BUTTON"),
                     asList("default"),
                     "Radio Buttons."
             ));
