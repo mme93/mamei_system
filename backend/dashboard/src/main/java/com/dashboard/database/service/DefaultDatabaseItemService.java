@@ -1,7 +1,6 @@
 package com.dashboard.database.service;
 
-import com.dashboard.activity.gui.components.model.ComponentEntity;
-import com.dashboard.activity.items.model.ItemNames;
+
 import com.dashboard.activity.items.model.basic.BasicItem;
 import com.dashboard.activity.items.repository.BasicItemRepository;
 import com.dashboard.activity.items.repository.CustomiseItemRepository;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 
 @Service
 public class DefaultDatabaseItemService {
@@ -39,14 +37,12 @@ public class DefaultDatabaseItemService {
 
     public List<Object> createDefaultDataSet() {
         List<Object>itemList=new ArrayList<>();
-        String itemName="";
-        if(!basicItemRepository.existsByName("x")){
-            itemName="";
+        if(!basicItemRepository.existsByName("Address")){
             basicItemRepository.save(new BasicItem(
-                    null,
-                    itemName,
-                    null,
-                    null
+                    "ADDRESS_SCHEME",
+                    "Address",
+                    "Save address from person.",
+                    "contacts"
             ));
         }
         return itemList;

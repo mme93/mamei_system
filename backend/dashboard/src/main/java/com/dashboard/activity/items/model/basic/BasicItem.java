@@ -20,7 +20,8 @@ public class BasicItem {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Long schemeId;
+
+    private String schemeName;
 
     private String name;
 
@@ -28,8 +29,8 @@ public class BasicItem {
 
     private String icon;
 
-    public BasicItem(Long schemeId, String name, String description, String icon) {
-        this.schemeId = schemeId;
+    public BasicItem(String schemeName, String name, String description, String icon) {
+        this.schemeName = schemeName;
         this.name = name;
         this.description = description;
         this.icon = icon;

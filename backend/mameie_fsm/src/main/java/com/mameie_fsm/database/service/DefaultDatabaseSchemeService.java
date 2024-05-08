@@ -43,6 +43,7 @@ public class DefaultDatabaseSchemeService {
 
     public void deleteAllData() {
         schemeRepository.deleteAll();
+        schemeComponentRepository.deleteAll();
     }
 
     public List<Scheme> createDefaultDataSet() {
@@ -53,17 +54,17 @@ public class DefaultDatabaseSchemeService {
             SchemeComponent addressComponent=new SchemeComponent(
                     label.getId(),label.getValue(), "Address", asList("Test"), 1, label.getSpecificationList().get(0)
             );
-            addressComponent=schemeComponentRepository.save(addressComponent);
+             addressComponent=schemeComponentRepository.save(addressComponent);
 
             SchemeComponent streetComponent=new SchemeComponent(
                     inputField.getId(),inputField.getValue(), "Street",asList("Test"), 2, inputField.getSpecificationList().get(0)
             );
-            streetComponent=schemeComponentRepository.save(streetComponent);
+             streetComponent=schemeComponentRepository.save(streetComponent);
 
             SchemeComponent townComponent=new SchemeComponent(
                     inputField.getId(),inputField.getValue(), "Town", asList("Test"), 3, inputField.getSpecificationList().get(0)
             );
-            townComponent=schemeComponentRepository.save(townComponent);
+             townComponent=schemeComponentRepository.save(townComponent);
 
             SchemeComponent plzComponent=new SchemeComponent(
                     inputField.getId(),inputField.getValue(), "Plz", asList("Test"), 4, inputField.getSpecificationList().get(0)
@@ -73,8 +74,8 @@ public class DefaultDatabaseSchemeService {
 
             schemeRepository.save(new Scheme(
                     ADDRESS_SCHEME, "default", "Save address from Person.",true,
-                    asList(addressComponent.getComponentId(),streetComponent.getComponentId(),
-                            townComponent.getComponentId(),plzComponent.getComponentId()
+                    asList(addressComponent.getId(),streetComponent.getId(),
+                            townComponent.getId(),plzComponent.getId()
                     )
             ));
         }

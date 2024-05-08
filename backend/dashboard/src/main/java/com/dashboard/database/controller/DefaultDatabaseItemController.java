@@ -1,6 +1,6 @@
 package com.dashboard.database.controller;
 
-import com.dashboard.activity.gui.components.model.ComponentEntity;
+
 import com.dashboard.database.service.DefaultDatabaseItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
