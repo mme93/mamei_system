@@ -4,12 +4,13 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatTableDataSource} from '@angular/material/table';
 import {StandardService} from "../../../../shared/services/dashboard/component/standard/standard.service";
 import {StandardComponent, StandardComponentTable} from "../../../../shared/model/dashboard/Components";
-import {ItemSetUp} from "../../../../shared/model/dashboard/Item";
+import {BasicItem, ItemSetUp} from "../../../../shared/model/dashboard/Item";
 import {MatDialog} from "@angular/material/dialog";
 import {ComponentSettingDialogComponent} from "../../dialog/component-setting-dialog/component-setting-dialog.component";
 import {SchemeName} from "../../../../shared/model/dashboard/Scheme";
 import {SchemeService} from "../../../../shared/services/dashboard/item/scheme/scheme.service";
 import {SchemeUiService} from "../../../../shared/services/dashboard/item/scheme/scheme-ui.service";
+import {BasicItemService} from "../../../../shared/services/dashboard/item/basicitem/basic-item.service";
 
 interface SelectedComponentScheme {
   value: string;
@@ -51,16 +52,16 @@ export class CreateItemComponent implements OnInit {
     itemTitle: new FormControl('', [Validators.required, Validators.minLength(1)])
   });
 
-
   schemeNames: SchemeName[] = [];
-
   standardComponents: StandardComponent[] = [];
+  basicItem: BasicItem = this.basicItemService.init()
 
   constructor(private eventService: TitleEventService,
               private standardService: StandardService,
               public dialog: MatDialog,
               private schemeService: SchemeService,
-              private schemeUiService: SchemeUiService) {
+              private schemeUiService: SchemeUiService,
+              private basicItemService: BasicItemService) {
   }
 
 
@@ -74,6 +75,7 @@ export class CreateItemComponent implements OnInit {
   addComponent() {
     let standardComponent = this.standardComponents.filter(standardComponent => standardComponent.value === this.selectedValueComponents)[0];
     this.tableData = this.schemeUiService.addTableData(this.tableData, standardComponent, this.counter, this.group);
+    this.basicItem = this.basicItemService.updateBasicItem(this.basicItem);
     this.updateTable();
   }
 
@@ -94,7 +96,7 @@ export class CreateItemComponent implements OnInit {
 
 
   editComponent(i: number) {
-    this.tableData[i]=this.schemeUiService.editComponent(this.tableData[i]);
+    this.tableData[i] = this.schemeUiService.editComponent(this.tableData[i]);
 
   }
 
