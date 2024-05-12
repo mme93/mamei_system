@@ -11,7 +11,7 @@ export class SchemeService {
   getAllScheme():SchemeName[]{
     return [
       {schemeName:'new_scheme',schemeViewName:'New Scheme'},
-      {schemeName:'todo_list',schemeViewName:'ToDo List'},
+      {schemeName:'ADDRESS_SCHEME',schemeViewName:'Address Scheme'},
     ]
   }
 

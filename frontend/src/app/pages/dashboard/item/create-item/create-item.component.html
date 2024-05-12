@@ -9,9 +9,15 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Enter the item title</mat-label>
-        <input matInput placeholder="title" formControlName="itemTitle" required>
-        <mat-error *ngIf="itemInformation.controls.itemTitle.invalid">Please enter the Item Title Name</mat-error>
+        <mat-label>Enter the description</mat-label>
+        <input matInput placeholder="description" formControlName="itemDescription" required>
+        <mat-error *ngIf="itemInformation.controls.itemDescription.invalid">Please enter the Item Title Name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter the icon name</mat-label>
+        <input matInput placeholder="description" formControlName="itemIconName" required>
+        <mat-error *ngIf="itemInformation.controls.itemIconName.invalid">Please enter the Item Title Name</mat-error>
       </mat-form-field>
 
     </form>

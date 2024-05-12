@@ -4,9 +4,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatTableDataSource} from '@angular/material/table';
 import {StandardService} from "../../../../shared/services/dashboard/component/standard/standard.service";
 import {StandardComponent, StandardComponentTable} from "../../../../shared/model/dashboard/Components";
-import {BasicItem, ItemSetUp} from "../../../../shared/model/dashboard/Item";
+import {BasicItem} from "../../../../shared/model/dashboard/Item";
 import {MatDialog} from "@angular/material/dialog";
-import {ComponentSettingDialogComponent} from "../../dialog/component-setting-dialog/component-setting-dialog.component";
 import {SchemeName} from "../../../../shared/model/dashboard/Scheme";
 import {SchemeService} from "../../../../shared/services/dashboard/item/scheme/scheme.service";
 import {SchemeUiService} from "../../../../shared/services/dashboard/item/scheme/scheme-ui.service";
@@ -49,7 +48,8 @@ export class CreateItemComponent implements OnInit {
 
   itemInformation = new FormGroup({
     itemName: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    itemTitle: new FormControl('', [Validators.required, Validators.minLength(1)])
+    itemDescription: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    itemIconName: new FormControl('', [Validators.required, Validators.minLength(1)])
   });
 
   schemeNames: SchemeName[] = [];

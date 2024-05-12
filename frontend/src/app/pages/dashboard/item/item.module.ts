@@ -23,6 +23,7 @@ import {MatListModule} from "@angular/material/list";
 import { SchemeComponent } from './scheme/scheme.component';
 import { ViewSchemeComponent } from './scheme/view-scheme/view-scheme.component';
 import { EditSchemeComponent } from './scheme/edit-scheme/edit-scheme.component';
+import {MatStepperModule} from "@angular/material/stepper";
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { EditSchemeComponent } from './scheme/edit-scheme/edit-scheme.component'
     MatSelectModule,
     FormsModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatStepperModule
   ],
   declarations: [
     CreateItemComponent,
