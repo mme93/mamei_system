@@ -24,6 +24,10 @@ import { SchemeComponent } from './scheme/scheme.component';
 import { ViewSchemeComponent } from './scheme/view-scheme/view-scheme.component';
 import { EditSchemeComponent } from './scheme/edit-scheme/edit-scheme.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import { ComponentForSchemeComponent } from './create-item/component-for-scheme/component-for-scheme.component';
+import { ItemSetupComponent } from './create-item/item-setup/item-setup.component';
+import { ItemRealViewComponent } from './create-item/item-real-view/item-real-view.component';
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
   imports: [
@@ -48,14 +52,18 @@ import {MatStepperModule} from "@angular/material/stepper";
     FormsModule,
     MatDividerModule,
     MatListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatChipsModule
   ],
   declarations: [
     CreateItemComponent,
     EditItemComponent,
     SchemeComponent,
     ViewSchemeComponent,
-    EditSchemeComponent
+    EditSchemeComponent,
+    ComponentForSchemeComponent,
+    ItemSetupComponent,
+    ItemRealViewComponent
   ]
 })
 export class ItemModule {}

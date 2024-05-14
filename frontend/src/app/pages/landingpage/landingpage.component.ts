@@ -10,7 +10,7 @@ import {TitleEventService} from "../../shared/event/title-event.service";
 export class LandingpageComponent implements OnInit{
   gridItems = [
     { icon: 'feed', text: 'Entities',route:'/dashboard/entities/menu' },
-    { icon: 'inventory', text: 'Task',route:'' },
+    { icon: 'inventory', text: 'Item Create',route:'/dashboard/item/edit' },
     { icon: 'checklist', text: 'Checklist',route:'' },
     { icon: 'sports_esports', text: 'Games' ,route:''},
     { icon: 'settings', text: 'Settings' ,route:'/help/settings/board'},
