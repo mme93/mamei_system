@@ -74,18 +74,20 @@
     <ng-container matColumnDef="valueList">
       <th mat-header-cell cdkDrag *matHeaderCellDef>Value List</th>
       <td mat-cell *matCellDef="let element">
+
         <form *ngIf="!element.isMultiValue">
           <mat-form-field>
             <mat-label>Enter your value list with comma delimiter</mat-label>
-            <input matInput [(ngModel)]="element.valueList" name="description">
+            <input matInput [(ngModel)]="element.value" name="description">
           </mat-form-field>
         </form>
-        <form *ngIf="element.isMultiValue">
-          <mat-form-field class="example-form-field">
-            <mat-label>Video keywords</mat-label>
-            <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl">
 
-              <mat-chip-row *ngFor="let keyword of keywords" (removed)="removeKeyword(keyword)">
+        <form *ngIf="element.isMultiValue">
+          <mat-form-field>
+            <mat-label>Values for {{element.componentName}}</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Enter keywords">
+
+              <mat-chip-row *ngFor="let keyword of element.valueList" (removed)="removeKeyword(keyword,element.valueList)">
                 {{keyword}}
                 <button matChipRemove aria-label="'remove ' + keyword">
                   <mat-icon>cancel</mat-icon>
@@ -93,11 +95,30 @@
               </mat-chip-row>
 
             </mat-chip-grid>
-            <input placeholder="New keyword..."
+            <input placeholder="New value..."
                    [matChipInputFor]="chipGrid"
-                   (matChipInputTokenEnd)="add($event)"/>
+                   (matChipInputTokenEnd)="add($event,element.valueList)"/>
           </mat-form-field>
         </form>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="open">
+      <th mat-header-cell *matHeaderCellDef> Open</th>
+      <td mat-cell *matCellDef="let row; let i = index;">
+        <button mat-icon-butto (click)="editComponent(i)" style="margin: 2px;">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-butto (click)="deleteComponent(i)" style="margin: 2px;">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-butto (click)="moveComponent(i)" style="margin: 2px;" *ngIf="i !==0">
+          <mat-icon>north</mat-icon>
+        </button>
+        <button mat-icon-butto (click)="moveComponent(i)" style="margin: 2px;"
+                *ngIf="i !== this.componentTableRow.length-1">
+          <mat-icon>south</mat-icon>
+        </button>
       </td>
     </ng-container>
 

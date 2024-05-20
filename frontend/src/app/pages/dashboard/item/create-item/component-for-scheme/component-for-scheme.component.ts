@@ -4,9 +4,9 @@ import {ComponentTableRow} from "../../../../../shared/model/dashboard/Test";
 import {SchemeService} from "../../../../../shared/services/dashboard/item/scheme/scheme.service";
 import {StandardService} from "../../../../../shared/services/dashboard/component/standard/standard.service";
 import {StandardComponent} from "../../../../../shared/model/dashboard/Components";
-import {FormControl} from "@angular/forms";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
+import {SchemeUiService} from "../../../../../shared/services/dashboard/item/scheme/scheme-ui.service";
 
 @Component({
   selector: 'app-component-for-scheme',
@@ -17,39 +17,33 @@ export class ComponentForSchemeComponent implements OnInit {
   selectedValueComponents = '';
   dataSource = new MatTableDataSource<ComponentTableRow>([]);
   standardComponents: StandardComponent[] = []
-  columns: string[] = ['position', 'componentName', 'label', 'specification', 'defaultValue', 'valueList'];
+  columns: string[] = ['position', 'componentName', 'label', 'specification', 'defaultValue', 'valueList','open'];
   componentTableRow: ComponentTableRow[] = [];
-
-  keywords = ['angular', 'how-to', 'tutorial', 'accessibility'];
-  formControl = new FormControl(['angular']);
 
   announcer = inject(LiveAnnouncer);
 
-  constructor(private schemeService: SchemeService, private standardService: StandardService) {
+  constructor(private schemeService: SchemeService,
+              private schemeUiService: SchemeUiService,
+              private standardService: StandardService) {
   }
 
   ngOnInit(): void {
     this.standardService.getAllStandardComponents().subscribe(result => this.standardComponents = result);
   }
 
-  removeKeyword(keyword: string) {
-    const index = this.keywords.indexOf(keyword);
+  removeKeyword(keyword: string,valueLust:string[]) {
+    const index = valueLust.indexOf(keyword);
     if (index >= 0) {
-      this.keywords.splice(index, 1);
-
+      valueLust.splice(index, 1);
       this.announcer.announce(`removed ${keyword}`);
     }
   }
 
-  add(event: MatChipInputEvent): void {
+  add(event: MatChipInputEvent,valueLust:string[]): void {
     const value = (event.value || '').trim();
-
-    // Add our keyword
     if (value) {
-      this.keywords.push(value);
+      valueLust.push(value);
     }
-
-    // Clear the input value
     event.chipInput!.clear();
   }
 
@@ -62,7 +56,8 @@ export class ComponentForSchemeComponent implements OnInit {
         standardComponent: selectComponent,
         componentName: selectComponent.value,
         defaultValue: '',
-        valueList: '',
+        value: '',
+        valueList: [],
         specification: selectComponent.specificationList[0],
         label: '',
         isBoolean: selectComponent.value === 'CHECKBOX',
@@ -70,5 +65,22 @@ export class ComponentForSchemeComponent implements OnInit {
       })
       this.dataSource = new MatTableDataSource<ComponentTableRow>(this.componentTableRow)
     }
+  }
+
+  getComponentForScheme(){
+    return this.componentTableRow;
+  }
+
+  moveComponent(i:number) {
+
+  }
+
+  deleteComponent(i:number) {
+    //this.schemeUiService.
+    this.dataSource = new MatTableDataSource<ComponentTableRow>(this.componentTableRow)
+  }
+
+  editComponent(i:number) {
+
   }
 }

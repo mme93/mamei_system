@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {TitleEventService} from "../../../../shared/event/title-event.service";
 import {StandardService} from "../../../../shared/services/dashboard/component/standard/standard.service";
@@ -9,6 +9,7 @@ import {BasicItemService} from "../../../../shared/services/dashboard/item/basic
 import {MatTableDataSource} from "@angular/material/table";
 import {StandardComponentTable} from "../../../../shared/model/dashboard/Components";
 import {ComponentTableRow} from "../../../../shared/model/dashboard/Test";
+import {ComponentForSchemeComponent} from "../create-item/component-for-scheme/component-for-scheme.component";
 
 @Component({
   selector: 'app-edit-item',
@@ -16,6 +17,8 @@ import {ComponentTableRow} from "../../../../shared/model/dashboard/Test";
   styleUrls: ['./edit-item.component.scss']
 })
 export class EditItemComponent {
+
+  @ViewChild(ComponentForSchemeComponent) schemeComponent!: ComponentForSchemeComponent;
 
   dataSource = new MatTableDataSource<ComponentTableRow>([]);
 
@@ -35,4 +38,7 @@ export class EditItemComponent {
   }
 
 
+  showValue() {
+    console.log(this.schemeComponent.getComponentForScheme())
+  }
 }
