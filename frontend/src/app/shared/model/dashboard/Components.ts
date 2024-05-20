@@ -7,25 +7,19 @@ export interface StandardComponent {
   description: string;
 }
 
-export interface StandardComponentTable {
+export interface ComponentTable{
+  componentTableRowNames:String[];
+  componentTableRow:ComponentTableRow[];
+}
+export interface ComponentTableRow{
   position:number;
   standardComponent: StandardComponent;
-  content:String;
-  group:number;
-  standardComponentSettings:StandardComponentSettings;
+  componentName:String;
+  defaultValue:String;
+  value:String;
+  valueList:String[];
+  specification:String;
+  label:String;
+  isBoolean:boolean;
+  isMultiValue:boolean;
 }
-
-export interface StandardComponentSettings{
-  specification:string;
-  styleClass:string;
-  subContent:string[];
-  errorMsg:string;
-}
-
-export interface Component{
-  position:number;
-  content:String;
-  group:number;
-  standardComponentSettings:StandardComponentSettings;
-}
-

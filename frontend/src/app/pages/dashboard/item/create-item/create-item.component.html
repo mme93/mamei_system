@@ -1,148 +1,24 @@
-<article>
-  <div>
-    <h4>Item Information</h4>
-    <form [formGroup]="itemInformation">
-      <mat-form-field>
-        <mat-label>Enter your item name</mat-label>
-        <input matInput placeholder="item name" formControlName="itemName" required>
-        <mat-error *ngIf="itemInformation.controls.itemName.invalid">Please enter your the Item Name</mat-error>
-      </mat-form-field>
+<article style="height: 100%">
+  <button mat-raised-button style="width: 100%" (click)="showValue()">Show Value</button>
+  <mat-stepper [linear]="isLinear" #stepper style="height: 100%">
 
-      <mat-form-field>
-        <mat-label>Enter the description</mat-label>
-        <input matInput placeholder="description" formControlName="itemDescription" required>
-        <mat-error *ngIf="itemInformation.controls.itemDescription.invalid">Please enter the Item Title Name</mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Enter the icon name</mat-label>
-        <input matInput placeholder="description" formControlName="itemIconName" required>
-        <mat-error *ngIf="itemInformation.controls.itemIconName.invalid">Please enter the Item Title Name</mat-error>
-      </mat-form-field>
-
-    </form>
-    <h4>Scheme</h4>
-
-    <div>
-      <mat-form-field style=" flex: 1;  margin-right: 10px; ">
-        <mat-label>Scheme</mat-label>
-        <mat-select [(ngModel)]="selectedValueScheme">
-          <mat-option *ngFor="let scheme of schemeNames"
-                      [value]="scheme.schemeName">{{scheme.schemeViewName}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div style="display: flex;align-items: center;" *ngIf="selectedValueScheme === 'new_scheme'">
-      <form [formGroup]="scheme" style=" flex: 1;  margin-right: 10px;">
-        <mat-form-field>
-          <mat-label>Enter your scheme name</mat-label>
-          <input matInput placeholder="item name" formControlName="schemeName" required>
-          <mat-error *ngIf="scheme.controls.schemeName.invalid">Please enter a Scheme Name</mat-error>
-        </mat-form-field>
-      </form>
-    </div>
-
-    <div style="display: flex;align-items: center;" *ngIf="selectedValueScheme !== 'new_scheme'">
-      <button mat-raised-button style="width: 100%">Load Scheme</button>
-    </div>
-
-    <div style="display: flex;align-items: center;" *ngIf="selectedValueScheme === 'new_scheme'">
-
-      <mat-form-field style=" flex: 1;  margin-right: 10px; ">
-        <mat-label>Components</mat-label>
-        <mat-select [(ngModel)]="selectedValueComponents">
-          <mat-option *ngFor="let standardComponent of standardComponents"
-                      [value]="standardComponent.value">{{standardComponent.viewValue}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-raised-button (click)="addComponent()">
-        <mat-icon>
-          add
-        </mat-icon>
-      </button>
-    </div>
-
-    <div *ngIf="this.tableData.length !== 0">
-      <h4>Component List</h4>
-
-      <table mat-table [dataSource]="dataSource">
-
-        <ng-container matColumnDef="position">
-          <th mat-header-cell cdkDrag *matHeaderCellDef> No.</th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="viewValue">
-          <th mat-header-cell cdkDrag *matHeaderCellDef>Component Name</th>
-          <td mat-cell *matCellDef="let element"> {{element.standardComponent.viewValue}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description">
-          <th mat-header-cell cdkDrag *matHeaderCellDef> Content</th>
-          <td mat-cell *matCellDef="let element">
-            <form>
-              <mat-form-field>
-                <mat-label>Enter your scheme name</mat-label>
-                <input matInput [(ngModel)]="element.content" name="description">
-              </mat-form-field>
-            </form>
-          </td>
-        </ng-container>
+    <mat-step label="Create Item">
+      <button mat-raised-button color="primary" matStepperNext>Next</button>
+      <app-item-setup></app-item-setup>
+    </mat-step>
 
 
-        <ng-container matColumnDef="valueTypes">
-          <th mat-header-cell cdkDrag *matHeaderCellDef> Specification Types</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-form-field>
-              <mat-label>Specification Types</mat-label>
-              <mat-select [(ngModel)]="element.standardComponentSettings.specification">
-                <mat-option *ngFor="let specification of element.standardComponent.specificationList"
-                            [value]="specification">{{specification}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-        </ng-container>
+    <mat-step label="Select/create your Scheme">
+      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" mat-button matStepperNext>Next</button>
+      <app-component-for-scheme></app-component-for-scheme>
+    </mat-step>
 
+    <mat-step>
+      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+      <app-item-real-view></app-item-real-view>
+    </mat-step>
 
-        <ng-container matColumnDef="open">
-          <th mat-header-cell *matHeaderCellDef> Open</th>
-          <td mat-cell *matCellDef="let row; let i = index;">
-            <button mat-icon-butto (click)="editComponent(i)" style="margin: 2px;">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-butto (click)="removeComponent(i)" style="margin: 2px;">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-icon-butto (click)="moveComponentUp(i)" style="margin: 2px;" *ngIf="i !==0">
-              <mat-icon>north</mat-icon>
-            </button>
-            <button mat-icon-butto (click)="moveComponentDown(i)" style="margin: 2px;"
-                    *ngIf="i !== this.tableData.length-1">
-              <mat-icon>south</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
-        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-      </table>
-    </div>
-
-    <div *ngIf="this.tableData.length !== 0">
-      <button *ngIf="showSchemeView" mat-raised-button style="width: 100%" color="primary"
-              (click)="showSchemeView= !showSchemeView">Close Scheme View
-      </button>
-      <button *ngIf="!showSchemeView" mat-raised-button style="width: 100%" color="primary"
-              (click)="showSchemeView= !showSchemeView">Open Scheme View
-      </button>
-      <app-view-scheme *ngIf="showSchemeView" [data]="tableData"></app-view-scheme>
-    </div>
-
-
-    <div style="margin-top: 5px">
-      <button mat-raised-button style="width: 100%;">Save item</button>
-    </div>
-  </div>
-
+  </mat-stepper>
 </article>

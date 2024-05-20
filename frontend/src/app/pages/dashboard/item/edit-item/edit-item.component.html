@@ -1,33 +1,3 @@
 <article style="height: 100%">
-  <button mat-raised-button style="width: 100%" (click)="showValue()">Show Value</button>
-  <mat-stepper [linear]="isLinear" #stepper style="height: 100%">
-
-    <mat-step label="Create Item">
-      <app-component-for-scheme></app-component-for-scheme>
-    </mat-step>
-
-
-    <mat-step [stepControl]="firstFormGroup" label="Select/create your Scheme">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
-  </mat-stepper>
+ <h1>Edit Item</h1>
 </article>

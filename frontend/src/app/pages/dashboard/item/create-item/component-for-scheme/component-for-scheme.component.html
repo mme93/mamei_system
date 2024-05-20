@@ -1,128 +1,152 @@
 <article>
 
   <mat-form-field style=" flex: 1;  margin-right: 10px; ">
-    <mat-label>Components</mat-label>
-    <mat-select [(ngModel)]="selectedValueComponents">
-      <mat-option *ngFor="let standardComponent of standardComponents"
-                  [value]="standardComponent.value">{{standardComponent.viewValue}}</mat-option>
+    <mat-label>Select Scheme</mat-label>
+    <mat-select [(ngModel)]="createItemSetup.schemeName">
+      <mat-option *ngFor="let scheme of createItemSetup.schemes"
+                  [value]="scheme.schemeName">{{scheme.schemeViewName}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-raised-button color="primary" class="add_button" (click)="addComponentToTable(selectedValueComponents)">
-    Add
-  </button>
 
-  <table mat-table [dataSource]="dataSource">
+ <div *ngIf="createItemSetup.schemeName !== ''">
+   <form [formGroup]="scheme" style=" flex: 1;  margin-right: 10px;" *ngIf="createItemSetup.schemeName === 'new_scheme'">
+     <mat-form-field>
+       <mat-label>Enter your scheme name</mat-label>
+       <input matInput placeholder="item name" formControlName="schemeName" required>
+       <mat-error *ngIf="scheme.controls.schemeName.invalid">Please enter a Scheme Name</mat-error>
+     </mat-form-field>
+   </form>
 
-    <ng-container matColumnDef="position">
-      <th mat-header-cell cdkDrag *matHeaderCellDef> No.</th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
+   <mat-form-field style=" flex: 1;  margin-right: 10px; " *ngIf="createItemSetup.schemeName === 'new_scheme'">
+     <mat-label>Components</mat-label>
+     <mat-select [(ngModel)]="selectedValueComponents">
+       <mat-option *ngFor="let standardComponent of createItemSetup.components"
+                   [value]="standardComponent.value">{{standardComponent.viewValue}}</mat-option>
+     </mat-select>
+   </mat-form-field>
 
-    <ng-container matColumnDef="componentName">
-      <th mat-header-cell cdkDrag *matHeaderCellDef> Component Name</th>
-      <td mat-cell *matCellDef="let element"> {{element.componentName}} </td>
-    </ng-container>
 
-    <ng-container matColumnDef="label">
-      <th mat-header-cell cdkDrag *matHeaderCellDef> Label Name</th>
-      <td mat-cell *matCellDef="let element">
-        <form>
-          <mat-form-field>
-            <mat-label>Enter your label name</mat-label>
-            <input matInput [(ngModel)]="element.label" name="description">
-          </mat-form-field>
-        </form>
-      </td>
-    </ng-container>
+   <button mat-raised-button color="primary" class="add_button" *ngIf="createItemSetup.schemeName !== 'new_scheme'">Load Scheme</button>
 
-    <ng-container matColumnDef="specification">
-      <th mat-header-cell cdkDrag *matHeaderCellDef>Specification</th>
-      <th mat-header-cell cdkDrag *matHeaderCellDef> Specification Types</th>
-      <td mat-cell *matCellDef="let element">
-        <mat-form-field>
-          <mat-label>Specification Types</mat-label>
-          <mat-select [(ngModel)]="element.specification">
-            <mat-option *ngFor="let specification of element.standardComponent.specificationList"
-                        [value]="specification">{{specification}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-    </ng-container>
+   <button mat-raised-button color="primary" class="add_button" (click)="addComponentToTable(selectedValueComponents)"
+           *ngIf="createItemSetup.schemeName === 'new_scheme'">
+     Add
+   </button>
 
-    <ng-container matColumnDef="defaultValue">
-      <th mat-header-cell cdkDrag *matHeaderCellDef> Default Value</th>
-      <td mat-cell *matCellDef="let element">
-        <form>
+   <table mat-table [dataSource]="dataSource">
 
-          <mat-form-field *ngIf="!element.isBoolean">
-            <mat-label>Enter your default value</mat-label>
-            <input matInput [(ngModel)]="element.defaultValue" [ngModelOptions]="{standalone: true}" >
-          </mat-form-field>
+     <ng-container matColumnDef="position">
+       <th mat-header-cell cdkDrag *matHeaderCellDef> No.</th>
+       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+     </ng-container>
 
-          <mat-form-field *ngIf="element.isBoolean">
-            <mat-label>Is check</mat-label>
-            <mat-select [(ngModel)]="element.defaultValue" [ngModelOptions]="{standalone: true}">
-              <mat-option [value]='true'>True</mat-option>
-              <mat-option  [value]='false'>False</mat-option>
-            </mat-select>
-          </mat-form-field>
+     <ng-container matColumnDef="componentName">
+       <th mat-header-cell cdkDrag *matHeaderCellDef> Component Name</th>
+       <td mat-cell *matCellDef="let element"> {{element.componentName}} </td>
+     </ng-container>
 
-        </form>
-      </td>
-    </ng-container>
+     <ng-container matColumnDef="label">
+       <th mat-header-cell cdkDrag *matHeaderCellDef> Label Name</th>
+       <td mat-cell *matCellDef="let element">
+         <form>
+           <mat-form-field>
+             <mat-label>Enter your label name</mat-label>
+             <input matInput [(ngModel)]="element.label" name="description">
+           </mat-form-field>
+         </form>
+       </td>
+     </ng-container>
 
-    <ng-container matColumnDef="valueList">
-      <th mat-header-cell cdkDrag *matHeaderCellDef>Value List</th>
-      <td mat-cell *matCellDef="let element">
+     <ng-container matColumnDef="specification">
+       <th mat-header-cell cdkDrag *matHeaderCellDef>Specification</th>
+       <th mat-header-cell cdkDrag *matHeaderCellDef> Specification Types</th>
+       <td mat-cell *matCellDef="let element">
+         <mat-form-field>
+           <mat-label>Specification Types</mat-label>
+           <mat-select [(ngModel)]="element.specification">
+             <mat-option *ngFor="let specification of element.standardComponent.specificationList"
+                         [value]="specification">{{specification}}</mat-option>
+           </mat-select>
+         </mat-form-field>
+       </td>
+     </ng-container>
 
-        <form *ngIf="!element.isMultiValue">
-          <mat-form-field>
-            <mat-label>Enter your value list with comma delimiter</mat-label>
-            <input matInput [(ngModel)]="element.value" name="description">
-          </mat-form-field>
-        </form>
+     <ng-container matColumnDef="defaultValue">
+       <th mat-header-cell cdkDrag *matHeaderCellDef> Default Value</th>
+       <td mat-cell *matCellDef="let element">
+         <form>
 
-        <form *ngIf="element.isMultiValue">
-          <mat-form-field>
-            <mat-label>Values for {{element.componentName}}</mat-label>
-            <mat-chip-grid #chipGrid aria-label="Enter keywords">
+           <mat-form-field *ngIf="!element.isBoolean">
+             <mat-label>Enter your default value</mat-label>
+             <input matInput [(ngModel)]="element.defaultValue" [ngModelOptions]="{standalone: true}">
+           </mat-form-field>
 
-              <mat-chip-row *ngFor="let keyword of element.valueList" (removed)="removeKeyword(keyword,element.valueList)">
-                {{keyword}}
-                <button matChipRemove aria-label="'remove ' + keyword">
-                  <mat-icon>cancel</mat-icon>
-                </button>
-              </mat-chip-row>
+           <mat-form-field *ngIf="element.isBoolean">
+             <mat-label>Is check</mat-label>
+             <mat-select [(ngModel)]="element.defaultValue" [ngModelOptions]="{standalone: true}">
+               <mat-option [value]='true'>True</mat-option>
+               <mat-option [value]='false'>False</mat-option>
+             </mat-select>
+           </mat-form-field>
 
-            </mat-chip-grid>
-            <input placeholder="New value..."
-                   [matChipInputFor]="chipGrid"
-                   (matChipInputTokenEnd)="add($event,element.valueList)"/>
-          </mat-form-field>
-        </form>
-      </td>
-    </ng-container>
+         </form>
+       </td>
+     </ng-container>
 
-    <ng-container matColumnDef="open">
-      <th mat-header-cell *matHeaderCellDef> Open</th>
-      <td mat-cell *matCellDef="let row; let i = index;">
-        <button mat-icon-butto (click)="editComponent(i)" style="margin: 2px;">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-butto (click)="deleteComponent(i)" style="margin: 2px;">
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button mat-icon-butto (click)="moveComponent(i)" style="margin: 2px;" *ngIf="i !==0">
-          <mat-icon>north</mat-icon>
-        </button>
-        <button mat-icon-butto (click)="moveComponent(i)" style="margin: 2px;"
-                *ngIf="i !== this.componentTableRow.length-1">
-          <mat-icon>south</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+     <ng-container matColumnDef="valueList">
+       <th mat-header-cell cdkDrag *matHeaderCellDef>Value List</th>
+       <td mat-cell *matCellDef="let element">
 
-    <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-  </table>
+         <form *ngIf="!element.isMultiValue">
+           <mat-form-field>
+             <mat-label>Enter your value list with comma delimiter</mat-label>
+             <input matInput [(ngModel)]="element.value" name="description">
+           </mat-form-field>
+         </form>
+
+         <form *ngIf="element.isMultiValue">
+           <mat-form-field>
+             <mat-label>Values for {{element.componentName}}</mat-label>
+             <mat-chip-grid #chipGrid aria-label="Enter keywords">
+
+               <mat-chip-row *ngFor="let keyword of element.valueList"
+                             (removed)="removeKeyword(keyword,element.valueList)">
+                 {{keyword}}
+                 <button matChipRemove aria-label="'remove ' + keyword">
+                   <mat-icon>cancel</mat-icon>
+                 </button>
+               </mat-chip-row>
+
+             </mat-chip-grid>
+             <input placeholder="New value..."
+                    [matChipInputFor]="chipGrid"
+                    (matChipInputTokenEnd)="add($event,element.valueList)"/>
+           </mat-form-field>
+         </form>
+       </td>
+     </ng-container>
+
+     <ng-container matColumnDef="open">
+       <th mat-header-cell *matHeaderCellDef> Open</th>
+       <td mat-cell *matCellDef="let row; let i = index;">
+         <button mat-icon-butto (click)="editComponent(i)" style="margin: 2px;">
+           <mat-icon>edit</mat-icon>
+         </button>
+         <button mat-icon-butto (click)="deleteComponent(i)" style="margin: 2px;">
+           <mat-icon>delete</mat-icon>
+         </button>
+         <button mat-icon-butto (click)="moveComponentUp(i)" style="margin: 2px;" *ngIf="i !==0">
+           <mat-icon>north</mat-icon>
+         </button>
+         <button mat-icon-butto (click)="moveComponentDown(i)" style="margin: 2px;"
+                 *ngIf="i !== this.createItemSetup.componentTable.componentTableRow.length-1">
+           <mat-icon>south</mat-icon>
+         </button>
+       </td>
+     </ng-container>
+
+     <tr mat-header-row *matHeaderRowDef="createItemSetup.componentTable.componentTableRowNames"></tr>
+     <tr mat-row *matRowDef="let row; columns: createItemSetup.componentTable.componentTableRowNames;"></tr>
+   </table>
+ </div>
 </article>

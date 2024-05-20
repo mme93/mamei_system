@@ -1,12 +1,13 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {ComponentTableRow} from "../../../../../shared/model/dashboard/Test";
 import {SchemeService} from "../../../../../shared/services/dashboard/item/scheme/scheme.service";
 import {StandardService} from "../../../../../shared/services/dashboard/component/standard/standard.service";
-import {StandardComponent} from "../../../../../shared/model/dashboard/Components";
+import {ComponentTableRow, StandardComponent} from "../../../../../shared/model/dashboard/Components";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {SchemeUiService} from "../../../../../shared/services/dashboard/item/scheme/scheme-ui.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {CreateItemSetup} from "../../../../../shared/model/dashboard/Item";
 
 @Component({
   selector: 'app-component-for-scheme',
@@ -16,11 +17,21 @@ import {SchemeUiService} from "../../../../../shared/services/dashboard/item/sch
 export class ComponentForSchemeComponent implements OnInit {
   selectedValueComponents = '';
   dataSource = new MatTableDataSource<ComponentTableRow>([]);
-  standardComponents: StandardComponent[] = []
-  columns: string[] = ['position', 'componentName', 'label', 'specification', 'defaultValue', 'valueList','open'];
-  componentTableRow: ComponentTableRow[] = [];
 
+  createItemSetup: CreateItemSetup = {
+    schemeName: '',
+    schemes: [],
+    components: [],
+    componentTable: {
+      componentTableRowNames: ['position', 'componentName', 'label', 'specification', 'defaultValue', 'valueList', 'open'],
+      componentTableRow: []
+    }
+  }
   announcer = inject(LiveAnnouncer);
+
+  scheme = new FormGroup({
+    schemeName: new FormControl('', [Validators.required, Validators.minLength(1)]),
+  })
 
   constructor(private schemeService: SchemeService,
               private schemeUiService: SchemeUiService,
@@ -28,10 +39,11 @@ export class ComponentForSchemeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.standardService.getAllStandardComponents().subscribe(result => this.standardComponents = result);
+    this.standardService.getAllStandardComponents().subscribe(result => this.createItemSetup.components = result);
+    this.createItemSetup.schemes = this.schemeService.getAllScheme();
   }
 
-  removeKeyword(keyword: string,valueLust:string[]) {
+  removeKeyword(keyword: string, valueLust: string[]) {
     const index = valueLust.indexOf(keyword);
     if (index >= 0) {
       valueLust.splice(index, 1);
@@ -39,7 +51,7 @@ export class ComponentForSchemeComponent implements OnInit {
     }
   }
 
-  add(event: MatChipInputEvent,valueLust:string[]): void {
+  add(event: MatChipInputEvent, valueLust: string[]): void {
     const value = (event.value || '').trim();
     if (value) {
       valueLust.push(value);
@@ -48,11 +60,11 @@ export class ComponentForSchemeComponent implements OnInit {
   }
 
   addComponentToTable(selectedValueComponents: string) {
-    const selectComponents: StandardComponent[] = this.standardComponents.filter(component => component.value === selectedValueComponents)
+    const selectComponents: StandardComponent[] = this.createItemSetup.components.filter(component => component.value === selectedValueComponents)
     if (selectComponents.length === 1) {
       const selectComponent = selectComponents[0]
-      this.componentTableRow.push({
-        position: this.componentTableRow.length + 1,
+      this.createItemSetup.componentTable.componentTableRow.push({
+        position: this.createItemSetup.componentTable.componentTableRow.length + 1,
         standardComponent: selectComponent,
         componentName: selectComponent.value,
         defaultValue: '',
@@ -63,24 +75,30 @@ export class ComponentForSchemeComponent implements OnInit {
         isBoolean: selectComponent.value === 'CHECKBOX',
         isMultiValue: ['RADIO_BUTTON'].includes(selectComponent.value)
       })
-      this.dataSource = new MatTableDataSource<ComponentTableRow>(this.componentTableRow)
+      this.dataSource = new MatTableDataSource<ComponentTableRow>(this.createItemSetup.componentTable.componentTableRow)
     }
   }
 
-  getComponentForScheme(){
-    return this.componentTableRow;
+  getComponentForScheme() {
+    return this.createItemSetup;
   }
 
-  moveComponent(i:number) {
-
+  moveComponentUp(i: number) {
+    this.schemeUiService.moveComponentUp(i, this.createItemSetup.componentTable.componentTableRow)
+    this.dataSource = new MatTableDataSource<ComponentTableRow>(this.createItemSetup.componentTable.componentTableRow)
   }
 
-  deleteComponent(i:number) {
-    //this.schemeUiService.
-    this.dataSource = new MatTableDataSource<ComponentTableRow>(this.componentTableRow)
+  moveComponentDown(i: number) {
+    this.dataSource = new MatTableDataSource<ComponentTableRow>(
+      this.schemeUiService.moveComponentDown(i, this.createItemSetup.componentTable.componentTableRow))
   }
 
-  editComponent(i:number) {
+  deleteComponent(i: number) {
+    this.schemeUiService.removeComponent(i, this.createItemSetup.componentTable.componentTableRow)
+    this.dataSource = new MatTableDataSource<ComponentTableRow>(this.createItemSetup.componentTable.componentTableRow)
+  }
+
+  editComponent(i: number) {
 
   }
 }

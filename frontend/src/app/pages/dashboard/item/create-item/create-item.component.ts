@@ -1,108 +1,45 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {TitleEventService} from "../../../../shared/event/title-event.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {MatTableDataSource} from '@angular/material/table';
 import {StandardService} from "../../../../shared/services/dashboard/component/standard/standard.service";
-import {StandardComponent, StandardComponentTable} from "../../../../shared/model/dashboard/Components";
-import {BasicItem} from "../../../../shared/model/dashboard/Item";
 import {MatDialog} from "@angular/material/dialog";
-import {SchemeName} from "../../../../shared/model/dashboard/Scheme";
 import {SchemeService} from "../../../../shared/services/dashboard/item/scheme/scheme.service";
 import {SchemeUiService} from "../../../../shared/services/dashboard/item/scheme/scheme-ui.service";
 import {BasicItemService} from "../../../../shared/services/dashboard/item/basicitem/basic-item.service";
+import {ComponentForSchemeComponent} from "./component-for-scheme/component-for-scheme.component";
+import {ComponentTableRow} from "../../../../shared/model/dashboard/Components";
 
-interface SelectedComponentScheme {
-  value: string;
-  viewValue: string;
-}
-
-export interface SchemeList {
-  position: number;
-  name: string;
-  specification: string;
-  description: string;
-  styleClass: string[];
-  spezificationList: string[];
-}
 
 @Component({
   selector: 'app-create-item',
   templateUrl: './create-item.component.html',
   styleUrls: ['./create-item.component.scss']
 })
-export class CreateItemComponent implements OnInit {
-  columns: string[] = ['position', 'viewValue', 'description', 'valueTypes', 'open'];
-  showSchemeView: boolean = false;
-  tableData: StandardComponentTable[] = [];
-  counter = 1;
-  group = 1;
-  selectedValueComponents = '';
-  selectedValueScheme = '';
+export class CreateItemComponent {
 
+  @ViewChild(ComponentForSchemeComponent) schemeComponent!: ComponentForSchemeComponent;
 
-  dataSource = new MatTableDataSource<StandardComponentTable>(this.tableData);
+  dataSource = new MatTableDataSource<ComponentTableRow>([]);
 
-  scheme = new FormGroup({
-    schemeName: new FormControl('', [Validators.required, Validators.minLength(1)]),
-  })
+  columns: string[] = ['position', 'componentName', 'label', 'specification', 'defaultValue', 'valueList'];
 
-  itemInformation = new FormGroup({
-    itemName: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    itemDescription: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    itemIconName: new FormControl('', [Validators.required, Validators.minLength(1)])
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
   });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isLinear = false;
 
-  schemeNames: SchemeName[] = [];
-  standardComponents: StandardComponent[] = [];
-  basicItem: BasicItem = this.basicItemService.init()
-
-  constructor(private eventService: TitleEventService,
-              private standardService: StandardService,
-              public dialog: MatDialog,
-              private schemeService: SchemeService,
-              private schemeUiService: SchemeUiService,
+  constructor(private _formBuilder: FormBuilder, private eventService: TitleEventService, private standardService: StandardService,
+              public dialog: MatDialog, private schemeService: SchemeService, private schemeUiService: SchemeUiService,
               private basicItemService: BasicItemService) {
   }
 
 
-  ngOnInit(): void {
-    this.eventService.updateTitle('Dashboard - Create Item');
-    this.standardService.getAllStandardComponents().subscribe(result => this.standardComponents = result);
-    this.schemeNames = this.schemeService.getAllScheme();
-    this.selectedValueScheme = this.schemeNames[0].schemeName;
-  }
-
-  addComponent() {
-    let standardComponent = this.standardComponents.filter(standardComponent => standardComponent.value === this.selectedValueComponents)[0];
-    this.tableData = this.schemeUiService.addTableData(this.tableData, standardComponent, this.counter, this.group);
-    this.basicItem = this.basicItemService.updateBasicItem(this.basicItem);
-    this.updateTable();
-  }
-
-  removeComponent(i: number) {
-    this.schemeUiService.removeComponent(i, this.tableData);
-    this.updateTable();
-  }
-
-  moveComponentUp(i: number) {
-    this.schemeUiService.moveComponentUp(i, this.tableData);
-    this.updateTable();
-  }
-
-  moveComponentDown(i: number) {
-    this.schemeUiService.moveComponentDown(i, this.tableData);
-    this.updateTable();
-  }
-
-
-  editComponent(i: number) {
-    this.tableData[i] = this.schemeUiService.editComponent(this.tableData[i]);
-
-  }
-
-  updateTable() {
-    this.counter = this.tableData.length + 1;
-    this.dataSource = new MatTableDataSource<StandardComponentTable>(this.tableData);
+  showValue() {
+    console.log(this.schemeComponent.getComponentForScheme())
   }
 
 }

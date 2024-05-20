@@ -1,14 +1,9 @@
-import { StandardComponentTable} from "./Components";
-import {ItemScheme} from "./Scheme";
+import {ComponentTable, StandardComponent} from "./Components";
+import {SchemeName} from "./Scheme";
 
-export interface ItemSetUp{
-  standardComponentSetUps:StandardComponentTable[];
-  isNewScheme:boolean;
-  scheme:string;
-  itemName:string;
-  itemTitle:string;
-}
-
-export interface BasicItem{
-  itemScheme:ItemScheme;
+export interface CreateItemSetup {
+  schemeName: string;
+  schemes: SchemeName[];
+  components: StandardComponent[];
+  componentTable: ComponentTable;
 }

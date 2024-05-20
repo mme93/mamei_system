@@ -1,14 +1,9 @@
-article {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 50px;
+.mat-stepper-horizontal {
+  margin-top: 8px;
 }
 
-article > div {
-  width: 80%;
-  padding: 3% 10%;
-  overflow-y: auto;
-  height: 100%;
+.mat-mdc-form-field {
+  margin-top: 16px;
 }
 
 mat-form-field {
@@ -19,3 +14,6 @@ table {
   width: 100%;
 }
 
+button{
+  margin: 3px;
+}
