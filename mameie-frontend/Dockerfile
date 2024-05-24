@@ -4,6 +4,10 @@ RUN npm install -g @angular/cli@17
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-EXPOSE 4200
-CMD ["ng", "serve", "--host", "0.0.0.0","--disable-host-check"]
+RUN ng build --prod
 
+# Stage 2: Serve the app with nginx
+FROM nginx:alpine
+COPY --from=build /app/dist/mameie-frontend /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
