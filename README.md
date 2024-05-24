@@ -24,3 +24,5 @@ Remove all Container:
 ## Db_Manger (Database Manager)
 
 
+current: { node: 'v18.12.1', npm: '9.2.0' }
+
