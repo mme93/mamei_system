@@ -1,3 +1,4 @@
+# Stage 1: Build the Angular app
 FROM node:20.13.1-alpine as build
 WORKDIR /app
 RUN npm install -g @angular/cli@17
