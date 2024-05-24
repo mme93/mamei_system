@@ -1,7 +1,13 @@
 <article style="height: 100%">
-  <button mat-raised-button style="width: 100%" (click)="showValue()">Show Value</button>
   <mat-stepper [linear]="isLinear" #stepper style="height: 100%">
-
+<!--
+    <mat-step label="Show Scheme and Save">
+      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button color="primary" >Save</button>
+      <app-item-real-view></app-item-real-view>
+    </mat-step>
+-->
     <mat-step label="Create Item">
       <button mat-raised-button color="primary" matStepperNext>Next</button>
       <app-item-setup></app-item-setup>
@@ -14,9 +20,10 @@
       <app-component-for-scheme></app-component-for-scheme>
     </mat-step>
 
-    <mat-step>
+    <mat-step label="Show Scheme and Save">
       <button mat-raised-button color="primary" matStepperPrevious>Back</button>
       <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button color="primary" >Save</button>
       <app-item-real-view></app-item-real-view>
     </mat-step>
 

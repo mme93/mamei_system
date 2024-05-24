@@ -28,6 +28,7 @@ import { ComponentForSchemeComponent } from './create-item/component-for-scheme/
 import { ItemSetupComponent } from './create-item/item-setup/item-setup.component';
 import { ItemRealViewComponent } from './create-item/item-real-view/item-real-view.component';
 import {MatChipsModule} from "@angular/material/chips";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import {MatChipsModule} from "@angular/material/chips";
     MatDividerModule,
     MatListModule,
     MatStepperModule,
-    MatChipsModule
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   declarations: [
     CreateItemComponent,

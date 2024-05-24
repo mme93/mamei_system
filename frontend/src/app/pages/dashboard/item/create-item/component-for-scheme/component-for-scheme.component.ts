@@ -7,7 +7,7 @@ import {MatChipInputEvent} from "@angular/material/chips";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {SchemeUiService} from "../../../../../shared/services/dashboard/item/scheme/scheme-ui.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CreateItemSetup} from "../../../../../shared/model/dashboard/Item";
+import {CreateSchemeSetup} from "../../../../../shared/model/dashboard/Scheme";
 
 @Component({
   selector: 'app-component-for-scheme',
@@ -18,7 +18,7 @@ export class ComponentForSchemeComponent implements OnInit {
   selectedValueComponents = '';
   dataSource = new MatTableDataSource<ComponentTableRow>([]);
 
-  createItemSetup: CreateItemSetup = {
+  createItemSetup: CreateSchemeSetup = {
     schemeName: '',
     schemes: [],
     components: [],

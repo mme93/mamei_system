@@ -16,7 +16,7 @@
 
       <mat-form-field>
         <mat-label>Enter the icon name</mat-label>
-        <input matInput placeholder="description" formControlName="itemIconName" required>
+        <input type="text" matInput  formControlName="itemIconName" required>
         <mat-error *ngIf="itemInformation.controls.itemIconName.invalid">Please enter the Item Title Name</mat-error>
       </mat-form-field>
     </form>
