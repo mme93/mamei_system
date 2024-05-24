@@ -1,0 +1,124 @@
+version: '3'
+
+services:
+  serviceregistry:
+    build:
+      context: backend/serviceregistry
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - eureka
+
+  apigateway:
+    build:
+      context: backend/apigateway
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+  systemmanager:
+    build:
+      context: backend/systemmanager
+      dockerfile: Dockerfile
+    ports:
+      - "9001:9001"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+  datastoragemanager:
+    build:
+      context: backend/datastoragemanager
+      dockerfile: Dockerfile
+    ports:
+      - "9005:9005"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+  massdatapool:
+    build:
+      context: backend/massdatapool
+      dockerfile: Dockerfile
+    ports:
+      - "9006:9006"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+  user:
+    build:
+      context: backend/user
+      dockerfile: Dockerfile
+    ports:
+      - "9050:9050"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+  dashboard:
+    build:
+      context: backend/dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "9052:9052"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+  gamesmanager:
+    build:
+      context: backend/gamesmanager
+      dockerfile: Dockerfile
+    ports:
+      - "9054:9054"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+  mameie_fsm:
+    build:
+      context: backend/mameie_fsm
+      dockerfile: Dockerfile
+    ports:
+      - "9055:9055"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:4200"
+
+  mameie-frontend:
+    build:
+      context: mameie-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:4200"
+
+  db_manager:
+    build:
+      context: system_tools/backend
+      dockerfile: Dockerfile
+    ports:
+      - "8998:8998"
+
+networks:
+  eureka:
+    driver: bridge
