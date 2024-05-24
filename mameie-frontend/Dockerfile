@@ -4,7 +4,7 @@ RUN npm install -g @angular/cli@17
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-RUN ng build --prod
+RUN ng build --configuration production
 
 # Stage 2: Serve the app with nginx
 FROM nginx:alpine
