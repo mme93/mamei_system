@@ -20,7 +20,6 @@
             "outputPath": "dist/mameie-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "baseHref": "/mameie-frontend/",
             "polyfills": [
               "zone.js"
             ],

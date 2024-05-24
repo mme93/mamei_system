@@ -20,7 +20,6 @@
             "outputPath": "dist/frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "baseHref": "/frontend/",
             "polyfills": [
               "zone.js"
             ],
