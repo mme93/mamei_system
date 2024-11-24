@@ -2,16 +2,14 @@ package mamei.de.mdv;
 
 import mamei.de.mdv.model.MDVAction;
 import mamei.de.mdv.model.MDVModules;
-import mamei.de.mdv.system.ESystem;
+import mamei.de.mdv.system.module.ESystem;
 import mamei.de.mdv.system.ISystem;
-import mamei.de.mdv.system.exception.NoSystemFoundException;
 import mamei.de.mdv.system.expression.GeneratorSystem;
+import mamei.de.mdv.system.module.ESystemCommand;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static mamei.de.mdv.system.System.*;
 
 
 public class MDV implements IMDV {
@@ -35,8 +33,18 @@ public class MDV implements IMDV {
     }
 
     @Override
-    public void action(MDVAction action) {
+    public void addSystem(ISystem system) {
+        modules.addSystem(system);
+    }
 
+    @Override
+    public void action(MDVAction action, ESystemCommand command) {
+        switch (action.getSystem()) {
+            case GENERATOR:
+                GeneratorSystem generator = modules.getGeneratorSystemByAction(action);
+                generator.action(action.getSystemAction(command));
+                break;
+        }
     }
 
     public static MDVBuilder builder() {

@@ -1,18 +1,19 @@
 package mamei.de.mdv.system.expression;
 
-import mamei.de.mdv.system.ESystem;
+import mamei.de.mdv.system.module.ESystem;
 import mamei.de.mdv.system.System;
+import mamei.de.mdv.system.module.SystemAction;
 
 import java.util.Optional;
 
 public class GeneratorSystem extends System {
 
-    public GeneratorSystem() {
-        super(GENERATOR_SYSTEM);
+    public GeneratorSystem(String name) {
+        super(name);
     }
 
     @Override
-    public void action(String action) {
+    public void action(SystemAction action) {
 
     }
 
