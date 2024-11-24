@@ -3,3 +3,4 @@
 /backend/massdatapool/logs/
 /backend/massdatapool/src/main/resources/logs/
 /backend/apigateway/src/main/resources/logs/
+/libs/.idea/
