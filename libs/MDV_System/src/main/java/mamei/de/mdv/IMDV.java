@@ -1,12 +1,11 @@
 package mamei.de.mdv;
 
-import mamei.de.mdv.system.ISystem;
+import mamei.de.mdv.model.MDVAction;
+
+import java.util.List;
 
 public interface IMDV {
+    List<String> getLoadedSystemNames();
 
-    Object getCastedSystem(String name);
-
-    Object getCustomizedSystem(String name);
-
-    ISystem getSystem(String name);
+    void action(MDVAction action);
 }

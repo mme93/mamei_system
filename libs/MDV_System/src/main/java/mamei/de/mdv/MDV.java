@@ -1,53 +1,42 @@
 package mamei.de.mdv;
 
+import mamei.de.mdv.model.MDVAction;
+import mamei.de.mdv.model.MDVModules;
+import mamei.de.mdv.system.ESystem;
 import mamei.de.mdv.system.ISystem;
 import mamei.de.mdv.system.exception.NoSystemFoundException;
-import mamei.de.mdv.system.expression.DataGeneratorSystem;
+import mamei.de.mdv.system.expression.GeneratorSystem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 import static mamei.de.mdv.system.System.*;
 
 
 public class MDV implements IMDV {
 
-    private List<ISystem> customizedSystem = new ArrayList<>();
+    private MDVModules modules;
 
-    private MDV() {
+    private MDV(List<ISystem> customizedSystem, List<ESystem> systems) {
+        this.modules = new MDVModules(systems);
+        loadModules(customizedSystem);
+    }
+
+    private void loadModules(List<ISystem> customizedSystem) {
+        Objects.requireNonNull(modules);
+        modules.loadSystem(customizedSystem);
     }
 
     @Override
-    public Object getCastedSystem(String name) {
-        switch (name) {
-            case DATA_GENERATOR_SYSTEM:
-                return new DataGeneratorSystem();
-            default:
-                throw new NoSystemFoundException(String.format("No system found by name: %s.", name));
-        }
+    public List<String> getLoadedSystemNames() {
+        Objects.requireNonNull(modules);
+        return modules.getLoadedSystemNames();
     }
 
     @Override
-    public Object getCustomizedSystem(String name) {
-        customizedSystem.stream().filter(iSystem -> {
-            Optional<Object> optSystem = iSystem.getMappedSystem();
-            return false;
-        });
-        return null;
-    }
+    public void action(MDVAction action) {
 
-    @Override
-    public ISystem getSystem(String name) {
-        ISystem system;
-        switch (name) {
-            case DATA_GENERATOR_SYSTEM:
-                system = new DataGeneratorSystem();
-                break;
-            default:
-                throw new NoSystemFoundException(String.format("No system found by name: %s.", name));
-        }
-        return system;
     }
 
     public static MDVBuilder builder() {
@@ -57,23 +46,20 @@ public class MDV implements IMDV {
     public static class MDVBuilder {
 
         List<ISystem> customizedSystem = new ArrayList<>();
-        List<String> systemNames = new ArrayList<>();
+        List<ESystem> systems = new ArrayList<>();
 
-        public MDVBuilder addCustomizedSystem(ISystem system) {
+        public MDVBuilder withCustomizedSystem(ISystem system) {
             customizedSystem.add(system);
             return this;
         }
 
-        public MDVBuilder addSystem(String systemName) {
-            if (!SYSTEM_NAMES.contains(systemName)) {
-                throw new NoSystemFoundException(String.format("No system found by name: %s", systemName));
-            }
-            systemNames.add(systemName);
+        public MDVBuilder withGenerator() {
+            systems.add(ESystem.GENERATOR);
             return this;
         }
 
         public MDV build() {
-            return new MDV();
+            return new MDV(customizedSystem, systems);
         }
     }
 }

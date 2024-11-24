@@ -1,17 +1,14 @@
 package mamei.de;
 
-import mamei.de.mdv.MDV;
-import mamei.de.mdv.system.expression.DataGeneratorSystem;
 
-import static mamei.de.mdv.system.System.DATA_GENERATOR_SYSTEM;
+import mamei.de.mdv.MDV;
 
 public class Main {
 
     public static void main(String[] args) {
+        System.out.println("MDV System Runs");
+        MDV mdv = MDV.builder().withGenerator().build();
+        //mdv.getLoadedSystemNames().forEach(x-> System.out.println(x));
 
-        MDV mdv = MDV.builder().addSystem(DATA_GENERATOR_SYSTEM).build();
-        DataGeneratorSystem system= (DataGeneratorSystem) mdv.getCastedSystem(DATA_GENERATOR_SYSTEM);
-        System.out.println(system.getSystemName());
-        system.action("asdfg");
     }
 }

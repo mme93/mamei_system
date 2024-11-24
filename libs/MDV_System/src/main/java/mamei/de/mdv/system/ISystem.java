@@ -6,6 +6,10 @@ public interface ISystem {
 
     void action(String action);
 
+    String getSystemName();
+
+    ESystem getSystemTyp();
+
     Optional<Object> getMappedSystem();
 
 }
