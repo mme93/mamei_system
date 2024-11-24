@@ -6,7 +6,7 @@
 
     <groupId>mamei.de</groupId>
     <artifactId>MDV_System</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -16,7 +16,6 @@
 
     <build>
         <plugins>
-            <!-- Plugin für die Erstellung eines ausführbaren JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -24,7 +23,6 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <!-- Hier gibst du die Hauptklasse deines Projekts an -->
                             <mainClass>mamei.de.Main</mainClass>
                         </manifest>
                     </archive>
