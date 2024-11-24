@@ -2,7 +2,7 @@ package mamei.de.mdv.system.expression.generator.expression;
 
 import mamei.de.mdv.system.data.Data;
 import mamei.de.mdv.system.data.IData;
-import mamei.de.mdv.system.data.entities.person.Person;
+import mamei.de.mdv.system.data.entities.Entities;
 import mamei.de.mdv.system.data.set.DataSet;
 import mamei.de.mdv.system.data.set.IDataSet;
 import mamei.de.mdv.system.expression.generator.Generator;
@@ -22,7 +22,7 @@ public class PersonGenerator extends Generator {
         Random random = new Random();
 
         for (int i = 0; i < amount; i++) {
-            Data personData = new Data(Person.IDENTIFIER);
+            Data personData = new Data(Entities.Primary.Person.IDENTIFIER);
             personData.setAttribute("firstName", FIRST_NAMES[random.nextInt(FIRST_NAMES.length)]);
             personData.setAttribute("lastName", LAST_NAMES[random.nextInt(LAST_NAMES.length)]);
             personData.setAttribute("age", random.nextInt(50) + 20);
