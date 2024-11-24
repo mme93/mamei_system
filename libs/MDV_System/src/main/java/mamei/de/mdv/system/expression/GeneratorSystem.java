@@ -1,5 +1,6 @@
 package mamei.de.mdv.system.expression;
 
+import mamei.de.mdv.model.MDVResult;
 import mamei.de.mdv.system.module.ESystem;
 import mamei.de.mdv.system.System;
 import mamei.de.mdv.system.module.SystemAction;
@@ -13,8 +14,9 @@ public class GeneratorSystem extends System {
     }
 
     @Override
-    public void action(SystemAction action) {
+    public MDVResult action(SystemAction action) {
 
+        return new MDVResult();
     }
 
     @Override

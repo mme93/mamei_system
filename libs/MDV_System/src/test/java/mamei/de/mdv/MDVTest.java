@@ -21,4 +21,10 @@ public class MDVTest {
     void testDefaultGenerator(){
         Assertions.assertTrue(mdv.getLoadedSystemNames().contains(GENERATOR_SYSTEM));
     }
+
+    @Test
+    @DisplayName("Has default generator")
+    void testX(){
+
+    }
 }

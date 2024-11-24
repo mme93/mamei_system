@@ -1,43 +1,23 @@
 package mamei.de.mdv.model;
 
-import mamei.de.mdv.system.module.ESystem;
-import mamei.de.mdv.system.module.ESystemCommand;
 import mamei.de.mdv.system.module.SystemAction;
-import mamei.de.mdv.system.module.SystemContext;
+import mamei.de.mdv.system.module.SystemIdentifier;
 
 public class MDVAction {
 
-    private String code;
-    private ESystem system;
-    private String systemName;
-    private boolean defaultAction;
-    private SystemContext context;
+    private SystemIdentifier identifier;
+    private SystemAction action;
 
-    public MDVAction(String code, ESystem system, String systemName, boolean defaultAction, SystemContext context) {
-        this.code = code;
-        this.system = system;
-        this.systemName = systemName;
-        this.defaultAction = defaultAction;
-        this.context = context;
+    public MDVAction(SystemIdentifier identifier, SystemAction action) {
+        this.identifier = identifier;
+        this.action = action;
     }
 
-    public String getCode() {
-        return code;
+    public SystemIdentifier getIdentifier() {
+        return identifier;
     }
 
-    public ESystem getSystem() {
-        return system;
-    }
-
-    public String getSystemName() {
-        return systemName;
-    }
-
-    public boolean isDefaultAction() {
-        return defaultAction;
-    }
-
-    public SystemAction getSystemAction(ESystemCommand command) {
-        return new SystemAction(context, command);
+    public SystemAction getAction() {
+        return action;
     }
 }
