@@ -1,16 +1,18 @@
 package mamei.de.mdv.system.module;
 
+import mamei.de.mdv.system.context.ISystemContext;
+
 public class SystemAction {
 
-    private SystemContext context;
+    private ISystemContext context;
     private ESystemCommand command;
 
-    public SystemAction(SystemContext context, ESystemCommand command) {
+    public SystemAction(ISystemContext context, ESystemCommand command) {
         this.context = context;
         this.command = command;
     }
 
-    public SystemContext getContext() {
+    public ISystemContext getContext() {
         return context;
     }
 

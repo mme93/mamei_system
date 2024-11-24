@@ -1,6 +1,8 @@
 package mamei.de.mdv.system.expression;
 
 import mamei.de.mdv.model.MDVResult;
+import mamei.de.mdv.system.context.ISystemContext;
+import mamei.de.mdv.system.context.generator.GeneratorContext;
 import mamei.de.mdv.system.module.ESystem;
 import mamei.de.mdv.system.System;
 import mamei.de.mdv.system.module.SystemAction;
@@ -13,9 +15,19 @@ public class GeneratorSystem extends System {
         super(name);
     }
 
+    public MDVResult load(GeneratorContext context) {
+
+
+        return null;
+    }
+
     @Override
     public MDVResult action(SystemAction action) {
-
+        switch (action.getCommand()) {
+            case GENERATE:
+                GeneratorContext context = (GeneratorContext) action.getContext();
+                return load(context);
+        }
         return new MDVResult();
     }
 
@@ -28,7 +40,6 @@ public class GeneratorSystem extends System {
     public Optional<Object> getMappedSystem() {
         return Optional.of(this);
     }
-
 
 
 }
