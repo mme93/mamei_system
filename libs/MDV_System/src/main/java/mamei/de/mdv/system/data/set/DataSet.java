@@ -17,25 +17,6 @@ public class DataSet implements IDataSet {
         this.name = name;
     }
 
-
-    @Override
-    public IDataSet generate(List<IData> dataList) {
-        if (dataList.isEmpty()) {
-            throw new NoDataFoundException("List with data is empty");
-        }
-
-        return null;
-    }
-
-    @Override
-    public IDataSet generate() {
-        if (dataList.isEmpty()) {
-            throw new NoDataFoundException("List with data is empty");
-        }
-
-        return null;
-    }
-
     @Override
     public void addData(IData data) {
         try {
@@ -50,7 +31,7 @@ public class DataSet implements IDataSet {
         if (dataList.isEmpty()) {
             throw new NoDataFoundException("List with data is empty.");
         }
-        dataList.addAll(dataList);
+        this.dataList.addAll(dataList);
     }
 
     @Override
@@ -67,5 +48,20 @@ public class DataSet implements IDataSet {
     @Override
     public boolean isEmpty() {
         return false;
+    }
+
+    @Override
+    public int getAmount() {
+        return amount;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public List<IData> getDataList() {
+        return dataList;
     }
 }

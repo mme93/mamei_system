@@ -5,6 +5,8 @@ public class Entities {
     public static class Person{
         public static final String IDENTIFIER = "PERSON";
         public static final String NAME = "name";
+        public static final String FIRST_NAMES = "firstName";
+        public static final String LAST_NAMES = "lastName";
         public static final String DATE_OF_BIRTH = "dateOfBirth";
         public static final String AGE = "age";
         public static final String PLACE_OF_BIRTH = "placeOfBirth";

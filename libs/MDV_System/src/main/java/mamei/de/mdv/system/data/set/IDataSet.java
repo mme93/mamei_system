@@ -6,10 +6,6 @@ import java.util.List;
 
 public interface IDataSet {
 
-    IDataSet generate(List<IData> dataList);
-
-    IDataSet generate();
-
     void addData(IData data);
 
     void addData(List<IData> dataList);
@@ -19,4 +15,10 @@ public interface IDataSet {
     boolean isValid();
 
     boolean isEmpty();
+
+    int getAmount();
+
+    String getName();
+
+    List<IData> getDataList();
 }

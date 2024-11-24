@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Entity {
+public abstract class Entity {
 
     private List<String> properties = new ArrayList<>();
     private final String identifier;
@@ -12,5 +12,9 @@ public class Entity {
     public Entity(String identifier) {
         Objects.requireNonNull(identifier);
         this.identifier = identifier;
+    }
+
+    public String getIdentifier() {
+        return identifier;
     }
 }
