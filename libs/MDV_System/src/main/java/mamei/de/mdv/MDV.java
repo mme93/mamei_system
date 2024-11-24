@@ -1,4 +1,6 @@
 package mamei.de.mdv;
 
-public class MDV {
+import mamei.de.mdv.system.System;
+
+public class MDV extends System {
 }

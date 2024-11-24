@@ -1,4 +1,4 @@
 package mamei.de.mdv.system;
 
-public class System {
+public class System implements ISystem{
 }
