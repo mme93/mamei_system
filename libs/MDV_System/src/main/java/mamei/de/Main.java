@@ -26,7 +26,7 @@ public class Main {
 
     public static void test1() {
         SystemIdentifier identifier = new SystemIdentifier(ESystem.GENERATOR, GENERATOR_SYSTEM, true);
-        GeneratorContext context = new GeneratorContext();
+        GeneratorContext context = new GeneratorContext(1);
         context.addEntity(null);
         SystemAction action = new SystemAction(context, ESystemCommand.GENERATE);
         MDVResult result = mdv.action(new MDVAction(identifier, action));

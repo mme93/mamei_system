@@ -18,4 +18,8 @@ public abstract class Entity {
     public String getIdentifier() {
         return identifier;
     }
+
+    public List<String> getProperties() {
+        return properties;
+    }
 }

@@ -1,10 +1,11 @@
-package mamei.de.mdv.system.expression.generator.expression;
+package mamei.de.mdv.system.expression.generator.expression.person;
 
 import mamei.de.mdv.system.context.ISystemContext;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
 import mamei.de.mdv.system.data.Data;
 import mamei.de.mdv.system.data.IData;
 import mamei.de.mdv.system.data.entities.Entities;
+import mamei.de.mdv.system.data.entities.Entity;
 import mamei.de.mdv.system.data.set.DataSet;
 import mamei.de.mdv.system.data.set.IDataSet;
 import mamei.de.mdv.system.expression.generator.Generator;
@@ -18,8 +19,7 @@ public class PersonGenerator extends Generator {
     private static final String[] FIRST_NAMES = {"John", "Jane", "Alice", "Bob"};
     private static final String[] LAST_NAMES = {"Smith", "Doe", "Brown", "Johnson"};
 
-    public PersonGenerator(GeneratorContext context) {
-    }
+    private GeneratorContext context;
 
     @Override
     public IDataSet generate(int amount) {
@@ -42,6 +42,11 @@ public class PersonGenerator extends Generator {
 
     @Override
     public IDataSet loadFromContext() {
+        for(Entity entity:context.getEntities()){
+            for(String property:entity.getProperties()){
+
+            }
+        }
         return null;
     }
 
@@ -57,12 +62,16 @@ public class PersonGenerator extends Generator {
 
     @Override
     public void setContext(ISystemContext context) {
-        super.setContext(context);
+        if (context != null) {
+            this.context= (GeneratorContext) context;
+            super.setContext(context);
+        }
+        throw new NullPointerException("Context is null");
     }
 
     @Override
     public ISystemContext getContext() {
-        return super.getContext();
+        return context;
     }
 
 }
