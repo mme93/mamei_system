@@ -57,10 +57,10 @@ public class MDVModules {
 
     public GeneratorSystem getGeneratorSystemByAction(MDVAction mdvAction) {
         Optional<GeneratorSystem> system = generatorSystems.stream().filter(generator -> {
-            if (mdvAction.isDefaultAction()) {
+            if (mdvAction.getIdentifier().isDefaultAction()) {
                 return generator.getSystemName().equals(GENERATOR_SYSTEM);
-            }else{
-                return  generator.getSystemName().equals(mdvAction.getSystemName());
+            } else {
+                return generator.getSystemName().equals(mdvAction.getIdentifier().getSystemName());
             }
         }).findAny();
 
@@ -68,5 +68,10 @@ public class MDVModules {
             return system.get();
         }
         throw new NoSystemFoundException("No system found.");
+    }
+
+
+    public List<GeneratorSystem> getGeneratorSystems() {
+        return generatorSystems;
     }
 }

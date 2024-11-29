@@ -1,7 +1,6 @@
 package mamei.de.mdv.system.expression;
 
 import mamei.de.mdv.model.MDVResult;
-import mamei.de.mdv.system.context.ISystemContext;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
 import mamei.de.mdv.system.module.ESystem;
 import mamei.de.mdv.system.System;
@@ -16,7 +15,6 @@ public class GeneratorSystem extends System {
     }
 
     public MDVResult load(GeneratorContext context) {
-
 
         return null;
     }

@@ -23,8 +23,7 @@ public class GeneratorContext implements ISystemContext {
     }
 
     @Override
-    public Object getContext() {
-
-        return null;
+    public ISystemContext getContext() {
+        return this;
     }
 }

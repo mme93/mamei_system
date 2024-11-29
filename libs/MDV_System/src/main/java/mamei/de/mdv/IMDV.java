@@ -11,5 +11,7 @@ public interface IMDV {
 
     void addSystem(ISystem system);
 
+    ISystem getSystemByName(String systemName);
+
     MDVResult action(MDVAction action);
 }

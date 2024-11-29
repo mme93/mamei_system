@@ -24,27 +24,27 @@ public abstract class ASecondary implements ISecondary {
     @Override
     public void setAllAttributes() {
         for (String attribute : Entities.Primary.Person.ATTRIBUTE_NAMES) {
-            attributes.add(new Attribute(getIdentifier(),attribute));
+            attributes.add(new Attribute(getIdentifier(), attribute));
         }
     }
 
     @Override
     public void removeAttribute(Attribute attribute) {
-
+        this.attributes.remove(attribute);
     }
 
     @Override
     public void removeAttributes(List<Attribute> attribute) {
-
+        this.attributes.removeAll(attribute);
     }
 
     @Override
     public void addAttribute(Attribute attribute) {
-
+        attributes.add(attribute);
     }
 
     @Override
     public void addAttributes(List<Attribute> attributes) {
-
+        this.attributes.addAll(attributes);
     }
 }

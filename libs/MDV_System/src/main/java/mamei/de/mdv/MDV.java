@@ -12,6 +12,7 @@ import mamei.de.mdv.system.expression.GeneratorSystem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class MDV implements IMDV {
@@ -37,6 +38,18 @@ public class MDV implements IMDV {
     @Override
     public void addSystem(ISystem system) {
         modules.addSystem(system);
+    }
+
+    @Override
+    public ISystem getSystemByName(String systemName) {
+        Optional<GeneratorSystem> optSystem = modules.getGeneratorSystems()
+                .stream()
+                .filter(system -> system.getSystemName().equals(systemName))
+                .findAny();
+        if (optSystem.isPresent()) {
+            return optSystem.get();
+        }
+        throw new NoSystemFoundException(String.format("No system found by name %s.", systemName));
     }
 
     @Override

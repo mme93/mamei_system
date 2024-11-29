@@ -9,6 +9,7 @@ public abstract class Entity {
     private List<String> properties = new ArrayList<>();
     private final String identifier;
 
+
     public Entity(String identifier) {
         Objects.requireNonNull(identifier);
         this.identifier = identifier;
