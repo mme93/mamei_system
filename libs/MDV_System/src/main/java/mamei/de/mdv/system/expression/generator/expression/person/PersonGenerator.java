@@ -4,8 +4,8 @@ import mamei.de.mdv.system.context.ISystemContext;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
 import mamei.de.mdv.system.data.Data;
 import mamei.de.mdv.system.data.IData;
-import mamei.de.mdv.system.data.entities.Entities;
-import mamei.de.mdv.system.data.entities.Entity;
+import mamei.de.mdv.system.data.entity.Entities;
+import mamei.de.mdv.system.data.entity.Entity;
 import mamei.de.mdv.system.data.set.DataSet;
 import mamei.de.mdv.system.data.set.IDataSet;
 import mamei.de.mdv.system.expression.generator.Generator;
@@ -35,17 +35,14 @@ public class PersonGenerator extends Generator {
         }
 
         validateGeneratedData(dataList.stream().map(data -> (IData) data).toList());
-        IDataSet dataSet = new DataSet(1, "GeneratedPersons");
-        dataSet.addData(dataList.stream().map(data -> (IData) data).toList());
-        return dataSet;
+   //     IDataSet dataSet = new DataSet(1, "GeneratedPersons");
+      //  dataSet.addData(dataList.stream().map(data -> (IData) data).toList());
+        return null;
     }
 
     @Override
     public IDataSet loadFromContext() {
         for(Entity entity:context.getEntities()){
-            for(String property:entity.getProperties()){
-
-            }
         }
         return null;
     }

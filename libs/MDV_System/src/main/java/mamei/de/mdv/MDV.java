@@ -1,32 +1,23 @@
 package mamei.de.mdv;
 
-import mamei.de.mdv.exception.MDVActionErrorException;
 import mamei.de.mdv.model.MDVAction;
 import mamei.de.mdv.model.MDVModules;
 import mamei.de.mdv.model.MDVResult;
-import mamei.de.mdv.system.exception.NoSystemFoundException;
 import mamei.de.mdv.system.module.ESystem;
 import mamei.de.mdv.system.ISystem;
-import mamei.de.mdv.system.expression.GeneratorSystem;
+import mamei.de.mdv.system.module.SystemContent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 public class MDV implements IMDV {
 
     private MDVModules modules;
 
-    private MDV(List<ISystem> customizedSystem, List<ESystem> systems) {
+    private MDV(List<ESystem> systems) {
         this.modules = new MDVModules(systems);
-        loadModules(customizedSystem);
-    }
-
-    private void loadModules(List<ISystem> customizedSystem) {
-        Objects.requireNonNull(modules);
-        modules.loadSystem(customizedSystem);
     }
 
     @Override
@@ -36,34 +27,18 @@ public class MDV implements IMDV {
     }
 
     @Override
-    public void addSystem(ISystem system) {
+    public void addSystem(SystemContent system) {
         modules.addSystem(system);
     }
 
     @Override
     public ISystem getSystemByName(String systemName) {
-        Optional<GeneratorSystem> optSystem = modules.getGeneratorSystems()
-                .stream()
-                .filter(system -> system.getSystemName().equals(systemName))
-                .findAny();
-        if (optSystem.isPresent()) {
-            return optSystem.get();
-        }
-        throw new NoSystemFoundException(String.format("No system found by name %s.", systemName));
+        return modules.getSystemByName(systemName);
     }
 
     @Override
     public MDVResult action(MDVAction action) {
-
-        switch (action.getIdentifier().getSystem()) {
-            case GENERATOR:
-                GeneratorSystem generator = modules.getGeneratorSystemByAction(action);
-                return generator.action(action.getAction());
-            default:
-                throw new NoSystemFoundException(
-                        String.format("Can´t execute action for system %s.", action.getIdentifier().getSystem())
-                );
-        }
+        return modules.executeAction(action);
     }
 
     public static MDVBuilder builder() {
@@ -72,13 +47,7 @@ public class MDV implements IMDV {
 
     public static class MDVBuilder {
 
-        List<ISystem> customizedSystem = new ArrayList<>();
         List<ESystem> systems = new ArrayList<>();
-
-        public MDVBuilder withCustomizedSystem(ISystem system) {
-            customizedSystem.add(system);
-            return this;
-        }
 
         public MDVBuilder withGenerator() {
             systems.add(ESystem.GENERATOR);
@@ -86,7 +55,7 @@ public class MDV implements IMDV {
         }
 
         public MDV build() {
-            return new MDV(customizedSystem, systems);
+            return new MDV(systems);
         }
     }
 }

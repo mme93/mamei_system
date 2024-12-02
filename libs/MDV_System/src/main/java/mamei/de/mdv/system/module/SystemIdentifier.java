@@ -2,14 +2,12 @@ package mamei.de.mdv.system.module;
 
 public class SystemIdentifier {
 
-    private ESystem system;
-    private String systemName;
-    private boolean defaultAction;
+    private final ESystem system;
+    private final String systemName;
 
-    public SystemIdentifier(ESystem system, String systemName, boolean defaultAction) {
+    public SystemIdentifier(ESystem system, String systemName) {
         this.system = system;
         this.systemName = systemName;
-        this.defaultAction = defaultAction;
     }
 
     public ESystem getSystem() {
@@ -18,9 +16,5 @@ public class SystemIdentifier {
 
     public String getSystemName() {
         return systemName;
-    }
-
-    public boolean isDefaultAction() {
-        return defaultAction;
     }
 }

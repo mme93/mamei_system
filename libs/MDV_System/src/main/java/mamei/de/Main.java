@@ -3,12 +3,12 @@ package mamei.de;
 
 import mamei.de.mdv.MDV;
 import mamei.de.mdv.model.MDVAction;
-import mamei.de.mdv.model.MDVResult;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
-import mamei.de.mdv.system.expression.GeneratorSystem;
+import mamei.de.mdv.system.data.entity.metadata.EntityMetadata;
+import mamei.de.mdv.system.data.entity.primary.Primary;
+import mamei.de.mdv.system.data.entity.primary.person.Person;
+import mamei.de.mdv.system.expression.generator.expression.communication.model.Email;
 import mamei.de.mdv.system.module.*;
-
-import static mamei.de.mdv.system.System.GENERATOR_SYSTEM;
 
 public class Main {
 
@@ -16,19 +16,36 @@ public class Main {
 
     public static void main(String[] args) {
         test2();
-
     }
 
     public static void test2() {
-        GeneratorSystem generatorSystem = (GeneratorSystem) mdv.getSystemByName(GENERATOR_SYSTEM);
+        Person person = new Person();
+        person.setFirstName("Max");
+        person.setAttribute("lastName", "Mustermann");
+        person.setAttribute("age", 30);
 
+        Email email = new Email();
+        email.setEmailDetails("max.mustermann@example.com", "Gmail");
+
+        person.addSecondary(email);
+
+        System.out.println("Person: " + person);
+        System.out.println("Primäre Attribute: " + person.getAttributes());
+
+        person.getSecondaries().forEach(secondary -> {
+            System.out.println("Secondary: " + secondary.getIdentifier());
+            System.out.println("Attributes: " + secondary.getAttributes());
+        });
     }
 
     public static void test1() {
-        SystemIdentifier identifier = new SystemIdentifier(ESystem.GENERATOR, GENERATOR_SYSTEM, true);
-        GeneratorContext context = new GeneratorContext(1);
-        context.addEntity(null);
-        SystemAction action = new SystemAction(context, ESystemCommand.GENERATE);
-        MDVResult result = mdv.action(new MDVAction(identifier, action));
+
+    }
+
+    public static MDVAction generateGeneratorAction(ESystem eSystem, ESystemCommand eCommand) {
+        SystemIdentifier identifier = new SystemIdentifier(eSystem, "GeneratorSystem");
+        GeneratorContext context = new GeneratorContext(10);
+
+        return new MDVAction(identifier, eCommand, context);
     }
 }

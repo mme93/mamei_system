@@ -1,10 +1,10 @@
 package mamei.de.mdv.system.expression;
 
+import mamei.de.mdv.model.MDVAction;
 import mamei.de.mdv.model.MDVResult;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
 import mamei.de.mdv.system.module.ESystem;
 import mamei.de.mdv.system.System;
-import mamei.de.mdv.system.module.SystemAction;
 
 import java.util.Optional;
 
@@ -20,13 +20,17 @@ public class GeneratorSystem extends System {
     }
 
     @Override
-    public MDVResult action(SystemAction action) {
-        switch (action.getCommand()) {
-            case GENERATE:
-                GeneratorContext context = (GeneratorContext) action.getContext();
-                return load(context);
+    public MDVResult action(MDVAction action) {
+        if (!(action.getContext() instanceof GeneratorContext context)) {
+            throw new IllegalArgumentException("Invalid context for GeneratorSystem");
         }
-        return new MDVResult();
+        switch (action.getCommand()) {
+            case GENERATE -> {
+                return generateEntities(context);
+            }
+            default -> throw new UnsupportedOperationException(
+                    "Command not supported: " + action.getCommand());
+        }
     }
 
     @Override
@@ -37,6 +41,11 @@ public class GeneratorSystem extends System {
     @Override
     public Optional<Object> getMappedSystem() {
         return Optional.of(this);
+    }
+
+    private MDVResult generateEntities(GeneratorContext context) {
+        int amount = context.getAmount();
+        return new MDVResult("Generated " + amount + " entities.");
     }
 
 

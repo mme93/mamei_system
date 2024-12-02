@@ -1,4 +1,4 @@
-package mamei.de.mdv.system.expression.generator.expression.communication.model;
+package mamei.de.mdv.system.data.entity.secondary.communication;
 
 import mamei.de.mdv.system.data.entity.secondary.Secondary;
 
@@ -20,5 +20,4 @@ public class Email extends Secondary {
     public String getProvider() {
         return (String) getAttribute("provider");
     }
-
 }

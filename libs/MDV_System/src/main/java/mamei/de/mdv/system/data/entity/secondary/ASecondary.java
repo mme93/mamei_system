@@ -1,33 +1,24 @@
-package mamei.de.mdv.system.data.entities.primary;
+package mamei.de.mdv.system.data.entity.secondary;
 
-import mamei.de.mdv.system.data.entities.Entities;
-import mamei.de.mdv.system.data.entities.attribute.Attribute;
-import mamei.de.mdv.system.data.entities.secondary.ISecondary;
+import mamei.de.mdv.system.data.entity.Entities;
+import mamei.de.mdv.system.data.entity.attribute.Attribute;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class APrimary implements IPrimary {
-
-    private List<ISecondary> secondaries;
-    private List<Attribute> attributes;
+public abstract class ASecondary implements ISecondary {
 
     private String identifier;
+    private List<Attribute> attributes;
 
-    public APrimary(String identifier) {
+    public ASecondary(String identifier) {
         this.identifier = identifier;
-        secondaries = new ArrayList<>();
-        attributes = new ArrayList<>();
+        this.attributes = new ArrayList<>();
     }
 
     @Override
     public String getIdentifier() {
         return identifier;
-    }
-
-    @Override
-    public List<ISecondary> getSecondaries() {
-        return secondaries;
     }
 
     @Override

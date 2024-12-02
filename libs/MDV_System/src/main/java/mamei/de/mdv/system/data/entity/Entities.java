@@ -1,4 +1,4 @@
-package mamei.de.mdv.system.data.entities;
+package mamei.de.mdv.system.data.entity;
 
 import java.util.List;
 
@@ -60,6 +60,14 @@ public class Entities {
                 public static final String NAME = "name";
                 public static List<String> ATTRIBUTE_NAMES = asList(IDENTIFIER, PROVIDER, NAME);
             }
+
+            public static class MobileNumber {
+                public static final String IDENTIFIER = "mobile_number";
+                public static final String PROVIDER = "provider";
+                public static final String MOBILE_PREFIX = "mobile_prefix";
+                public static final String NUMBER = "number";
+            }
+
         }
     }
 
