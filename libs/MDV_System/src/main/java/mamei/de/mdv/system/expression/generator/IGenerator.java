@@ -1,14 +1,14 @@
 package mamei.de.mdv.system.expression.generator;
 
+import mamei.de.mdv.datasets.DataSet;
 import mamei.de.mdv.system.context.ISystemContext;
-import mamei.de.mdv.system.data.IData;
-import mamei.de.mdv.system.data.set.IDataSet;
+import mamei.de.mdv.datasets.IData;
 
 public interface IGenerator {
 
-    IDataSet loadDataSet(IData data);
+    DataSet loadDataSet(IData data);
 
-    IDataSet loadFromContext();
+    DataSet loadFromContext();
 
     void setContext(ISystemContext context);
 

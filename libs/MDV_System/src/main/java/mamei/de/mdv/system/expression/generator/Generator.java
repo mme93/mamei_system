@@ -1,9 +1,9 @@
 package mamei.de.mdv.system.expression.generator;
 
+import mamei.de.mdv.datasets.DataSet;
 import mamei.de.mdv.system.context.ISystemContext;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
-import mamei.de.mdv.system.data.IData;
-import mamei.de.mdv.system.data.set.IDataSet;
+import mamei.de.mdv.datasets.IData;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ public abstract class Generator implements IGenerator {
 
     private GeneratorContext context;
 
-    public abstract IDataSet generate(int amount);
+    public abstract DataSet generate(int amount);
 
     @Override
-    public abstract IDataSet loadFromContext();
+    public abstract DataSet loadFromContext();
 
     @Override
     public void setContext(ISystemContext context) {
@@ -27,7 +27,7 @@ public abstract class Generator implements IGenerator {
     }
 
     @Override
-    public abstract IDataSet loadDataSet(IData data);
+    public abstract DataSet loadDataSet(IData data);
 
     protected abstract boolean validateGeneratedData(List<IData> dataList) ;
 

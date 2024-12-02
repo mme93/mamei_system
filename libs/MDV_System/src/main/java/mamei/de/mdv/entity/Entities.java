@@ -1,4 +1,4 @@
-package mamei.de.mdv.system.data.entity;
+package mamei.de.mdv.entity;
 
 import java.util.List;
 

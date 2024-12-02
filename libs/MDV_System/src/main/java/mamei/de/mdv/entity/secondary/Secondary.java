@@ -1,6 +1,6 @@
-package mamei.de.mdv.system.data.entity.secondary;
+package mamei.de.mdv.entity.secondary;
 
-import mamei.de.mdv.system.data.entity.Entity;
+import mamei.de.mdv.entity.Entity;
 
 public class Secondary extends Entity {
 

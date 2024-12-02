@@ -1,10 +1,10 @@
-package mamei.de.mdv.system.data.set;
+package mamei.de.mdv.datasets;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DataSet implements IDataSet {
+public class DataSet {
 
     private final List<Map<String, Object>> data;
 

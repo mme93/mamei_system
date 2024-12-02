@@ -1,11 +1,12 @@
-package mamei.de.mdv.system.data.entity;
+package mamei.de.mdv.service;
 
-import mamei.de.mdv.system.data.entity.attribute.Attribute;
-import mamei.de.mdv.system.data.entity.primary.Primary;
+import mamei.de.mdv.entity.Entity;
+import mamei.de.mdv.entity.attribute.Attribute;
+import mamei.de.mdv.entity.primary.Primary;
 
 import java.util.Map;
 
-public class EntityMerger {
+public class EntityMergerservice {
     public static Entity merge(Entity base, Entity other) {
         for (Map.Entry<String, Attribute> entry : other.getAttributes().entrySet()) {
             base.setAttribute(entry.getKey(), entry.getValue());

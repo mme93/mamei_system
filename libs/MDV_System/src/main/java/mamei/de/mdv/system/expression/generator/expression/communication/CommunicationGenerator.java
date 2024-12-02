@@ -1,11 +1,11 @@
 package mamei.de.mdv.system.expression.generator.expression.communication;
 
+import mamei.de.mdv.datasets.DataSet;
 import mamei.de.mdv.system.context.ISystemContext;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
-import mamei.de.mdv.system.data.IData;
-import mamei.de.mdv.system.data.entity.Entities;
-import mamei.de.mdv.system.data.entity.Entity;
-import mamei.de.mdv.system.data.set.IDataSet;
+import mamei.de.mdv.datasets.IData;
+import mamei.de.mdv.entity.Entities;
+import mamei.de.mdv.entity.Entity;
 import mamei.de.mdv.system.expression.generator.Generator;
 import mamei.de.mdv.system.expression.generator.expression.communication.model.ECommunicationType;
 
@@ -28,7 +28,7 @@ public class CommunicationGenerator extends Generator {
     }
 
     @Override
-    public IDataSet generate(int amount) {
+    public DataSet generate(int amount) {
         List<ICommunication> communications;
         for (Entity entity : context.getEntities()) {
             switch (entity.getIdentifier()) {
@@ -46,12 +46,12 @@ public class CommunicationGenerator extends Generator {
     }
 
     @Override
-    public IDataSet loadFromContext() {
+    public DataSet loadFromContext() {
         return null;
     }
 
     @Override
-    public IDataSet loadDataSet(IData data) {
+    public DataSet loadDataSet(IData data) {
         return null;
     }
 

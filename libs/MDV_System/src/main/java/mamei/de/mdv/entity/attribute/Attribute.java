@@ -1,4 +1,4 @@
-package mamei.de.mdv.system.data.entity.attribute;
+package mamei.de.mdv.entity.attribute;
 
 import java.util.Objects;
 

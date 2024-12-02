@@ -1,13 +1,12 @@
 package mamei.de.mdv.system.expression.generator.expression.person;
 
+import mamei.de.mdv.datasets.DataSet;
 import mamei.de.mdv.system.context.ISystemContext;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
-import mamei.de.mdv.system.data.Data;
-import mamei.de.mdv.system.data.IData;
-import mamei.de.mdv.system.data.entity.Entities;
-import mamei.de.mdv.system.data.entity.Entity;
-import mamei.de.mdv.system.data.set.DataSet;
-import mamei.de.mdv.system.data.set.IDataSet;
+import mamei.de.mdv.datasets.Data;
+import mamei.de.mdv.datasets.IData;
+import mamei.de.mdv.entity.Entities;
+import mamei.de.mdv.entity.Entity;
 import mamei.de.mdv.system.expression.generator.Generator;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class PersonGenerator extends Generator {
     private GeneratorContext context;
 
     @Override
-    public IDataSet generate(int amount) {
+    public DataSet generate(int amount) {
         List<Data> dataList = new ArrayList<>();
         Random random = new Random();
 
@@ -41,14 +40,14 @@ public class PersonGenerator extends Generator {
     }
 
     @Override
-    public IDataSet loadFromContext() {
+    public DataSet loadFromContext() {
         for(Entity entity:context.getEntities()){
         }
         return null;
     }
 
     @Override
-    public IDataSet loadDataSet(IData data) {
+    public DataSet loadDataSet(IData data) {
         return null;
     }
 

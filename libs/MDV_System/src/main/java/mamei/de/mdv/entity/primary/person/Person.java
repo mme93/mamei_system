@@ -1,8 +1,6 @@
-package mamei.de.mdv.system.data.entity.primary.person;
+package mamei.de.mdv.entity.primary.person;
 
-import mamei.de.mdv.system.data.entity.primary.Primary;
-
-import java.util.List;
+import mamei.de.mdv.entity.primary.Primary;
 
 public class Person extends Primary {
 

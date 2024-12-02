@@ -1,4 +1,4 @@
-package mamei.de.mdv.system.exception;
+package mamei.de.mdv.exception;
 
 public class NoSystemFoundException extends RuntimeException{
 

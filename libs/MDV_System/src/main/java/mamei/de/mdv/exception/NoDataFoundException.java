@@ -1,4 +1,4 @@
-package mamei.de.mdv.system.data.set;
+package mamei.de.mdv.exception;
 
 public class NoDataFoundException extends RuntimeException{
 

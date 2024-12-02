@@ -1,4 +1,4 @@
-package mamei.de.mdv.system.data.entity.metadata;
+package mamei.de.mdv.entity.metadata;
 
 import java.util.ArrayList;
 import java.util.Collections;

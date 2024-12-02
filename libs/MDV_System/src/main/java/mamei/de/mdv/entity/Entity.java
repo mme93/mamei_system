@@ -1,7 +1,7 @@
-package mamei.de.mdv.system.data.entity;
+package mamei.de.mdv.entity;
 
 
-import mamei.de.mdv.system.data.entity.attribute.Attribute;
+import mamei.de.mdv.entity.attribute.Attribute;
 import java.util.HashMap;
 import java.util.Map;
 

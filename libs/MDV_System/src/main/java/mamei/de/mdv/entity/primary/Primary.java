@@ -1,7 +1,7 @@
-package mamei.de.mdv.system.data.entity.primary;
+package mamei.de.mdv.entity.primary;
 
-import mamei.de.mdv.system.data.entity.Entity;
-import mamei.de.mdv.system.data.entity.secondary.Secondary;
+import mamei.de.mdv.entity.Entity;
+import mamei.de.mdv.entity.secondary.Secondary;
 
 import java.util.ArrayList;
 import java.util.List;

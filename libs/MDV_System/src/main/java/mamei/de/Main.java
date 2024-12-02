@@ -4,9 +4,7 @@ package mamei.de;
 import mamei.de.mdv.MDV;
 import mamei.de.mdv.model.MDVAction;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
-import mamei.de.mdv.system.data.entity.metadata.EntityMetadata;
-import mamei.de.mdv.system.data.entity.primary.Primary;
-import mamei.de.mdv.system.data.entity.primary.person.Person;
+import mamei.de.mdv.entity.primary.person.Person;
 import mamei.de.mdv.system.expression.generator.expression.communication.model.Email;
 import mamei.de.mdv.system.module.*;
 

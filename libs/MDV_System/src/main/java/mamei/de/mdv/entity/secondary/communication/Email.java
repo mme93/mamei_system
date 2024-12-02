@@ -1,6 +1,6 @@
-package mamei.de.mdv.system.data.entity.secondary.communication;
+package mamei.de.mdv.entity.secondary.communication;
 
-import mamei.de.mdv.system.data.entity.secondary.Secondary;
+import mamei.de.mdv.entity.secondary.Secondary;
 
 public class Email extends Secondary {
 
