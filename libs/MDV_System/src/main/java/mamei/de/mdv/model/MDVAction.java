@@ -1,8 +1,8 @@
 package mamei.de.mdv.model;
 
 import mamei.de.mdv.system.context.ISystemContext;
-import mamei.de.mdv.system.module.ESystemCommand;
-import mamei.de.mdv.system.module.SystemIdentifier;
+import mamei.de.mdv.system.model.ESystemCommand;
+import mamei.de.mdv.system.model.SystemIdentifier;
 
 public class MDVAction {
 

@@ -1,4 +1,4 @@
-package mamei.de.mdv.system.module;
+package mamei.de.mdv.system.model;
 
 import mamei.de.mdv.system.ISystem;
 

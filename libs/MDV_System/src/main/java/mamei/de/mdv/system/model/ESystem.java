@@ -1,4 +1,4 @@
-package mamei.de.mdv.system.module;
+package mamei.de.mdv.system.model;
 
 public enum ESystem {
 

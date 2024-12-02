@@ -2,9 +2,9 @@ package mamei.de.mdv.model;
 
 import mamei.de.mdv.system.ISystem;
 import mamei.de.mdv.exception.NoSystemFoundException;
-import mamei.de.mdv.system.module.ESystem;
+import mamei.de.mdv.system.model.ESystem;
 import mamei.de.mdv.system.expression.GeneratorSystem;
-import mamei.de.mdv.system.module.SystemContent;
+import mamei.de.mdv.system.model.SystemContent;
 
 import java.util.ArrayList;
 import java.util.List;

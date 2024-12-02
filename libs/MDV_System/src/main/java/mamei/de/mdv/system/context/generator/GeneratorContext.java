@@ -17,6 +17,11 @@ public class GeneratorContext implements ISystemContext {
         this.amount = amount;
     }
 
+    public GeneratorContext(List<Entity> entities, int amount) {
+        this.entities = entities;
+        this.amount = amount;
+    }
+
     public void addAllEntities(List<Entity> entities) {
         this.entities.addAll(entities);
     }

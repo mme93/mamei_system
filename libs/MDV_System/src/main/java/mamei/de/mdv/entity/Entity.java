@@ -23,6 +23,14 @@ public abstract class Entity {
         return attributes;
     }
 
+    public void setAttribute(String name) {
+        Attribute attribute = attributes.get(name);
+        if (attribute == null) {
+            attribute = new Attribute(identifier + ":" + name, name);
+            attributes.put(name, attribute);
+        }
+    }
+
     public void setAttribute(String name, Object value) {
         Attribute attribute = attributes.get(name);
         if (attribute == null) {

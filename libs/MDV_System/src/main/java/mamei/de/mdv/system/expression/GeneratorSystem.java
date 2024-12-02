@@ -1,9 +1,10 @@
 package mamei.de.mdv.system.expression;
 
+import mamei.de.mdv.entity.Entity;
 import mamei.de.mdv.model.MDVAction;
 import mamei.de.mdv.model.MDVResult;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
-import mamei.de.mdv.system.module.ESystem;
+import mamei.de.mdv.system.model.ESystem;
 import mamei.de.mdv.system.System;
 
 import java.util.Optional;
@@ -44,8 +45,12 @@ public class GeneratorSystem extends System {
     }
 
     private MDVResult generateEntities(GeneratorContext context) {
-        int amount = context.getAmount();
-        return new MDVResult("Generated " + amount + " entities.");
+        for (int i = 0; i < context.getAmount(); i++) {
+            for (Entity entity : context.getEntities()) {
+
+            }
+        }
+        return new MDVResult("Generated entities.");
     }
 
 

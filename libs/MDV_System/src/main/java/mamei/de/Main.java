@@ -2,28 +2,38 @@ package mamei.de;
 
 
 import mamei.de.mdv.MDV;
+import mamei.de.mdv.entity.secondary.communication.Email;
 import mamei.de.mdv.model.MDVAction;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
 import mamei.de.mdv.entity.primary.person.Person;
-import mamei.de.mdv.system.expression.generator.expression.communication.model.Email;
-import mamei.de.mdv.system.module.*;
+import mamei.de.mdv.system.model.ESystem;
+import mamei.de.mdv.system.model.ESystemCommand;
+import mamei.de.mdv.system.model.SystemIdentifier;
+
+import static java.util.Arrays.asList;
 
 public class Main {
 
     static MDV mdv = MDV.builder().withGenerator().build();
 
     public static void main(String[] args) {
-        test2();
+        test3();
+    }
+
+    public static void test3() {
+        MDVAction action =generateGeneratorAction(ESystem.GENERATOR, ESystemCommand.GENERATE);
+        mdv.action(action);
     }
 
     public static void test2() {
         Person person = new Person();
         person.setFirstName("Max");
         person.setAttribute("lastName", "Mustermann");
+        person.setAttribute("lastName", "Peter");
         person.setAttribute("age", 30);
 
         Email email = new Email();
-        email.setEmailDetails("max.mustermann@example.com", "Gmail");
+        email.setDefaultAttributes();
 
         person.addSecondary(email);
 
@@ -42,7 +52,11 @@ public class Main {
 
     public static MDVAction generateGeneratorAction(ESystem eSystem, ESystemCommand eCommand) {
         SystemIdentifier identifier = new SystemIdentifier(eSystem, "GeneratorSystem");
-        GeneratorContext context = new GeneratorContext(10);
+
+        Email email= new Email();
+        email.setDefaultAttributes();
+
+        GeneratorContext context = new GeneratorContext(asList(email),5);
 
         return new MDVAction(identifier, eCommand, context);
     }
