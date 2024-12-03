@@ -34,6 +34,10 @@ public abstract class Entity {
         attributes.remove(attribute);
     }
 
+    public void clearAttributes(){
+        attributes.clear();
+    }
+
     @Override
     public String toString() {
         return String.format("Entity{identifier='%s', attributes=%s}",

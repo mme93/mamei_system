@@ -1,4 +1,4 @@
-package mamei.de.mdv.model;
+package mamei.de.mdv.action;
 
 import mamei.de.mdv.system.context.ISystemContext;
 import mamei.de.mdv.system.model.ESystemCommand;

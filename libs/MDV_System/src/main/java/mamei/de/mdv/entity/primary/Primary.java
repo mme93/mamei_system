@@ -46,4 +46,9 @@ public abstract class Primary extends Entity {
     public void removeAttribute(Attribute attribute) {
         super.removeAttribute(attribute);
     }
+
+    @Override
+    public void clearAttributes() {
+        super.clearAttributes();
+    }
 }

@@ -1,6 +1,6 @@
 package mamei.de.mdv;
 
-import mamei.de.mdv.model.MDVAction;
+import mamei.de.mdv.action.MDVAction;
 import mamei.de.mdv.model.MDVResult;
 import mamei.de.mdv.system.ISystem;
 import mamei.de.mdv.system.model.SystemContent;

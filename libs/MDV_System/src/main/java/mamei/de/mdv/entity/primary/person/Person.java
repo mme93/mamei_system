@@ -51,4 +51,9 @@ public class Person extends Primary {
     public void removeAttribute(Attribute attribute) {
         super.removeAttribute(attribute);
     }
+
+    @Override
+    public void clearAttributes() {
+        super.clearAttributes();
+    }
 }

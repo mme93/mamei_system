@@ -10,10 +10,6 @@ public class Email extends Secondary {
 
     public Email() {
         super(Entities.Secondary.Communication.Email.IDENTIFIER);
-    }
-
-    public void setEmailDetails() {
-
         setDefaultAttributes();
     }
 
