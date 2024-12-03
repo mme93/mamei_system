@@ -6,7 +6,6 @@ public class Attribute {
 
     private final String attributeIdentifier;
     private final String attributeName;
-    private Object value;
 
     public Attribute(String attributeIdentifier, String attributeName) {
         Objects.requireNonNull(attributeIdentifier, "Attribute Identifier darf nicht null sein");
@@ -24,18 +23,10 @@ public class Attribute {
         return attributeName;
     }
 
-    public Object getValue() {
-        return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
     @Override
     public String toString() {
-        return String.format("Attribute{identifier='%s', name='%s', value=%s}",
-                attributeIdentifier, attributeName, value);
+        return String.format("Attribute{identifier='%s', name='%s'}",
+                attributeIdentifier, attributeName);
     }
 
     @Override

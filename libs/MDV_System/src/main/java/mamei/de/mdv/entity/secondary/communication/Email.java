@@ -1,31 +1,46 @@
 package mamei.de.mdv.entity.secondary.communication;
 
 import mamei.de.mdv.entity.Entities;
+import mamei.de.mdv.entity.attribute.Attribute;
 import mamei.de.mdv.entity.secondary.Secondary;
+
+import java.util.Map;
 
 public class Email extends Secondary {
 
     public Email() {
-        super("EMAIL");
+        super(Entities.Secondary.Communication.Email.IDENTIFIER);
     }
 
-    public void setEmailDetails(String address, String provider) {
-        setAttribute("address", address);
-        setAttribute("provider", provider);
-    }
+    public void setEmailDetails() {
 
-    public String getAddress() {
-        return (String) getAttribute("address");
-    }
-
-    public String getProvider() {
-        return (String) getAttribute("provider");
+        setDefaultAttributes();
     }
 
     @Override
     public void setDefaultAttributes() {
-        for(String attribute: Entities.Secondary.Communication.Email.ATTRIBUTE_NAMES){
-            setAttribute(attribute);
+        for (String attribute : Entities.Secondary.Communication.Email.ATTRIBUTE_NAMES) {
+            addAttribute(attribute);
         }
+    }
+
+    @Override
+    public String getIdentifier() {
+        return super.getIdentifier();
+    }
+
+    @Override
+    public Map<String, Attribute> getAttributes() {
+        return super.getAttributes();
+    }
+
+    @Override
+    public void addAttribute(String name) {
+        super.addAttribute(name);
+    }
+
+    @Override
+    public void removeAttribute(String name) {
+        super.removeAttribute(name);
     }
 }

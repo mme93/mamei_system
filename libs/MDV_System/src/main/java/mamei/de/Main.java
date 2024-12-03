@@ -17,34 +17,15 @@ public class Main {
     static MDV mdv = MDV.builder().withGenerator().build();
 
     public static void main(String[] args) {
-        test3();
+        test2();
     }
 
-    public static void test3() {
+    public static void test2() {
         MDVAction action =generateGeneratorAction(ESystem.GENERATOR, ESystemCommand.GENERATE);
         mdv.action(action);
     }
 
-    public static void test2() {
-        Person person = new Person();
-        person.setFirstName("Max");
-        person.setAttribute("lastName", "Mustermann");
-        person.setAttribute("lastName", "Peter");
-        person.setAttribute("age", 30);
 
-        Email email = new Email();
-        email.setDefaultAttributes();
-
-        person.addSecondary(email);
-
-        System.out.println("Person: " + person);
-        System.out.println("Primäre Attribute: " + person.getAttributes());
-
-        person.getSecondaries().forEach(secondary -> {
-            System.out.println("Secondary: " + secondary.getIdentifier());
-            System.out.println("Attributes: " + secondary.getAttributes());
-        });
-    }
 
     public static void test1() {
 
@@ -55,8 +36,10 @@ public class Main {
 
         Email email= new Email();
         email.setDefaultAttributes();
-
-        GeneratorContext context = new GeneratorContext(asList(email),5);
+        Person person = new Person();
+        person.setDefaultAttributes();
+        person.addSecondary(email);
+        GeneratorContext context = new GeneratorContext(asList(person),5);
 
         return new MDVAction(identifier, eCommand, context);
     }

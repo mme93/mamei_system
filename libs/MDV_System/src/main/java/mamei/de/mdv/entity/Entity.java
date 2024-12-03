@@ -23,26 +23,10 @@ public abstract class Entity {
         return attributes;
     }
 
-    public void setAttribute(String name) {
-        Attribute attribute = attributes.get(name);
-        if (attribute == null) {
-            attribute = new Attribute(identifier + ":" + name, name);
-            attributes.put(name, attribute);
+    public void addAttribute(String name) {
+        if (!attributes.containsKey(name)) {
+            attributes.put(name, new Attribute(identifier, name));
         }
-    }
-
-    public void setAttribute(String name, Object value) {
-        Attribute attribute = attributes.get(name);
-        if (attribute == null) {
-            attribute = new Attribute(identifier + ":" + name, name);
-            attributes.put(name, attribute);
-        }
-        attribute.setValue(value);
-    }
-
-    public Object getAttribute(String name) {
-        Attribute attribute = attributes.get(name);
-        return (attribute != null) ? attribute.getValue() : null;
     }
 
     public void removeAttribute(String name) {
@@ -51,6 +35,7 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-        return String.format("Entity{identifier='%s', attributes=%s}", identifier, attributes);
+        return String.format("Entity{identifier='%s', attributes=%s}",
+                identifier, attributes);
     }
 }
