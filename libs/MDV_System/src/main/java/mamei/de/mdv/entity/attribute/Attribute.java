@@ -8,8 +8,8 @@ public class Attribute {
     private final String attributeName;
 
     public Attribute(String attributeIdentifier, String attributeName) {
-        Objects.requireNonNull(attributeIdentifier, "Attribute Identifier darf nicht null sein");
-        Objects.requireNonNull(attributeName, "Attribute Name darf nicht null sein");
+        Objects.requireNonNull(attributeIdentifier);
+        Objects.requireNonNull(attributeName);
 
         this.attributeIdentifier = attributeIdentifier;
         this.attributeName = attributeName;
@@ -29,16 +29,4 @@ public class Attribute {
                 attributeIdentifier, attributeName);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Attribute attribute = (Attribute) o;
-        return attributeIdentifier.equals(attribute.attributeIdentifier);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(attributeIdentifier);
-    }
 }

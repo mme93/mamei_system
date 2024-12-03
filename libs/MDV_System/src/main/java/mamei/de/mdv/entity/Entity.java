@@ -2,35 +2,36 @@ package mamei.de.mdv.entity;
 
 
 import mamei.de.mdv.entity.attribute.Attribute;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Entity {
 
     private final String identifier;
-    private final Map<String, Attribute> attributes;
+    private final List<Attribute> attributes;
 
     public Entity(String identifier) {
         this.identifier = identifier;
-        this.attributes = new HashMap<>();
+        this.attributes = new ArrayList<>();
     }
 
     public String getIdentifier() {
         return identifier;
     }
 
-    public Map<String, Attribute> getAttributes() {
+    public List<Attribute> getAttributes() {
         return attributes;
     }
 
-    public void addAttribute(String name) {
-        if (!attributes.containsKey(name)) {
-            attributes.put(name, new Attribute(identifier, name));
+    public void addAttribute(Attribute attribute) {
+        if (!attributes.contains(attribute)) {
+            attributes.add(attribute);
         }
     }
 
-    public void removeAttribute(String name) {
-        attributes.remove(name);
+    public void removeAttribute(Attribute attribute) {
+        attributes.remove(attribute);
     }
 
     @Override

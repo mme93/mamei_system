@@ -1,36 +1,24 @@
 package mamei.de.mdv.datasets;
 
-import mamei.de.mdv.entity.attribute.Attribute;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class DataSet implements IDataSet {
+public class DataSet {
 
-    private final List<Data> dataSet;
+    private List<Data> entities = new ArrayList<>();
 
-    public DataSet() {
-        this.dataSet = new ArrayList<>();
+    public void addEntity(Data entity) {
+        entities.add(entity);
     }
 
-    @Override
-    public String asJSON() {
-        return "";
+    public Optional<Data> getEntityByIdentifier() {
+        return null;
+        //return  entities.stream().findAny().filter(entity->)
     }
 
-    @Override
-    public String asDataList() {
-        return "";
-    }
-
-    @Override
-    public void addAttributeToEntity(Attribute attribute) {
-
-    }
-
-    @Override
-    public void removeAttributeFromEntity(Attribute attribute) {
-
+    public void clearEntities() {
+        entities.clear();
     }
 
 }

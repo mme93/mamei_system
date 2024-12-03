@@ -3,6 +3,7 @@ package mamei.de.mdv.entity.secondary;
 import mamei.de.mdv.entity.Entity;
 import mamei.de.mdv.entity.attribute.Attribute;
 
+import java.util.List;
 import java.util.Map;
 
 public abstract class Secondary extends Entity {
@@ -20,17 +21,17 @@ public abstract class Secondary extends Entity {
     }
 
     @Override
-    public Map<String, Attribute> getAttributes() {
+    public List< Attribute> getAttributes() {
         return super.getAttributes();
     }
 
     @Override
-    public void addAttribute(String name) {
-        super.addAttribute(name);
+    public void addAttribute(Attribute attribute) {
+        super.addAttribute(attribute);
     }
 
     @Override
-    public void removeAttribute(String name) {
-        super.removeAttribute(name);
+    public void removeAttribute(Attribute attribute) {
+        super.removeAttribute(attribute);
     }
 }

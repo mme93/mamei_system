@@ -4,7 +4,7 @@ import mamei.de.mdv.entity.Entities;
 import mamei.de.mdv.entity.attribute.Attribute;
 import mamei.de.mdv.entity.secondary.Secondary;
 
-import java.util.Map;
+import java.util.List;
 
 public class Email extends Secondary {
 
@@ -20,7 +20,7 @@ public class Email extends Secondary {
     @Override
     public void setDefaultAttributes() {
         for (String attribute : Entities.Secondary.Communication.Email.ATTRIBUTE_NAMES) {
-            addAttribute(attribute);
+            addAttribute(new Attribute(getIdentifier(), attribute));
         }
     }
 
@@ -30,17 +30,17 @@ public class Email extends Secondary {
     }
 
     @Override
-    public Map<String, Attribute> getAttributes() {
+    public List<Attribute> getAttributes() {
         return super.getAttributes();
     }
 
     @Override
-    public void addAttribute(String name) {
-        super.addAttribute(name);
+    public void addAttribute(Attribute attribute) {
+        super.addAttribute(attribute);
     }
 
     @Override
-    public void removeAttribute(String name) {
-        super.removeAttribute(name);
+    public void removeAttribute(Attribute attribute) {
+        super.removeAttribute(attribute);
     }
 }

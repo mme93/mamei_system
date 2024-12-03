@@ -5,12 +5,10 @@ import mamei.de.mdv.entity.primary.Primary;
 import mamei.de.mdv.entity.secondary.Secondary;
 
 import java.util.List;
-import java.util.Map;
 
 import static mamei.de.mdv.entity.Entities.Primary.Person.*;
 
 public class Person extends Primary {
-
 
     public Person() {
         super(IDENTIFIER);
@@ -20,7 +18,7 @@ public class Person extends Primary {
     @Override
     public void setDefaultAttributes() {
         for (String attribute : ATTRIBUTE_NAMES) {
-            addAttribute(attribute);
+            addAttribute(new Attribute(getIdentifier(),attribute));
         }
     }
 
@@ -40,17 +38,17 @@ public class Person extends Primary {
     }
 
     @Override
-    public Map<String, Attribute> getAttributes() {
+    public List<Attribute> getAttributes() {
         return super.getAttributes();
     }
 
     @Override
-    public void addAttribute(String name) {
-        super.addAttribute(name);
+    public void addAttribute(Attribute attribute) {
+        super.addAttribute(attribute);
     }
 
     @Override
-    public void removeAttribute(String name) {
-        super.removeAttribute(name);
+    public void removeAttribute(Attribute attribute) {
+        super.removeAttribute(attribute);
     }
 }
