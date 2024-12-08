@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow: hidden;
 }
 
 #app-root {
@@ -15,7 +16,7 @@ app-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: #f4f4f4;
+    background-color: #ae3131;
     /* Hintergrundfarbe des Headers */
 }
 
@@ -29,7 +30,6 @@ app-footer {
 
 app-world {
     flex: 1;
-    /* Spielfeld nimmt den Rest des verfügbaren Platzes ein */
     overflow: hidden;
     display: flex;
     align-items: center;
