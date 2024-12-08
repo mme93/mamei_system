@@ -11,7 +11,7 @@ export class WorldComponent implements OnInit {
   stone_ground_fiel_path = '/assets/stone_ground_field.png';
 
   container: PixelQuestContainer = {
-    colSize: 50,
+    colSize: 150,
     rowSize: 50,
     pixelQuestGrid: {
       pixelRow: []
