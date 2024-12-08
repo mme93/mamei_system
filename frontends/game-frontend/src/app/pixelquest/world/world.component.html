@@ -1,0 +1,8 @@
+<div class="world-container" (mousedown)="startDrag($event)" (mouseup)="stopDrag()" (mousemove)="onDrag($event)">
+    <div class="world-grid" [style.transform]="'translate(' + offsetX + 'px, ' + offsetY + 'px)'">
+        <div *ngFor="let row of grid; let rowIndex = index" class="row">
+            <div *ngFor="let cell of row; let colIndex = index" class="cell" [style.backgroundImage]="'url(/assets/stone_ground_field.png)'">
+            </div>
+        </div>
+    </div>
+</div>

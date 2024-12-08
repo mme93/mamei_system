@@ -1,0 +1,27 @@
+.world-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    overflow: hidden;
+}
+
+.world-container:active {
+    cursor: grabbing;
+}
+
+.world-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), 100px);
+    grid-template-rows: repeat(var(--grid-size), 100px);
+    gap: 2px;
+    transform: translate(0, 0);
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ccc;
+}

@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #f4f4f4;
+    /* Hintergrundfarbe des Headers */
+}
+
+app-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    background-color: #ae3131;
+    /* Hintergrundfarbe des Footers */
+}
+
+app-world {
+    flex: 1;
+    /* Spielfeld nimmt den Rest des verfügbaren Platzes ein */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
