@@ -1,7 +1,7 @@
 package mamei.de.mdv.system.context.generator;
 
 import mamei.de.mdv.system.context.ISystemContext;
-import mamei.de.mdv.entity.Entity;
+import mamei.de.bigdata.core.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package mamei.de.mdv.service;
 
-import mamei.de.mdv.entity.Entity;
+import mamei.de.bigdata.core.entity.Entity;
 
 public class EntityMergeService {
 

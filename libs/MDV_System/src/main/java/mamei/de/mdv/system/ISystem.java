@@ -17,6 +17,4 @@ public interface ISystem {
 
     Optional<Object> getMappedSystem();
 
-    MDVResult generate(ISystemContext context);
-
 }

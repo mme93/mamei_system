@@ -1,11 +1,11 @@
 package mamei.de.mdv.system.expression.generator.expression.communication;
 
+import mamei.de.bigdata.core.entity.model.EntityModel;
 import mamei.de.mdv.datasets.DataSet;
 import mamei.de.mdv.datasets.DataTable;
 import mamei.de.mdv.system.context.ISystemContext;
 import mamei.de.mdv.system.context.generator.GeneratorContext;
-import mamei.de.mdv.entity.Entities;
-import mamei.de.mdv.entity.Entity;
+import mamei.de.bigdata.core.entity.Entity;
 import mamei.de.mdv.system.expression.generator.Generator;
 import mamei.de.mdv.system.expression.generator.expression.communication.model.ECommunicationType;
 
@@ -34,10 +34,10 @@ public class CommunicationGenerator extends Generator {
         List<ICommunication> communications;
         for (Entity entity : context.getEntities()) {
             switch (entity.getIdentifier()) {
-                case Entities.Secondary.Communication.Email.IDENTIFIER:
+                case EntityModel.Secondary.Communication.Email.IDENTIFIER:
 
                     break;
-                case Entities.Secondary.Communication.MobileNumber.IDENTIFIER:
+                case EntityModel.Secondary.Communication.MobileNumber.IDENTIFIER:
                     communications = CommunicationFactory
                             .createCommunication(ECommunicationType.MOBILE_PHONE, amount);
 
