@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PixelQuestContainer } from '../model/pixelquestmodel';
 
 @Component({
   selector: 'app-world',
@@ -6,48 +7,64 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './world.component.scss'
 })
 export class WorldComponent implements OnInit {
-  gridSize: number = 5; // Anzahl der sichtbaren Zellen n x n
-  grid: Array<Array<{ x: number, y: number }>> = [];
-  offsetX: number = 0; // Verschiebung entlang der X-Achse
-  offsetY: number = 0; // Verschiebung entlang der Y-Achse
-  isDragging: boolean = false;
-  lastMouseX: number = 0;
-  lastMouseY: number = 0;
+
+  stone_ground_fiel_path = '/assets/stone_ground_field.png';
+
+  container: PixelQuestContainer = {
+    colSize: 50,
+    rowSize: 50,
+    pixelQuestGrid: {
+      pixelRow: []
+    },
+    settings: {
+      offsetX: 0,
+      offsetY: 0,
+      isDragging: false,
+      lastMouseX: 0,
+      lastMouseY: 0
+    }
+  }
 
   ngOnInit() {
     this.generateGrid();
   }
 
   generateGrid() {
-    this.grid = Array.from({ length: this.gridSize }, (_, rowIndex) =>
-      Array.from({ length: this.gridSize }, (_, colIndex) => ({
-        x: colIndex,
-        y: rowIndex
-      }))
-    );
-    console.log(this.grid)
+    for (let row: number = 0; row < this.container.rowSize; row++) {
+      if (!this.container.pixelQuestGrid.pixelRow[row]) {
+        this.container.pixelQuestGrid.pixelRow[row] = { pixelElements: [] };
+      }
+      for (let col: number = 0; col < this.container.colSize; col++) {
+        this.container.pixelQuestGrid.pixelRow[row].pixelElements.push({
+          colIndex: col,
+          rowIndex: row,
+          image: this.stone_ground_fiel_path
+        });
+      }
+    }
+    console.log(this.container);
   }
 
   startDrag(event: MouseEvent) {
-    this.isDragging = true;
-    this.lastMouseX = event.clientX;
-    this.lastMouseY = event.clientY;
+    this.container.settings.isDragging = true;
+    this.container.settings.lastMouseX = event.clientX;
+    this.container.settings.lastMouseY = event.clientY;
   }
 
   stopDrag() {
-    this.isDragging = false;
+    this.container.settings.isDragging = false;
   }
 
   onDrag(event: MouseEvent) {
-    if (this.isDragging) {
-      const deltaX = event.clientX - this.lastMouseX;
-      const deltaY = event.clientY - this.lastMouseY;
+    if (this.container.settings.isDragging) {
+      const deltaX = event.clientX - this.container.settings.lastMouseX;
+      const deltaY = event.clientY - this.container.settings.lastMouseY;
 
-      this.offsetX += deltaX;
-      this.offsetY += deltaY;
+      this.container.settings.offsetX += deltaX;
+      this.container.settings.offsetY += deltaY;
 
-      this.lastMouseX = event.clientX;
-      this.lastMouseY = event.clientY;
+      this.container.settings.lastMouseX = event.clientX;
+      this.container.settings.lastMouseY = event.clientY;
     }
   }
 }
