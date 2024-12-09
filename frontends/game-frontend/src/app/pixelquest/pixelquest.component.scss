@@ -3,7 +3,6 @@ app-header {
     top: 0;
     z-index: 100;
     background-color: #ae3131;
-    /* Hintergrundfarbe des Headers */
 }
 
 app-footer {
@@ -11,7 +10,6 @@ app-footer {
     bottom: 0;
     z-index: 100;
     background-color: #ae3131;
-    /* Hintergrundfarbe des Footers */
 }
 
 app-world {
@@ -21,4 +19,5 @@ app-world {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: green;
 }

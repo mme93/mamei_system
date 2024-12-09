@@ -1,0 +1,19 @@
+.world-grid-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.world-grid-row {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.world-grid-element {
+    min-width: 50px;
+    min-height: 50px;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
