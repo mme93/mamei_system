@@ -6,7 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { WorldComponent } from './world/world.component';
 import { CommonModule } from '@angular/common';
 import { WorldElementComponent } from './world/world-element/world-element.component';
-
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { WorldElementComponent } from './world/world-element/world-element.compo
   ],
   imports: [
     PixelquestRoutingModule,
-    CommonModule
+    CommonModule,
+    ImageModule
     
   ],
   providers: [],

@@ -7,15 +7,3 @@
     display: flex;
     justify-content: flex-start;
 }
-
-.world-grid-element {
-    min-width: 75px;
-    min-height: 75px;
-    max-width: 75px;
-    max-height: 75px;
-    background-color: lightblue;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-}

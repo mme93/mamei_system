@@ -15,7 +15,7 @@ export class WorldComponent implements OnInit {
 
   createGridElements() {
     const row = 5;
-    const col = 5;
+    const col = 10;
     for (var i: number = 0; i < row; i++) {
       let rowArray: String[] = [];
       for (var j: number = 0; j < col; j++){
