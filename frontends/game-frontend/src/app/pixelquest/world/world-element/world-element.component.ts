@@ -9,5 +9,9 @@ export class WorldElementComponent {
   @Input() image_path: string = ''; 
   @Input() height: number = 75;
   @Input() width: number = 75;
+  @Input() hasFigure: boolean=false;
+  @Input() hasObject: boolean=false;
+  @Input() figurePath: string = ''; 
+  @Input() objectPath: string = ''; 
 
 }

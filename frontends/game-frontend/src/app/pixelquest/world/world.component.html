@@ -1,5 +1,5 @@
 <div [style.background-color]="'green'" [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width">
     <div *ngFor="let row of example" class="row">
-        <app-world-element [height]="blockHight" [width]="blockWidth" *ngFor="let col of row"></app-world-element>
+        <app-world-element [hasFigure]="true" [figurePath]="'./assets/figure/figure.png'" [image_path]=" './assets/stone_ground_field.png' " [height]="blockHight " [width]="blockWidth " *ngFor="let col of row "></app-world-element>
     </div>
 </div>
