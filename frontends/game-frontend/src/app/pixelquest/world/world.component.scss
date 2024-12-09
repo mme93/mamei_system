@@ -1,17 +1,9 @@
-.world-grid-container {
-    position: relative;
-    width: 500px;
-    height: 500px;
-    overflow: hidden;
-    cursor: grab;
-    &:active {
-        cursor: grabbing;
-    }
-    transform: translate(0, 0);
-    transition: transform 0.1s ease-out;
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
-.world-grid-row {
-    display: flex;
-    justify-content: flex-start;
+app-world-element {
+    display: inline-block;
 }
