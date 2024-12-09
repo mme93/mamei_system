@@ -37,11 +37,11 @@ export class WorldComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.screenSizeService.screenSize$.subscribe(size => {
       this.screenSize = {
-        width: (size.width * 0.7),
+        width: (size.width * 0.8),
         height: (size.height * 0.7)
       };
       this.blockHight = (size.height * 0.7) / this.rows;
-      this.blockWidth = (size.width * 0.7) / this.cols;
+      this.blockWidth = (size.width * 0.8) / this.cols;
     });
     this.createGrid();
   }
