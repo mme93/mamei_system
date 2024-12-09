@@ -1,0 +1,9 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+app-world-element {
+    display: inline-block;
+}
