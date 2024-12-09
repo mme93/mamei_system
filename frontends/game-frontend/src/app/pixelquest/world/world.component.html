@@ -1,9 +1,1 @@
-<div class="world-container" (mousedown)="startDrag($event)" (mouseup)="stopDrag()" (mousemove)="onDrag($event)" style="height: 100vh;">
-</div>
-<div class="world-grid" [style.gridTemplateColumns]="'repeat(' + container.colSize + ', 100px)'" [style.gridTemplateRows]="'repeat(' + container.rowSize + ', 100px)'" [style.transform]="'translate(' + container.settings.offsetX + 'px, ' + container.settings.offsetY + 'px)'">
-    <div *ngFor="let row of container.pixelQuestGrid.pixelRow; let rowIndex = index" class="row">
-        <div *ngFor="let element of row.pixelElements; let colIndex = index" class="cell" [style.backgroundImage]="'url(' + element.image + ')'">
-            {{ (colIndex + 1) + (rowIndex * 10) }}
-        </div>
-    </div>
-</div>
+<p>Hi</p>
