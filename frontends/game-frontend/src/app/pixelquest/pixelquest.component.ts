@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ScreenSizeService } from '../service/screen/screen-size.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pixelquest',

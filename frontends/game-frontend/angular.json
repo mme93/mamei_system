@@ -38,7 +38,8 @@
                             "output": "assets"
                         }],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "node_modules/primeflex/primeflex.css"
                         ],
                         "scripts": []
                     },
@@ -95,7 +96,8 @@
                             "output": "assets"
                         }],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "node_modules/primeflex/primeflex.css"
                         ],
                         "scripts": []
                     }
