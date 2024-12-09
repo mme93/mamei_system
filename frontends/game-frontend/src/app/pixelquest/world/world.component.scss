@@ -9,8 +9,10 @@
 }
 
 .world-grid-element {
-    min-width: 50px;
-    min-height: 50px;
+    min-width: 75px;
+    min-height: 75px;
+    max-width: 75px;
+    max-height: 75px;
     background-color: lightblue;
     display: flex;
     align-items: center;

@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { WorldComponent } from './world/world.component';
 import { CommonModule } from '@angular/common';
+import { WorldElementComponent } from './world/world-element/world-element.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { CommonModule } from '@angular/common';
     PixelquestComponent,
     HeaderComponent,
     FooterComponent,
-    WorldComponent
+    WorldComponent,
+    WorldElementComponent
   ],
   imports: [
     PixelquestRoutingModule,
