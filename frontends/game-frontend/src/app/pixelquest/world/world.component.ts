@@ -1,19 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ScreenSizeService } from '../../service/screen/screen-size.service';
-
-export interface WorldGridRow {
-  gridElements: WorldGridElement[];
-}
-
-export interface WorldGridElement {
-  rowSize: number;
-  colSize: number;
-  rowIndex: number;
-  colIndex: number;
-  backgroundImg: string;
-  hasPerson: boolean;
-}
+import { WorldGridElement, WorldGridRow } from '../model/pixelquestmodel';
+import {firstLevel} from './../model/pixelquestlevel';
 
 @Component({
   selector: 'app-world',
@@ -43,7 +32,7 @@ export class WorldComponent implements OnInit, OnDestroy {
       this.blockHight = (size.height * 0.7) / this.rows;
       this.blockWidth = (size.width * 0.8) / this.cols;
     });
-    this.createGrid();
+ this.createGrid();
   }
 
   createGrid() {
