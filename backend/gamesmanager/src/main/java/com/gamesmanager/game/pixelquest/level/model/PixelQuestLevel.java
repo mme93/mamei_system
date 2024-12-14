@@ -2,6 +2,7 @@ package com.gamesmanager.game.pixelquest.level.model;
 
 
 import com.gamesmanager.game.pixelquest.map.model.PixelQuestMap;
+import com.gamesmanager.game.pixelquest.map.service.PixelQuestMapService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +21,8 @@ public class PixelQuestLevel {
         this.title = title;
     }
 
-    public void loadMap(){
-        pixelQuestMap = new PixelQuestMap();
+    public void loadMap(PixelQuestMapService mapService){
+        pixelQuestMap = mapService.loadMap(level);
     }
 
     public static PixelQuestLevelBuilder builder() {

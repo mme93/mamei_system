@@ -2,10 +2,17 @@ package com.gamesmanager.game.pixelquest.level.factory;
 
 import com.gamesmanager.game.pixelquest.level.model.EPixelQuestLevel;
 import com.gamesmanager.game.pixelquest.level.model.PixelQuestLevel;
+import com.gamesmanager.game.pixelquest.map.service.PixelQuestMapService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PixelQuestLevelFactory {
+
+    private final PixelQuestMapService mapService;
+
+    public PixelQuestLevelFactory(PixelQuestMapService mapService) {
+        this.mapService = mapService;
+    }
 
     public PixelQuestLevel createLevel(EPixelQuestLevel levelType) {
         switch (levelType) {
@@ -37,34 +44,43 @@ public class PixelQuestLevelFactory {
         }
     }
 
-    public PixelQuestLevel loadLevel(EPixelQuestLevel levelType) {
+    public PixelQuestLevel
+    loadLevel(EPixelQuestLevel levelType) {
+        PixelQuestLevel level;
         switch (levelType) {
             case LEVEL_HOME:
-                return PixelQuestLevel.builder()
+                level = PixelQuestLevel.builder()
                         .withLevel(levelType)
                         .withTitle("Welcome Home")
                         .builder();
+                break;
 
             case LEVEL_1:
-                return PixelQuestLevel.builder()
+                level = PixelQuestLevel.builder()
                         .withLevel(levelType)
                         .withTitle("Level 1: Beginning")
                         .builder();
+                break;
 
             case LEVEL_2:
-                return PixelQuestLevel.builder()
+                level = PixelQuestLevel.builder()
                         .withLevel(levelType)
                         .withTitle("Level 2: The Journey")
                         .builder();
+                break;
 
             case LEVEL_3:
-                return PixelQuestLevel.builder()
+                level = PixelQuestLevel.builder()
                         .withLevel(levelType)
                         .withTitle("Level 3: The Finale")
                         .builder();
+                break;
             default:
                 throw new IllegalArgumentException("Unsupported level type: " + levelType);
+
         }
+        level.loadMap(mapService);
+        return level;
     }
 
 }
