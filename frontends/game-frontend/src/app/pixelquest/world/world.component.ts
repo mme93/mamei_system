@@ -50,9 +50,8 @@ export class WorldComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.worldService.world$.subscribe(world => {
-      //world?.maps.find(world => world.)
-      console.log(world)
-      console.log(this.accountService.getAccount())
+      const x=world?.maps.find(world => world.pixelQuestMap===this.accountService.getAccount()?.pixelQuestMap);
+      console.log(x)
     })
 
     this.subscription = this.testService.test$.subscribe(test => {

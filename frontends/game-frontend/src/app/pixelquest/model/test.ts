@@ -28,7 +28,7 @@ export interface PixelQuestAccountDto {
     currentMapId: number,
     mapColIndex: number,
     mapRowIndex: number
-
+    pixelQuestMap:string;
 }
 
 export interface PixelQuestComponentView{

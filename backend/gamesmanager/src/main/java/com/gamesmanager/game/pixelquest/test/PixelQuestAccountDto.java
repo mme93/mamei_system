@@ -1,5 +1,6 @@
 package com.gamesmanager.game.pixelquest.test;
 
+import com.gamesmanager.game.pixelquest.level.model.EPixelQuestMap;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,4 +20,5 @@ public class PixelQuestAccountDto {
 
     private int mapRowIndex;
 
+    private EPixelQuestMap pixelQuestMap;
 }

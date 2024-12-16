@@ -28,7 +28,7 @@ public class PixelDummyController {
     public ResponseEntity<PixelQuestAccountDto> getAccountById(@PathVariable Long id) {
         PixelQuestAccountEntity accountEntity = accountRepository.getReferenceById(id);
         return new ResponseEntity<>(new PixelQuestAccountDto(
-                accountEntity.getUserName(), accountEntity.getCurrentWorldId(), accountEntity.getCurrentMapId(), accountEntity.getMapColIndex(), accountEntity.getMapRowIndex()
+                accountEntity.getUserName(), accountEntity.getCurrentWorldId(), accountEntity.getCurrentMapId(), accountEntity.getMapColIndex(), accountEntity.getMapRowIndex(),accountEntity.getPixelQuestMap()
         ), HttpStatus.OK);
     }
 
