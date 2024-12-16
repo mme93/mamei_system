@@ -14,15 +14,27 @@ import lombok.Setter;
 @Table(name = "PixelQuestGridElement")
 public class PixelQuestGridElement {
 
+    public PixelQuestGridElement(int rowIndex, int columnIndex, EPixelQuestBaseTexture baseTexture, EPixelQuestElementItem item) {
+        this.rowIndex = rowIndex;
+        this.columnIndex = columnIndex;
+        this.baseTexture = baseTexture;
+        this.item = item;
+    }
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private int rowIndex;
+
     private int columnIndex;
-    private String baseTexture;
-    private String items;
+
+    @Enumerated(EnumType.STRING)
+    private EPixelQuestBaseTexture baseTexture;
+
+    @Enumerated(EnumType.STRING)
+    private EPixelQuestElementItem item;
 
     @ManyToOne
     @JoinColumn(name = "map_id", nullable = false)

@@ -17,10 +17,11 @@ import java.util.List;
 public class PixelQuestWorldEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "world", cascade = CascadeType.ALL, orphanRemoval = true)
