@@ -1,5 +1,7 @@
 package com.gamesmanager.game.pixelquest.test;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gamesmanager.game.pixelquest.level.model.EPixelQuestMap;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,6 +32,7 @@ public class PixelQuestMapEntity {
 
     @ManyToOne
     @JoinColumn(name = "world_id", nullable = false)
+    @JsonIgnore
     private PixelQuestWorldEntity world;
 
     @OneToMany(mappedBy = "map", cascade = CascadeType.ALL, orphanRemoval = true)

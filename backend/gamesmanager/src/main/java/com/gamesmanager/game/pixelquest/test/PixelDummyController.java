@@ -1,9 +1,11 @@
 package com.gamesmanager.game.pixelquest.test;
 
 import com.gamesmanager.game.pixelquest.level.model.EPixelQuestMap;
+import com.gamesmanager.game.pixelquest.world.model.PixelQuestWorld;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +21,19 @@ public class PixelDummyController {
     public PixelDummyController(PixelQuestWorldRepository worldRepository) {
         this.worldRepository = worldRepository;
     }
+
+    @GetMapping("/world/{id}")
+    public ResponseEntity<PixelQuestWorldEntity> getPixelWorld(@PathVariable Long id){
+        PixelQuestWorldEntity world=null;
+        try {
+            world=worldRepository.getReferenceById(id);
+        }catch (IllegalStateException e){
+            System.err.println(e.getMessage());
+        }
+
+        return new ResponseEntity<>(null,HttpStatus.OK);
+    }
+
 
     @GetMapping()
     public ResponseEntity lol() {
