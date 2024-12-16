@@ -13,14 +13,16 @@ export class LoginComponent {
 
   screenSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
+  username: string = '';
+  password: string = '';
 
   constructor(private screenSizeService: ScreenSizeService,private configService:ConfigService,private accountService:AccountService) { }
 
   ngOnInit(): void {
     this.subscription = this.screenSizeService.screenSize$.subscribe(size => {
       this.screenSize = {
-        width: (size.width * 0.8),
-        height: (size.height * 0.7)
+        width: (size.width * 0.3),
+        height: (size.height * 0.5)
       };
     });
   }

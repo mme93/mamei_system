@@ -19,7 +19,7 @@ export interface PixelQuestMapGridElementDto {
     columnIndex: number,
     baseTexture: string,
     item: string,
-    hasPerson?:boolean
+    hasPerson:boolean
 }
 
 export interface PixelQuestAccountDto {

@@ -1,5 +1,5 @@
 <div [style.background-color]="'green'" [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width">
-    <div *ngFor="let row of grid; let row_pos = index" class="row ">
-        <app-world-element [col_pos]="col_pos " [row_pos]="row_pos " [hasFigure]="col.hasPerson " [figurePath]=" './assets/figure/figure.png' " [image_path]="col.backgroundImg " [height]="blockHight " [width]="blockWidth " *ngFor="let col of row.gridElements ; let col_pos = index"></app-world-element>
+    <div *ngFor="let row of map.grid.rows; let row_pos = index" class="row ">
+        <app-world-element [col_pos]="col_pos " [row_pos]="row_pos " [hasFigure]="col.hasPerson " [figurePath]=" './assets/figure/figure.png' " [image_path]="'./assets/fields/wood.png'" [height]="blockHight " [width]="blockWidth " *ngFor="let col of row ; let col_pos = index"></app-world-element>
     </div>
 </div>
