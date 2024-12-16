@@ -17,7 +17,12 @@ export class MapService {
   }
 
   setCurrentMap(map: PixelQuestMapDto): void {
+    console.warn(map)
     this.mapSubject.next(map);
+  }
+
+  getMap():PixelQuestMapDto| null{
+    return this.mapSubject.value;
   }
 
 }

@@ -28,6 +28,7 @@ export class WorldService {
       next: (result: PixelQuestWorldDto) => {
         result.maps[0].grid.rows[mapColIndex][mapRowIndex].hasPerson=true;
         this.worldSubject.next(result);
+        this.mapService.setCurrentMap(result.maps[0]);
       },
       error: (error) => {
         console.error('Fehler beim Laden der Welt:', error);

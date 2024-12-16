@@ -17,13 +17,16 @@ export class AccountService {
     this.account$ = this.accountSubject.asObservable();
   }
 
+  getAccount(): PixelQuestAccountDto | null {
+    return this.accountSubject.getValue();
+  }
+
   loadAccount(account_id: number): void {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    console.warn(account_id)
     this.http.get<PixelQuestAccountDto>(`http://localhost:9054/test/accout/${account_id}`, httpOptions).subscribe({
       next: (result: PixelQuestAccountDto) => {
         this.accountSubject.next(result);

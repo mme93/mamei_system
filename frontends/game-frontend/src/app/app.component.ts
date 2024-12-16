@@ -1,7 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FigurecontrollerService } from './service/data/figure/figurecontroller.service';
-import { AccountService } from './service/data/account/account.service';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +21,9 @@ export class AppComponent {
     }
   }
 
-  constructor(public figurecontrollerService:FigurecontrollerService,private accountService:AccountService){
+  constructor(public figurecontrollerService:FigurecontrollerService){
     this.keyBoardSubject = new BehaviorSubject('init');
     this.keyBoard$ = this.keyBoardSubject.asObservable();
-    this.accountService.loadAccount(1)
   }
 
 }

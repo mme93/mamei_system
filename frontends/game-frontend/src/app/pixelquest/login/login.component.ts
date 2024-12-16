@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ScreenSizeService } from '../../service/screen/screen-size.service';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../service/data/config/config.service';
+import { AccountService } from '../../service/data/account/account.service';
+import { TestService } from '../../service/data/config/test.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginComponent {
   screenSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private screenSizeService: ScreenSizeService,private configService:ConfigService) { }
+  constructor(private screenSizeService: ScreenSizeService, private testService: TestService,private configService:ConfigService,private accountService:AccountService) { }
 
   ngOnInit(): void {
     this.subscription = this.screenSizeService.screenSize$.subscribe(size => {
@@ -25,6 +27,8 @@ export class LoginComponent {
   }
 
   login(){
+    this.accountService.loadAccount(1);
+    this.testService.emitTest('Login')
     this.configService.emitView({isWorld:true,isLogin:false});
   }
 }

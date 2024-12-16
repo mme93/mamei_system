@@ -4,6 +4,9 @@ import { ScreenSizeService } from '../../service/screen/screen-size.service';
 import { WorldGridElement, WorldGridRow } from '../model/pixelquestmodel';
 import { MapService } from '../../service/data/map/map.service';
 import { PixelQuestGridDto, PixelQuestMapDto } from '../model/test';
+import { TestService } from '../../service/data/config/test.service';
+import { WorldService } from '../../service/data/world/world.service';
+import { AccountService } from '../../service/data/account/account.service';
 
 @Component({
   selector: 'app-world',
@@ -11,7 +14,7 @@ import { PixelQuestGridDto, PixelQuestMapDto } from '../model/test';
   styleUrls: ['./world.component.scss']
 })
 export class WorldComponent implements OnInit, OnDestroy {
-  
+
   map: PixelQuestMapDto = {
     height: 0,
     width: 0,
@@ -32,7 +35,7 @@ export class WorldComponent implements OnInit, OnDestroy {
   screenSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private screenSizeService: ScreenSizeService, private mapService: MapService) {
+  constructor(private accountService:AccountService,private screenSizeService: ScreenSizeService, private mapService: MapService, private worldService: WorldService, private testService: TestService) {
 
   }
 
@@ -46,8 +49,18 @@ export class WorldComponent implements OnInit, OnDestroy {
       this.blockWidth = (size.width * 0.8) / this.cols;
     });
 
+    this.subscription = this.worldService.world$.subscribe(world => {
+      //world?.maps.find(world => world.)
+      console.log(world)
+      console.log(this.accountService.getAccount())
+    })
+
+    this.subscription = this.testService.test$.subscribe(test => {
+      console.warn(test);
+      console.warn(this.mapService.getMap())
+    })
+
     this.subscription = this.mapService.map$
-      .pipe(filter(map => map !== null))
       .subscribe(map => {
         console.warn('Load Map: ', map);
         this.map = map!;
