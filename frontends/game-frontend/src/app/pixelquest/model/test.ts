@@ -18,7 +18,8 @@ export interface PixelQuestMapGridElementDto {
     rowIndex: number,
     columnIndex: number,
     baseTexture: string,
-    item: string
+    item: string,
+    hasPerson?:boolean
 }
 
 export interface PixelQuestAccountDto {
@@ -28,4 +29,9 @@ export interface PixelQuestAccountDto {
     mapColIndex: number,
     mapRowIndex: number
 
+}
+
+export interface PixelQuestComponentView{
+    isWorld:boolean,
+    isLogin:boolean
 }

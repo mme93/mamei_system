@@ -7,12 +7,15 @@ import { WorldElementComponent } from './world/world-element/world-element.compo
 import { ImageModule } from 'primeng/image';
 import {  HttpClientModule } from '@angular/common/http';
 import { MapService } from '../service/data/map/map.service';
+import { AccountService } from '../service/data/account/account.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     PixelquestComponent,
     WorldComponent,
-    WorldElementComponent
+    WorldElementComponent,
+    LoginComponent
   ],
   imports: [
     PixelquestRoutingModule,
@@ -21,7 +24,7 @@ import { MapService } from '../service/data/map/map.service';
     HttpClientModule 
     
   ],
-  providers: [MapService],
+  providers: [MapService,AccountService],
   bootstrap: [PixelquestComponent]
 })
 export class PixelQuestModule { }

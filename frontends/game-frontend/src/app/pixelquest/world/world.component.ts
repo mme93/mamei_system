@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { ScreenSizeService } from '../../service/screen/screen-size.service';
 import { WorldGridElement, WorldGridRow } from '../model/pixelquestmodel';
-import {firstLevel} from './../model/pixelquestlevel';
 import { MapService } from '../../service/data/map/map.service';
+import { PixelQuestGridDto, PixelQuestMapDto } from '../model/test';
 
 @Component({
   selector: 'app-world',
@@ -11,6 +11,16 @@ import { MapService } from '../../service/data/map/map.service';
   styleUrls: ['./world.component.scss']
 })
 export class WorldComponent implements OnInit, OnDestroy {
+  
+  map: PixelQuestMapDto = {
+    height: 0,
+    width: 0,
+    pixelQuestMap: '',
+    grid: { rows: [] }
+  }
+  grids: PixelQuestGridDto = {
+    rows: []
+  };
   grid: WorldGridRow[] = [];
   example: String[][] = [];
   blockWidth: number = 0;
@@ -22,7 +32,9 @@ export class WorldComponent implements OnInit, OnDestroy {
   screenSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private screenSizeService: ScreenSizeService, private mapService:MapService) { }
+  constructor(private screenSizeService: ScreenSizeService, private mapService: MapService) {
+
+  }
 
   ngOnInit(): void {
     this.subscription = this.screenSizeService.screenSize$.subscribe(size => {
@@ -33,9 +45,18 @@ export class WorldComponent implements OnInit, OnDestroy {
       this.blockHight = (size.height * 0.7) / this.rows;
       this.blockWidth = (size.width * 0.8) / this.cols;
     });
- this.createGrid();
- this.mapService.getMapEntity(2);
+
+    this.subscription = this.mapService.map$
+      .pipe(filter(map => map !== null))
+      .subscribe(map => {
+        console.warn('Load Map: ', map);
+        this.map = map!;
+        this.grids = map?.grid ?? { rows: [] };
+      });
+    this.createGrid();
+
   }
+
 
   createGrid() {
     for (let i = 0; i < this.rows; i++) {
@@ -54,7 +75,7 @@ export class WorldComponent implements OnInit, OnDestroy {
           backgroundImg: backgroundImage,
           hasPerson: isStart
         } as WorldGridElement)
-        
+
       }
       this.example.push(x);
 

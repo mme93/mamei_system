@@ -15,7 +15,6 @@ export class AccountService {
   constructor(private http: HttpClient,private worldService:WorldService) {
     this.accountSubject = new BehaviorSubject<PixelQuestAccountDto | null>(null);
     this.account$ = this.accountSubject.asObservable();
-    this.loadAccount(1);
   }
 
   loadAccount(account_id: number): void {
@@ -24,12 +23,11 @@ export class AccountService {
         'Content-Type': 'application/json'
       })
     };
-
+    console.warn(account_id)
     this.http.get<PixelQuestAccountDto>(`http://localhost:9054/test/accout/${account_id}`, httpOptions).subscribe({
       next: (result: PixelQuestAccountDto) => {
-        console.log('Account geladen:', result);
         this.accountSubject.next(result);
-        this.worldService.loadWorld(result.currentWorldId);
+        this.worldService.loadWorld(result.currentWorldId,result.currentMapId,result.mapColIndex,result.mapRowIndex);
       },
       error: (error) => {
         console.error('Fehler beim Laden des Accounts:', error);
