@@ -11,7 +11,7 @@ export interface PixelQuestMapDto {
 }
 
 export interface PixelQuestGridDto {
-    rows:PixelQuestMapGridElementDto[][]
+    rows: PixelQuestMapGridElementDto[][]
 }
 
 export interface PixelQuestMapGridElementDto {
@@ -19,4 +19,13 @@ export interface PixelQuestMapGridElementDto {
     columnIndex: number,
     baseTexture: string,
     item: string
+}
+
+export interface PixelQuestAccountDto {
+    userName: string,
+    currentWorldId: number,
+    currentMapId: number,
+    mapColIndex: number,
+    mapRowIndex: number
+
 }

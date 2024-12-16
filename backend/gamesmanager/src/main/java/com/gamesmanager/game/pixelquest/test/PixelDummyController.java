@@ -17,20 +17,30 @@ import java.util.List;
 public class PixelDummyController {
 
     private final PixelQuestWorldRepository worldRepository;
+    private final PixelQuestAccountRepository accountRepository;
 
-    public PixelDummyController(PixelQuestWorldRepository worldRepository) {
+    public PixelDummyController(PixelQuestWorldRepository worldRepository, PixelQuestAccountRepository accountRepository) {
         this.worldRepository = worldRepository;
+        this.accountRepository = accountRepository;
+    }
+
+    @GetMapping("/accout/{id}")
+    public ResponseEntity<PixelQuestAccountDto> getAccountById(@PathVariable Long id) {
+        PixelQuestAccountEntity accountEntity = accountRepository.getReferenceById(id);
+        return new ResponseEntity<>(new PixelQuestAccountDto(
+                accountEntity.getUserName(), accountEntity.getCurrentWorldId(), accountEntity.getCurrentMapId(), accountEntity.getMapColIndex(), accountEntity.getMapRowIndex()
+        ), HttpStatus.OK);
     }
 
     @GetMapping("/world/{id}")
-    public ResponseEntity<PixelQuestWorldDto> getPixelWorld(@PathVariable Long id){
-        PixelQuestWorldEntity result=null;
-        PixelQuestWorldDto world=null;
+    public ResponseEntity<PixelQuestWorldDto> getPixelWorld(@PathVariable Long id) {
+        PixelQuestWorldEntity result = null;
+        PixelQuestWorldDto world = null;
         try {
-            result=worldRepository.getReferenceById(id);
-            List<PixelQuestMapDto>pixelQuestMapDtos = new ArrayList<>();
-            for(PixelQuestMapEntity mapEntity: result.getMaps()){
-                List<List<PixelQuestMapGridElementDto>>rows= new ArrayList<>();
+            result = worldRepository.getReferenceById(id);
+            List<PixelQuestMapDto> pixelQuestMapDtos = new ArrayList<>();
+            for (PixelQuestMapEntity mapEntity : result.getMaps()) {
+                List<List<PixelQuestMapGridElementDto>> rows = new ArrayList<>();
                 for (int i = 0; i < mapEntity.getHeight(); i++) {
                     List<PixelQuestMapGridElementDto> elements = new ArrayList<>();
                     for (int j = 0; j < mapEntity.getWidth(); j++) {
@@ -42,14 +52,14 @@ public class PixelDummyController {
                     }
                     rows.add(elements);
                 }
-                pixelQuestMapDtos.add(new PixelQuestMapDto(mapEntity.getHeight(),mapEntity.getWidth(),mapEntity.getPixelQuestMap(),new PixelQuestGridDto(rows)));
+                pixelQuestMapDtos.add(new PixelQuestMapDto(mapEntity.getHeight(), mapEntity.getWidth(), mapEntity.getPixelQuestMap(), new PixelQuestGridDto(rows)));
             }
-            world = new PixelQuestWorldDto(result.getName(),pixelQuestMapDtos);
-        }catch (IllegalStateException e){
+            world = new PixelQuestWorldDto(result.getName(), pixelQuestMapDtos);
+        } catch (IllegalStateException e) {
             System.err.println(e.getMessage());
         }
 
-        return new ResponseEntity<>(world,HttpStatus.OK);
+        return new ResponseEntity<>(world, HttpStatus.OK);
     }
 
 
