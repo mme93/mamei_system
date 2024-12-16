@@ -12,9 +12,9 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "PixelQuestGridElement")
-public class PixelQuestGridElement {
+public class PixelQuestGridElementEntity {
 
-    public PixelQuestGridElement(int rowIndex, int columnIndex, EPixelQuestBaseTexture baseTexture, EPixelQuestElementItem item) {
+    public PixelQuestGridElementEntity(int rowIndex, int columnIndex, EPixelQuestBaseTexture baseTexture, EPixelQuestElementItem item) {
         this.rowIndex = rowIndex;
         this.columnIndex = columnIndex;
         this.baseTexture = baseTexture;

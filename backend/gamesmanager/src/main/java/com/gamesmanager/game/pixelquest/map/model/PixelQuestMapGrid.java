@@ -5,13 +5,13 @@ import java.util.List;
 
 public class PixelQuestMapGrid {
 
-    private List<List<PixelQuestMapGridElement>> worldRows;
+    private List<List<PixelQuestMapGridElementDto>> worldRows;
 
     public PixelQuestMapGrid() {
         this.worldRows = new ArrayList<>();
     }
 
-    public void addRows(List<PixelQuestMapGridElement> elements){
+    public void addRows(List<PixelQuestMapGridElementDto> elements){
         worldRows.add(new ArrayList<>(elements));
     }
 
@@ -20,8 +20,8 @@ public class PixelQuestMapGrid {
     }
 
 
-    public void addElementToRow(PixelQuestMapGridElement element, int index) {
-        List<PixelQuestMapGridElement>elements=worldRows.get(index);
+    public void addElementToRow(PixelQuestMapGridElementDto element, int index) {
+        List<PixelQuestMapGridElementDto>elements=worldRows.get(index);
         elements.add(element);
     }
 

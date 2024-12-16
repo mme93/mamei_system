@@ -1,6 +1,5 @@
 package com.gamesmanager.game.pixelquest.test;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gamesmanager.game.pixelquest.level.model.EPixelQuestMap;
 import jakarta.persistence.*;
@@ -36,6 +35,6 @@ public class PixelQuestMapEntity {
     private PixelQuestWorldEntity world;
 
     @OneToMany(mappedBy = "map", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PixelQuestGridElement> gridElements;
+    private List<PixelQuestGridElementEntity> gridElements;
 
 }

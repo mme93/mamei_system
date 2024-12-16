@@ -1,6 +1,7 @@
 package com.gamesmanager.game.pixelquest.test;
 
 import com.gamesmanager.game.pixelquest.level.model.EPixelQuestMap;
+import com.gamesmanager.game.pixelquest.map.model.PixelQuestMapGridElementDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +23,28 @@ public class PixelDummyController {
     }
 
     @GetMapping("/world/{id}")
-    public ResponseEntity<PixelQuestWorldEntity> getPixelWorld(@PathVariable Long id){
-        PixelQuestWorldEntity world=null;
+    public ResponseEntity<PixelQuestWorldDto> getPixelWorld(@PathVariable Long id){
+        PixelQuestWorldEntity result=null;
+        PixelQuestWorldDto world=null;
         try {
-            world=worldRepository.getReferenceById(id);
+            result=worldRepository.getReferenceById(id);
+            List<PixelQuestMapDto>pixelQuestMapDtos = new ArrayList<>();
+            for(PixelQuestMapEntity mapEntity: result.getMaps()){
+                List<List<PixelQuestMapGridElementDto>>rows= new ArrayList<>();
+                for (int i = 0; i < mapEntity.getHeight(); i++) {
+                    List<PixelQuestMapGridElementDto> elements = new ArrayList<>();
+                    for (int j = 0; j < mapEntity.getWidth(); j++) {
+                        int index = (i * mapEntity.getWidth()) + j;
+                        PixelQuestGridElementEntity elementEntity = mapEntity.getGridElements().get(index);
+                        elements.add(
+                                new PixelQuestMapGridElementDto(elementEntity.getRowIndex(), elementEntity.getColumnIndex(),
+                                        elementEntity.getBaseTexture(), elementEntity.getItem()));
+                    }
+                    rows.add(elements);
+                }
+                pixelQuestMapDtos.add(new PixelQuestMapDto(mapEntity.getHeight(),mapEntity.getWidth(),mapEntity.getPixelQuestMap(),new PixelQuestGridDto(rows)));
+            }
+            world = new PixelQuestWorldDto(result.getName(),pixelQuestMapDtos);
         }catch (IllegalStateException e){
             System.err.println(e.getMessage());
         }
@@ -44,10 +63,10 @@ public class PixelDummyController {
         mapEntity.setWidth(32);
         mapEntity.setPixelQuestMap(EPixelQuestMap.GENESIS_GROUND);
         mapEntity.setWorld(world);
-        List<PixelQuestGridElement> gridElements = new ArrayList<>();
+        List<PixelQuestGridElementEntity> gridElements = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
             for (int j = 0; j < 32; j++) {
-                PixelQuestGridElement element = new PixelQuestGridElement(
+                PixelQuestGridElementEntity element = new PixelQuestGridElementEntity(
                         i, j, EPixelQuestBaseTexture.STONE, EPixelQuestElementItem.NOTHING);
                 gridElements.add(element);
                 element.setMap(mapEntity);
