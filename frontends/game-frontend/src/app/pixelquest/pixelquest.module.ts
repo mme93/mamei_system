@@ -5,6 +5,8 @@ import { WorldComponent } from './world/world.component';
 import { CommonModule } from '@angular/common';
 import { WorldElementComponent } from './world/world-element/world-element.component';
 import { ImageModule } from 'primeng/image';
+import {  HttpClientModule } from '@angular/common/http';
+import { MapService } from '../service/data/map/map.service';
 
 @NgModule({
   declarations: [
@@ -15,10 +17,11 @@ import { ImageModule } from 'primeng/image';
   imports: [
     PixelquestRoutingModule,
     CommonModule,
-    ImageModule
+    ImageModule,
+    HttpClientModule 
     
   ],
-  providers: [],
+  providers: [MapService],
   bootstrap: [PixelquestComponent]
 })
 export class PixelQuestModule { }

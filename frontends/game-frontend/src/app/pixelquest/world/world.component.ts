@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ScreenSizeService } from '../../service/screen/screen-size.service';
 import { WorldGridElement, WorldGridRow } from '../model/pixelquestmodel';
 import {firstLevel} from './../model/pixelquestlevel';
+import { MapService } from '../../service/data/map/map.service';
 
 @Component({
   selector: 'app-world',
@@ -21,7 +22,7 @@ export class WorldComponent implements OnInit, OnDestroy {
   screenSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private screenSizeService: ScreenSizeService) { }
+  constructor(private screenSizeService: ScreenSizeService, private mapService:MapService) { }
 
   ngOnInit(): void {
     this.subscription = this.screenSizeService.screenSize$.subscribe(size => {
@@ -33,6 +34,7 @@ export class WorldComponent implements OnInit, OnDestroy {
       this.blockWidth = (size.width * 0.8) / this.cols;
     });
  this.createGrid();
+ this.mapService.getMapEntity(2);
   }
 
   createGrid() {
