@@ -4,7 +4,6 @@ import { ScreenSizeService } from '../../service/screen/screen-size.service';
 import { WorldGridElement, WorldGridRow } from '../model/pixelquestmodel';
 import { MapService } from '../../service/data/map/map.service';
 import { PixelQuestGridDto, PixelQuestMapDto } from '../model/test';
-import { TestService } from '../../service/data/config/test.service';
 import { WorldService } from '../../service/data/world/world.service';
 import { AccountService } from '../../service/data/account/account.service';
 
@@ -35,7 +34,7 @@ export class WorldComponent implements OnInit, OnDestroy {
   screenSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private accountService:AccountService,private screenSizeService: ScreenSizeService, private mapService: MapService, private worldService: WorldService, private testService: TestService) {
+  constructor(private accountService: AccountService, private screenSizeService: ScreenSizeService, private mapService: MapService, private worldService: WorldService) {
 
   }
 
@@ -49,14 +48,11 @@ export class WorldComponent implements OnInit, OnDestroy {
       this.blockWidth = (size.width * 0.8) / this.cols;
     });
 
-    this.subscription = this.worldService.world$.subscribe(world => {
-      const x=world?.maps.find(world => world.pixelQuestMap===this.accountService.getAccount()?.pixelQuestMap);
-      console.log(x)
-    })
-
-    this.subscription = this.testService.test$.subscribe(test => {
-      console.warn(test);
-      console.warn(this.mapService.getMap())
+    this.subscription = this.worldService.world$.subscribe(worlds => {
+      const map = worlds?.maps.find(world => world.pixelQuestMap === this.accountService.getAccount()?.pixelQuestMap);
+      if (map) {
+        this.map = map;
+      }
     })
 
     this.subscription = this.mapService.map$

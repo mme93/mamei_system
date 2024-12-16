@@ -9,7 +9,6 @@ import {  HttpClientModule } from '@angular/common/http';
 import { MapService } from '../service/data/map/map.service';
 import { AccountService } from '../service/data/account/account.service';
 import { LoginComponent } from './login/login.component';
-import { TestService } from '../service/data/config/test.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,7 @@ import { TestService } from '../service/data/config/test.service';
     HttpClientModule 
     
   ],
-  providers: [MapService,AccountService,TestService],
+  providers: [MapService,AccountService],
   bootstrap: [PixelquestComponent]
 })
 export class PixelQuestModule { }
