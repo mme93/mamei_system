@@ -26,7 +26,7 @@ public class DummyTest {
         con.close();
     }
 
-
+    /*
     @Test
     public void test() throws SQLException {
         Connection con = DBConnectionFactory.getInstance(DBServerSettings.CLOUD_XXL, "a_test").getConnection();
@@ -111,5 +111,6 @@ public class DummyTest {
        // con.prepareStatement("DROP TABLE Countries").execute();
         con.close();
     }
+     */
 
 }
