@@ -105,6 +105,13 @@ services:
     ports:
       - "80:4200"
 
+  game-frontend:
+    build:
+      context: frontends/game-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "81:4200"
+
   db_manager:
     build:
       context: system_tools/backend
