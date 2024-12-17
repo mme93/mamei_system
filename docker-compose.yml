@@ -103,7 +103,7 @@ services:
       context: backend/databasemanager
       dockerfile: Dockerfile
     ports:
-      - "9054:8998"
+      - "9056:8998"
     networks:
       - eureka
     environment:
