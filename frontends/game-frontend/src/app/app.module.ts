@@ -4,6 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PixelQuestModule } from './pixelquest/pixelquest.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from "@angular/forms";
+import { InputTextModule } from 'primeng/inputtext';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -11,8 +15,12 @@ import { PixelQuestModule } from './pixelquest/pixelquest.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    InputTextModule,
     AppRoutingModule,
-    PixelQuestModule
+    PixelQuestModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

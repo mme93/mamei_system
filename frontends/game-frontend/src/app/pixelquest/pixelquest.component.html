@@ -1,3 +1,4 @@
-<app-menu></app-menu>
-<app-world>
+<app-world *ngIf="view.isWorld">
 </app-world>
+<app-login *ngIf="view.isLogin">
+</app-login>
