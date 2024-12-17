@@ -11,6 +11,9 @@ import { AccountService } from '../service/data/account/account.service';
 import { LoginComponent } from './login/login.component';
 import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
+import {CardModule} from "primeng/card";
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -26,8 +29,10 @@ import { ButtonModule } from 'primeng/button';
     HttpClientModule,
     PanelModule,
     CommonModule,
-    ButtonModule 
-
+    ButtonModule,
+    CardModule,
+    FormsModule,
+    InputTextModule
   ],
   providers: [MapService, AccountService],
   bootstrap: [PixelquestComponent]
