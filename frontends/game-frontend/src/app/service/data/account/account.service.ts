@@ -27,7 +27,7 @@ export class AccountService {
         'Content-Type': 'application/json'
       })
     };
-    this.http.get<PixelQuestAccountDto>(`http://localhost:9054/test/accout/${account_id}`, httpOptions).subscribe({
+    this.http.get<PixelQuestAccountDto>(`http://217.160.26.246:9054/test/accout/${account_id}`, httpOptions).subscribe({
       next: (result: PixelQuestAccountDto) => {
         this.accountSubject.next(result);
         this.worldService.loadWorld(result.currentWorldId,result.currentMapId,result.mapColIndex,result.mapRowIndex);
