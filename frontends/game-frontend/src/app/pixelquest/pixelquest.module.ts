@@ -10,6 +10,7 @@ import { MapService } from '../service/data/map/map.service';
 import { AccountService } from '../service/data/account/account.service';
 import { LoginComponent } from './login/login.component';
 import { PanelModule } from 'primeng/panel';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PanelModule } from 'primeng/panel';
     ImageModule,
     HttpClientModule,
     PanelModule,
-    CommonModule
+    CommonModule,
+    ButtonModule 
 
   ],
   providers: [MapService, AccountService],
