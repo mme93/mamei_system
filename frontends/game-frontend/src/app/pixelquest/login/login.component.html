@@ -5,19 +5,16 @@
 -->
 
 <div class="login-container" [style.height.px]="screenSize?.height">
-    <p-panel header="Login" [style]="{ 'width': '400px' }" [styleClass]="'login-panel'">
-        <div class="p-fluid">
-            <div class="p-field">
-                <label for="username">Benutzername</label>
-                <input pInputText id="username" placeholder="Benutzername eingeben" />
-            </div>
-            <div class="p-field">
-                <label for="password">Passwort</label>
-                <input pPassword id="password" placeholder="Passwort eingeben" />
-            </div>
-            <div class="p-field">
-                <button pButton label="Login" icon="pi pi-sign-in" (click)="login()" class="p-button-rounded">Test</button>
-            </div>
+    <div class="login-panel" [style.width.px]="screenSize?.width">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="username">Benutzername</label>
+            <input type="text" id="username" class="form-input" placeholder="Benutzername eingeben" />
         </div>
-    </p-panel>
+        <div class="form-group">
+            <label for="password">Passwort</label>
+            <input type="password" id="password" class="form-input" placeholder="Passwort eingeben" />
+        </div>
+        <button class="btn-submit" (click)="login()">Anmelden</button>
+    </div>
 </div>
