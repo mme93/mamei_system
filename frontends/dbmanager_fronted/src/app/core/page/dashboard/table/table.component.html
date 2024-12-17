@@ -1,0 +1,40 @@
+<article>
+  <p-card>
+    <ng-template pTemplate="title">
+      <h1>Table Menu</h1>
+    </ng-template>
+
+    <p-divider/>
+
+    <div>
+      <h4>Table Menu</h4>
+      <div>
+        <p-checkbox label="With Sequence"></p-checkbox>
+        <p-checkbox label="With Owner"></p-checkbox>
+        <p-checkbox label="Has Data"></p-checkbox>
+      </div>
+
+      <div>
+        <p-button label="Load Tables"></p-button>
+      </div>
+
+      <p-divider/>
+
+      <div>
+        <h4>Table Filter</h4>
+        <p>Database Name:</p>
+        <p-dropdown [options]="databaseNames" [(ngModel)]="selectedDatabaseName" optionLabel="name"></p-dropdown>
+        <p>Table Name</p>
+        <input pInputText [(ngModel)]="tableName"  placeholder="Table Name"/>
+        <p>Table Owner</p>
+        <input pInputText [(ngModel)]="tableName"  placeholder="Table Name"/>
+      </div>
+
+      <p-divider/>
+
+      <div>
+        <h4>Table Overview</h4>
+      </div>
+    </div>
+  </p-card>
+</article>

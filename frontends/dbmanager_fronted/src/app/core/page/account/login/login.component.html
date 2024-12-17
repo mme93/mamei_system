@@ -1,0 +1,26 @@
+<article class="article-container">
+  <p-card class="center-card">
+    <ng-template pTemplate="header">
+      <h1>Login</h1>
+    </ng-template>
+
+    <div class="card-content">
+      <form [formGroup]="loginForm" class="card-content">
+        <p>Username</p>
+        <input type="text" pInputText placeholder="Username" formControlName="userName"/>
+        <small class="p-error block" *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.dirty">
+          User name is required</small>
+        <p>Password</p>
+        <input type="password" pInputText placeholder="********" formControlName="passWord"/>
+        <small class="p-error block" *ngIf="loginForm.get('passWord')?.invalid && loginForm.get('passWord')?.dirty">
+          Password is required</small>
+      </form>
+      <p-selectButton class="server-option-selectButton" [options]="servers" [(ngModel)]="selectedServer"
+                      optionLabel="name"></p-selectButton>
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button label="Login" icon="pi pi-search" [disabled]="loginForm.invalid" [loading]="isLogin" class="p-button-lg"
+                [style]="{'width': '100%'}" (onClick)="login()"></p-button>
+    </ng-template>
+  </p-card>
+</article>

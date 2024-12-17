@@ -1,0 +1,30 @@
+::ng-deep .p-card {
+  margin: 5% 5%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.equal-width-button {
+  flex: 1;
+  max-width: 150px;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.right-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+
+:host ::ng-deep .p-dropdown {
+  width: 14rem;
+  z-index: 1000;
+}
+

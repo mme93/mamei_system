@@ -1,0 +1,24 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15vh;
+  margin: 20px;
+
+  i {
+    font-size: 4rem;
+  }
+}
+
+p-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-container :hover {
+
+}
+.icon-container{
+  margin: auto;
+  width: 50%;
+}
+

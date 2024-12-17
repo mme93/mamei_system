@@ -98,6 +98,17 @@ services:
     environment:
       - EUREKA_URI=http://serviceregistry:8761/eureka
 
+  database-manager:
+    build:
+      context: backend/databasemanager
+      dockerfile: Dockerfile
+    ports:
+      - "9054:8998"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
   frontend:
     build:
       context: frontend
@@ -118,6 +129,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "82:4200"
+
+  database-frontend:
+    build:
+      context: frontends/dbmanager_fronted
+      dockerfile: Dockerfile
+    ports:
+      - "83:4200"
 
   db_manager:
     build:
