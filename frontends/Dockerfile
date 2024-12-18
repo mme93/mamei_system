@@ -7,7 +7,8 @@ RUN npm run build --prod
 
 FROM nginx:latest AS ngi
 
-COPY --from=build dbmanager_fronted/dist/src/app/dist/dbmanager_fronted /usr/share/nginx/html
+COPY --from=build /app/dbmanager_fronted/dist/dbmanager_fronted /usr/share/nginx/html/dbmanager
 COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
+
