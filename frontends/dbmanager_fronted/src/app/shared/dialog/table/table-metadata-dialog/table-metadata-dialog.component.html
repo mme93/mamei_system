@@ -1,0 +1,71 @@
+<div>
+  <p-table [value]="filteredMetaData || []" [scrollable]="true" scrollHeight="400px"
+           [tableStyle]="{'min-width': '50rem'}" styleClass="p-datatable-sm">
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of columnNames">{{ col }}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-metaInfo>
+      <tr *ngIf="!isEdit">
+        <td>{{ metaInfo.nr }}</td>
+        <td>{{ metaInfo.field }}</td>
+        <td>{{ metaInfo.type }}</td>
+        <td>{{ metaInfo.nullable }}</td>
+        <td>{{ metaInfo.key }}</td>
+        <td>{{ metaInfo.defaultValue }}</td>
+      </tr>
+
+      <tr *ngIf="isEdit">
+        <td>{{ metaInfo.nr }}</td>
+        <td>
+         <p-checkbox value="isSelcted" (select)="metaInfo.isSelected" [(ngModel)]="metaInfo.isSelected"></p-checkbox>
+        </td>
+        <td>
+          <input pInputText [(ngModel)]="metaInfo.field" placeholder="Field"/>
+        </td>
+        <td>
+          <input pInputText [(ngModel)]="metaInfo.type" placeholder="Type"/>
+        </td>
+        <td>
+          <input pInputText [(ngModel)]="metaInfo.nullable" placeholder="Nullable"/>
+        </td>
+        <td>
+          <input pInputText [(ngModel)]="metaInfo.key" placeholder="Key"/>
+        </td>
+        <td>
+          <input pInputText [(ngModel)]="metaInfo.defaultValue" placeholder="Default Value"/>
+        </td>
+        <td>
+          <input pInputText [(ngModel)]="metaInfo.overWriteValue"  placeholder="New Value for this Field"/>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-paginator [rows]="rows" [rowsPerPageOptions]="[5,10, 20, 30]" (onPageChange)="change($event)"
+               [totalRecords]="metaData.length"></p-paginator>
+
+  <div class="button-container">
+    <div class="right-buttons">
+      <p-button icon="pi pi-wrench" label="Edit" styleClass="p-button-primary equal-width-button"
+                (click)="changeColumnNames()" *ngIf="!isEdit">
+      </p-button>
+      <p-button icon="pi pi-plus" label="Add" styleClass="p-button-primary equal-width-button" (click)="addMetaData()"
+                *ngIf="isEdit">
+      </p-button>
+      <p-button icon="pi pi-trash" label="Delete Row" styleClass="p-button-primary equal-width-button"
+                *ngIf="isEdit" (click)="deleteRows()">
+      </p-button>
+    </div>
+    <div class="spacer"></div>
+    <div class="right-buttons">
+      <p-button icon="pi pi-times" label="Cancel" styleClass="p-button-primary equal-width-button"
+                (click)="cancel()" *ngIf="isEdit"></p-button>
+      <p-button icon="pi pi-save" label="Save" styleClass="p-button-primary equal-width-button"
+                *ngIf="isEdit"></p-button>
+      <p-button label="Close" styleClass="p-button-primary equal-width-button"
+                *ngIf="!isEdit"></p-button>
+    </div>
+  </div>
+</div>

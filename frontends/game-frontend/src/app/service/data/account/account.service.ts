@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PixelQuestAccountDto, PixelQuestWorldDto } from '../../../pixelquest/model/test';
 import { WorldService } from '../world/world.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +23,13 @@ export class AccountService {
   }
 
   loadAccount(account_id: number): void {
+    
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    this.http.get<PixelQuestAccountDto>(`http://localhost:9054/test/accout/${account_id}`, httpOptions).subscribe({
+    this.http.get<PixelQuestAccountDto>(`${environment.uri}:9054/test/accout/${account_id}`, httpOptions).subscribe({
       next: (result: PixelQuestAccountDto) => {
         this.accountSubject.next(result);
         this.worldService.loadWorld(result.currentWorldId,result.currentMapId,result.mapColIndex,result.mapRowIndex);

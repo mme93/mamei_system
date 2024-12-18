@@ -1,0 +1,14 @@
+<article>
+  <p class="article_title">Dashboard Overview</p>
+  <div class="card-container">
+    <p-card *ngFor="let item of items" (click)="navigate(item.route)">
+      <ng-template pTemplate="title">
+        <p>{{item.name}}</p>
+      </ng-template>
+
+      <div class="icon-container">
+        <i class="{{item.iconName}}"></i>
+      </div>
+    </p-card>
+  </div>
+</article>

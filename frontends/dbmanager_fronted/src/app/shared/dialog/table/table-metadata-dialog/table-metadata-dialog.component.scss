@@ -1,0 +1,19 @@
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.equal-width-button {
+  flex: 1;
+  max-width: 150px;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.right-buttons {
+  display: flex;
+  gap: 8px;
+}

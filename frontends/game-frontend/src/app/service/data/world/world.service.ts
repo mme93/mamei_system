@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PixelQuestWorldDto } from '../../../pixelquest/model/test';
 import { MapService } from '../map/map.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class WorldService {
       })
     };
 
-    this.http.get<PixelQuestWorldDto>(`http://localhost:9054/test/world/${world_id}`, httpOptions).subscribe({
+    this.http.get<PixelQuestWorldDto>(`${environment.uri}:9054/test/world/${world_id}`, httpOptions).subscribe({
       next: (result: PixelQuestWorldDto) => {
         result.maps[0].grid.rows[mapColIndex][mapRowIndex].hasPerson=true;
         this.worldSubject.next(result);

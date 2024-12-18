@@ -1,0 +1,55 @@
+<article>
+
+  <div class="tree-container" *ngIf="!disabledTreeSelect">
+    <div class="button-container">
+      <button pButton type="button" icon='pi pi-list' class="p-button-rounded"
+              (click)="disabledTreeSelect=true"></button>
+      <p>{{serverName}}</p>
+    </div>
+    <p-tree [value]="databaseTreeNodes" selectionMode="single" [(selection)]="selectedDatabaseTreeNode"
+            (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">
+    </p-tree>
+  </div>
+  <div class="selectedContent">
+    <button pButton *ngIf="disabledTreeSelect" type="button" icon='pi pi-list' class="p-button-rounded"
+            (click)="disabledTreeSelect=false"></button>
+    <!--Database-->
+    <p-card *ngIf="!isTable && isSelected">
+      <ng-template pTemplate="title">
+        <h1>Database <b>{{databaseName}}</b> Overview</h1>
+      </ng-template>
+
+      <div class="card-content">
+        <p><span class="text_as_bold">Server:</span> <span>{{serverName}}</span></p>
+        <p><span class="text_as_bold">Database:</span> <span>{{databaseName}}</span></p>
+        <p><span class="text_as_bold">Table Amounts:</span> <span>{{tableAmounts}}</span></p>
+      </div>
+
+
+      <ng-template pTemplate="footer">
+        <p-button label='Create Table' icon='pi pi-list'></p-button>
+        <p-button label='Delete Database' icon='pi pi-trash'></p-button>
+      </ng-template>
+    </p-card>
+    <!--Table-->
+    <p-card *ngIf="isTable && isSelected">
+      <ng-template pTemplate="title">
+        <h1>Table <b>{{tableName}}</b> Overview</h1>
+      </ng-template>
+
+      <div class="card-content">
+        <p><span class="text_as_bold">Server:</span> <span>{{serverName}}</span></p>
+        <p><span class="text_as_bold">Database:</span> <span>{{databaseName}}</span></p>
+        <p><span class="text_as_bold">Table:</span> <span>{{tableName}}</span></p>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <p-button label='Open Table' icon='pi pi-arrow-circle-right' (click)="openTable(databaseName,tableName)"></p-button>
+        <p-button label='Delete Table' icon='pi pi-trash'></p-button>
+        <p-button label='Copy Table' icon='pi pi-copy'></p-button>
+      </ng-template>
+    </p-card>
+
+  </div>
+</article>
+
