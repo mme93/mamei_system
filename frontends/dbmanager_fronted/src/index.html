@@ -9,5 +9,19 @@
 </head>
 <body>
   <app-root></app-root>
+  <script>
+    fetch('.')
+      .then(response => response.text())
+      .then(html => {
+        const files = [...html.matchAll(/main-[a-zA-Z0-9]+\.js/g)];
+        if (files.length > 0) {
+          const script = document.createElement('script');
+          script.src = files[0][0];
+          document.body.appendChild(script);
+        } else {
+          console.error('main-***.js Datei wurde nicht gefunden.');
+        }
+      });
+  </script>
 </body>
 </html>
