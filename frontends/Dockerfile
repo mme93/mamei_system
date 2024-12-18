@@ -12,7 +12,7 @@ COPY dbmanager_fronted/package.json dbmanager_fronted/package-lock.json ./dbmana
 WORKDIR /app/dbmanager_fronted
 RUN npm install
 COPY dbmanager_fronted /app/dbmanager_fronted
-RUN ng build  --output-hashing=none --configuration production
+RUN ng build  --output-hashing=none --configuration production --base-href /dbmanager_fronted/
 
 # 2. Kopiere und baue frontend
 COPY frontend/package.json frontend/package-lock.json /app/frontend/
