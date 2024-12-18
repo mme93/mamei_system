@@ -15,21 +15,21 @@ COPY dbmanager_fronted /app/dbmanager_fronted
 RUN ng build --configuration production --base-href /dbmanager/
 
 # 2. Kopiere und baue frontend
-COPY frontend/package.json ../frontend/package-lock.json /app/frontend/
+COPY frontend/package.json frontend/package-lock.json /app/frontend/
 WORKDIR /app/frontend
 RUN npm install
 COPY frontend /app/frontend
 RUN ng build --configuration production --base-href /frontend/
 
 # 3. Kopiere und baue game-frontend
-COPY game-frontend/package.json ../game-frontend/package-lock.json /app/game-frontend/
+COPY game-frontend/package.json game-frontend/package-lock.json /app/game-frontend/
 WORKDIR /app/game-frontend
 RUN npm install
 COPY game-frontend /app/game-frontend
 RUN ng build --configuration production --base-href /game/
 
 # 4. Kopiere und baue mameie-frontend
-COPY mameie-frontend/package.json ../mameie-frontend/package-lock.json /app/mameie-frontend/
+COPY mameie-frontend/package.json mameie-frontend/package-lock.json /app/mameie-frontend/
 WORKDIR /app/mameie-frontend
 RUN npm install
 COPY mameie-frontend /app/mameie-frontend
