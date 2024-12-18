@@ -39,7 +39,7 @@ RUN ng build --configuration production --base-href /mameie/
 FROM nginx:1.23-alpine
 
 # Kopiere die gebauten Angular Apps nach NGINX
-COPY --from=build /app/dbmanager_fronted/dist/dbmanager_fronted /usr/share/nginx/html/dbmanager
+COPY --from=build /app/dbmanager_fronted/dist/dbmanager_fronted /usr/share/nginx/html/dbmanager_fronted
 COPY --from=build /app/frontend/dist/frontend /usr/share/nginx/html/frontend
 COPY --from=build /app/game-frontend/dist/game-frontend /usr/share/nginx/html/game
 COPY --from=build /app/mameie-frontend/dist/mameie-frontend /usr/share/nginx/html/mameie
