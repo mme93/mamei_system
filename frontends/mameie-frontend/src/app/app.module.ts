@@ -7,15 +7,15 @@ import { ButtonModule } from 'primeng/button';
 import {MenuModule} from "primeng/menu";
 import {MenubarModule} from "primeng/menubar";
 import {CardModule} from "primeng/card";
-import {LoginComponent} from "./pages/account/login/login.component";
 import { InputTextModule } from 'primeng/inputtext';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
+import { PixelContentComponent } from './pixelquest/pixel-content/pixel-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+
   ],
   imports: [
     BrowserModule,

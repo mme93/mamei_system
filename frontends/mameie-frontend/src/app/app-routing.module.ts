@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./pages/account/login/login.component";
+import { PixelquestComponent } from './pixelquest/pixelquest.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'pixelquest',
     pathMatch: 'full'
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'pixelquest',
+    component: PixelquestComponent
   }
 ];
 
