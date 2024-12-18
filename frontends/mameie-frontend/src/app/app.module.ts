@@ -10,11 +10,10 @@ import {CardModule} from "primeng/card";
 import { InputTextModule } from 'primeng/inputtext';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
-import { PixelContentComponent } from './pixelquest/pixel-content/pixel-content.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
 
   ],
   imports: [
