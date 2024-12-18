@@ -125,7 +125,7 @@ services:
 
   mameie-frontend:
     build:
-      context: mameie-frontend
+      context: frontends/mameie-frontend
       dockerfile: Dockerfile
     ports:
       - "82:4200"
