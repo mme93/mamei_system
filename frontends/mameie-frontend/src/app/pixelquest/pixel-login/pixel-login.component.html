@@ -1,18 +1,14 @@
-<p-card header="Login">
-
-    <div class="flex flex-column gap-2">
-        <label for="username">Username</label>
-        <input pInputText id="username" aria-describedby="username-help" [(ngModel)]="userName" />
-        <small id="username-help">
-        Enter your username to reset your password.
-      </small>
+<div class="login-container" [style.height.px]="screenSize?.height">
+    <div class="login-panel" [style.width.px]="screenSize?.width">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="username">Benutzername</label>
+            <input type="text" id="username" class="form-input" placeholder="Benutzername eingeben" />
+        </div>
+        <div class="form-group">
+            <label for="password">Passwort</label>
+            <input type="password" id="password" class="form-input" placeholder="Passwort eingeben" />
+        </div>
+        <button class="btn-submit" (click)="login()">Anmelden</button>
     </div>
-
-    <div class="flex flex-column gap-2">
-        <label for="username">Username</label>
-        <input pInputText id="password" aria-describedby="username-help" [(ngModel)]="password" />
-        <small id="password-help">
-        Enter your username to reset your password.
-      </small>
-    </div>
-</p-card>
+</div>
