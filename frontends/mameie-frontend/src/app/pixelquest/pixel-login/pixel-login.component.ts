@@ -5,19 +5,19 @@ import { CardModule } from 'primeng/card';
 import { Subscription } from 'rxjs';
 import { ScreenService } from 'src/app/service/tools/screen/screen.service';
 import { PanelModule } from 'primeng/panel';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/service/data/account/account.service';
 
 @Component({
   selector: 'app-pixel-login',
   standalone: true,
   imports: [CardModule, FormsModule, ButtonModule, FormsModule, ReactiveFormsModule, PanelModule],
+  providers: [AccountService],
   templateUrl: './pixel-login.component.html',
   styleUrl: './pixel-login.component.scss'
 })
 export class PixelLoginComponent {
 
-  login() {
-    throw new Error('Method not implemented.');
-  }
 
   loginForm: FormGroup = new FormGroup({
     'login': new FormControl('', Validators.required),
@@ -26,13 +26,13 @@ export class PixelLoginComponent {
 
   submitted = false;
 
-  password = '';
-  userName = '';
+  password = 'admin';
+  userName = 'admin';
 
   screenSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private screenService: ScreenService) { }
+  constructor(private screenService: ScreenService, private router:Router,private accountService:AccountService) { }
 
   ngOnInit(): void {
     this.subscription = this.screenService.screenSize$.subscribe(size => {
@@ -42,9 +42,10 @@ export class PixelLoginComponent {
       };
     });
   }
-  onSubmit() {
-    this.submitted = true;
-    alert(JSON.stringify(this.loginForm.value));
+
+  login() {
+    this.accountService.loadAccount(2);
+   //this.router.navigate(['pixelquest']);
   }
 
 }

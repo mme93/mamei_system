@@ -10,6 +10,8 @@ import {CardModule} from "primeng/card";
 import { InputTextModule } from 'primeng/inputtext';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,10 @@ import {FormsModule} from "@angular/forms";
     MenuModule,
     MenubarModule,
     CardModule,
-    InputTextModule
+    InputTextModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
