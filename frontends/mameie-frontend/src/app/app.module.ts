@@ -12,6 +12,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { MessageModule } from 'primeng/message';
+import {MessagesModule} from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { MessageService } from 'primeng/api';
     MenubarModule,
     CardModule,
     InputTextModule,
-    HttpClientModule
+    HttpClientModule,
+    MessageModule,
+    MessagesModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
