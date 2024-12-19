@@ -9,14 +9,15 @@ import { PanelModule } from 'primeng/panel';
 @Component({
   selector: 'app-pixel-login',
   standalone: true,
-  imports: [CardModule, FormsModule, ButtonModule,FormsModule,ReactiveFormsModule,PanelModule],
+  imports: [CardModule, FormsModule, ButtonModule, FormsModule, ReactiveFormsModule, PanelModule],
   templateUrl: './pixel-login.component.html',
   styleUrl: './pixel-login.component.scss'
 })
 export class PixelLoginComponent {
-login() {
-throw new Error('Method not implemented.');
-}
+
+  login() {
+    throw new Error('Method not implemented.');
+  }
 
   loginForm: FormGroup = new FormGroup({
     'login': new FormControl('', Validators.required),
@@ -37,7 +38,7 @@ throw new Error('Method not implemented.');
     this.subscription = this.screenService.screenSize$.subscribe(size => {
       this.screenSize = {
         width: (size.width * 0.4),
-        height: (size.height * 0.5)
+        height: (size.height * 0.8)
       };
     });
   }
