@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PixelQuestAccountDto } from 'src/app/model/account';
 import { environment } from 'src/environments/environment';
+import { ErrorMessageService } from '../../message/error-message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AccountService {
   private accountSubject: BehaviorSubject<PixelQuestAccountDto | null>;
   public account$: Observable<PixelQuestAccountDto | null>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private errorMsgService:ErrorMessageService) {
     this.accountSubject = new BehaviorSubject<PixelQuestAccountDto | null>(null);
     this.account$ = this.accountSubject.asObservable();
   }
@@ -22,7 +23,7 @@ export class AccountService {
   }
 
   loadAccount(account_id: number): void {
-    
+    this.errorMsgService.showMessage('Blabliblub');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

@@ -3,3 +3,42 @@
     padding: 0;
     overflow: hidden;
 }
+
+::ng-deep p-messages {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 50vw;
+}
+
+::ng-deep .p-message {
+    margin-bottom: 10px;
+    padding-right: 10px;
+}
+
+::ng-deep .p-message-close-icon {
+    margin-left: auto;
+}
+
+::ng-deep .p-message-close-button {
+    margin-left: auto;
+    position: right;
+    margin-right: 0;
+}
+
+::ng-deep .p-message-icon {
+    display: none !important;
+    position: right;
+    margin-right: 0;
+}
+
+::ng-deep .p-message-summary {
+    margin-left: 1rem;
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
