@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PixelQuestAccountDto } from 'src/app/model/account';
@@ -23,7 +23,6 @@ export class AccountService {
   }
 
   loadAccount(account_id: number): void {
-    this.errorMsgService.showMessage('Blabliblub');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -35,7 +34,8 @@ export class AccountService {
         console.log(result)
       },
       error: (error) => {
-        console.error('Fehler beim Laden des Accounts:', error);
+        const err = error as HttpErrorResponse
+        this.errorMsgService.showMessage(err.error);
       }
     });
   }

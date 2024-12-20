@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
       if (message) {
         this.msgService.add({
           severity: 'error',
-          summary: 'Error: '+message
+          summary: 'Error: ',
+          detail: message,
         });
         setTimeout(() => (this.msgService.clear()), 5000);
       }
