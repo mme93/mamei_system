@@ -31,6 +31,7 @@ export class AccountService {
     return this.http.post<PixelQuestAccountDto>(`${environment.uri}:9054/pixelquest/account/login`,user, httpOptions).pipe(
       map((response) => {
         this.accountSubject.next(response);
+        console.log(this.getAccount())
         return true;
       }),
       catchError((err) => {
