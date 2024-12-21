@@ -1,4 +1,4 @@
-package com.gamesmanager.game.pixelquest.account;
+package com.gamesmanager.game.pixelquest.account.entity;
 
 import com.gamesmanager.game.test.level.model.EPixelQuestMap;
 import jakarta.persistence.*;

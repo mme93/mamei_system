@@ -16,7 +16,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private screenSizeService: ScreenSizeService,private configService:ConfigService,private accountService:AccountService) { }
+  constructor(private screenSizeService: ScreenSizeService,private configService:ConfigService,private pixelQuestAccountService:AccountService) { }
 
   ngOnInit(): void {
     this.subscription = this.screenSizeService.screenSize$.subscribe(size => {
@@ -28,7 +28,7 @@ export class LoginComponent {
   }
 
   login(){
-    this.accountService.loadAccount(1);
+    this.pixelQuestAccountService.loadAccount(1);
     this.configService.emitView({isWorld:true,isLogin:false});
   }
 }

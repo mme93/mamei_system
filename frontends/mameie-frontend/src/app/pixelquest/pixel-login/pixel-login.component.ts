@@ -32,7 +32,7 @@ export class PixelLoginComponent {
   screenSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private screenService: ScreenService, private router:Router,private accountService:AccountService) { }
+  constructor(private screenService: ScreenService, private router:Router,private pixelQuestAccountService:AccountService) { }
 
   ngOnInit(): void {
     this.subscription = this.screenService.screenSize$.subscribe(size => {
@@ -44,7 +44,7 @@ export class PixelLoginComponent {
   }
 
   login() {
-    this.accountService.loadAccount(2);
+    this.pixelQuestAccountService.loadAccount(2);
    //this.router.navigate(['pixelquest']);
   }
 

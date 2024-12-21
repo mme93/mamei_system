@@ -1,8 +1,8 @@
 package com.gamesmanager.game.test.test;
 
-import com.gamesmanager.game.pixelquest.account.PixelQuestAccountDto;
-import com.gamesmanager.game.pixelquest.account.PixelQuestAccountEntity;
-import com.gamesmanager.game.pixelquest.account.PixelQuestAccountRepository;
+import com.gamesmanager.game.pixelquest.account.dto.PixelQuestAccountDto;
+import com.gamesmanager.game.pixelquest.account.entity.PixelQuestAccountEntity;
+import com.gamesmanager.game.pixelquest.account.repository.PixelQuestAccountRepository;
 import com.gamesmanager.game.test.level.model.EPixelQuestMap;
 import com.gamesmanager.game.test.map.model.PixelQuestMapGridElementDto;
 import org.springframework.http.HttpStatus;

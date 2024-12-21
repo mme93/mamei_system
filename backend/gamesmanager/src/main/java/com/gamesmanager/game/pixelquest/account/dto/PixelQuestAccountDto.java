@@ -1,4 +1,4 @@
-package com.gamesmanager.game.pixelquest.account;
+package com.gamesmanager.game.pixelquest.account.dto;
 
 import com.gamesmanager.game.test.level.model.EPixelQuestMap;
 import lombok.AllArgsConstructor;
