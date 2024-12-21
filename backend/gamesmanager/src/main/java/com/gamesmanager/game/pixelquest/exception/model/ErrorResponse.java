@@ -1,4 +1,4 @@
-package com.gamesmanager.game.pixelquest.exception;
+package com.gamesmanager.game.pixelquest.exception.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

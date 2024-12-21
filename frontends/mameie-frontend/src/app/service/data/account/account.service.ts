@@ -33,9 +33,8 @@ export class AccountService {
         this.accountSubject.next(response);
         return true;
       }),
-      catchError((error) => {
-        console.log(error)
-        this.errorMsgService.showMessage(error.error);
+      catchError((err) => {
+        this.errorMsgService.showMessage(err.error.message);
         return of(false);
       })
     );

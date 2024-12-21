@@ -1,20 +1,15 @@
-package com.gamesmanager.game.pixelquest.exception;
+package com.gamesmanager.game.pixelquest.exception.controller;
 
 
+import com.gamesmanager.game.pixelquest.exception.model.ErrorResponse;
+import com.gamesmanager.game.pixelquest.exception.PixelQuestInvalidLoginException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionHandlerController {
-
-    @ExceptionHandler(value = PixelQuestNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleCustomerAlreadyExistsException(PixelQuestNotFoundException ex) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
-    }
 
     @ExceptionHandler(PixelQuestInvalidLoginException.class)
     public ResponseEntity<ErrorResponse> handleInvalidLoginException(PixelQuestInvalidLoginException ex) {
