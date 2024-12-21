@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PixelQuestAccountDto } from 'src/app/model/account';
+import { PixelQuestAccountDto, PixelQuestUserDto } from 'src/app/model/account';
 import { environment } from 'src/environments/environment';
 import { ErrorMessageService } from '../../message/error-message.service';
 
@@ -20,6 +20,24 @@ export class AccountService {
 
   getAccount(): PixelQuestAccountDto | null {
     return this.accountSubject.getValue();
+  }
+
+  login(user:PixelQuestUserDto){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    this.http.post<PixelQuestAccountDto>(`${environment.uri}:9054/pixelquest/account/login`,user, httpOptions).subscribe({
+      next: (result: PixelQuestAccountDto) => {
+        this.accountSubject.next(result);
+        console.log(result)
+      },
+      error: (error) => {
+        const err = error as HttpErrorResponse
+        this.errorMsgService.showMessage(err.error);
+      }
+    });
   }
 
   loadAccount(account_id: number): void {

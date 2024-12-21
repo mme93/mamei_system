@@ -22,7 +22,6 @@ public class PixelQuestUserService {
     }
 
     public PixelQuestAccountDto login(PixelQuestUserDto pixelQuestUserDto) {
-        pixelQuestUserRepository.save(new PixelQuestUserEntity("Admin","Admin"));
         List<PixelQuestUserEntity> users = pixelQuestUserRepository.findAll();
         Optional<PixelQuestUserEntity> userOpt = users.stream().filter(user -> (
                 user.getUserName().equals(pixelQuestUserDto.getUserName()) &&

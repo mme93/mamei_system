@@ -4,5 +4,10 @@ export interface PixelQuestAccountDto {
     currentMapId: number,
     mapColIndex: number,
     mapRowIndex: number
-    pixelQuestMap:string;
+    pixelQuestMap: string;
+}
+
+export interface PixelQuestUserDto {
+    userName: string;
+    password: string;
 }

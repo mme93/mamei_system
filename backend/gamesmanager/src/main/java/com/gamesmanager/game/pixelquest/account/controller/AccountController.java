@@ -23,7 +23,6 @@ public class AccountController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody PixelQuestUserDto pixelQuestUserDto) {
-
         try {
             return new ResponseEntity<>(pixelQuestUserService.login(pixelQuestUserDto), HttpStatus.OK);
         } catch (EntityNotFoundException ex) {
