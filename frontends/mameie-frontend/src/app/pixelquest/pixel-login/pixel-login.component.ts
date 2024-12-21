@@ -14,7 +14,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'app-pixel-login',
   standalone: true,
   imports: [CardModule, FormsModule, ButtonModule, FormsModule, ReactiveFormsModule, PanelModule],
-  providers: [AccountService],
   templateUrl: './pixel-login.component.html',
   styleUrl: './pixel-login.component.scss'
 })
