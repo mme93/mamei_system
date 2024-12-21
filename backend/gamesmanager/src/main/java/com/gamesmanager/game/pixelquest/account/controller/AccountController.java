@@ -21,28 +21,30 @@ public class AccountController {
         this.pixelQuestUserService = pixelQuestUserService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity login(@RequestBody PixelQuestUserDto pixelQuestUserDto) {
-        try {
-            return new ResponseEntity<>(pixelQuestUserService.login(pixelQuestUserDto), HttpStatus.OK);
-        } catch (EntityNotFoundException ex) {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(ex.getMessage());
+    @GetMapping("/test")
+    public ResponseEntity getTest(){
 
-        }
+
+        pixelQuestUserService.test(true);
+
+        return null;
     }
 
-
-    @GetMapping("/{id}")
-    public ResponseEntity getAccountById(@PathVariable Long id) {
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody PixelQuestUserDto pixelQuestUserDto) {
+        return new ResponseEntity<>(pixelQuestUserService.test(true), HttpStatus.OK);
+        //return new ResponseEntity<>(pixelQuestUserService.login(pixelQuestUserDto), HttpStatus.OK);
+       /*
         try {
-            return new ResponseEntity<>(pixelQuestAccountService.getAccountById(id), HttpStatus.OK);
-        } catch (EntityNotFoundException ex) {
+            return new ResponseEntity<>(pixelQuestUserService.login(pixelQuestUserDto), HttpStatus.OK);
+        } catch (RuntimeException ex) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(ex.getMessage());
+
         }
+
+        */
     }
 
 }

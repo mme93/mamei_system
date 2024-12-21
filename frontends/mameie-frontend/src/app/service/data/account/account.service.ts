@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { PixelQuestAccountDto, PixelQuestUserDto } from 'src/app/model/account';
 import { environment } from 'src/environments/environment';
 import { ErrorMessageService } from '../../message/error-message.service';
@@ -22,39 +22,24 @@ export class AccountService {
     return this.accountSubject.getValue();
   }
 
-  login(user:PixelQuestUserDto){
+  login(user:PixelQuestUserDto): Observable<boolean> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    this.http.post<PixelQuestAccountDto>(`${environment.uri}:9054/pixelquest/account/login`,user, httpOptions).subscribe({
-      next: (result: PixelQuestAccountDto) => {
-        this.accountSubject.next(result);
-        console.log(result)
-      },
-      error: (error) => {
-        const err = error as HttpErrorResponse
-        this.errorMsgService.showMessage(err.error);
-      }
-    });
+    return this.http.post<PixelQuestAccountDto>(`${environment.uri}:9054/pixelquest/account/login`,user, httpOptions).pipe(
+      map((response) => {
+        this.accountSubject.next(response);
+        return true;
+      }),
+      catchError((error) => {
+        console.log(error)
+        this.errorMsgService.showMessage(error.error);
+        return of(false);
+      })
+    );
   }
 
-  loadAccount(account_id: number): void {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    this.http.get<PixelQuestAccountDto>(`${environment.uri}:9054/pixelquest/account/${account_id}`, httpOptions).subscribe({
-      next: (result: PixelQuestAccountDto) => {
-        this.accountSubject.next(result);
-        console.log(result)
-      },
-      error: (error) => {
-        const err = error as HttpErrorResponse
-        this.errorMsgService.showMessage(err.error);
-      }
-    });
-  }
+ 
 }

@@ -7,6 +7,8 @@ import { ScreenService } from 'src/app/service/tools/screen/screen.service';
 import { PanelModule } from 'primeng/panel';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/service/data/account/account.service';
+import { PixelQuestAccountDto } from 'src/app/model/account';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-pixel-login',
@@ -47,8 +49,11 @@ export class PixelLoginComponent {
     this.pixelQuestAccountService.login({
       userName: this.userName,
       password: this.password
+    }).subscribe((response: boolean) => {
+      if (response) {
+        this.router.navigate(['pixelquest']);
+      }
     });
-    //this.router.navigate(['pixelquest']);
   }
 
 }

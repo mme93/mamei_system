@@ -1,8 +1,8 @@
 package com.gamesmanager.game.pixelquest.account.service;
 
 import com.gamesmanager.game.pixelquest.account.dto.PixelQuestAccountDto;
-import com.gamesmanager.game.pixelquest.account.entity.PixelQuestAccountEntity;
 import com.gamesmanager.game.pixelquest.account.repository.PixelQuestAccountRepository;
+import com.gamesmanager.game.pixelquest.exception.PixelQuestNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -24,17 +24,6 @@ public class PixelQuestAccountService {
         if(accountDtoOpt.isPresent()){
             return accountDtoOpt.get();
         }
-        throw new EntityNotFoundException(String.format("No account entity found by username %s.", userName));
-    }
-
-    public PixelQuestAccountDto getAccountById(Long id) {
-        Optional<PixelQuestAccountEntity> accountEntityOpt = accountRepository.findById(id);
-        if (accountEntityOpt.isPresent()) {
-            PixelQuestAccountEntity accountEntity = accountEntityOpt.get();
-            return new PixelQuestAccountDto(
-                    accountEntity.getUserName(), accountEntity.getCurrentWorldId(), accountEntity.getCurrentMapId(), accountEntity.getMapColIndex(), accountEntity.getMapRowIndex(), accountEntity.getPixelQuestMap()
-            );
-        }
-        throw new EntityNotFoundException(String.format("No account entity found by id %s.", id));
+        throw new PixelQuestNotFoundException(String.format("No account entity found by username %s.", userName));
     }
 }
