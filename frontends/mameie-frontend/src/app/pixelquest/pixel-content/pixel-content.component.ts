@@ -1,17 +1,56 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { MenubarModule } from 'primeng/menubar';
 import { filter, Subscription } from 'rxjs';
 import { PixelQuestAccountDto } from 'src/app/model/account';
 import { AccountService } from 'src/app/service/data/account/account.service';
 import { ScreenService } from 'src/app/service/tools/screen/screen.service';
+import { PixelquestHeaderComponent } from "./pixelquest-header/pixelquest-header.component";
 
 @Component({
   selector: 'app-pixel-content',
   standalone: true,
-  imports: [],
+  imports: [MenubarModule, PixelquestHeaderComponent],
   templateUrl: './pixel-content.component.html',
   styleUrl: './pixel-content.component.scss'
 })
 export class PixelContentComponent implements OnInit {
+
+  items: MenuItem[]= [
+    {
+      label: 'File',
+      items: [
+        { label: 'Open', icon: 'pi pi-fw pi-download' },
+        { separator: true },
+        { label: 'Quit', icon: 'pi pi-fw pi-times' }
+      ]
+    },
+    {
+      label: 'Edit',
+      items: [
+        { label: 'Undo', icon: 'pi pi-fw pi-undo' },
+        { label: 'Redo', icon: 'pi pi-fw pi-repeat' }
+      ]
+    },
+    {
+      label: 'Help',
+      items: [
+        { label: 'Contents', icon: 'pi pi-fw pi-file' },
+        { label: 'Search', icon: 'pi pi-fw pi-search' }
+      ]
+    },
+    {
+      label: 'Actions',
+      items: [
+        { label: 'Edit', icon: 'pi pi-fw pi-pencil' },
+        { label: 'Delete', icon: 'pi pi-fw pi-trash' },
+        { label: 'Archive', icon: 'pi pi-fw pi-archive' }
+      ]
+    },
+    {
+      label: 'Quit', icon: 'pi pi-fw pi-power-off'
+    }
+  ];
 
   account: PixelQuestAccountDto = {};
   screenSize: { width: number, height: number } | null = null;
