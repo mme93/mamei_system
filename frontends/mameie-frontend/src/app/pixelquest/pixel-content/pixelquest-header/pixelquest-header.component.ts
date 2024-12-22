@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -14,5 +15,10 @@ export class PixelquestHeaderComponent {
   gold: number = 0;          
   coins: number = 0;          
   units: number = 0;       
+  constructor(private router:Router){}
+
+  changeToEditor(){
+    this.router.navigate(['editor']);
+  }
 
 }
