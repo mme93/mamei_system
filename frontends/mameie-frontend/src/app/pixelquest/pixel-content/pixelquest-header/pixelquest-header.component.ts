@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SplitButtonModule } from 'primeng/splitbutton';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-pixelquest-header',
   standalone: true,
-  imports: [SplitButtonModule],
+  imports: [ButtonModule],
   templateUrl: './pixelquest-header.component.html',
   styleUrl: './pixelquest-header.component.scss'
 })
