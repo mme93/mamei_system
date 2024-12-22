@@ -6,11 +6,12 @@ import { PixelQuestAccountDto } from 'src/app/model/account';
 import { AccountService } from 'src/app/service/data/account/account.service';
 import { ScreenService } from 'src/app/service/tools/screen/screen.service';
 import { PixelquestHeaderComponent } from "./pixelquest-header/pixelquest-header.component";
+import { PixelElementComponent } from './pixel-element/pixel-element.component';
 
 @Component({
   selector: 'app-pixel-content',
   standalone: true,
-  imports: [MenubarModule, PixelquestHeaderComponent],
+  imports: [MenubarModule, PixelquestHeaderComponent,PixelElementComponent],
   templateUrl: './pixel-content.component.html',
   styleUrl: './pixel-content.component.scss'
 })
@@ -24,7 +25,7 @@ export class PixelContentComponent implements OnInit {
   private subscription!: Subscription;
   rows: number = 14;
   cols: number = 32;
-
+  test=['Test'];
   constructor(private screenService: ScreenService, private accountService: AccountService) {
 
   }

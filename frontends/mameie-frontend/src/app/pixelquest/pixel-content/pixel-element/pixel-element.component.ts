@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-pixel-element',
@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './pixel-element.component.scss'
 })
 export class PixelElementComponent {
+  @Input() image_path: string = ''; 
+  @Input() height: number = 75;
+  @Input() width: number = 75;
 
 }

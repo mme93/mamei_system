@@ -14,14 +14,5 @@ export class PixelquestHeaderComponent {
   gold: number = 0;          
   coins: number = 0;          
   units: number = 0;       
-  items = [
-    {
-      label: 'File',
-      items: [
-        { label: 'Open', icon: 'pi pi-fw pi-download' },
-        { separator: true },
-        { label: 'Quit', icon: 'pi pi-fw pi-times' }
-      ]
-    }
-  ]  
+
 }
