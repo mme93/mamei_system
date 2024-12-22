@@ -16,46 +16,11 @@ import { PixelquestHeaderComponent } from "./pixelquest-header/pixelquest-header
 })
 export class PixelContentComponent implements OnInit {
 
-  items: MenuItem[]= [
-    {
-      label: 'File',
-      items: [
-        { label: 'Open', icon: 'pi pi-fw pi-download' },
-        { separator: true },
-        { label: 'Quit', icon: 'pi pi-fw pi-times' }
-      ]
-    },
-    {
-      label: 'Edit',
-      items: [
-        { label: 'Undo', icon: 'pi pi-fw pi-undo' },
-        { label: 'Redo', icon: 'pi pi-fw pi-repeat' }
-      ]
-    },
-    {
-      label: 'Help',
-      items: [
-        { label: 'Contents', icon: 'pi pi-fw pi-file' },
-        { label: 'Search', icon: 'pi pi-fw pi-search' }
-      ]
-    },
-    {
-      label: 'Actions',
-      items: [
-        { label: 'Edit', icon: 'pi pi-fw pi-pencil' },
-        { label: 'Delete', icon: 'pi pi-fw pi-trash' },
-        { label: 'Archive', icon: 'pi pi-fw pi-archive' }
-      ]
-    },
-    {
-      label: 'Quit', icon: 'pi pi-fw pi-power-off'
-    }
-  ];
-
   account: PixelQuestAccountDto = {};
   screenSize: { width: number, height: number } | null = null;
   blockWidth: number = 0;
   blockHight: number = 0;
+  headerHeight:number=0;
   private subscription!: Subscription;
   rows: number = 14;
   cols: number = 32;
@@ -70,6 +35,7 @@ export class PixelContentComponent implements OnInit {
         width: (size.width * 0.8),
         height: (size.height * 0.7)
       };
+      this.headerHeight = (size.height * 0.05) ;
       this.blockHight = (size.height * 0.7) / this.rows;
       this.blockWidth = (size.width * 0.8) / this.cols;
     });
