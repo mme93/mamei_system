@@ -6,16 +6,17 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PixelquestHeaderComponent } from '../pixel-content/pixelquest-header/pixelquest-header.component';
 import { PixelQuestMapEditorHeaderComponent } from './pixel-quest-map-editor-header/pixel-quest-map-editor-header.component';
+import { EditorConfigService } from 'src/app/service/editor/editor-config.service';
 
 @Component({
   selector: 'app-pixelquest-map-editor',
   standalone: true,
-  imports: [PixelquestMapEditorElementComponent, FormsModule, CommonModule, PixelquestHeaderComponent,PixelQuestMapEditorHeaderComponent],
+  imports: [PixelquestMapEditorElementComponent, FormsModule, CommonModule, PixelquestHeaderComponent, PixelQuestMapEditorHeaderComponent],
   templateUrl: './pixelquest-map-editor.component.html',
   styleUrl: './pixelquest-map-editor.component.scss'
 })
 export class PixelquestMapEditorComponent implements OnInit {
-  showSettings=true;
+  showSettings = true;
   dummy: String[][] = [];
   blockWidth: number = 0;
   blockHight: number = 0;
@@ -25,7 +26,7 @@ export class PixelquestMapEditorComponent implements OnInit {
   sideBarSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private screenSizeService: ScreenService) {
+  constructor(private screenSizeService: ScreenService, private editorConfigService: EditorConfigService) {
 
   }
 
@@ -50,6 +51,9 @@ export class PixelquestMapEditorComponent implements OnInit {
       this.dummy.push(x)
 
     }
+    this.subscription = this.editorConfigService.showSettings$.subscribe(editorConfig => {
+      this.showSettings = editorConfig;
+    })
   }
 
 }
