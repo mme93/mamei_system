@@ -4,11 +4,13 @@ import { ScreenService } from 'src/app/service/tools/screen/screen.service';
 import { PixelquestMapEditorElementComponent } from "./pixelquest-map-editor-element/pixelquest-map-editor-element.component";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PixelquestMapEditorContentComponent } from './pixelquest-map-editor-content/pixelquest-map-editor-content.component';
+import { PixelContentComponent } from "../pixel-content/pixel-content.component";
 
 @Component({
   selector: 'app-pixelquest-map-editor',
   standalone: true,
-  imports: [PixelquestMapEditorElementComponent, FormsModule,CommonModule],
+  imports: [PixelquestMapEditorElementComponent, PixelquestMapEditorContentComponent, FormsModule, CommonModule, PixelContentComponent],
   templateUrl: './pixelquest-map-editor.component.html',
   styleUrl: './pixelquest-map-editor.component.scss'
 })

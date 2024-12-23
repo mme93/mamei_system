@@ -1,0 +1,5 @@
+<div [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width">
+    <div *ngFor="let row of dummy; let row_pos = index" class="row ">
+        <app-x-element *ngFor="let col of row ; let col_pos = index" [height]="blockHight" [width]="blockWidth"></app-x-element>
+    </div>
+</div>

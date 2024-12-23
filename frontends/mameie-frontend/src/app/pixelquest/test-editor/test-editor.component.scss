@@ -1,0 +1,22 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+app-x-element {
+    display: inline-block;
+}
+
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f0f0f0;
+    background-image: url('/assets/background_game.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

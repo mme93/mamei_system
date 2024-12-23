@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('/assets/background_editor.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.grid-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+app-pixelquest-map-editor-element {
+    display: inline-block;
+}

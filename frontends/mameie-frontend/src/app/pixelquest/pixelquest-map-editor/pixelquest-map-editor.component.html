@@ -31,19 +31,5 @@
         </div>
         <button (click)="updateGrid()">Änderungen übernehmen</button>
     </div>
-
-    <div class="main-content">
-
-        <div class="test" [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width">
-            <div class="grid-container">
-                <div *ngFor="let row of dummy">
-                    <div class="grid-row">
-                        <app-pixelquest-map-editor-element *ngFor="let cell of row" [height]="blockHight" [width]="blockWidth">
-                        </app-pixelquest-map-editor-element>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <app-pixelquest-map-editor-content></app-pixelquest-map-editor-content>
 </div>
