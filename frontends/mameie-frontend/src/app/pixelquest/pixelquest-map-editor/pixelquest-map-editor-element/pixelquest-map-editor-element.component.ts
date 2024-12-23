@@ -9,8 +9,9 @@ import { Component, Input } from '@angular/core';
 })
 export class PixelquestMapEditorElementComponent {
 
-    @Input() image_path: string = ''; 
-    @Input() height: number = 75;
-    @Input() width: number = 75;
+@Input() height: number = 75;
+  @Input() width: number = 75;
+  image_path='/assets/stone_ground_field.png'
+
 
 }
