@@ -46,6 +46,7 @@ export class PixelquestMapEditorComponent implements OnInit {
     });
     this.subscription = this.editorConfigService.showSettings$.subscribe(editorConfig => {
       this.showSettings = editorConfig;
+      
     })
     this.updateGrid();
   }
