@@ -17,12 +17,18 @@
 
     <div class="right-sidebar" [style.height.px]="xSize?.height" [style.width.px]="xSize?.width">
         <h3>Einstellungen</h3>
-        <label for="map-title">Titel:</label>
-        <input id="map-title" type="text" placeholder="Titel eingeben" />
-        <label for="map-width">Breite:</label>
-        <input id="map-width" type="number" placeholder="Breite eingeben" />
-        <label for="map-height">Höhe:</label>
-        <input id="map-height" type="number" placeholder="Höhe eingeben" />
+        <div class="form-group">
+            <label for="map-title">Titel:</label>
+            <input id="map-title" type="text" placeholder="Titel eingeben" />
+        </div>
+        <div class="form-group">
+            <label for="map-width">Breite:</label>
+            <input id="map-width" type="text" placeholder="Breite eingeben" />
+        </div>
+        <div class="form-group">
+            <label for="map-height">Höhe:</label>
+            <input id="map-height" type="text" placeholder="Höhe eingeben" />
+        </div>
         <button>Änderungen übernehmen</button>
     </div>
 
