@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ScreenService } from 'src/app/service/tools/screen/screen.service';
+import { PixelquestMapEditorElementComponent } from "./pixelquest-map-editor-element/pixelquest-map-editor-element.component";
 
 @Component({
   selector: 'app-pixelquest-map-editor',
   standalone: true,
-  imports: [],
+  imports: [PixelquestMapEditorElementComponent],
   templateUrl: './pixelquest-map-editor.component.html',
   styleUrl: './pixelquest-map-editor.component.scss'
 })
