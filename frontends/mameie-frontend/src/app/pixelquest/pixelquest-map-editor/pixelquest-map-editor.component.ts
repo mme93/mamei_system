@@ -23,8 +23,8 @@ export class PixelquestMapEditorComponent {
   ngOnInit(): void {
     this.subscription = this.screenService.screenSize$.subscribe(size => {
       this.screenSize = {
-        width: (size.width * 0.5),
-        height: (size.height * 0.5)
+        width: (size.width * 0.7),
+        height: (size.height * 0.6)
       };
       this.xSize = {
         width: (size.width * 0.13),
