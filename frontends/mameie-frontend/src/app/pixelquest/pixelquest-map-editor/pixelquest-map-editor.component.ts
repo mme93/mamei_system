@@ -11,7 +11,7 @@ import { EditorConfigService } from 'src/app/service/editor/editor-config.servic
 @Component({
   selector: 'app-pixelquest-map-editor',
   standalone: true,
-  imports: [PixelquestMapEditorElementComponent, FormsModule, CommonModule, PixelquestHeaderComponent, PixelQuestMapEditorHeaderComponent],
+  imports: [PixelquestMapEditorElementComponent, FormsModule, CommonModule, FormsModule, PixelquestHeaderComponent, PixelQuestMapEditorHeaderComponent],
   templateUrl: './pixelquest-map-editor.component.html',
   styleUrl: './pixelquest-map-editor.component.scss'
 })
@@ -20,6 +20,7 @@ export class PixelquestMapEditorComponent implements OnInit {
   dummy: String[][] = [];
   blockWidth: number = 0;
   blockHight: number = 0;
+  title = 'New Title'
   rows: number = 14;
   cols: number = 32;
   screenSize: { width: number, height: number } | null = null;
@@ -54,6 +55,25 @@ export class PixelquestMapEditorComponent implements OnInit {
     this.subscription = this.editorConfigService.showSettings$.subscribe(editorConfig => {
       this.showSettings = editorConfig;
     })
+  }
+
+  updateGrid() {
+    console.log(this.blockHight)
+    if (this.screenSize) {
+      this.blockHight = (this.screenSize.height * 0.7) / this.rows;
+      this.blockWidth = (this.screenSize.width * 0.8) / this.cols;
+      this.dummy = [];
+      for (let i: number = 0; i < this.rows; i++) {
+        let x: String[] = [];
+        for (let j: number = 0; j < this.cols; j++) {
+          x.push('Test');
+        }
+        this.dummy.push(x)
+
+      }
+    }
+    console.log(this.blockHight)
+
   }
 
 }
