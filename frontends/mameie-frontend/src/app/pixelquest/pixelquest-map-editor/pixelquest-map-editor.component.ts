@@ -44,24 +44,17 @@ export class PixelquestMapEditorComponent implements OnInit {
       this.blockHight = (size.height * 0.7) / this.rows;
       this.blockWidth = (size.width * 0.8) / this.cols;
     });
-    for (let i: number = 0; i < this.rows; i++) {
-      let x: String[] = [];
-      for (let j: number = 0; j < this.cols; j++) {
-        x.push('Test');
-      }
-      this.dummy.push(x)
-
-    }
     this.subscription = this.editorConfigService.showSettings$.subscribe(editorConfig => {
       this.showSettings = editorConfig;
     })
+    this.updateGrid();
   }
 
   updateGrid() {
     console.log(this.blockHight)
     if (this.screenSize) {
-      this.blockHight = (this.screenSize.height * 0.7) / this.rows;
-      this.blockWidth = (this.screenSize.width * 0.8) / this.cols;
+      this.blockHight = (this.screenSize.height) / this.rows;
+      this.blockWidth = (this.screenSize.width) / this.cols;
       this.dummy = [];
       for (let i: number = 0; i < this.rows; i++) {
         let x: String[] = [];
