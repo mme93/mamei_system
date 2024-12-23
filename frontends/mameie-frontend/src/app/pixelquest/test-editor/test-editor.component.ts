@@ -3,11 +3,12 @@ import { XElementComponent } from './x-element/x-element.component';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { ScreenService } from 'src/app/service/tools/screen/screen.service';
+import { PixelquestHeaderComponent } from '../pixel-content/pixelquest-header/pixelquest-header.component';
 
 @Component({
   selector: 'app-test-editor',
   standalone: true,
-  imports: [XElementComponent, CommonModule],
+  imports: [XElementComponent, CommonModule,PixelquestHeaderComponent],
   templateUrl: './test-editor.component.html',
   styleUrl: './test-editor.component.scss'
 })
