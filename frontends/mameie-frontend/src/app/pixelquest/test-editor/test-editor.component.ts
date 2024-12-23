@@ -19,6 +19,7 @@ export class TestEditorComponent implements OnInit {
   rows: number = 14;
   cols: number = 32;
   screenSize: { width: number, height: number } | null = null;
+  sideBarSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
   constructor(private screenSizeService: ScreenService) {
@@ -30,6 +31,10 @@ export class TestEditorComponent implements OnInit {
       this.screenSize = {
         width: (size.width * 0.8),
         height: (size.height * 0.7)
+      };
+      this.sideBarSize = {
+        width: (size.width * 0.13),
+        height: (size.height)
       };
       this.blockHight = (size.height * 0.7) / this.rows;
       this.blockWidth = (size.width * 0.8) / this.cols;

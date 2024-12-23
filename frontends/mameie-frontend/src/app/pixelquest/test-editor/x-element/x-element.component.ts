@@ -11,4 +11,9 @@ export class XElementComponent {
   @Input() height: number = 75;
   @Input() width: number = 75;
   image_path='/assets/stone_ground_field.png'
+
+  constructor(){
+    console.log(this.height)
+  }
+
 }
