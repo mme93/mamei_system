@@ -1,22 +1,38 @@
 <div class="pixelquest-header">
     <div class="header">
-
         <div class="header-left">
             <i class="pi pi-cog"></i>
         </div>
-
-
         <div class="header-title">
             <h1>Map-Editor</h1>
         </div>
-
         <div class="header-stats">
             <div>Breite: 32</div>
-            <div>Höhe: 55 </div>
+            <div>Höhe: 55</div>
         </div>
     </div>
 </div>
 
-<div [style.background-color]="'green'" [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width">
-    <app-pixelquest-map-editor-element></app-pixelquest-map-editor-element>
+<div class="content-wrapper">
+
+    <div class="right-sidebar" [style.height.px]="xSize?.height" [style.width.px]="xSize?.width">
+        <h3>Einstellungen</h3>
+        <label for="map-title">Titel:</label>
+        <input id="map-title" type="text" placeholder="Titel eingeben" />
+        <label for="map-width">Breite:</label>
+        <input id="map-width" type="number" placeholder="Breite eingeben" />
+        <label for="map-height">Höhe:</label>
+        <input id="map-height" type="number" placeholder="Höhe eingeben" />
+        <button>Änderungen übernehmen</button>
+    </div>
+
+    <div class="main-content" [style.background-color]="'green'">
+
+        <div class="test" [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width">
+            Hi asdasd
+        </div>
+        <!-- <app-pixelquest-map-editor-element></app-pixelquest-map-editor-element>
+            -->
+    </div>
+
 </div>

@@ -13,7 +13,7 @@ import { PixelquestMapEditorElementComponent } from "./pixelquest-map-editor-ele
 export class PixelquestMapEditorComponent {
 
   screenSize: { width: number, height: number } | null = null;
-
+  xSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
   constructor(private screenService: ScreenService) {
@@ -23,8 +23,12 @@ export class PixelquestMapEditorComponent {
   ngOnInit(): void {
     this.subscription = this.screenService.screenSize$.subscribe(size => {
       this.screenSize = {
-        width: (size.width * 0.8),
-        height: (size.height * 0.7)
+        width: (size.width * 0.5),
+        height: (size.height * 0.5)
+      };
+      this.xSize = {
+        width: (size.width * 0.13),
+        height: (size.height)
       };
     });
   }
