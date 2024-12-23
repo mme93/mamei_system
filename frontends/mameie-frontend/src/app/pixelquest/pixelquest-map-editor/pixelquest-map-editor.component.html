@@ -15,27 +15,34 @@
 
 <div class="content-wrapper">
 
-    <div class="right-sidebar" [style.height.px]="xSize?.height" [style.width.px]="xSize?.width">
+    <div class="right-sidebar" [style.height.px]="sideBarSize?.height" [style.width.px]="sideBarSize?.width">
         <h3>Einstellungen</h3>
         <div class="form-group">
             <label for="map-title">Titel:</label>
-            <input id="map-title" type="text" placeholder="Titel eingeben" />
+            <input id="map-title" type="text" placeholder="Titel eingeben" [(ngModel)]="title" />
         </div>
         <div class="form-group">
             <label for="map-width">Breite:</label>
-            <input id="map-width" type="text" placeholder="Breite eingeben" />
+            <input id="map-width" type="text" placeholder="Breite eingeben" [(ngModel)]="cols" />
         </div>
         <div class="form-group">
             <label for="map-height">Höhe:</label>
-            <input id="map-height" type="text" placeholder="Höhe eingeben" />
+            <input id="map-height" type="text" placeholder="Höhe eingeben" [(ngModel)]="rows" />
         </div>
-        <button>Änderungen übernehmen</button>
+        <button (click)="updateGrid()">Änderungen übernehmen</button>
     </div>
 
     <div class="main-content">
 
         <div class="test" [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width">
-            Hi asdasd
+            <div class="grid-container">
+                <div *ngFor="let row of dummy">
+                    <div class="grid-row">
+                        <app-pixelquest-map-editor-element *ngFor="let cell of row" [height]="blockHight" [width]="blockWidth">
+                        </app-pixelquest-map-editor-element>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

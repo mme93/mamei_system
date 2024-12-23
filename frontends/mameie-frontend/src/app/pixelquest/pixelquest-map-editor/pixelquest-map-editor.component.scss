@@ -27,7 +27,7 @@
 }
 
 .right-sidebar {
-    height: 100%;
+    padding-top: 7vh;
     background-color: #444;
     color: white;
     box-shadow: -2px 0 4px rgba(0, 0, 0, 0.2);
@@ -48,6 +48,7 @@
         margin-bottom: 10px;
         border: none;
         border-radius: 5px;
+        color: black;
     }
     button {
         padding: 10px;
@@ -96,7 +97,7 @@
     padding: 0.5rem;
     border-radius: 5px;
     border: 1px solid #ccc;
-    color: white;
+    color: black;
 }
 
 .right-sidebar button {

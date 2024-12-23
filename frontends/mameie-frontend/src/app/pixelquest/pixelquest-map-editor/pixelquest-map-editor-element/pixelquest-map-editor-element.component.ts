@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-pixelquest-map-editor-element',
@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './pixelquest-map-editor-element.component.scss'
 })
 export class PixelquestMapEditorElementComponent {
+
+    @Input() image_path: string = ''; 
+    @Input() height: number = 75;
+    @Input() width: number = 75;
 
 }
