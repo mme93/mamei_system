@@ -2,6 +2,7 @@
 
 <div class="content-wrapper">
     <div class="grid-container">
+
         <div class="right-sidebar-overlay" *ngIf="showSettings">
             <div class="right-sidebar">
                 <h3>Karten Einstellungen</h3>
@@ -27,5 +28,6 @@
                 <app-pixelquest-map-editor-element *ngFor="let col of row; let col_pos = index" [height]="blockHight" [width]="blockWidth"></app-pixelquest-map-editor-element>
             </div>
         </div>
+
     </div>
 </div>
