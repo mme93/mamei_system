@@ -1,9 +1,9 @@
-<app-pixelquest-header class="pixelquest-header"></app-pixelquest-header>
+<app-pixel-quest-map-editor-header class="pixelquest-header"></app-pixel-quest-map-editor-header>
 
 <div class="content-wrapper">
     <!-- Grid-Inhalt -->
     <div class="grid-container">
-        <div class="right-sidebar-overlay">
+        <div class="right-sidebar-overlay" *ngIf="showSettings">
             <div class="right-sidebar">
                 <h3>Einstellungen</h3>
                 <div class="form-group">
