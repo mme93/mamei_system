@@ -1,33 +1,9 @@
 <app-pixel-quest-map-editor-header class="pixelquest-header"></app-pixel-quest-map-editor-header>
 
 <div class="content-wrapper">
-    <div class="grid-container">
-
-        <div class="right-sidebar-overlay" *ngIf="showSettings">
-            <div class="right-sidebar">
-                <h3>Karten Einstellungen</h3>
-                <div class="form-group">
-                    <label for="map-title">Titel:</label>
-                    <input id="map-title" type="text" placeholder="Titel eingeben" [(ngModel)]="title" />
-                </div>
-                <div class="form-group">
-                    <label for="map-width">Breite:</label>
-                    <input id="map-width" type="text" placeholder="Breite eingeben" [(ngModel)]="cols" />
-                </div>
-                <div class="form-group">
-                    <label for="map-height">Höhe:</label>
-                    <input id="map-height" type="text" placeholder="Höhe eingeben" [(ngModel)]="rows" />
-                </div>
-                <button (click)="updateGrid()">Änderungen übernehmen</button>
-            </div>
+    <div [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width" class="grid">
+        <div *ngFor="let row of dummy; let row_pos = index" class="row">
+            <app-pixelquest-map-editor-element *ngFor="let col of row; let col_pos = index" [height]="newMap.settings.blockHight" [width]="newMap.settings.blockWidth"></app-pixelquest-map-editor-element>
         </div>
-
-
-        <div [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width" class="grid">
-            <div *ngFor="let row of dummy; let row_pos = index" class="row">
-                <app-pixelquest-map-editor-element *ngFor="let col of row; let col_pos = index" [height]="blockHight" [width]="blockWidth"></app-pixelquest-map-editor-element>
-            </div>
-        </div>
-
     </div>
 </div>

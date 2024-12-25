@@ -1,29 +1,30 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EditorConfigService } from 'src/app/service/editor/editor-config.service';
+import { PixelquestMapEditorSettingsComponent } from '../dialogs/pixelquest-map-editor-settings/pixelquest-map-editor-settings.component';
+import { NewMapSettings } from 'src/app/model/config';
 
 @Component({
   selector: 'app-pixel-quest-map-editor-header',
   standalone: true,
-  imports: [],
+  imports: [DynamicDialogModule, PixelquestMapEditorSettingsComponent],
+  providers: [DialogService],
   templateUrl: './pixel-quest-map-editor-header.component.html',
   styleUrl: './pixel-quest-map-editor-header.component.scss'
 })
 export class PixelQuestMapEditorHeaderComponent {
-  showSettings=false;
-  
-  title: string = 'PixelQuest';
-  gold: number = 0;          
-  coins: number = 0;          
-  units: number = 0;    
 
-  constructor(private editorConfigService:EditorConfigService){
+  title: string = 'PixelQuest Editor';
+  gold: number = 0;
+  coins: number = 0;
+  units: number = 0;
+
+  constructor(private editorConfigService: EditorConfigService) {
   }
 
 
-  toggleSettings(){
-    this.showSettings=!this.showSettings;
-    this.editorConfigService.toggleShowSettings(this.showSettings);
+  toggleSettings() {
+    this.editorConfigService.toggleShowSettings(true);
   }
 
 }

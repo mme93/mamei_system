@@ -7,27 +7,38 @@ import { CommonModule } from '@angular/common';
 import { PixelquestHeaderComponent } from '../pixel-content/pixelquest-header/pixelquest-header.component';
 import { PixelQuestMapEditorHeaderComponent } from './pixel-quest-map-editor-header/pixel-quest-map-editor-header.component';
 import { EditorConfigService } from 'src/app/service/editor/editor-config.service';
+import { EditorDialogService } from 'src/app/service/editor/dialog/editor-dialog.service';
+import { NewMap, NewMapSettings } from 'src/app/model/config';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-pixelquest-map-editor',
   standalone: true,
   imports: [PixelquestMapEditorElementComponent, FormsModule, CommonModule, FormsModule, PixelquestHeaderComponent, PixelQuestMapEditorHeaderComponent],
+  providers: [EditorDialogService, DialogService],
   templateUrl: './pixelquest-map-editor.component.html',
   styleUrl: './pixelquest-map-editor.component.scss'
 })
 export class PixelquestMapEditorComponent implements OnInit {
   showSettings = true;
   dummy: String[][] = [];
-  blockWidth: number = 0;
-  blockHight: number = 0;
-  title = 'New Title'
-  rows: number = 14;
-  cols: number = 32;
+
+  newMap:NewMap={
+    settings: {
+      title: 'New Title',
+      rows: 14,
+      cols: 32,
+      blockWidth: 0,
+      blockHight: 0
+    },
+    grid:[]
+  }
+
   screenSize: { width: number, height: number } | null = null;
   sideBarSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private screenSizeService: ScreenService, private editorConfigService: EditorConfigService) {
+  constructor(private screenSizeService: ScreenService, private editorConfigService: EditorConfigService, private editorDialogService: EditorDialogService) {
 
   }
 
@@ -41,33 +52,37 @@ export class PixelquestMapEditorComponent implements OnInit {
         width: (size.width * 0.13),
         height: (size.height)
       };
-      this.blockHight = (size.height * 0.7) / this.rows;
-      this.blockWidth = (size.width * 0.8) / this.cols;
+      this.newMap.settings.blockHight = (size.height * 0.7) / this.newMap.settings.rows;
+      this.newMap.settings.blockWidth = (size.width * 0.8) / this.newMap.settings.cols;
     });
     this.subscription = this.editorConfigService.showSettings$.subscribe(editorConfig => {
-      this.showSettings = editorConfig;
-      
+      if (editorConfig) {
+        this.editorDialogService.openPixelQuestMapEditorSettings(this.newMap.settings).subscribe(result => {
+          if (result) {
+            this.newMap.settings = result
+            this.updateGrid();
+          }
+        });
+      }
     })
     this.updateGrid();
   }
 
   updateGrid() {
-    console.log(this.blockHight)
     if (this.screenSize) {
-      this.blockHight = (this.screenSize.height) / this.rows;
-      this.blockWidth = (this.screenSize.width) / this.cols;
+      console.log(this.newMap.settings)
+      this.newMap.settings.blockHight = (this.screenSize.height) / this.newMap.settings.rows;
+      this.newMap.settings.blockWidth = (this.screenSize.width) / this.newMap.settings.cols;
       this.dummy = [];
-      for (let i: number = 0; i < this.rows; i++) {
+      for (let i: number = 0; i < this.newMap.settings.rows; i++) {
         let x: String[] = [];
-        for (let j: number = 0; j < this.cols; j++) {
+        for (let j: number = 0; j < this.newMap.settings.cols; j++) {
           x.push('Test');
         }
         this.dummy.push(x)
 
       }
     }
-    console.log(this.blockHight)
-
   }
 
 }
