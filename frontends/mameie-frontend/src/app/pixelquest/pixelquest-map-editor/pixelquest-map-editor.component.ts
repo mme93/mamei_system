@@ -8,7 +8,7 @@ import { PixelquestHeaderComponent } from '../pixel-content/pixelquest-header/pi
 import { PixelQuestMapEditorHeaderComponent } from './pixel-quest-map-editor-header/pixel-quest-map-editor-header.component';
 import { EditorConfigService } from 'src/app/service/editor/editor-config.service';
 import { EditorDialogService } from 'src/app/service/editor/dialog/editor-dialog.service';
-import { NewMap, NewMapSettings } from 'src/app/model/config';
+import { NewMap, NewMapGridElement, NewMapGridRow, NewMapSettings } from 'src/app/model/config';
 import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
@@ -22,8 +22,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 export class PixelquestMapEditorComponent implements OnInit {
   showSettings = true;
   dummy: String[][] = [];
-
-  newMap:NewMap={
+  newMap: NewMap = {
     settings: {
       title: 'New Title',
       rows: 14,
@@ -31,7 +30,7 @@ export class PixelquestMapEditorComponent implements OnInit {
       blockWidth: 0,
       blockHight: 0
     },
-    grid:[]
+    grid: []
   }
 
   screenSize: { width: number, height: number } | null = null;
@@ -76,9 +75,15 @@ export class PixelquestMapEditorComponent implements OnInit {
       this.dummy = [];
       for (let i: number = 0; i < this.newMap.settings.rows; i++) {
         let x: String[] = [];
+        let elements: NewMapGridElement[] = [];
         for (let j: number = 0; j < this.newMap.settings.cols; j++) {
           x.push('Test');
+          elements.push({
+            field_image:'/assets/stone_ground_field.png',
+            field_object_image:''
+          })
         }
+        this.newMap.grid.push({elements:elements});
         this.dummy.push(x)
 
       }
