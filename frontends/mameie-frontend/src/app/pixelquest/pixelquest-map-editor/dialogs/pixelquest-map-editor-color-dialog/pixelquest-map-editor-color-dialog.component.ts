@@ -6,6 +6,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 
+export interface X {
+  title: String;
+  src: String;
+  category: String;
+  isSelected:boolean;
+}
+
 @Component({
   selector: 'app-pixelquest-map-editor-color-dialog',
   standalone: true,
@@ -16,24 +23,39 @@ import { FormsModule } from '@angular/forms';
 export class PixelquestMapEditorColorDialogComponent {
   searchText = '';
   selectedCategory: string = '';
-  selectedImage: any | null = null;
+  selectedImage: X | null = null;
   categories = [
     { label: 'Fields', value: 'fields' },
     { label: 'Objects', value: 'objects' },
   ];
 
-  images = [
-    { title: 'Field 1', src: '/assets/stone_ground_field.png', category: 'fields' },
-    { title: 'Field 2', src: '/assets/fields/wood.png', category: 'fields' },
-    { title: 'Object 1', src: '/assets/stone_ground_field.png', category: 'objects' },
-    { title: 'Object 2', src: '/assets/stone_ground_field.png', category: 'objects' },
+  images: X[] = [
+    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields',isSelected:false },
+    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields' ,isSelected:false},
+    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields',isSelected:false },
+    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields',isSelected:false },
+
+    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields',isSelected:false },
+    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields' ,isSelected:false},
+    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields',isSelected:false },
+    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields',isSelected:false },
+    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields',isSelected:false },
+    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields' ,isSelected:false},
+    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields',isSelected:false },
+    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields',isSelected:false },
+    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields',isSelected:false },
+    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields' ,isSelected:false},
+    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields',isSelected:false },
+    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields',isSelected:false },
+
+    { title: 'Object 2', src: '/assets/objects/bonfire.png', category: 'objects' ,isSelected:false},
   ];
 
-  filteredImages = [...this.images];
+  filteredImages:X[] = [...this.images];
 
   constructor(private ref: DynamicDialogRef) {
     this.filterImages();
-   }
+  }
 
   filterImages() {
     this.filteredImages = this.images.filter((image) => {
@@ -46,8 +68,10 @@ export class PixelquestMapEditorColorDialogComponent {
     });
   }
 
-  selectImage(image: any) {
-    this.selectedImage = image; 
+  selectImage(image: X) {
+    this.selectedImage = image;
+    this.images.forEach(image => image.isSelected=false);
+    image.isSelected=true;
     console.log('Selected image:', image);
   }
 

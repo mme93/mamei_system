@@ -2,20 +2,21 @@
     <div class="filters">
         <input type="text" placeholder="Search by keyword or title" [(ngModel)]="searchText" (input)="filterImages()" />
         <select [(ngModel)]="selectedCategory" (change)="filterImages()">
-          <option value="">Select Category</option>
-          <option value="fields">Fields</option>
-          <option value="objects">Objects</option>
-        </select>
+        <option value="">Select Category</option>
+        <option value="fields">Fields</option>
+        <option value="objects">Objects</option>
+      </select>
     </div>
 
     <div class="grid-container">
         <div *ngFor="let image of filteredImages" class="image-item" (click)="selectImage(image)">
-            <img [src]="image.src" [alt]="image.title" (click)="selectImage(image)" />
+            <img [src]="image.src" [alt]="image.title" />
             <p>{{ image.title }}</p>
         </div>
     </div>
-</div>
 
-<div class="actions">
-    <p-button label="Close" (onClick)="close()"></p-button>
+    <div class="dialog-footer">
+        <button class="btn">Übernehmen</button>
+        <button class="btn">Abbrechen</button>
+    </div>
 </div>
