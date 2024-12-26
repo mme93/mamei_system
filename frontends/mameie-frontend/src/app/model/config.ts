@@ -2,6 +2,11 @@ export interface GameInterface{
     
 }
 
+export interface EditorButtonAction{
+    mapSettings:boolean;
+    mapColours:boolean;
+}
+
 export interface NewMap{
     settings:NewMapSettings;
     grid:NewMapGridRow[];

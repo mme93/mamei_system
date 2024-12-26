@@ -14,6 +14,7 @@ import { NewMapSettings } from 'src/app/model/config';
 })
 export class PixelQuestMapEditorHeaderComponent {
 
+
   title: string = 'PixelQuest Editor';
   gold: number = 0;
   coins: number = 0;
@@ -25,6 +26,10 @@ export class PixelQuestMapEditorHeaderComponent {
 
   toggleSettings() {
     this.editorConfigService.toggleShowSettings(true);
+  }
+
+  toggleColour() {
+    this.editorConfigService.toggleShowColour();
   }
 
 }

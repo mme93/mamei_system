@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { EditorButtonAction } from 'src/app/model/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditorConfigService {
 
-  private showSettingsSubject: BehaviorSubject<boolean>;
-  public showSettings$: Observable<boolean>;
+  private buttonActionSubject: BehaviorSubject<EditorButtonAction>;
+  public buttonAction$: Observable<EditorButtonAction>;
 
   constructor() {
-    this.showSettingsSubject = new BehaviorSubject(false);
-    this.showSettings$ = this.showSettingsSubject.asObservable();
+    this.buttonActionSubject = new BehaviorSubject({ mapSettings: false, mapColours: false } as EditorButtonAction);
+    this.buttonAction$ = this.buttonActionSubject.asObservable();
   }
 
-  isShowSettings() {
-    return this.showSettingsSubject.getValue();
+  toggleShowSettings(showSettings: boolean) {
+    this.buttonActionSubject.next({ mapSettings: true, mapColours: false } as EditorButtonAction);
   }
 
-  toggleShowSettings(showSettings:boolean){
-    this.showSettingsSubject.next(showSettings);
+  toggleShowColour() {
+    this.buttonActionSubject.next({ mapSettings: false, mapColours: true } as EditorButtonAction);
   }
 }
