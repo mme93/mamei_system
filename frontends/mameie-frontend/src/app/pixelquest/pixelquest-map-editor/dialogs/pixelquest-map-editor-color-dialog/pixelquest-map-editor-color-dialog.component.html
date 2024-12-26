@@ -1,1 +1,21 @@
-<p>pixelquest-map-editor-color-dialog works!</p>
+<div class="dialog-content">
+    <div class="filters">
+        <input type="text" placeholder="Search by keyword or title" [(ngModel)]="searchText" (input)="filterImages()" />
+        <select [(ngModel)]="selectedCategory" (change)="filterImages()">
+          <option value="">Select Category</option>
+          <option value="fields">Fields</option>
+          <option value="objects">Objects</option>
+        </select>
+    </div>
+
+    <div class="grid-container">
+        <div *ngFor="let image of filteredImages" class="image-item">
+            <img [src]="image.src" [alt]="image.title" (click)="selectImage(image)" />
+            <p>{{ image.title }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="actions">
+    <p-button label="Close" (onClick)="close()"></p-button>
+</div>
