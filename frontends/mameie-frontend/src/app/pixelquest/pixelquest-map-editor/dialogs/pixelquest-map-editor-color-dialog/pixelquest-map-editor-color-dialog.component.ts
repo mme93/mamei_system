@@ -15,7 +15,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class PixelquestMapEditorColorDialogComponent {
   searchText = '';
-  selectedCategory: string | null = null;
+  selectedCategory: string = '';
+  selectedImage: any | null = null;
   categories = [
     { label: 'Fields', value: 'fields' },
     { label: 'Objects', value: 'objects' },
@@ -30,7 +31,9 @@ export class PixelquestMapEditorColorDialogComponent {
 
   filteredImages = [...this.images];
 
-  constructor(private ref: DynamicDialogRef) { }
+  constructor(private ref: DynamicDialogRef) {
+    this.filterImages();
+   }
 
   filterImages() {
     this.filteredImages = this.images.filter((image) => {
@@ -44,6 +47,7 @@ export class PixelquestMapEditorColorDialogComponent {
   }
 
   selectImage(image: any) {
+    this.selectedImage = image; 
     console.log('Selected image:', image);
   }
 

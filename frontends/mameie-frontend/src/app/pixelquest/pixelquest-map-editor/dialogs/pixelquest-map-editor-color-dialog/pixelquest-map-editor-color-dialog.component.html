@@ -9,7 +9,7 @@
     </div>
 
     <div class="grid-container">
-        <div *ngFor="let image of filteredImages" class="image-item">
+        <div *ngFor="let image of filteredImages" class="image-item" (click)="selectImage(image)">
             <img [src]="image.src" [alt]="image.title" (click)="selectImage(image)" />
             <p>{{ image.title }}</p>
         </div>
