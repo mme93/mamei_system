@@ -8,7 +8,7 @@ import { PixelquestHeaderComponent } from '../pixel-content/pixelquest-header/pi
 import { PixelQuestMapEditorHeaderComponent } from './pixel-quest-map-editor-header/pixel-quest-map-editor-header.component';
 import { EditorConfigService } from 'src/app/service/editor/editor-config.service';
 import { EditorDialogService } from 'src/app/service/editor/dialog/editor-dialog.service';
-import { NewMap, NewMapGridElement, NewMapGridRow, NewMapSettings } from 'src/app/model/config';
+import { NewMap, NewMapGridElement, NewMapGridRow, NewMapImage, NewMapSettings } from 'src/app/model/config';
 import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
@@ -20,8 +20,11 @@ import { DialogService } from 'primeng/dynamicdialog';
   styleUrl: './pixelquest-map-editor.component.scss'
 })
 export class PixelquestMapEditorComponent implements OnInit {
-
   newMap: NewMap = {
+    images: {
+      fields: '/assets/stone_ground_field.png',
+      objects: ''
+    },
     settings: {
       title: 'New Title',
       rows: 14,
@@ -56,8 +59,14 @@ export class PixelquestMapEditorComponent implements OnInit {
 
     this.subscription = this.editorConfigService.buttonAction$.subscribe(buttonAction => {
       if (buttonAction.mapColours) {
-        this.editorDialogService.openPixelQuestMapEditorColor().subscribe(result => {
+        this.editorDialogService.openPixelQuestMapEditorColor().subscribe((result: NewMapImage) => {
           console.log(result)
+          if (result.category === 'objects') {
+            this.newMap.images.objects=result.src;
+          } else if (result.category === 'fields') {
+            this.newMap.images.fields=result.src;
+          }
+          this.newMap.images
         });
       } else if (buttonAction.mapSettings) {
         this.editorDialogService.openPixelQuestMapEditorSettings(this.newMap.settings).subscribe(result => {
@@ -67,11 +76,7 @@ export class PixelquestMapEditorComponent implements OnInit {
           }
         });
       }
-      this.editorDialogService.openPixelQuestMapEditorColor().subscribe(result => {
-        if (result) {
-          console.log(result)
-        }
-      });
+
     });
 
     this.updateGrid();

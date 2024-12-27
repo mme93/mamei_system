@@ -5,13 +5,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
-
-export interface X {
-  title: String;
-  src: String;
-  category: String;
-  isSelected:boolean;
-}
+import { NewMapImage } from 'src/app/model/config';
 
 @Component({
   selector: 'app-pixelquest-map-editor-color-dialog',
@@ -23,35 +17,35 @@ export interface X {
 export class PixelquestMapEditorColorDialogComponent {
   searchText = '';
   selectedCategory: string = '';
-  selectedImage: X | null = null;
+  selectedImage: NewMapImage | null = null;
   categories = [
     { label: 'Fields', value: 'fields' },
     { label: 'Objects', value: 'objects' },
   ];
 
-  images: X[] = [
-    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields',isSelected:false },
-    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields' ,isSelected:false},
-    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields',isSelected:false },
-    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields',isSelected:false },
+  images: NewMapImage[] = [
+    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields', isSelected: false },
+    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields', isSelected: false },
+    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields', isSelected: false },
+    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
 
-    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields',isSelected:false },
-    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields' ,isSelected:false},
-    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields',isSelected:false },
-    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields',isSelected:false },
-    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields',isSelected:false },
-    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields' ,isSelected:false},
-    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields',isSelected:false },
-    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields',isSelected:false },
-    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields',isSelected:false },
-    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields' ,isSelected:false},
-    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields',isSelected:false },
-    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields',isSelected:false },
+    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields', isSelected: false },
+    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields', isSelected: false },
+    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields', isSelected: false },
+    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
+    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields', isSelected: false },
+    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields', isSelected: false },
+    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields', isSelected: false },
+    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
+    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields', isSelected: false },
+    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields', isSelected: false },
+    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields', isSelected: false },
+    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
 
-    { title: 'Object 2', src: '/assets/objects/bonfire.png', category: 'objects' ,isSelected:false},
+    { title: 'Object 2', src: '/assets/objects/bonfire.png', category: 'objects', isSelected: false },
   ];
 
-  filteredImages:X[] = [...this.images];
+  filteredImages: NewMapImage[] = [...this.images];
 
   constructor(private ref: DynamicDialogRef) {
     this.filterImages();
@@ -68,14 +62,17 @@ export class PixelquestMapEditorColorDialogComponent {
     });
   }
 
-  selectImage(image: X) {
+  selectImage(image: NewMapImage) {
     this.selectedImage = image;
-    this.images.forEach(image => image.isSelected=false);
-    image.isSelected=true;
-    console.log('Selected image:', image);
+    this.images.forEach(image => image.isSelected = false);
+    image.isSelected = true;
   }
 
-  close() {
-    this.ref.close();
+  close(withValue: boolean) {
+    if (withValue) {
+      this.ref.close(this.selectedImage);
+    } else {
+      this.ref.close();
+    }
   }
 }
