@@ -7,19 +7,37 @@ import { EditorButtonAction } from 'src/app/model/config';
 })
 export class EditorConfigService {
 
+
   private buttonActionSubject: BehaviorSubject<EditorButtonAction>;
   public buttonAction$: Observable<EditorButtonAction>;
 
   constructor() {
-    this.buttonActionSubject = new BehaviorSubject({ mapSettings: false, mapColours: false } as EditorButtonAction);
+    this.buttonActionSubject = new BehaviorSubject({ buttonTyp: 'field',imageType:'empty' } as EditorButtonAction);
     this.buttonAction$ = this.buttonActionSubject.asObservable();
   }
 
-  toggleShowSettings(showSettings: boolean) {
-    this.buttonActionSubject.next({ mapSettings: true, mapColours: false } as EditorButtonAction);
+  toggleShowSettings() {
+    let buttonAction: EditorButtonAction = this.buttonActionSubject.getValue();
+    buttonAction.buttonTyp = 'settings';
+    this.buttonActionSubject.next(buttonAction);
   }
 
   toggleShowColour() {
-    this.buttonActionSubject.next({ mapSettings: false, mapColours: true } as EditorButtonAction);
+    let buttonAction: EditorButtonAction = this.buttonActionSubject.getValue();
+    buttonAction.buttonTyp = 'color';
+    this.buttonActionSubject.next(buttonAction);
+  }
+
+  toggleImages(isField: boolean, isObject: boolean) {
+    let buttonAction: EditorButtonAction = this.buttonActionSubject.getValue();
+    buttonAction.buttonTyp = 'image';
+    if (isField && !isObject) {
+      buttonAction.imageType = 'field';
+    } else if (!isField && isObject) {
+      buttonAction.imageType = 'object';
+    }else{
+      buttonAction.imageType = 'empty';
+    }
+    this.buttonActionSubject.next(buttonAction);
   }
 }

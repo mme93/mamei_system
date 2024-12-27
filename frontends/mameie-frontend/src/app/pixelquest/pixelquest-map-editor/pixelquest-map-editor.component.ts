@@ -58,7 +58,7 @@ export class PixelquestMapEditorComponent implements OnInit {
     });
 
     this.subscription = this.editorConfigService.buttonAction$.subscribe(buttonAction => {
-      if (buttonAction.mapColours) {
+      if (buttonAction.buttonTyp ==='color') {
         this.editorDialogService.openPixelQuestMapEditorColor().subscribe((result: NewMapImage) => {
           console.log(result)
           if (result.category === 'objects') {
@@ -68,13 +68,15 @@ export class PixelquestMapEditorComponent implements OnInit {
           }
           this.newMap.images
         });
-      } else if (buttonAction.mapSettings) {
+      } else if (buttonAction.buttonTyp ==='settings') {
         this.editorDialogService.openPixelQuestMapEditorSettings(this.newMap.settings).subscribe(result => {
           if (result) {
             this.newMap.settings = result
             this.updateGrid();
           }
         });
+      }else if (buttonAction.buttonTyp ==='image') {
+        
       }
 
     });

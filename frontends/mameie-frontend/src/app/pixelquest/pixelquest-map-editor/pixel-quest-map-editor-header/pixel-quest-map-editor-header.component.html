@@ -4,6 +4,14 @@
         <i class="pi pi-cog" (click)="toggleSettings()"></i>
     </div>
     <div class="header-left" style="padding-left: 0.5rem;">
+        <i *ngIf="isField" class="pi pi-stop" style="background-color: green;" (click)="toggleImages(true,false)"></i>
+        <i *ngIf="!isField" class="pi pi-stop" style="background-color: red;" (click)="toggleImages(true,false)"></i>
+    </div>
+    <div class="header-left" style="padding-left: 0.5rem;">
+        <i *ngIf="isObject" class="pi pi-home" style="background-color: green;" (click)="toggleImages(false,true)"></i>
+        <i *ngIf="!isObject" class="pi pi-home" style="background-color: red;" (click)="toggleImages(false,true)"></i>
+    </div>
+    <div class="header-left" style="padding-left: 0.5rem;">
         <i class="pi pi-palette" (click)="toggleColour()"></i>
     </div>
 

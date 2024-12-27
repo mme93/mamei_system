@@ -3,8 +3,8 @@ export interface GameInterface {
 }
 
 export interface EditorButtonAction {
-    mapSettings: boolean;
-    mapColours: boolean;
+    buttonTyp:string;
+    imageType:string;
 }
 
 export interface NewMap {
