@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { NewMapImage } from 'src/app/model/config';
+import { ScreenService } from 'src/app/service/tools/screen/screen.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pixelquest-map-editor-color-dialog',
@@ -14,9 +16,12 @@ import { NewMapImage } from 'src/app/model/config';
   templateUrl: './pixelquest-map-editor-color-dialog.component.html',
   styleUrl: './pixelquest-map-editor-color-dialog.component.scss'
 })
-export class PixelquestMapEditorColorDialogComponent {
+export class PixelquestMapEditorColorDialogComponent implements OnInit {
   searchText = '';
-  selectedCategory: string = '';
+  blockHeight: number = 0;
+  blockwidth: number = 0;
+  gridHeight: number = 0;
+  gridwidth: number = 0;
   selectedImage: NewMapImage | null = null;
   categories = [
     { label: 'Fields', value: 'fields' },
@@ -43,22 +48,30 @@ export class PixelquestMapEditorColorDialogComponent {
     { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
 
     { title: 'Object 2', src: '/assets/objects/bonfire.png', category: 'objects', isSelected: false },
+    { title: 'Object 2', src: '/assets/objects/quest_icon.png', category: 'objects', isSelected: false },
   ];
 
   filteredImages: NewMapImage[] = [...this.images];
+  private subscription!: Subscription;
 
-  constructor(private ref: DynamicDialogRef) {
+  constructor(private ref: DynamicDialogRef, private screenSizeService: ScreenService) {
     this.filterImages();
+  }
+  ngOnInit(): void {
+    this.subscription = this.screenSizeService.screenSize$.subscribe(size => {
+      this.blockHeight = size.width / 5;
+      this.blockwidth = size.width / 5;
+      this.gridHeight = size.height;
+      this.gridwidth = size.width;
+    });
   }
 
   filterImages() {
     this.filteredImages = this.images.filter((image) => {
-      const matchesCategory =
-        !this.selectedCategory || image.category === this.selectedCategory;
       const matchesSearch =
         !this.searchText ||
         image.title.toLowerCase().includes(this.searchText.toLowerCase());
-      return matchesCategory && matchesSearch;
+      return matchesSearch;
     });
   }
 

@@ -1,11 +1,6 @@
 <div class="dialog-content">
     <div class="filters">
         <input type="text" placeholder="Search by keyword or title" [(ngModel)]="searchText" (input)="filterImages()" />
-        <select [(ngModel)]="selectedCategory" (change)="filterImages()">
-        <option value="">Select Category</option>
-        <option value="fields">Fields</option>
-        <option value="objects">Objects</option>
-      </select>
     </div>
 
     <div class="grid-container">
