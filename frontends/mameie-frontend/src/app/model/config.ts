@@ -31,6 +31,7 @@ export interface NewMapGridRow {
 }
 
 export interface NewMapImagePaths {
+    imageType:string;
     fields: string;
     objects: string;
 }

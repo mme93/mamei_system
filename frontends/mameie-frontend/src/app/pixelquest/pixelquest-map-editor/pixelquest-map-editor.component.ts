@@ -20,10 +20,12 @@ import { DialogService } from 'primeng/dynamicdialog';
   styleUrl: './pixelquest-map-editor.component.scss'
 })
 export class PixelquestMapEditorComponent implements OnInit {
+
   newMap: NewMap = {
     images: {
+      imageType: 'empty',
       fields: '/assets/stone_ground_field.png',
-      objects: ''
+      objects: '/assets/objects/bonfire.png'
     },
     settings: {
       title: 'New Title',
@@ -58,25 +60,25 @@ export class PixelquestMapEditorComponent implements OnInit {
     });
 
     this.subscription = this.editorConfigService.buttonAction$.subscribe(buttonAction => {
-      if (buttonAction.buttonTyp ==='color') {
+      if (buttonAction.buttonTyp === 'color') {
         this.editorDialogService.openPixelQuestMapEditorColor().subscribe((result: NewMapImage) => {
           console.log(result)
           if (result.category === 'objects') {
-            this.newMap.images.objects=result.src;
+            this.newMap.images.objects = result.src;
           } else if (result.category === 'fields') {
-            this.newMap.images.fields=result.src;
+            this.newMap.images.fields = result.src;
           }
           this.newMap.images
         });
-      } else if (buttonAction.buttonTyp ==='settings') {
+      } else if (buttonAction.buttonTyp === 'settings') {
         this.editorDialogService.openPixelQuestMapEditorSettings(this.newMap.settings).subscribe(result => {
           if (result) {
             this.newMap.settings = result
             this.updateGrid();
           }
         });
-      }else if (buttonAction.buttonTyp ==='image') {
-        
+      } else if (buttonAction.buttonTyp === 'image') {
+        this.newMap.images.imageType = buttonAction.imageType;
       }
 
     });
@@ -98,6 +100,14 @@ export class PixelquestMapEditorComponent implements OnInit {
         }
         this.newMap.grid.push({ elements: elements });
       }
+    }
+  }
+
+  changeElement(element: NewMapGridElement) {
+    if (this.newMap.images.imageType === 'field') {
+      element.field_image = this.newMap.images.fields;
+    } else if (this.newMap.images.imageType === 'object') {
+      element.field_object_image = this.newMap.images.objects;
     }
   }
 

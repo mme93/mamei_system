@@ -10,12 +10,16 @@
     top: 0;
     left: 0;
     pointer-events: none;
-}
-
-.figure-image {
-    z-index: 2;
+    z-index: 3;
 }
 
 .world-element-content {
     z-index: 1;
+}
+
+.figure-image-small {
+    transform: translate(50%, 50%);
+    pointer-events: none;
+    z-index: 2;
+    transition: transform 0.2s ease;
 }
