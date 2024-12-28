@@ -6,8 +6,7 @@ import { EditorButtonAction } from 'src/app/model/config';
   providedIn: 'root'
 })
 export class EditorConfigService {
-
-
+  
   private buttonActionSubject: BehaviorSubject<EditorButtonAction>;
   public buttonAction$: Observable<EditorButtonAction>;
 
@@ -38,6 +37,12 @@ export class EditorConfigService {
     }else{
       buttonAction.imageType = 'empty';
     }
+    this.buttonActionSubject.next(buttonAction);
+  }
+
+  saveMap() {
+    let buttonAction: EditorButtonAction = this.buttonActionSubject.getValue();
+    buttonAction.buttonTyp = 'saveMap';
     this.buttonActionSubject.next(buttonAction);
   }
 }

@@ -46,7 +46,7 @@ export class PixelQuestMapEditorHeaderComponent {
   }
 
   saveMap() {
-    console.log('SAVE MAP')
+    this.editorConfigService.saveMap();
   }
 
 }

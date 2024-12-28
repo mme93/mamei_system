@@ -10,6 +10,7 @@ import { EditorConfigService } from 'src/app/service/editor/editor-config.servic
 import { EditorDialogService } from 'src/app/service/editor/dialog/editor-dialog.service';
 import { NewMap, NewMapGridElement, NewMapGridRow, NewMapImage, NewMapSettings } from 'src/app/model/config';
 import { DialogService } from 'primeng/dynamicdialog';
+import { MapEditorService } from 'src/app/service/data/map/map-editor.service';
 
 @Component({
   selector: 'app-pixelquest-map-editor',
@@ -21,27 +22,13 @@ import { DialogService } from 'primeng/dynamicdialog';
 })
 export class PixelquestMapEditorComponent implements OnInit {
 
-  newMap: NewMap = {
-    images: {
-      imageType: 'empty',
-      fields: '/assets/stone_ground_field.png',
-      objects: '/assets/objects/bonfire.png'
-    },
-    settings: {
-      title: 'New Title',
-      rows: 14,
-      cols: 32,
-      blockWidth: 0,
-      blockHight: 0
-    },
-    grid: []
-  }
+  newMap: NewMap = this.mapEditorService.loadMap();
 
   screenSize: { width: number, height: number } | null = null;
   sideBarSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private screenSizeService: ScreenService, private editorConfigService: EditorConfigService, private editorDialogService: EditorDialogService) {
+  constructor(private mapEditorService: MapEditorService, private screenSizeService: ScreenService, private editorConfigService: EditorConfigService, private editorDialogService: EditorDialogService) {
 
   }
 
@@ -64,7 +51,7 @@ export class PixelquestMapEditorComponent implements OnInit {
         this.editorDialogService.openPixelQuestMapEditorColor(this.newMap.images.imageType).subscribe((result: NewMapImage) => {
           if (result && result.category === 'objects') {
             this.newMap.images.objects = result.src;
-          } else if (result &&result.category === 'fields') {
+          } else if (result && result.category === 'fields') {
             this.newMap.images.fields = result.src;
           }
           this.newMap.images
@@ -78,6 +65,8 @@ export class PixelquestMapEditorComponent implements OnInit {
         });
       } else if (buttonAction.buttonTyp === 'image') {
         this.newMap.images.imageType = buttonAction.imageType;
+      } else if (buttonAction.buttonTyp === 'saveMap') {
+        this.mapEditorService.saveMap();
       }
 
     });
