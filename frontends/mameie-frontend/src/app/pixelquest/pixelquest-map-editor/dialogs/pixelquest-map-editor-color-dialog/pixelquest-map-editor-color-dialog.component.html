@@ -1,12 +1,12 @@
-<div class="dialog-content">
+<div #dialogContent class="dialog-content">
     <div class="filters">
         <input type="text" placeholder="Search by keyword or title" [(ngModel)]="searchText" (input)="filterImages()" />
     </div>
 
     <div class="grid-container">
-        <div *ngFor="let image of filteredImages" class="image-item" (click)="selectImage(image)">
-            <img [src]="image.src" [alt]="image.title" />
-            <p>{{ image.title }}</p>
+        <div *ngFor="let image of filteredImages" class="image-item" [style.width.px]="blockwidth" [style.height.px]="blockHeight" (click)="selectImage(image)">
+            <img [src]="image.src" [alt]="image.title" [style.width.px]="blockwidth" [style.height.px]="blockHeight" />
+            <p [style.fontSize.px]="blockHeight / 6">{{ image.title }}</p>
         </div>
     </div>
 

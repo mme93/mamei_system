@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './pixelquest-map-editor-color-dialog.component.scss'
 })
 export class PixelquestMapEditorColorDialogComponent implements OnInit {
+  @ViewChild('dialogContent', { static: true }) dialogContent!: ElementRef<HTMLDivElement>;
   searchText = '';
   blockHeight: number = 0;
   blockwidth: number = 0;
@@ -59,10 +60,12 @@ export class PixelquestMapEditorColorDialogComponent implements OnInit {
   }
   ngOnInit(): void {
     this.subscription = this.screenSizeService.screenSize$.subscribe(size => {
-      this.blockHeight = size.width / 5;
-      this.blockwidth = size.width / 5;
-      this.gridHeight = size.height;
-      this.gridwidth = size.width;
+      const dialogWidth = this.dialogContent.nativeElement.offsetWidth;
+      const padding = 20; // Padding zwischen den Bildern
+      const totalColumns = 4;
+
+      this.blockwidth = (dialogWidth - padding * (totalColumns + 1)) / totalColumns;
+      this.blockHeight = this.blockwidth;
     });
   }
 
@@ -89,3 +92,4 @@ export class PixelquestMapEditorColorDialogComponent implements OnInit {
     }
   }
 }
+
