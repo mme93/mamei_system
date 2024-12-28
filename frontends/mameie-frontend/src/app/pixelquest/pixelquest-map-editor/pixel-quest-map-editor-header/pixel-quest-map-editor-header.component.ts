@@ -45,4 +45,8 @@ export class PixelQuestMapEditorHeaderComponent {
     this.editorConfigService.toggleImages(this.isField, this.isObject);
   }
 
+  saveMap() {
+    console.log('SAVE MAP')
+  }
+
 }

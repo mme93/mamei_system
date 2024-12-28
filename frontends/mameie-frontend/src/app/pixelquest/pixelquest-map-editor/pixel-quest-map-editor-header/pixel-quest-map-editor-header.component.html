@@ -4,6 +4,9 @@
         <i class="pi pi-cog" (click)="toggleSettings()"></i>
     </div>
     <div class="header-left" style="padding-left: 0.5rem;">
+        <i class="pi pi-save" (click)="saveMap()"></i>
+    </div>
+    <div class="header-left" style="padding-left: 0.5rem;">
         <i *ngIf="isField" class="pi pi-stop" style="background-color: green;" (click)="toggleImages(true,false)"></i>
         <i *ngIf="!isField" class="pi pi-stop" style="background-color: red;" (click)="toggleImages(true,false)"></i>
     </div>
