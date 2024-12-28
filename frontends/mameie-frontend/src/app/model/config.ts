@@ -41,4 +41,5 @@ export interface NewMapImage {
     src: string;
     category: String;
     isSelected: boolean;
+    size:string;
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
@@ -17,30 +17,21 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./pixelquest-map-editor-color-dialog.component.scss'],
 })
 export class PixelquestMapEditorColorDialogComponent implements OnInit, AfterViewInit {
+
   @ViewChild('dialogContent', { static: false }) dialogContent!: ElementRef<HTMLDivElement>;
+
   searchText = '';
   blockHeight: number = 0;
   blockwidth: number = 0;
   selectedImage: NewMapImage | null = null;
 
-  categories = [
-    { label: 'Fields', value: 'fields' },
-    { label: 'Objects', value: 'objects' },
-  ];
-
-  images: NewMapImage[] = [
-    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields', isSelected: false },
-    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields', isSelected: false },
-    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields', isSelected: false },
-    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
-    { title: 'Object 2', src: '/assets/objects/bonfire.png', category: 'objects', isSelected: false },
-    { title: 'Object 2', src: '/assets/objects/quest_icon.png', category: 'objects', isSelected: false },
-  ];
+  images: NewMapImage[] = [];
 
   filteredImages: NewMapImage[] = [...this.images];
   private subscription!: Subscription;
 
-  constructor(private ref: DynamicDialogRef, private screenSizeService: ScreenService, private cd: ChangeDetectorRef) {
+  constructor(private ref: DynamicDialogRef, private screenSizeService: ScreenService, private cd: ChangeDetectorRef, private config: DynamicDialogConfig) {
+    this.loadImages();
     this.filterImages();
   }
 
@@ -86,4 +77,16 @@ export class PixelquestMapEditorColorDialogComponent implements OnInit, AfterVie
       this.ref.close();
     }
   }
+
+  loadImages() {
+    this.images = [
+      { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'field', isSelected: false, size: 'normal' },
+      { title: 'Wood', src: '/assets/fields/wood.png', category: 'field', isSelected: false, size: 'normal' },
+      { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'field', isSelected: false, size: 'normal' },
+      { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'field', isSelected: false, size: 'normal' },
+      { title: 'Bon fire', src: '/assets/objects/bonfire.png', category: 'object', isSelected: false, size: 'normal' },
+      { title: 'Quest', src: '/assets/objects/quest_icon.png', category: 'object', isSelected: false, size: 'normal' },
+    ].filter(image => image.category === this.config.data);
+  }
+
 }

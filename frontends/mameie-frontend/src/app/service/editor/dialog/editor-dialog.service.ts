@@ -22,11 +22,12 @@ export class EditorDialogService {
           }).onClose;
     }
 
-    openPixelQuestMapEditorColor(){
+    openPixelQuestMapEditorColor(category:string){
       return this.dialogService.open(PixelquestMapEditorColorDialogComponent, {
             header: 'Map Editor Settings',
             height: '50vh',
-            width: '80vh'
+            width: '80vh',
+            data: category
           }).onClose;
     }
   }

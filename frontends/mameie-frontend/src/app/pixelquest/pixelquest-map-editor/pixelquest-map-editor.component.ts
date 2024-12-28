@@ -61,11 +61,10 @@ export class PixelquestMapEditorComponent implements OnInit {
 
     this.subscription = this.editorConfigService.buttonAction$.subscribe(buttonAction => {
       if (buttonAction.buttonTyp === 'color') {
-        this.editorDialogService.openPixelQuestMapEditorColor().subscribe((result: NewMapImage) => {
-          console.log(result)
-          if (result.category === 'objects') {
+        this.editorDialogService.openPixelQuestMapEditorColor(this.newMap.images.imageType).subscribe((result: NewMapImage) => {
+          if (result && result.category === 'objects') {
             this.newMap.images.objects = result.src;
-          } else if (result.category === 'fields') {
+          } else if (result &&result.category === 'fields') {
             this.newMap.images.fields = result.src;
           }
           this.newMap.images
