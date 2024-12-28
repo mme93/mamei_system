@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -14,16 +14,15 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [CommonModule, InputTextModule, ButtonModule, DropdownModule, FormsModule],
   templateUrl: './pixelquest-map-editor-color-dialog.component.html',
-  styleUrl: './pixelquest-map-editor-color-dialog.component.scss'
+  styleUrls: ['./pixelquest-map-editor-color-dialog.component.scss'],
 })
-export class PixelquestMapEditorColorDialogComponent implements OnInit {
-  @ViewChild('dialogContent', { static: true }) dialogContent!: ElementRef<HTMLDivElement>;
+export class PixelquestMapEditorColorDialogComponent implements OnInit, AfterViewInit {
+  @ViewChild('dialogContent', { static: false }) dialogContent!: ElementRef<HTMLDivElement>;
   searchText = '';
   blockHeight: number = 0;
   blockwidth: number = 0;
-  gridHeight: number = 0;
-  gridwidth: number = 0;
   selectedImage: NewMapImage | null = null;
+
   categories = [
     { label: 'Fields', value: 'fields' },
     { label: 'Objects', value: 'objects' },
@@ -34,20 +33,6 @@ export class PixelquestMapEditorColorDialogComponent implements OnInit {
     { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields', isSelected: false },
     { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields', isSelected: false },
     { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
-
-    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields', isSelected: false },
-    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields', isSelected: false },
-    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields', isSelected: false },
-    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
-    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields', isSelected: false },
-    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields', isSelected: false },
-    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields', isSelected: false },
-    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
-    { title: 'Stone', src: '/assets/stone_ground_field.png', category: 'fields', isSelected: false },
-    { title: 'Wood', src: '/assets/fields/wood.png', category: 'fields', isSelected: false },
-    { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'fields', isSelected: false },
-    { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'fields', isSelected: false },
-
     { title: 'Object 2', src: '/assets/objects/bonfire.png', category: 'objects', isSelected: false },
     { title: 'Object 2', src: '/assets/objects/quest_icon.png', category: 'objects', isSelected: false },
   ];
@@ -55,32 +40,42 @@ export class PixelquestMapEditorColorDialogComponent implements OnInit {
   filteredImages: NewMapImage[] = [...this.images];
   private subscription!: Subscription;
 
-  constructor(private ref: DynamicDialogRef, private screenSizeService: ScreenService) {
+  constructor(private ref: DynamicDialogRef, private screenSizeService: ScreenService, private cd: ChangeDetectorRef) {
     this.filterImages();
   }
+
   ngOnInit(): void {
-    this.subscription = this.screenSizeService.screenSize$.subscribe(size => {
+    this.subscription = this.screenSizeService.screenSize$.subscribe(() => {
+      this.calculateDimensions();
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.calculateDimensions();
+    this.cd.detectChanges();
+    window.addEventListener('resize', () => this.calculateDimensions());
+  }
+
+  private calculateDimensions(): void {
+    if (this.dialogContent) {
       const dialogWidth = this.dialogContent.nativeElement.offsetWidth;
-      const padding = 20; // Padding zwischen den Bildern
+      const padding = 20;
       const totalColumns = 4;
 
       this.blockwidth = (dialogWidth - padding * (totalColumns + 1)) / totalColumns;
       this.blockHeight = this.blockwidth;
-    });
+    }
   }
 
   filterImages() {
-    this.filteredImages = this.images.filter((image) => {
-      const matchesSearch =
-        !this.searchText ||
-        image.title.toLowerCase().includes(this.searchText.toLowerCase());
-      return matchesSearch;
-    });
+    this.filteredImages = this.images.filter((image) =>
+      !this.searchText || image.title.toLowerCase().includes(this.searchText.toLowerCase())
+    );
   }
 
   selectImage(image: NewMapImage) {
     this.selectedImage = image;
-    this.images.forEach(image => image.isSelected = false);
+    this.images.forEach((img) => (img.isSelected = false));
     image.isSelected = true;
   }
 
@@ -92,4 +87,3 @@ export class PixelquestMapEditorColorDialogComponent implements OnInit {
     }
   }
 }
-
