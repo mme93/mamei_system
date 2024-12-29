@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs';
 export class PixelquestMapEditorColorDialogComponent implements OnInit, AfterViewInit {
 
   @ViewChild('dialogContent', { static: false }) dialogContent!: ElementRef<HTMLDivElement>;
-
+  objectSize = 'normal';
   searchText = '';
   blockHeight: number = 0;
   blockwidth: number = 0;
@@ -30,7 +30,7 @@ export class PixelquestMapEditorColorDialogComponent implements OnInit, AfterVie
   filteredImages: NewMapImage[] = [...this.images];
   private subscription!: Subscription;
 
-  constructor(private ref: DynamicDialogRef, private screenSizeService: ScreenService, private cd: ChangeDetectorRef, private config: DynamicDialogConfig) {
+  constructor(private ref: DynamicDialogRef, private screenSizeService: ScreenService, private cd: ChangeDetectorRef, public config: DynamicDialogConfig) {
     this.loadImages();
     this.filterImages();
   }
@@ -72,6 +72,10 @@ export class PixelquestMapEditorColorDialogComponent implements OnInit, AfterVie
 
   close(withValue: boolean) {
     if (withValue) {
+      if (this.selectedImage && this.config.data === 'object') {
+        this.selectedImage.objectSize = this.objectSize;
+      }
+      console.log(this.selectedImage)
       this.ref.close(this.selectedImage);
     } else {
       this.ref.close();
@@ -84,8 +88,8 @@ export class PixelquestMapEditorColorDialogComponent implements OnInit, AfterVie
       { title: 'Wood', src: '/assets/fields/wood.png', category: 'field', isSelected: false, size: 'normal' },
       { title: 'Gras', src: '/assets/fields/gras.jpg', category: 'field', isSelected: false, size: 'normal' },
       { title: 'Sand', src: '/assets/fields/sand.jpg', category: 'field', isSelected: false, size: 'normal' },
-      { title: 'Bon fire', src: '/assets/objects/bonfire.png', category: 'object', isSelected: false, size: 'normal' },
-      { title: 'Quest', src: '/assets/objects/quest_icon.png', category: 'object', isSelected: false, size: 'normal' },
+      { title: 'Bon fire', src: '/assets/objects/bonfire.png', category: 'object', isSelected: false, size: this.objectSize },
+      { title: 'Quest', src: '/assets/objects/quest_icon.png', category: 'object', isSelected: false, size: this.objectSize },
     ].filter(image => image.category === this.config.data);
   }
 

@@ -3,8 +3,8 @@ export interface GameInterface {
 }
 
 export interface EditorButtonAction {
-    buttonTyp:string;
-    imageType:string;
+    buttonTyp: string;
+    imageType: string;
 }
 
 export interface NewMap {
@@ -31,7 +31,7 @@ export interface NewMapGridRow {
 }
 
 export interface NewMapImagePaths {
-    imageType:string;
+    imageType: string;
     fields: string;
     objects: string;
 }
@@ -41,5 +41,6 @@ export interface NewMapImage {
     src: string;
     category: String;
     isSelected: boolean;
-    size:string;
+    size: string;
+    objectSize?: string;
 }
