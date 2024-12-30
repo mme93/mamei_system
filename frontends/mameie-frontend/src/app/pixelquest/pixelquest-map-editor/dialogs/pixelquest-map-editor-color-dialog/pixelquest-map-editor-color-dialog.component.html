@@ -1,0 +1,24 @@
+<div class="dialog-content" #dialogContent>
+    <div class="filters">
+        <div class="filters-group">
+            <select name="size" id="size" *ngIf="config.data === 'object'" [(ngModel)]="objectSize">
+                <option value="normal">Normal</option>
+                <option value="small">Small</option>
+            </select>
+            <input type="text" placeholder="Search by keyword or title" [(ngModel)]="searchText" (input)="filterImages()" [class.full-width]="config.data !== 'object'" />
+        </div>
+    </div>
+
+
+    <div class="grid-container">
+        <div *ngFor="let image of filteredImages" class="image-item" [style.width.px]="blockwidth" [style.height.px]="blockHeight" (click)="selectImage(image)">
+            <img [src]="image.src" [alt]="image.title" [style.width.px]="blockwidth" [style.height.px]="blockHeight" />
+            <p [style.fontSize.px]="blockHeight / 6">{{ image.title }}</p>
+        </div>
+    </div>
+
+    <div class="dialog-footer">
+        <button class="btn" (click)="close(true)">Übernehmen</button>
+        <button class="btn" (click)="close(false)">Abbrechen</button>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="editor-settings-dialog-content">
+    <div class="flex flex-column gap-2 content">
+        <div class="flex flex-column gap-2">
+            <label for="map-title">Map Title</label>
+            <input pInputText id="map-title" aria-describedby="username-help" [(ngModel)]="mapSettings.title" />
+            <small id="map-title-help">Enter your username to reset your password.</small>
+        </div>
+
+        <div class="flex flex-column gap-2">
+            <label for="rows">Höhe</label>
+            <input pInputText id="rows" aria-describedby="rows-help" [(ngModel)]="mapSettings.rows" />
+            <small id="rows-help">Enter your username to reset your password.</small>
+        </div>
+
+        <div class="flex flex-column gap-2">
+            <label for="cols">Breite</label>
+            <input pInputText id="cols" aria-describedby="cols-help" [(ngModel)]="mapSettings.cols" />
+            <small id="cols-help">Enter your username to reset your password.</small>
+        </div>
+    </div>
+
+    <div class="dialog-footer">
+        <p-button label="Übernehmen" [raised]="true" (onClick)="takeOver()"></p-button>
+        <p-button label="Abbrechen" [raised]="true" (onClick)="close()"></p-button>
+    </div>
+</div>

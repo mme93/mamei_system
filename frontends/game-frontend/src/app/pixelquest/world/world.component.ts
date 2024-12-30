@@ -29,7 +29,7 @@ export class WorldComponent implements OnInit, OnDestroy {
   screenSize: { width: number, height: number } | null = null;
   private subscription!: Subscription;
 
-  constructor(private accountService: AccountService, private screenSizeService: ScreenSizeService, private mapService: MapService, private worldService: WorldService) {
+  constructor(private pixelQuestAccountService: AccountService, private screenSizeService: ScreenSizeService, private mapService: MapService, private worldService: WorldService) {
 
   }
 
@@ -44,7 +44,7 @@ export class WorldComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.worldService.world$.subscribe(worlds => {
-      const map = worlds?.maps.find(world => world.pixelQuestMap === this.accountService.getAccount()?.pixelQuestMap);
+      const map = worlds?.maps.find(world => world.pixelQuestMap === this.pixelQuestAccountService.getAccount()?.pixelQuestMap);
       if (map) {
         this.map = map;
       }

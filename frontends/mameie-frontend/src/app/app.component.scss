@@ -1,21 +1,44 @@
-:host ::ng-deep .p-menubar {
-  background-color: #4CAF50;
-  border: none;
+::ng-deep * {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
-  color: #fff;
+::ng-deep p-messages {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 50vw;
 }
 
-:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:hover {
-  background-color: #45a049;
+::ng-deep .p-message {
+    margin-bottom: 10px;
+    padding-right: 10px;
 }
 
-:host ::ng-deep .p-menubar .p-menuitem .p-menuitem-link .p-menuitem-icon {
-  color: #fff;
+::ng-deep .p-message-close-icon {
+    margin-left: auto;
 }
 
-html{
-  margin: 0;
-  padding: 0;
+::ng-deep .p-message-close-button {
+    margin-left: auto;
+    position: right;
+    margin-right: 0;
+}
+
+::ng-deep .p-message-icon {
+    display: none !important;
+    position: right;
+    margin-right: 0;
+}
+
+::ng-deep .p-message-summary {
+    margin-left: 1rem;
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

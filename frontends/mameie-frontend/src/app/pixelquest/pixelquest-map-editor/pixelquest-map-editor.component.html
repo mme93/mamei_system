@@ -1,0 +1,9 @@
+<app-pixel-quest-map-editor-header class="pixelquest-header"></app-pixel-quest-map-editor-header>
+
+<div class="content-wrapper">
+    <div [style.height.px]="screenSize?.height" [style.width.px]="screenSize?.width" class="grid">
+        <div *ngFor="let row of newMap.grid; let row_pos = index" class="row">
+            <app-pixelquest-map-editor-element [newObjectImage]="element.field_object_image" [newImage]="element.field_image " (click)="changeElement(element) " *ngFor="let element of row.elements; let col_pos=index " [height]="newMap.settings.blockHight " [width]="newMap.settings.blockWidth "></app-pixelquest-map-editor-element>
+        </div>
+    </div>
+</div>

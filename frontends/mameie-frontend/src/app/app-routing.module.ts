@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./pages/account/login/login.component";
+import { PixelquestComponent } from './pixelquest/pixelquest.component';
+import { PixelLoginComponent } from './pixelquest/pixel-login/pixel-login.component';
+import { PixelquestMapEditorComponent } from './pixelquest/pixelquest-map-editor/pixelquest-map-editor.component';
 
 const routes: Routes = [
   {
@@ -9,8 +11,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'pixelquest',
+    component: PixelquestComponent
+  },
+  {
     path: 'login',
-    component: LoginComponent
+    component: PixelLoginComponent
+  },
+  {
+    path: 'editor',
+    component: PixelquestMapEditorComponent
   }
 ];
 

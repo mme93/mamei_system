@@ -7,15 +7,18 @@ import { ButtonModule } from 'primeng/button';
 import {MenuModule} from "primeng/menu";
 import {MenubarModule} from "primeng/menubar";
 import {CardModule} from "primeng/card";
-import {LoginComponent} from "./pages/account/login/login.component";
 import { InputTextModule } from 'primeng/inputtext';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+import { MessageModule } from 'primeng/message';
+import {MessagesModule} from 'primeng/messages';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent
+    AppComponent
+
   ],
   imports: [
     BrowserModule,
@@ -26,9 +29,12 @@ import {FormsModule} from "@angular/forms";
     MenuModule,
     MenubarModule,
     CardModule,
-    InputTextModule
+    InputTextModule,
+    HttpClientModule,
+    MessageModule,
+    MessagesModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

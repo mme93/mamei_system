@@ -1,0 +1,28 @@
+.world-element-content {
+    background-image: url('/assets/stone_ground_field.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    position: relative;
+}
+
+.figure-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.world-element-content {
+    z-index: 1;
+}
+
+.figure-image-small {
+    position: absolute;
+    transform: translate(50%, 50%);
+    pointer-events: none;
+    z-index: 2;
+    transition: transform 0.2s ease;
+}
