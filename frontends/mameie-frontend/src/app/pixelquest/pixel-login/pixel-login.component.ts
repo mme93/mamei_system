@@ -11,7 +11,7 @@ import { ScreenService } from '../service/tools/screen/screen.service';
 @Component({
   selector: 'app-pixel-login',
   standalone: true,
-  imports: [CardModule, FormsModule, ButtonModule, FormsModule, ReactiveFormsModule, PanelModule],
+  imports: [CardModule, FormsModule, ButtonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './pixel-login.component.html',
   styleUrl: './pixel-login.component.scss'
 })
