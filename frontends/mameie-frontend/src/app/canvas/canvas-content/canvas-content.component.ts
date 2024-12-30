@@ -198,13 +198,4 @@ export class CanvasContentComponent implements OnInit {
     }
   }
   
-  isMobile(): boolean {
-    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
-    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
-  }
-  
-  isTablet(): boolean {
-    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
-    return /ipad|tablet|playbook|silk/i.test(userAgent.toLowerCase());
-  }
 }
