@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { NewMapSettings } from 'src/app/model/config';
+import { NewMapSettings } from 'src/app/pixelquest/model/config';
 
 @Component({
   selector: 'app-pixelquest-map-editor-settings',

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ScreenService } from 'src/app/service/tools/screen/screen.service';
 import { PixelquestMapEditorElementComponent } from "./pixelquest-map-editor-element/pixelquest-map-editor-element.component";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PixelquestHeaderComponent } from '../pixel-content/pixelquest-header/pixelquest-header.component';
 import { PixelQuestMapEditorHeaderComponent } from './pixel-quest-map-editor-header/pixel-quest-map-editor-header.component';
-import { EditorConfigService } from 'src/app/service/editor/editor-config.service';
-import { EditorDialogService } from 'src/app/service/editor/dialog/editor-dialog.service';
-import { NewMap, NewMapGridElement, NewMapGridRow, NewMapImage, NewMapSettings } from 'src/app/model/config';
 import { DialogService } from 'primeng/dynamicdialog';
-import { MapEditorService } from 'src/app/service/data/map/map-editor.service';
+import { EditorDialogService } from '../service/editor/dialog/editor-dialog.service';
+import { NewMap, NewMapImage, NewMapGridElement } from '../model/config';
+import { MapEditorService } from '../service/data/map/map-editor.service';
+import { EditorConfigService } from '../service/editor/editor-config.service';
+import { ScreenService } from '../service/tools/screen/screen.service';
 
 @Component({
   selector: 'app-pixelquest-map-editor',

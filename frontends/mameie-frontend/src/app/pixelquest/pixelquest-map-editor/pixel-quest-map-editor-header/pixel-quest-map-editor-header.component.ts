@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { EditorConfigService } from 'src/app/service/editor/editor-config.service';
 import { PixelquestMapEditorSettingsComponent } from '../dialogs/pixelquest-map-editor-settings/pixelquest-map-editor-settings.component';
-import { NewMapSettings } from 'src/app/model/config';
+
 import { CommonModule } from '@angular/common';
+import { EditorConfigService } from '../../service/editor/editor-config.service';
 
 @Component({
   selector: 'app-pixel-quest-map-editor-header',

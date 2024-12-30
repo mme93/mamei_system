@@ -1,9 +1,9 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
-import { PixelQuestAccountDto, PixelQuestUserDto } from 'src/app/model/account';
 import { environment } from 'src/environments/environment';
 import { ErrorMessageService } from '../../message/error-message.service';
+import { PixelQuestAccountDto, PixelQuestUserDto } from 'src/app/pixelquest/model/account';
 
 @Injectable({
   providedIn: 'root'

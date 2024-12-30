@@ -3,17 +3,15 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { Subscription } from 'rxjs';
-import { ScreenService } from 'src/app/service/tools/screen/screen.service';
-import { PanelModule } from 'primeng/panel';
-import { Router } from '@angular/router';
-import { AccountService } from 'src/app/service/data/account/account.service';
-import { PixelQuestAccountDto } from 'src/app/model/account';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AccountService } from '../service/data/account/account.service';
+import { ScreenService } from '../service/tools/screen/screen.service';
 
 @Component({
   selector: 'app-pixel-login',
   standalone: true,
-  imports: [CardModule, FormsModule, ButtonModule, FormsModule, ReactiveFormsModule, PanelModule],
+  imports: [CardModule, FormsModule, ButtonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './pixel-login.component.html',
   styleUrl: './pixel-login.component.scss'
 })
