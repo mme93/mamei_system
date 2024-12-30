@@ -1,0 +1,13 @@
+<div class="touch-controls">
+    <button class="btn-up" (touchstart)="move('up')">▲</button>
+    <div class="horizontal-buttons">
+        <button class="btn-left" (touchstart)="move('left')">◄</button>
+        <button class="btn-right" (touchstart)="move('right')">►</button>
+    </div>
+    <button class="btn-down" (touchstart)="move('down')">▼</button>
+</div>
+
+Tablet:{{isTablet()}} Handy:{{isMobile()}}
+<div>
+    <canvas id="gridCanvas" #gridCanvas></canvas>
+</div>
