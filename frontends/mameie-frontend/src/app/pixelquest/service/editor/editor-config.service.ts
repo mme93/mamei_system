@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { EditorButtonAction } from 'src/app/model/config';
+import { EditorButtonAction } from '../../model/config';
 
 @Injectable({
   providedIn: 'root'

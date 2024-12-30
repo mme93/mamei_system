@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, Message, MessageService } from "primeng/api";
-import { ErrorMessageService } from './service/message/error-message.service';
+import { ErrorMessageService } from './pixelquest/service/message/error-message.service';
 
 @Component({
   selector: 'app-root',

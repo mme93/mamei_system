@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
-import { NewMapSettings } from 'src/app/model/config';
+import { NewMapSettings } from 'src/app/pixelquest/model/config';
 import { PixelquestMapEditorColorDialogComponent } from 'src/app/pixelquest/pixelquest-map-editor/dialogs/pixelquest-map-editor-color-dialog/pixelquest-map-editor-color-dialog.component';
 import { PixelquestMapEditorSettingsComponent } from 'src/app/pixelquest/pixelquest-map-editor/dialogs/pixelquest-map-editor-settings/pixelquest-map-editor-settings.component';
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NewMap } from 'src/app/model/config';
+import { NewMap } from 'src/app/pixelquest/model/config';
 
 @Injectable({
   providedIn: 'root'

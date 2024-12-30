@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { filter, Subscription } from 'rxjs';
-import { PixelQuestAccountDto } from 'src/app/model/account';
-import { AccountService } from 'src/app/service/data/account/account.service';
-import { ScreenService } from 'src/app/service/tools/screen/screen.service';
 import { PixelquestHeaderComponent } from "./pixelquest-header/pixelquest-header.component";
 import { PixelElementComponent } from './pixel-element/pixel-element.component';
+import { PixelQuestAccountDto } from '../model/account';
+import { AccountService } from '../service/data/account/account.service';
+import { ScreenService } from '../service/tools/screen/screen.service';
 
 @Component({
   selector: 'app-pixel-content',

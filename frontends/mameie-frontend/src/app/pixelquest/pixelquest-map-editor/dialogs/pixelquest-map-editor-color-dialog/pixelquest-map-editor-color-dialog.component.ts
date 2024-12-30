@@ -5,9 +5,9 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
-import { NewMapImage } from 'src/app/model/config';
-import { ScreenService } from 'src/app/service/tools/screen/screen.service';
 import { Subscription } from 'rxjs';
+import { NewMapImage } from 'src/app/pixelquest/model/config';
+import { ScreenService } from 'src/app/pixelquest/service/tools/screen/screen.service';
 
 @Component({
   selector: 'app-pixelquest-map-editor-color-dialog',

@@ -18,7 +18,6 @@ import {MessagesModule} from 'primeng/messages';
 @NgModule({
   declarations: [
     AppComponent
-
   ],
   imports: [
     BrowserModule,
