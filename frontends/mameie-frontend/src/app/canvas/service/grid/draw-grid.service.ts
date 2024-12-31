@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanvasGame } from '../../model/canvas-grid';
+import { CanvasGame, CanvasGameField } from '../../model/canvas-grid';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DrawGridService {
 
-
-  drawGrid(game: CanvasGame, ctx: CanvasRenderingContext2D, nativeElement: HTMLCanvasElement) {
+  drawGrid(game: CanvasGame, ctx: CanvasRenderingContext2D, nativeElement: HTMLCanvasElement, grid: CanvasGameField[][]) {
     ctx.clearRect(0, 0, nativeElement.width, nativeElement.height);
 
     for (let y = 0; y < game.gridContent.visibleHeight; y++) {
@@ -26,6 +25,7 @@ export class DrawGridService {
         }
       }
     }
+
   }
 
   initializeCanvas(game: CanvasGame, nativeElement: HTMLCanvasElement): CanvasRenderingContext2D {
