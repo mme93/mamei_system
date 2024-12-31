@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CanvasGame } from '../model/canvas-grid';
 import { DrawGridService } from '../service/grid/draw-grid.service';
+import { MoveService } from '../service/action/move.service';
 
 @Component({
   selector: 'app-canvas-content',
@@ -19,7 +20,7 @@ export class CanvasContentComponent implements OnInit {
   private ctx!: CanvasRenderingContext2D;
   private uploadedImage: HTMLImageElement | null = null;
 
-  constructor(private drawGridService: DrawGridService) {
+  constructor(private drawGridService: DrawGridService, private moveService: MoveService) {
 
   }
 
@@ -80,46 +81,9 @@ export class CanvasContentComponent implements OnInit {
   }
 
   movePlayer(event: KeyboardEvent): void {
-    const key = event.key;
-    let moved = false;
+    this.game = this.moveService.movePlayerWithKeyEvent(event, this.game);
 
-    if (key === 'w' && this.game.player.playerY > 0) {
-      if (this.game.player.playerY <= this.game.gridContent.visibleStartY && this.game.gridContent.visibleStartY > 0) {
-        this.game.gridContent.visibleStartY--;
-      } else {
-        this.game.player.playerY--;
-      }
-      moved = true;
-    }
-
-    if (key === 's' && this.game.player.playerY < this.game.gridContent.totalHeight - 1) {
-      if (this.game.player.playerY >= this.game.gridContent.visibleStartY + this.game.gridContent.visibleHeight - 1 && this.game.gridContent.visibleStartY + this.game.gridContent.visibleHeight < this.game.gridContent.totalHeight) {
-        this.game.gridContent.visibleStartY++;
-      } else {
-        this.game.player.playerY++;
-      }
-      moved = true;
-    }
-
-    if (key === 'a' && this.game.player.playerX > 0) {
-      if (this.game.player.playerX <= this.game.gridContent.visibleStartX && this.game.gridContent.visibleStartX > 0) {
-        this.game.gridContent.visibleStartX--;
-      } else {
-        this.game.player.playerX--;
-      }
-      moved = true;
-    }
-
-    if (key === 'd' && this.game.player.playerX < this.game.gridContent.totalWidth - 1) {
-      if (this.game.player.playerX >= this.game.gridContent.visibleStartX + this.game.gridContent.visibleWidth - 1 && this.game.gridContent.visibleStartX + this.game.gridContent.visibleWidth < this.game.gridContent.totalWidth) {
-        this.game.gridContent.visibleStartX++;
-      } else {
-        this.game.player.playerX++;
-      }
-      moved = true;
-    }
-
-    if (moved) {
+    if (this.game.moved) {
       this.drawGrid();
     }
   }
