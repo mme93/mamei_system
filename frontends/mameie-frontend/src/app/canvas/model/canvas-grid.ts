@@ -1,6 +1,7 @@
 export interface Player {
     playerX: number;
     playerY: number;
+    image?: HTMLImageElement;
 }
 
 export interface GridContent {
