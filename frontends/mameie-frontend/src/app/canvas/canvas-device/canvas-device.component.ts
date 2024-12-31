@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './canvas-device.component.scss'
 })
 export class CanvasDeviceComponent {
-  
+
   move(arg0: string) {
     throw new Error('Method not implemented.');
   }

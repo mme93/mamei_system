@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CanvasGame } from '../model/canvas-grid';
 import { DrawGridService } from '../service/grid/draw-grid.service';
 import { MoveService } from '../service/action/move.service';
+import { ImageService } from '../service/grid/image.service';
 
 @Component({
   selector: 'app-canvas-content',
@@ -18,7 +19,7 @@ export class CanvasContentComponent implements OnInit {
   game: CanvasGame = this.drawGridService.initCanvasGame();
   ctx!: CanvasRenderingContext2D;
 
-  constructor(private drawGridService: DrawGridService, private moveService: MoveService) { }
+  constructor(private drawGridService: DrawGridService, private moveService: MoveService, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.ctx = this.drawGridService.initializeCanvas(this.game, this.gridCanvas.nativeElement);

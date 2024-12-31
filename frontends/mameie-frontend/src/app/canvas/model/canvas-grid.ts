@@ -21,3 +21,7 @@ export interface CanvasGame {
     player: Player;
     gridContent: GridContent;
 }
+
+export interface CanvasGameField {
+    path: string;
+}
