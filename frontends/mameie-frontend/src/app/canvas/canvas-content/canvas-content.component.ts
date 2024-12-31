@@ -17,7 +17,6 @@ export class CanvasContentComponent implements OnInit {
   game: CanvasGame = this.drawGridService.initCanvasGame();
 
   private ctx!: CanvasRenderingContext2D;
-  private playerImage = new Image();
   private uploadedImage: HTMLImageElement | null = null;
 
   constructor(private drawGridService: DrawGridService) {
@@ -52,7 +51,7 @@ export class CanvasContentComponent implements OnInit {
     canvas.width = this.game.gridContent.tileSize * this.game.gridContent.visibleWidth;
     canvas.height = this.game.gridContent.tileSize * this.game.gridContent.visibleHeight;
 
-    this.playerImage.src = '/assets/figure/figure.png'; // Path to player image
+    this.game.player.image.src = '/assets/figure/figure.png'; // Path to player image
   }
 
   drawGrid(): void {
@@ -70,7 +69,7 @@ export class CanvasContentComponent implements OnInit {
         this.ctx.strokeRect(x * this.game.gridContent.tileSize, y * this.game.gridContent.tileSize, this.game.gridContent.tileSize, this.game.gridContent.tileSize);
 
         if (gridX === this.game.player.playerX && gridY === this.game.player.playerY) {
-          this.ctx.drawImage(this.playerImage, x * this.game.gridContent.tileSize, y * this.game.gridContent.tileSize, this.game.gridContent.tileSize, this.game.gridContent.tileSize);
+          this.ctx.drawImage(this.game.player.image, x * this.game.gridContent.tileSize, y * this.game.gridContent.tileSize, this.game.gridContent.tileSize, this.game.gridContent.tileSize);
         }
 
         if (this.uploadedImage && gridX === this.game.player.playerX && gridY === this.game.player.playerY) {
