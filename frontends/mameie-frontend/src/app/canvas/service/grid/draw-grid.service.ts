@@ -5,8 +5,13 @@ import { CanvasGame, CanvasGameField } from '../../model/canvas-grid';
   providedIn: 'root',
 })
 export class DrawGridService {
-
-  drawGrid(game: CanvasGame, ctx: CanvasRenderingContext2D, nativeElement: HTMLCanvasElement, grid: CanvasGameField[][]) {
+  drawGrid(
+    game: CanvasGame,
+    ctx: CanvasRenderingContext2D,
+    nativeElement: HTMLCanvasElement,
+    grid: CanvasGameField[][]
+  ) {
+    console.log(grid)
     ctx.clearRect(0, 0, nativeElement.width, nativeElement.height);
 
     for (let y = 0; y < game.gridContent.visibleHeight; y++) {
@@ -14,21 +19,55 @@ export class DrawGridService {
         const gridX = game.gridContent.visibleStartX + x;
         const gridY = game.gridContent.visibleStartY + y;
 
-        ctx.fillStyle = (gridX + gridY) % 2 === 0 ? '#ffffff' : '#000000';
-        ctx.fillRect(x * game.gridContent.tileSize, y * game.gridContent.tileSize, game.gridContent.tileSize, game.gridContent.tileSize);
+        // Draw the tile background
+        const tile = grid[gridY]?.[gridX];
+        if (tile && tile.path) {
+          const tileImage = new Image();
+          tileImage.src = tile.path;
+          ctx.drawImage(
+            tileImage,
+            x * game.gridContent.tileSize,
+            y * game.gridContent.tileSize,
+            game.gridContent.tileSize,
+            game.gridContent.tileSize
+          );
+        } else {
+          ctx.fillStyle = (gridX + gridY) % 2 === 0 ? '#ffffff' : '#000000';
+          ctx.fillRect(
+            x * game.gridContent.tileSize,
+            y * game.gridContent.tileSize,
+            game.gridContent.tileSize,
+            game.gridContent.tileSize
+          );
+        }
 
+        // Draw borders for tiles
         ctx.strokeStyle = '#ccc';
-        ctx.strokeRect(x * game.gridContent.tileSize, y * game.gridContent.tileSize, game.gridContent.tileSize, game.gridContent.tileSize);
+        ctx.strokeRect(
+          x * game.gridContent.tileSize,
+          y * game.gridContent.tileSize,
+          game.gridContent.tileSize,
+          game.gridContent.tileSize
+        );
 
+        // Draw the player
         if (gridX === game.player.playerX && gridY === game.player.playerY) {
-          ctx.drawImage(game.player.image, x * game.gridContent.tileSize, y * game.gridContent.tileSize, game.gridContent.tileSize, game.gridContent.tileSize);
+          ctx.drawImage(
+            game.player.image,
+            x * game.gridContent.tileSize,
+            y * game.gridContent.tileSize,
+            game.gridContent.tileSize,
+            game.gridContent.tileSize
+          );
         }
       }
     }
-
   }
 
-  initializeCanvas(game: CanvasGame, nativeElement: HTMLCanvasElement): CanvasRenderingContext2D {
+  initializeCanvas(
+    game: CanvasGame,
+    nativeElement: HTMLCanvasElement
+  ): CanvasRenderingContext2D {
     const canvas = nativeElement;
     const availableWidth = window.innerWidth * 0.8;
     const availableHeight = window.innerHeight * 0.8;
@@ -45,7 +84,6 @@ export class DrawGridService {
 
     return canvas.getContext('2d')!;
   }
-
 
   initCanvasGame(): CanvasGame {
     let playerImage = new Image();
@@ -66,9 +104,8 @@ export class DrawGridService {
       player: {
         image: playerImage,
         playerX: Math.floor(40 / 2),
-        playerY: Math.floor(40 / 2)
-      }
-    }
+        playerY: Math.floor(40 / 2),
+      },
+    };
   }
-
 }

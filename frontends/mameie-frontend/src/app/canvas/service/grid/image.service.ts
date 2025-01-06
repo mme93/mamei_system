@@ -13,7 +13,12 @@ export class ImageService {
     for (let i: number = 0; i < 40; i++) {
       let row: CanvasGameField[] = []
       for (let j: number = 0; j < 40; j++) {
-        row.push({ path: '/assets/fields/wood.png' });
+        if (i === 0 || i === 39 || j === 0 || j === 39) {
+          row.push({ path: '/assets/stone_ground_field.png' });
+        } else {
+          row.push({ path: '/assets/fields/wood.png' });
+        }
+
       }
       grid.push(row);
     }
