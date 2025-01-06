@@ -3,12 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { PixelquestComponent } from './pixelquest/pixelquest.component';
 import { PixelLoginComponent } from './pixelquest/pixel-login/pixel-login.component';
 import { PixelquestMapEditorComponent } from './pixelquest/pixelquest-map-editor/pixelquest-map-editor.component';
+import { CanvasComponent } from './canvas/canvas.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'canvas',
     pathMatch: 'full'
+  },
+  {
+    path: 'canvas',
+    component: CanvasComponent
   },
   {
     path: 'pixelquest',

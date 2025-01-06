@@ -1,0 +1,37 @@
+.touch-controls {
+    position: fixed;
+    bottom: 10%;
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.horizontal-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    /* Border für bessere Sichtbarkeit */
+    border-radius: 50%;
+    background-color: rgba(85, 85, 85, 0.5);
+    /* Transparente Farbe */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Angepasster Schatten */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:active {
+    background-color: rgba(119, 119, 119, 0.7);
+    /* Weniger Transparenz bei Aktivierung */
+    transform: scale(0.95);
+    /* Leichtes Verkleinern beim Klicken */
+}
