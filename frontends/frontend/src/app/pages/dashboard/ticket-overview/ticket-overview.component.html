@@ -1,1 +1,11 @@
-<p>ticket-overview works!</p>
+<mat-card>
+    <mat-card-title>Ticket Overview</mat-card-title>
+    <mat-list>
+        <mat-list-item *ngFor="let ticket of tickets">
+            {{ ticket.title }}
+            <button mat-button color="accent" (click)="viewTicket(ticket.id)">View</button>
+            <button mat-button color="warn" (click)="editTicket(ticket.id)">Edit</button>
+        </mat-list-item>
+    </mat-list>
+    <button mat-fab color="primary" (click)="createTicket()">+</button>
+</mat-card>
