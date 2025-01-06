@@ -2,7 +2,6 @@ package mamei.de.datagenie.system.entity.builder;
 
 import mamei.de.datagenie.core.entity.Entity;
 import mamei.de.datagenie.core.entity.models.EEntityTyp;
-import mamei.de.datagenie.core.entity.models.communication.Handy;
 import mamei.de.datagenie.system.entity.factory.IEntityFactory;
 import mamei.de.datagenie.system.entity.factory.communication.CommunicationFactory;
 
