@@ -1,1 +1,21 @@
-<p>ticket works!</p>
+<div class="ticket-container">
+
+    <mat-card *ngIf="ticket">
+        <mat-spinner *ngIf="loading" class="spinner-overlay"></mat-spinner>
+
+        <mat-card-header>
+            <mat-card-title>{{ ticket?.title }}</mat-card-title>
+            <mat-card-subtitle>{{ ticket?.ticketType }} - {{ ticket?.ticketPrios }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p><strong>Beschreibung:</strong> {{ ticket?.description }}</p>
+            <p><strong>Startdatum:</strong> {{ ticket?.startDate | date: 'mediumDate' }}</p>
+            <p><strong>Enddatum:</strong> {{ ticket?.endDate | date: 'mediumDate' }}</p>
+            <p><strong>Deadline:</strong> {{ ticket?.deadLine ? 'Ja' : 'Nein' }}</p>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- Ladehinweis, falls Ticket nicht geladen -->
+    <mat-spinner *ngIf="loading && !ticket"></mat-spinner>
+    <p *ngIf="!loading && !ticket">Kein Ticket gefunden.</p>
+</div>

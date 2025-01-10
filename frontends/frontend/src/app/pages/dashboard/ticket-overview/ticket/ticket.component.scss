@@ -1,0 +1,13 @@
+.ticket-container {
+    position: relative;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.spinner-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
