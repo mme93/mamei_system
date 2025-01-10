@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TicketService {
+ 
 
   private createTicketUrl = environment.uri+':9052/ticket/';
 
@@ -19,6 +20,10 @@ export class TicketService {
 
   getTicketById(id:number){
     return this.http.get<Ticket>(this.createTicketUrl+id);
+  }
+
+  getAllTickets() {
+    return this.http.get<Ticket[]>(this.createTicketUrl);
   }
 
 }

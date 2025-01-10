@@ -1,26 +1,36 @@
-import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Ticket } from 'src/app/shared/model/dashboard/Ticket';
+import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.service';
 
 @Component({
   selector: 'app-ticket-overview',
   templateUrl: './ticket-overview.component.html',
   styleUrl: './ticket-overview.component.scss'
 })
-export class TicketOverviewComponent {
+export class TicketOverviewComponent implements OnInit {
 
-  tickets = [
-    { id: 1, title: 'Bug in Login' },
-    { id: 2, title: 'New Feature: Dark Mode' }
-  ];
+  tickets: Ticket[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private ticketService: TicketService) { }
 
-  viewTicket(id: number) {
-    this.router.navigate([`/dashboard/ticket/${id}`]);
+  ngOnInit(): void {
+    this.ticketService.getAllTickets().subscribe(result => {
+      this.tickets = result;
+      console.log(this.tickets)
+    },
+      (error: HttpErrorResponse) => {
+        console.log('HTTP Status:', error.status);
+      });
   }
 
-  editTicket(id: number) {
-    this.router.navigate([`/dashboard/ticket/edit/${id}`]);
+  viewTicket(ticket: Ticket) {
+    this.router.navigate([`/dashboard/ticket/${ticket?.id}`]);
+  }
+
+  editTicket(ticket: Ticket) {
+    this.router.navigate([`/dashboard/ticket/edit/${ticket?.id}`]);
   }
 
   createTicket() {
