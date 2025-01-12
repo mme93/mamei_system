@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { tick } from '@angular/core/testing';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Ticket, TicketTableElement } from 'src/app/shared/model/dashboard/Ticket';
@@ -12,7 +13,7 @@ import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.s
 })
 export class TicketOverviewComponent implements OnInit {
   ticketElements: TicketTableElement[] = []
-  displayedColumns: string[] = ['position', 'id', 'status','label', 'classification', 'title', 'date', 'createDate','delete'];
+  displayedColumns: string[] = ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'delete'];
   dataSource = new MatTableDataSource(this.ticketElements);
 
   tickets: Ticket[] = [];
@@ -29,7 +30,7 @@ export class TicketOverviewComponent implements OnInit {
       });
   }
 
-  viewTicket(ticket: Ticket) {
+  viewTicket(ticket: TicketTableElement) {
     this.router.navigate([`/dashboard/ticket/${ticket?.id}`]);
   }
 
@@ -37,13 +38,16 @@ export class TicketOverviewComponent implements OnInit {
     this.router.navigate(['/dashboard/ticket/create']);
   }
 
-  deleteTicket(ticket: Ticket) {
+  deleteTicket(ticketElement: TicketTableElement) {
+    let ticket: Ticket = this.tickets.filter(ticket => ticket.id === ticketElement.id)[0];
     this.ticketService.deleteTicket(ticket).subscribe(() => {
+      console.log(ticket)
       for (let i: number = 0; i < this.tickets.length; i++) {
         if (ticket.id === this.tickets[i].id) {
           this.tickets.splice(i, 1);
         }
       }
+      this.createTableContent(this.tickets)
     },
       (error: HttpErrorResponse) => {
         console.log('HTTP Status:', error.status);
@@ -56,7 +60,8 @@ export class TicketOverviewComponent implements OnInit {
   }
 
   createTableContent(tickets: Ticket[]) {
-    let index=1;
+    this.ticketElements = [];
+    let index = 1;
     tickets.forEach(ticket => {
       this.ticketElements.push({
         position: index,
@@ -74,7 +79,6 @@ export class TicketOverviewComponent implements OnInit {
       })
       index++;
     })
-    console.log(this.ticketElements)
     this.dataSource.data = this.ticketElements;
   }
 
