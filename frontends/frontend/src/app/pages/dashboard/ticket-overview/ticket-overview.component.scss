@@ -3,11 +3,8 @@ article {
     flex-direction: column;
     height: 100vh;
     padding: 0 30px;
-    /* Seitenpadding */
     margin: 0;
-    /* Kein Abstand nach außen */
     box-sizing: border-box;
-    /* Vermeidet Layoutprobleme durch Padding */
 }
 
 div {
@@ -15,32 +12,24 @@ div {
     align-items: center;
     gap: 10px;
     margin: 10px 0;
-    /* Abstand nach unten */
 }
 
 mat-form-field {
     flex: 1;
-    /* Nimmt die verbleibende Breite ein */
 }
 
 button {
     flex-shrink: 0;
-    /* Verhindert das Schrumpfen der Buttons */
 }
 
 .table-container {
     flex: 1;
     max-height: 80%;
-    /* Tabelle ist maximal 80% des Artikels hoch */
     overflow-y: auto;
-    /* Ermöglicht Scrollen, falls der Inhalt zu groß ist */
     min-height: 0;
-    /* Wichtig für korrektes Scrollverhalten */
 }
 
 table {
     width: 100%;
-    /* Tabelle nutzt die volle Breite */
     border-collapse: collapse;
-    /* Optional: Tabelle kompakter darstellen */
 }

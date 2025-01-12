@@ -4,8 +4,8 @@
             <mat-label>Search</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
         </mat-form-field>
-        <button mat-fab>
-        <mat-icon>delete</mat-icon>
+        <button mat-fab (click)="createTicket()">
+        <mat-icon>add</mat-icon>
       </button>
         <button mat-fab>
         <mat-icon>settings</mat-icon>
@@ -14,7 +14,6 @@
 
     <section class="table-container mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <!-- Columns -->
             <ng-container matColumnDef="position">
                 <th mat-header-cell *matHeaderCellDef> No. </th>
                 <td mat-cell *matCellDef="let element"> {{element.position}} </td>
@@ -49,11 +48,6 @@
 <!-- <article style="padding-bottom: 30px">
 
     <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <span matLine>All Tickets</span>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
         <mat-card>
             <mat-card-title>Ticket Overview</mat-card-title>
             <button mat-fab color="primary" (click)="createTicket()">+</button>
@@ -68,62 +62,6 @@
         </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <span matLine>Status: In Progress</span>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <mat-form-field style="width: 100%;">
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-        </mat-form-field>
-
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-
-            <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-            </ng-container>
-
-
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
-
-
-            <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef> Weight </th>
-                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-            </ng-container>
-
-
-            <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-
-            <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-            </tr>
-        </table>
-
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <span matLine>Status: Finished</span>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-    </mat-expansion-panel>
 
 </article>
 -->
