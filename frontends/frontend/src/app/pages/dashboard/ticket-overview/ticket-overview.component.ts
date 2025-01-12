@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { tick } from '@angular/core/testing';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { TitleEventService } from 'src/app/shared/event/title-event.service';
 import { Ticket, TicketTableElement } from 'src/app/shared/model/dashboard/Ticket';
 import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.service';
 
@@ -18,7 +19,7 @@ export class TicketOverviewComponent implements OnInit {
 
   tickets: Ticket[] = [];
 
-  constructor(private router: Router, private ticketService: TicketService) { }
+  constructor(private eventService: TitleEventService, private router: Router, private ticketService: TicketService) { }
 
   ngOnInit(): void {
     this.ticketService.getAllTickets().subscribe(result => {
@@ -28,6 +29,8 @@ export class TicketOverviewComponent implements OnInit {
       (error: HttpErrorResponse) => {
         console.log('HTTP Status:', error.status);
       });
+    this.eventService.updateTitle('Ticket Overview')
+
   }
 
   viewTicket(ticket: TicketTableElement) {
