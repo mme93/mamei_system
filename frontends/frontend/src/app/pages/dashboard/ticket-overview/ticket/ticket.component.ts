@@ -32,6 +32,9 @@ export class TicketComponent implements OnInit {
   backToOverview(){
     this.router.navigate(['/dashboard/ticket/overview']);
   }
+  onStatusChange(ticket: Ticket): void {
+    console.log(`Status updated to: ${ticket.status}`);
+  }
 
 }
 

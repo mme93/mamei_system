@@ -1,50 +1,95 @@
 .ticket-container {
     max-width: 700px;
-    margin: 20px auto;
+    margin: 50px auto;
     padding: 20px;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+    background: #2c2c2c;
 }
 
 .ticket-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    background: #424242;
+    /* Karte mit Kontrast */
+    color: #f5f5f5;
+    text-align: center;
+    padding: 20px;
 }
 
 .ticket-title {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     font-weight: bold;
 }
 
 .ticket-subtitle {
-    font-size: 0.9rem;
-    color: #757575;
+    font-size: 1rem;
+    color: #bdbdbd;
 }
 
 .ticket-detail,
-.ticket-dates,
 .ticket-meta {
-    margin-bottom: 16px;
+    margin: 20px 0;
+    font-size: 1.1rem;
 }
 
-.ticket-dates p,
-.ticket-meta p {
-    margin: 4px 0;
+.ticket-meta p,
+.ticket-detail p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.no-ticket-message {
-    text-align: center;
+mat-icon {
+    color: #64b5f6;
+}
+
+.status-display {
+    margin: 20px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
     font-size: 1.2rem;
-    color: #757575;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: bold;
 }
 
-.spinner-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.status-display.open {
+    background-color: #e8f5e9;
+    color: #2e7d32;
 }
 
-.progress-bar {
-    margin-bottom: 8px;
+.status-display.in-progress {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.status-display.closed {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.status-field {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.status-open {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-progress {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.status-closed {
+    background-color: #ffebee;
+    color: #c62828;
 }
