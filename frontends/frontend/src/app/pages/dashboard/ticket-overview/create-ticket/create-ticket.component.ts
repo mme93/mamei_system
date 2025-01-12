@@ -72,4 +72,7 @@ export class CreateTicketComponent implements OnInit {
         console.log('HTTP Status:', error.status);
       });
   }
+  backToOverview(){
+    this.router.navigate(['/dashboard/ticket/overview']);
+  }
 }

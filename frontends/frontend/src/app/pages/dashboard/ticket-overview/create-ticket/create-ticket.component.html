@@ -67,7 +67,10 @@
 
 
                 <div class="button-container ">
-                    <button mat-raised-button color="primary " type="submit" [disabled]="!ticketForm.valid " (click)="createTicket()">
+                    <button mat-raised-button color="primary" (click)="backToOverview()" style="margin-right: 1rem;">
+                        Back    
+                      </button>
+                    <button mat-raised-button color="primary " type="submit " [disabled]="!ticketForm.valid " (click)="createTicket() ">
               Create    
             </button>
                 </div>

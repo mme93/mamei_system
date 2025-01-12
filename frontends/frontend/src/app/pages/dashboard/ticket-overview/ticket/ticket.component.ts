@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ticket } from 'src/app/shared/model/dashboard/Ticket';
 import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.service';
 
@@ -12,7 +12,7 @@ import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.s
 export class TicketComponent implements OnInit {
   loading: boolean = true;
   ticket: Ticket | null = null;
-  constructor(private route: ActivatedRoute, private ticketService: TicketService) { }
+  constructor(private route: ActivatedRoute, private ticketService: TicketService,private router:Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -27,6 +27,10 @@ export class TicketComponent implements OnInit {
         });
       console.log('Erhaltene ID:', params['id']);
     });
+  }
+
+  backToOverview(){
+    this.router.navigate(['/dashboard/ticket/overview']);
   }
 
 }
