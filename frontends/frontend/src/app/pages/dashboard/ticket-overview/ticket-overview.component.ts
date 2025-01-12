@@ -18,7 +18,6 @@ export class TicketOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.ticketService.getAllTickets().subscribe(result => {
       this.tickets = result;
-      console.log(this.tickets)
     },
       (error: HttpErrorResponse) => {
         console.log('HTTP Status:', error.status);
@@ -29,12 +28,21 @@ export class TicketOverviewComponent implements OnInit {
     this.router.navigate([`/dashboard/ticket/${ticket?.id}`]);
   }
 
-  editTicket(ticket: Ticket) {
-    this.router.navigate([`/dashboard/ticket/edit/${ticket?.id}`]);
-  }
-
   createTicket() {
     this.router.navigate(['/dashboard/ticket/create']);
+  }
+
+  deleteTicket(ticket: Ticket) {
+    this.ticketService.deleteTicket(ticket).subscribe(() => {
+      for(let i:number=0;i<this.tickets.length;i++){
+        if(ticket.id===this.tickets[i].id){
+          this.tickets.splice(i, 1);
+        }
+      }
+    },
+      (error: HttpErrorResponse) => {
+        console.log('HTTP Status:', error.status);
+      });
   }
 
 }

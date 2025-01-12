@@ -41,9 +41,11 @@ public class TicketEntity {
 
     private Date endDate;
 
+    private Date createDate;
+
     private boolean deadLine;
 
-    public TicketEntity(String title, ETicketTyp type, ETicketLabel label, ETicketClassification classification, ETicketStatus status, String description, Date startDate, Date endDate, boolean deadLine) {
+    public TicketEntity(String title, ETicketTyp type, ETicketLabel label, ETicketClassification classification, ETicketStatus status, String description, Date startDate, Date endDate, Date createDate, boolean deadLine) {
         this.title = title;
         this.type = type;
         this.label = label;
@@ -52,6 +54,7 @@ public class TicketEntity {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.createDate = createDate;
         this.deadLine = deadLine;
     }
 }

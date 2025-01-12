@@ -10,18 +10,26 @@
 
                 <div class="row">
                     <mat-form-field class="flex-item">
-                        <mat-label>Art of ticket</mat-label>
-                        <mat-select formControlName="ticketType">
-                            <mat-option *ngFor="let type of ticketTypes" [value]="type.value">
+                        <mat-label>Type of ticket</mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option *ngFor="let type of types" [value]="type.value">
                                 {{ type.viewValue }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field class="flex-item">
-                        <mat-label>Priority of the ticket</mat-label>
-                        <mat-select formControlName="ticketPrios">
-                            <mat-option *ngFor="let type of ticketPrio" [value]="type.value">
-                                {{ type.viewValue }}
+                        <mat-label>Label of the ticket</mat-label>
+                        <mat-select formControlName="label">
+                            <mat-option *ngFor="let label of labels" [value]="label.value">
+                                {{ label.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="flex-item">
+                        <mat-label>Classification of the ticket</mat-label>
+                        <mat-select formControlName="classification">
+                            <mat-option *ngFor="let classsifcation of classsifcations" [value]="classsifcation.value">
+                                {{ classsifcation.viewValue }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

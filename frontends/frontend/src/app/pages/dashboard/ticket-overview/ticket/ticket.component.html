@@ -5,13 +5,14 @@
 
         <mat-card-header>
             <mat-card-title>{{ ticket?.title }}</mat-card-title>
-            <mat-card-subtitle>{{ ticket?.ticketType }} - {{ ticket?.ticketPrios }}</mat-card-subtitle>
+            <mat-card-subtitle>{{ ticket?.type }} - {{ ticket?.label }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <p><strong>Beschreibung:</strong> {{ ticket?.description }}</p>
-            <p><strong>Startdatum:</strong> {{ ticket?.startDate | date: 'mediumDate' }}</p>
-            <p><strong>Enddatum:</strong> {{ ticket?.endDate | date: 'mediumDate' }}</p>
-            <p><strong>Deadline:</strong> {{ ticket?.deadLine ? 'Ja' : 'Nein' }}</p>
+            <p><strong>Description:</strong> {{ ticket?.description }}</p>
+            <p><strong>Start date:</strong> {{ ticket?.startDate | date: 'mediumDate' }}</p>
+            <p><strong>End date:</strong> {{ ticket?.endDate | date: 'mediumDate' }}</p>
+            <p><strong>Created date:</strong> {{ ticket?.createDate }}</p>
+            <p><strong>Classification</strong> {{ ticket?.classification ? 'Ja' : 'Nein' }}</p>
         </mat-card-content>
     </mat-card>
 

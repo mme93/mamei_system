@@ -11,14 +11,14 @@ import java.util.Date;
 @AllArgsConstructor
 public class CreateTicketDto {
 
-    private  String  title ;
-    private String ticketType;
-    private String ticketPrios;
+    private String title;
     private String description;
     private Date startDate;
     private Date endDate;
+    private Date createDate;
     private boolean deadLine;
     private ETicketTyp type;
     private ETicketLabel label;
     private ETicketClassification classification;
+
 }

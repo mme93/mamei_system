@@ -5,7 +5,7 @@
         <mat-list-item *ngFor="let ticket of tickets">
             Title: {{ ticket.title }} | Description: {{ ticket.description }}
             <button mat-button color="accent" (click)="viewTicket(ticket)">View</button>
-            <button mat-button color="warn" (click)="editTicket(ticket)">Edit</button>
+            <button mat-button color="warn" (click)="deleteTicket(ticket)">Delete</button>
         </mat-list-item>
     </mat-list>
 

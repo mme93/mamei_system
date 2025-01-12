@@ -29,4 +29,8 @@ public class TicketService {
     public List<TicketEntity> getAllTickets() {
         return ticketRepository.findAll();
     }
+
+    public void deleteTicketById(Long id) {
+        ticketRepository.deleteById(id);
+    }
 }

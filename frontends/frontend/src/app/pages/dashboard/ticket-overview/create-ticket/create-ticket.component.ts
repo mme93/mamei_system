@@ -15,22 +15,21 @@ export class CreateTicketComponent implements OnInit {
 
   ticketForm: FormGroup;
 
-  ticketTypes = [
-    { value: 'bug', viewValue: 'Bug' },
-    { value: 'feature', viewValue: 'Feature Request' },
-    { value: 'support', viewValue: 'Support' }
+  types = [
+    { value: 'TASK', viewValue: 'Task' },
+    { value: 'BUG', viewValue: 'Bug' },
+    { value: 'FEATURE', viewValue: 'Feature' }
   ];
 
-  ticketLabel = [
-    { value: 'bug', viewValue: 'Bug' },
-    { value: 'feature', viewValue: 'Feature Request' },
-    { value: 'support', viewValue: 'Support' }
+  labels = [
+    { value: 'CODE', viewValue: 'Code' },
+    { value: 'NOTICE', viewValue: 'Notice' }
   ];
 
-  ticketPrio = [
-    { value: 'high', viewValue: 'High' },
-    { value: 'middle', viewValue: 'Middle' },
-    { value: 'low', viewValue: 'Low' }
+  classsifcations = [
+    { value: 'HIGH', viewValue: 'High' },
+    { value: 'MIDDLE', viewValue: 'Middle' },
+    { value: 'LOW', viewValue: 'Low' }
   ];
 
   creationDate: Date = new Date();
@@ -38,12 +37,13 @@ export class CreateTicketComponent implements OnInit {
   constructor(private eventService: TitleEventService, private fb: FormBuilder, private ticketService: TicketService, private router: Router) {
     this.ticketForm = this.fb.group({
       title: ['Test title', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
-      ticketType: ['bug', [Validators.required]],
-      ticketPrios: ['low', [Validators.required]],
       description: ['Test description', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]],
       startDate: [this.creationDate],
       endDate: [this.creationDate],
-      deadLine: [true]
+      deadLine: [true],
+      type: ['TASK', [Validators.required]],
+      label: ['NOTICE', [Validators.required]],
+      classification: ['LOW', [Validators.required]]
     });
   }
 
@@ -54,12 +54,14 @@ export class CreateTicketComponent implements OnInit {
   createTicket() {
     const ticket = {
       title: this.ticketForm.get('title')?.value,
-      ticketType: this.ticketForm.get('ticketType')?.value,
-      ticketPrios: this.ticketForm.get('ticketPrios')?.value,
       description: this.ticketForm.get('description')?.value,
       startDate: this.ticketForm.get('startDate')?.value,
       endDate: this.ticketForm.get('endDate')?.value,
-      deadLine: this.ticketForm.get('deadLine')?.value
+      createDate:this.creationDate,
+      deadLine: this.ticketForm.get('deadLine')?.value,
+      type: this.ticketForm.get('type')?.value,
+      label: this.ticketForm.get('label')?.value,
+      classification: this.ticketForm.get('classification')?.value,
     };
     this.ticketService.createTicket(ticket).subscribe(result => {
       if (result.id) {

@@ -16,6 +16,7 @@ public class TicketMapper {
                 ticket.getDescription(),
                 ticket.getStartDate(),
                 ticket.getEndDate(),
+                ticket.getCreateDate(),
                 ticket.isDeadLine()
         );
     }

@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TicketService {
- 
 
   private createTicketUrl = environment.uri+':9052/ticket/';
 
@@ -26,6 +25,9 @@ export class TicketService {
     return this.http.get<Ticket[]>(this.createTicketUrl);
   }
 
-  
+  deleteTicket(ticket: Ticket) {
+    return this.http.delete(this.createTicketUrl+ticket.id);
+  }
+ 
 
 }

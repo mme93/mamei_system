@@ -1,22 +1,27 @@
 export interface CreateTicket {
     title: string,
-    ticketType: string,
-    ticketPrios: string,
     description: string,
     startDate: Date,
     endDate: Date,
+    createDate:Date,
     deadLine: boolean
+    type: string,
+    label: string,
+    classification: string
 }
 
 export interface Ticket {
     id?: number;
     title: string,
-    ticketType: string,
-    ticketPrios: string,
     description: string,
     startDate: Date,
     endDate: Date,
-    deadLine: boolean
+    createDate: Date,
+    deadLine: boolean,
+    type: string,
+    label: string,
+    classification: string,
+    status: string
 }
 
 export interface TicketDropDown {
