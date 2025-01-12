@@ -1,12 +1,39 @@
-<mat-card>
-    <mat-card-title>Ticket Overview</mat-card-title>
-    <button mat-fab color="primary" (click)="createTicket()">+</button>
-    <mat-list>
-        <mat-list-item *ngFor="let ticket of tickets">
-            Title: {{ ticket.title }} | Description: {{ ticket.description }}
-            <button mat-button color="accent" (click)="viewTicket(ticket)">View</button>
-            <button mat-button color="warn" (click)="deleteTicket(ticket)">Delete</button>
-        </mat-list-item>
-    </mat-list>
+<article style="padding-bottom: 30px">
 
-</mat-card>
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span matLine>All Tickets</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+            <mat-card-title>Ticket Overview</mat-card-title>
+            <button mat-fab color="primary" (click)="createTicket()">+</button>
+            <mat-list>
+                <mat-list-item *ngFor="let ticket of tickets">
+                    Title: {{ ticket.title }} | Description: {{ ticket.description }}
+                    <button mat-button color="accent" (click)="viewTicket(ticket)">View</button>
+                    <button mat-button color="warn" (click)="deleteTicket(ticket)">Delete</button>
+                </mat-list-item>
+            </mat-list>
+
+        </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span matLine>Status: In Progress</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span matLine>Status: Finished</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+
+</article>

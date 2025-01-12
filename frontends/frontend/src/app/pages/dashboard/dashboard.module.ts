@@ -31,6 +31,7 @@ import { ComponentSettingDialogComponent } from './dialog/component-setting-dial
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatListModule} from "@angular/material/list";
 import { TicketOverviewComponent } from './ticket-overview/ticket-overview.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { TicketOverviewComponent } from './ticket-overview/ticket-overview.compo
     MatDialogModule,
     MatSelectModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule
   ],
   exports: [
     UtilsComponent
