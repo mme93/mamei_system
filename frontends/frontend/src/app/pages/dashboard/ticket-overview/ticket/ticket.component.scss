@@ -1,7 +1,41 @@
 .ticket-container {
-    position: relative;
-    max-width: 600px;
+    max-width: 700px;
     margin: 20px auto;
+    padding: 20px;
+    position: relative;
+}
+
+.ticket-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.ticket-subtitle {
+    font-size: 0.9rem;
+    color: #757575;
+}
+
+.ticket-detail,
+.ticket-dates,
+.ticket-meta {
+    margin-bottom: 16px;
+}
+
+.ticket-dates p,
+.ticket-meta p {
+    margin: 4px 0;
+}
+
+.no-ticket-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #757575;
 }
 
 .spinner-overlay {
@@ -9,5 +43,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1000;
+}
+
+.progress-bar {
+    margin-bottom: 8px;
 }

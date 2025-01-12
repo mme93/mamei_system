@@ -1,23 +1,38 @@
-<div class="ticket-container">
-
-    <mat-card *ngIf="ticket">
-        <mat-spinner *ngIf="loading" class="spinner-overlay"></mat-spinner>
+<div class="ticket-container" *ngIf="ticket">
+    <mat-card class="ticket-card">
+        <mat-progress-bar *ngIf="loading" mode="indeterminate" class="progress-bar"></mat-progress-bar>
 
         <mat-card-header>
-            <mat-card-title>{{ ticket?.title }}</mat-card-title>
-            <mat-card-subtitle>{{ ticket?.type }} - {{ ticket?.label }}</mat-card-subtitle>
+            <mat-card-title class="ticket-title">{{ ticket?.title }}</mat-card-title>
+            <mat-card-subtitle class="ticket-subtitle">
+                <span>{{ ticket?.type }}</span> | <span>{{ ticket?.label }}</span>
+            </mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
-            <p><strong>Description:</strong> {{ ticket?.description }}</p>
-            <p><strong>Start date:</strong> {{ ticket?.startDate | date: 'mediumDate' }}</p>
-            <p><strong>End date:</strong> {{ ticket?.endDate | date: 'mediumDate' }}</p>
-            <p><strong>Created date:</strong> {{ ticket?.createDate }}</p>
-            <p><strong>Classification</strong> {{ ticket?.classification ? 'Ja' : 'Nein' }}</p>
-        </mat-card-content>
-        <button mat-button color="primary" (click)="backToOverview()">Back</button>
-    </mat-card>
 
-    <!-- Ladehinweis, falls Ticket nicht geladen -->
-    <mat-spinner *ngIf="loading && !ticket"></mat-spinner>
-    <p *ngIf="!loading && !ticket">Kein Ticket gefunden.</p>
+        <mat-card-content>
+            <div class="ticket-detail">
+                <p><strong>Description:</strong> {{ ticket?.description }}</p>
+            </div>
+            <div class="ticket-dates">
+                <p><strong>Start Date:</strong> {{ ticket?.startDate | date: 'mediumDate' }}</p>
+                <p><strong>End Date:</strong> {{ ticket?.endDate | date: 'mediumDate' }}</p>
+                <p><strong>Created:</strong> {{ ticket?.createDate | date: 'mediumDate' }}</p>
+            </div>
+            <div class="ticket-meta">
+                <p><strong>Classification:</strong> {{ ticket?.classification }}</p>
+                <p><strong>Status:</strong> {{ ticket?.status }}</p>
+                <p><strong>Deadline:</strong> {{ ticket?.deadLine ? 'Yes' : 'No' }}</p>
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button mat-raised-button color="accent" (click)="backToOverview()">Back to Overview</button>
+        </mat-card-actions>
+    </mat-card>
 </div>
+
+<div *ngIf="!ticket && !loading" class="no-ticket-message">
+    <p>No ticket found.</p>
+</div>
+
+<mat-spinner *ngIf="loading && !ticket" class="spinner-overlay"></mat-spinner>

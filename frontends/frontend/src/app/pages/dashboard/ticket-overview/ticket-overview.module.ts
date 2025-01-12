@@ -14,6 +14,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatSelectModule } from "@angular/material/select";
 import { TicketComponent } from "./ticket/ticket.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 
 
@@ -32,7 +33,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
         MatNativeDateModule,
         MatButtonModule,
         MatIconModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatProgressBarModule
     ],
     exports: [],
     declarations: [
