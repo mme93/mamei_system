@@ -1,6 +1,7 @@
 package com.dashboard.ticket.model.mapper;
 
 import com.dashboard.ticket.model.CreateTicketDto;
+import com.dashboard.ticket.model.ETicketStatus;
 import com.dashboard.ticket.model.TicketEntity;
 
 public class TicketMapper {
@@ -8,8 +9,10 @@ public class TicketMapper {
     public static TicketEntity createTicketMapToTicket(CreateTicketDto ticket){
         return new TicketEntity(
                 ticket.getTitle(),
-                ticket.getTicketType(),
-                ticket.getTicketPrios(),
+                ticket.getType(),
+                ticket.getLabel(),
+                ticket.getClassification(),
+                ETicketStatus.CREATED,
                 ticket.getDescription(),
                 ticket.getStartDate(),
                 ticket.getEndDate(),

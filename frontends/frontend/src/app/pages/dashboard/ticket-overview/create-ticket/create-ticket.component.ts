@@ -21,6 +21,12 @@ export class CreateTicketComponent implements OnInit {
     { value: 'support', viewValue: 'Support' }
   ];
 
+  ticketLabel = [
+    { value: 'bug', viewValue: 'Bug' },
+    { value: 'feature', viewValue: 'Feature Request' },
+    { value: 'support', viewValue: 'Support' }
+  ];
+
   ticketPrio = [
     { value: 'high', viewValue: 'High' },
     { value: 'middle', viewValue: 'Middle' },

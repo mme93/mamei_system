@@ -18,4 +18,7 @@ public class CreateTicketDto {
     private Date startDate;
     private Date endDate;
     private boolean deadLine;
+    private ETicketTyp type;
+    private ETicketLabel label;
+    private ETicketClassification classification;
 }

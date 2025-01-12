@@ -23,9 +23,17 @@ public class TicketEntity {
 
     private  String  title ;
 
-    private String ticketType;
+    @Enumerated(EnumType.STRING)
+    private ETicketTyp type;
 
-    private String ticketPrios;
+    @Enumerated(EnumType.STRING)
+    private ETicketLabel label;
+
+    @Enumerated(EnumType.STRING)
+    private ETicketClassification classification;
+
+    @Enumerated(EnumType.STRING)
+    private ETicketStatus status;
 
     private String description;
 
@@ -35,10 +43,12 @@ public class TicketEntity {
 
     private boolean deadLine;
 
-    public TicketEntity(String title, String ticketType, String ticketPrios, String description, Date startDate, Date endDate, boolean deadLine) {
+    public TicketEntity(String title, ETicketTyp type, ETicketLabel label, ETicketClassification classification, ETicketStatus status, String description, Date startDate, Date endDate, boolean deadLine) {
         this.title = title;
-        this.ticketType = ticketType;
-        this.ticketPrios = ticketPrios;
+        this.type = type;
+        this.label = label;
+        this.classification = classification;
+        this.status = status;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
