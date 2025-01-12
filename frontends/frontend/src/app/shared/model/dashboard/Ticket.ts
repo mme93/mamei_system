@@ -34,3 +34,18 @@ export interface CreateTicketContent {
     ticketLabel: TicketDropDown[],
     ticketPrios: TicketDropDown[],
 }
+
+export interface TicketTableElement{
+    position: number;
+    id: number;
+    title: string,
+    description: string,
+    startDate: Date,
+    endDate: Date,
+    createDate: Date,
+    deadLine: boolean,
+    type: string,
+    label: string,
+    classification: string,
+    status: string
+}
