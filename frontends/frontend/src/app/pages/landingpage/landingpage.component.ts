@@ -15,7 +15,7 @@ export class LandingpageComponent implements OnInit{
     { icon: 'sports_esports', text: 'Games' ,route:''},
     { icon: 'settings', text: 'Settings' ,route:'/help/settings/board'},
     { icon: 'admin_panel_settings', text: 'Admin' ,route:'/admin/menu'},
-    { icon: 'storage', text: 'Database Manager',route:'' },
+    { icon: 'rate_review', text: 'Tickets',route:'/dashboard/ticket' },
     { icon: 'cloud_download', text: 'Data Cloud' ,route:''},
     { icon: 'insert_chart', text: 'Dashboard' ,route:''},
     { icon: 'email', text: 'Message' ,route:''},

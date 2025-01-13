@@ -1,0 +1,80 @@
+<div class="form-wrapper">
+    <mat-card>
+        <mat-card-content>
+            <form [formGroup]="ticketForm">
+
+                <mat-form-field class="full-width">
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Enter title" formControlName="title" />
+                </mat-form-field>
+
+                <div class="row">
+                    <mat-form-field class="flex-item">
+                        <mat-label>Type of ticket</mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option *ngFor="let type of types" [value]="type.value">
+                                {{ type.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="flex-item">
+                        <mat-label>Label of the ticket</mat-label>
+                        <mat-select formControlName="label">
+                            <mat-option *ngFor="let label of labels" [value]="label.value">
+                                {{ label.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="flex-item">
+                        <mat-label>Classification of the ticket</mat-label>
+                        <mat-select formControlName="classification">
+                            <mat-option *ngFor="let classsifcation of classsifcations" [value]="classsifcation.value">
+                                {{ classsifcation.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+                <mat-form-field class="full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput placeholder="Beschreibung" formControlName="description"></textarea>
+                </mat-form-field>
+
+                <div class="row">
+                    <mat-form-field class="flex-item">
+                        <mat-label>Start date</mat-label>
+                        <input matInput [matDatepicker]="startPicker" formControlName="startDate" />
+                        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startPicker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field class="flex-item" *ngIf="ticketForm.get('deadLine')?.value">
+                        <mat-label>End date</mat-label>
+                        <input matInput [matDatepicker]="endPicker" formControlName="endDate" />
+                        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endPicker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-checkbox formControlName="deadLine">Deadline</mat-checkbox>
+                </div>
+
+
+                <div class="row ">
+                    <strong>Creation date:</strong>
+                    <span>{{ creationDate | date: 'medium' }}</span>
+                </div>
+
+
+                <div class="button-container ">
+                    <button mat-raised-button color="primary" (click)="backToOverview()" style="margin-right: 1rem;">
+                        Back    
+                      </button>
+                    <button mat-raised-button color="primary " type="submit " [disabled]="!ticketForm.valid " (click)="createTicket() ">
+              Create    
+            </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,49 @@
+.ticket-detail p,
+.ticket-meta p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.ticket-detail .dates {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 1rem;
+}
+
+.ticket-detail .dates p {
+    flex: 1;
+    margin: 0;
+}
+
+.status-field {
+    margin-top: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+mat-select {
+    width: 100%;
+}
+
+mat-icon {
+    font-size: 20px;
+    color: #64b5f6;
+}
+
+.ticket-card {
+    padding: 20px;
+}
+
+.description {
+    max-height: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+}

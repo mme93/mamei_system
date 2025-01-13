@@ -30,6 +30,8 @@ import {MatDividerModule} from "@angular/material/divider";
 import { ComponentSettingDialogComponent } from './dialog/component-setting-dialog/component-setting-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatListModule} from "@angular/material/list";
+import { TicketOverviewComponent } from './ticket-overview/ticket-overview.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -56,11 +58,12 @@ import {MatListModule} from "@angular/material/list";
     MatDialogModule,
     MatSelectModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule
   ],
   exports: [
     UtilsComponent
   ],
-  declarations: [DashboardComponent, TaskComponent, OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, UtilsComponent, EntitiesComponent, ItemComponent, ComponentSettingDialogComponent]
+  declarations: [DashboardComponent, TaskComponent, OverviewComponent, CreateTaskComponent, TaskOverviewComponent, EditTaskComponent, UtilsComponent, EntitiesComponent, ItemComponent, ComponentSettingDialogComponent,TicketOverviewComponent]
 })
 export class DashboardModule {}

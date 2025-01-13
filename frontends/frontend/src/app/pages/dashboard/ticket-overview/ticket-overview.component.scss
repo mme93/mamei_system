@@ -1,0 +1,35 @@
+article {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0 30px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+mat-form-field {
+    flex: 1;
+}
+
+button {
+    flex-shrink: 0;
+}
+
+.table-container {
+    flex: 1;
+    max-height: 80%;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
