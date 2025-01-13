@@ -11,26 +11,34 @@
 
         <mat-card-content>
             <div class="ticket-detail">
-                <p>
-                    <mat-icon>description</mat-icon> <strong>Description:</strong> {{ ticket?.description }}
+                <p class="description">
+                    <mat-icon>description</mat-icon>
+                    <strong>Description:</strong> {{ ticket?.description }}
                 </p>
+                <div class="dates">
+                    <p>
+                        <mat-icon>event</mat-icon>
+                        <strong>Start Date:</strong> {{ ticket?.startDate | date: 'mediumDate' }}
+                    </p>
+                    <p *ngIf="ticket?.deadLine">
+                        <mat-icon>event</mat-icon>
+                        <strong>End Date:</strong> {{ ticket?.endDate | date: 'mediumDate' }}
+                    </p>
+                </div>
                 <p>
-                    <mat-icon>event</mat-icon> <strong>Start Date:</strong> {{ ticket?.startDate | date: 'mediumDate' }}
-                </p>
-                <p>
-                    <mat-icon>event</mat-icon> <strong>End Date:</strong> {{ ticket?.endDate | date: 'mediumDate' }}
-                </p>
-                <p>
-                    <mat-icon>calendar_today</mat-icon> <strong>Created:</strong> {{ ticket?.createDate | date: 'mediumDate' }}
+                    <mat-icon>calendar_today</mat-icon>
+                    <strong>Created:</strong> {{ ticket?.createDate | date: 'mediumDate' }}
                 </p>
             </div>
 
             <div class="ticket-meta">
                 <p>
-                    <mat-icon>category</mat-icon> <strong>Classification:</strong> {{ ticket?.classification }}
+                    <mat-icon>category</mat-icon>
+                    <strong>Classification:</strong> {{ ticket?.classification }}
                 </p>
                 <p>
-                    <mat-icon>schedule</mat-icon> <strong>Deadline:</strong> {{ ticket?.deadLine ? 'Yes' : 'No' }}
+                    <mat-icon>schedule</mat-icon>
+                    <strong>Deadline:</strong> {{ ticket?.deadLine ? 'Yes' : 'No' }}
                 </p>
             </div>
 
@@ -54,9 +62,3 @@
         </mat-card-actions>
     </mat-card>
 </div>
-
-<div *ngIf="!ticket && !loading" class="no-ticket-message">
-    <p>No ticket found.</p>
-</div>
-
-<mat-spinner *ngIf="loading && !ticket" class="spinner-overlay"></mat-spinner>

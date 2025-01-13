@@ -1,95 +1,49 @@
-.ticket-container {
-    max-width: 700px;
-    margin: 50px auto;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 100px);
-    background: #2c2c2c;
-}
-
-.ticket-card {
-    width: 100%;
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    background: #424242;
-    /* Karte mit Kontrast */
-    color: #f5f5f5;
-    text-align: center;
-    padding: 20px;
-}
-
-.ticket-title {
-    font-size: 2.2rem;
-    font-weight: bold;
-}
-
-.ticket-subtitle {
-    font-size: 1rem;
-    color: #bdbdbd;
-}
-
-.ticket-detail,
-.ticket-meta {
-    margin: 20px 0;
-    font-size: 1.1rem;
-}
-
-.ticket-meta p,
-.ticket-detail p {
+.ticket-detail p,
+.ticket-meta p {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 1rem;
+    text-align: left;
 }
 
-mat-icon {
-    color: #64b5f6;
-}
-
-.status-display {
-    margin: 20px 0;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-size: 1.2rem;
+.ticket-detail .dates {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-weight: bold;
+    gap: 20px;
+    margin-bottom: 1rem;
 }
 
-.status-display.open {
-    background-color: #e8f5e9;
-    color: #2e7d32;
-}
-
-.status-display.in-progress {
-    background-color: #fff3e0;
-    color: #ef6c00;
-}
-
-.status-display.closed {
-    background-color: #ffebee;
-    color: #c62828;
+.ticket-detail .dates p {
+    flex: 1;
+    margin: 0;
 }
 
 .status-field {
     margin-top: 20px;
     width: 100%;
+    text-align: left;
 }
 
-.status-open {
-    background-color: #e8f5e9;
-    color: #2e7d32;
+mat-select {
+    width: 100%;
 }
 
-.status-progress {
-    background-color: #fff3e0;
-    color: #ef6c00;
+mat-icon {
+    font-size: 20px;
+    color: #64b5f6;
 }
 
-.status-closed {
-    background-color: #ffebee;
-    color: #c62828;
+.ticket-card {
+    padding: 20px;
+}
+
+.description {
+    max-height: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
 }
