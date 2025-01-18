@@ -25,7 +25,6 @@ export class TicketComponent implements OnInit {
           console.log('HTTP Status:', error.status);
           this.loading = false;
         });
-      console.log('Erhaltene ID:', params['id']);
     });
   }
 
