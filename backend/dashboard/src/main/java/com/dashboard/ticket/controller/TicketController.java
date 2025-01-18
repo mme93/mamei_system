@@ -1,6 +1,7 @@
 package com.dashboard.ticket.controller;
 
 import com.dashboard.ticket.model.CreateTicketDto;
+import com.dashboard.ticket.model.ETicketStatus;
 import com.dashboard.ticket.model.TicketEntity;
 import com.dashboard.ticket.service.TicketService;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,16 @@ public class TicketController {
         }catch (Exception e){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PutMapping("/status/{id}")
+    public ResponseEntity<TicketEntity>updateTicketStatus(@RequestBody ETicketStatus status,@PathVariable Long id){
+        return new ResponseEntity<>(ticketService.updateTicketStatus(status,id),HttpStatus.OK);
+    }
+
+    @PutMapping("")
+    public ResponseEntity<TicketEntity>updateTicket(@RequestBody TicketEntity ticket){
+        return new ResponseEntity<>(ticketService.updateTicket(ticket),HttpStatus.OK);
     }
 
 }
