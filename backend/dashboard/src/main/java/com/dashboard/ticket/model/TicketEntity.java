@@ -35,6 +35,7 @@ public class TicketEntity {
     @Enumerated(EnumType.STRING)
     private ETicketStatus status;
 
+    @Column(length = 2000)
     private String description;
 
     private Date startDate;
