@@ -1,0 +1,22 @@
+.status-filter {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.checkbox-group mat-checkbox {
+    width: 48%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+mat-form-field {
+    margin-bottom: 20px;
+}
