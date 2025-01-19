@@ -58,10 +58,6 @@ export class TicketComponent implements OnInit {
         label: 'Set to Refinement',
         code: 'REFINEMENT'
       });
-      this.statusLabels.push({
-        label: 'Set to Done',
-        code: 'DONE'
-      });
     } else if (ticket.status === 'WAITING') {
       this.statusLabels.push({
         label: 'Set to Refinement',
