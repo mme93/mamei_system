@@ -1,11 +1,15 @@
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { tick } from '@angular/core/testing';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TitleEventService } from 'src/app/shared/event/title-event.service';
 import { Ticket, TicketTableElement } from 'src/app/shared/model/dashboard/Ticket';
+import { TicketTableSettings } from 'src/app/shared/model/settings/TicketSettings';
 import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.service';
+import { DialogService } from 'src/app/shared/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-ticket-overview',
@@ -13,13 +17,47 @@ import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.s
   styleUrl: './ticket-overview.component.scss'
 })
 export class TicketOverviewComponent implements OnInit {
+  ticketTableSettings: TicketTableSettings = {
+    defaultCoulmns: ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons'],
+    selectedFilter: {
+      name: 'default',
+      statusFilter: {
+        isCREATED: true,
+        isWAITING: true,
+        isREFINEMENT: true,
+        isIN_PROGRESS: true,
+        isDONE: true
+      },
+      displayedColumns: ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
+    },
+    filter: [{
+      name: 'default',
+      statusFilter: {
+        isCREATED: true,
+        isWAITING: true,
+        isREFINEMENT: true,
+        isIN_PROGRESS: true,
+        isDONE: true
+      },
+      displayedColumns: ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
+    },{
+      name: 'Done',
+      statusFilter: {
+        isCREATED: false,
+        isWAITING: false,
+        isREFINEMENT: false,
+        isIN_PROGRESS: false,
+        isDONE: true
+      },
+      displayedColumns: ['position', 'id', 'status', 'label', 'classification', 'title', 'buttons']
+    }]
+  }
   ticketElements: TicketTableElement[] = []
-  displayedColumns: string[] = ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'delete'];
   dataSource = new MatTableDataSource(this.ticketElements);
 
   tickets: Ticket[] = [];
 
-  constructor(private eventService: TitleEventService, private router: Router, private ticketService: TicketService) { }
+  constructor(private dialogService: DialogService, private eventService: TitleEventService, private router: Router, private ticketService: TicketService) { }
 
   ngOnInit(): void {
     this.ticketService.getAllTickets().subscribe(result => {
@@ -87,6 +125,15 @@ export class TicketOverviewComponent implements OnInit {
       index++;
     })
     this.dataSource.data = this.ticketElements;
+  }
+
+  openSettingsDialog(): void {
+    console.log(this.ticketTableSettings)
+    this.dialogService.openTicketSettingsDialog(this.ticketTableSettings).subscribe((result: TicketTableSettings) => {
+      if(result){
+        this.ticketTableSettings = result;
+      }
+    });
   }
 
 }
