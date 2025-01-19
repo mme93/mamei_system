@@ -46,19 +46,19 @@
                 <mat-icon>info</mat-icon>
                 <strong>Status:</strong> {{ ticket?.status }}
             </div>
-
-            <mat-form-field appearance="fill" class="status-field">
-                <mat-label>Status ändern</mat-label>
-                <mat-select [(ngModel)]="ticket.status" (selectionChange)="onStatusChange(ticket)">
-                    <mat-option value="Open" class="status-open">Open</mat-option>
-                    <mat-option value="In Progress" class="status-progress">In Progress</mat-option>
-                    <mat-option value="Closed" class="status-closed">Closed</mat-option>
-                </mat-select>
-            </mat-form-field>
         </mat-card-content>
 
         <mat-card-actions align="end">
-            <button mat-raised-button color="primary" (click)="backToOverview()">Back to Overview</button>
+            <button mat-raised-button color="primary" [matMenuTriggerFor]="statusMenu" style="margin-right: 0.5rem;">
+                Change Status
+            </button>
+
+            <mat-menu #statusMenu="matMenu">
+                <button mat-menu-item (click)="changeStatus(labels.code)" *ngFor="let labels of statusLabels">{{labels.label}}</button>
+            </mat-menu>
+
+            <button mat-raised-button color="primary" (click)="backToOverview()">Back</button>
         </mat-card-actions>
+
     </mat-card>
 </div>
