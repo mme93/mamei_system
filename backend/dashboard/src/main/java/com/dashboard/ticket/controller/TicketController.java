@@ -51,8 +51,9 @@ public class TicketController {
     }
 
     @PutMapping("/status/{id}")
-    public ResponseEntity<TicketEntity>updateTicketStatus(@RequestBody ETicketStatus status,@PathVariable Long id){
-        return new ResponseEntity<>(ticketService.updateTicketStatus(status,id),HttpStatus.OK);
+    public ResponseEntity<TicketEntity>updateTicketStatus(@RequestBody String status,@PathVariable Long id){
+        ETicketStatus parsedStatus = ETicketStatus.valueOf(status.toUpperCase());
+        return new ResponseEntity<>(ticketService.updateTicketStatus(parsedStatus,id),HttpStatus.OK);
     }
 
     @PutMapping("")
