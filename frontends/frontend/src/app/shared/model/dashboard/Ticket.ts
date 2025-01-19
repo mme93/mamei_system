@@ -49,3 +49,8 @@ export interface TicketTableElement{
     classification: string,
     status: string
 }
+
+export interface TicketStatusDropDown{
+    label:string;
+    code:string;
+}
