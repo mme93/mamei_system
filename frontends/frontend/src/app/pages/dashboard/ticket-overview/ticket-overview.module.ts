@@ -16,6 +16,7 @@ import { TicketComponent } from "./ticket/ticket.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatMenuModule } from "@angular/material/menu";
+import { EditTicketComponent } from "./edit-ticket/edit-ticket.component";
 
 
 
@@ -41,7 +42,8 @@ import { MatMenuModule } from "@angular/material/menu";
     exports: [],
     declarations: [
         CreateTicketComponent,
-        TicketComponent
+        TicketComponent,
+        EditTicketComponent
     ]
 })
 export class TicketOverviewModule { }

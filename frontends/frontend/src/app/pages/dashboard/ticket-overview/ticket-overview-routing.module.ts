@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TicketOverviewComponent } from './ticket-overview.component';
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { EditTicketComponent } from './edit-ticket/edit-ticket.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     component: TicketOverviewComponent
   },
   { path: 'create', component: CreateTicketComponent },
+  { path: 'edit/:id', component: EditTicketComponent },
   { path: ':id', component: TicketComponent }
 ];
 

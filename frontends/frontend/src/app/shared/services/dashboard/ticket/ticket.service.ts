@@ -33,4 +33,8 @@ export class TicketService {
     return this.http.put<Ticket>(this.createTicketUrl + 'status/' + id, status);
   }
 
+  updateTicket(ticket: Ticket | null) {
+    return this.http.put(this.createTicketUrl, ticket);
+  }
+
 }

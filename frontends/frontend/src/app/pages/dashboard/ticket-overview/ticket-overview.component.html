@@ -64,10 +64,12 @@
                     <button mat-mini-fab color="primary" style="margin-right: 0.5rem;" (click)="viewTicket(element)">
                         <mat-icon>folder_open</mat-icon>
                       </button>
-                    <button mat-mini-fab color="warn" (click)="deleteTicket(element)">
+                    <button mat-mini-fab color="warn" style="margin-right: 0.5rem;" (click)="deleteTicket(element)">
                         <mat-icon>delete</mat-icon>
                       </button>
-
+                    <button mat-mini-fab color="primary" (click)="editTicket(element)">
+                        <mat-icon>construction</mat-icon>
+                      </button>
                 </td>
             </ng-container>
 

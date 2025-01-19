@@ -41,6 +41,10 @@ export class TicketOverviewComponent implements OnInit {
     this.router.navigate(['/dashboard/ticket/create']);
   }
 
+  editTicket(ticket: TicketTableElement) {
+    this.router.navigate([`/dashboard/ticket/edit/${ticket?.id}`]);
+  }
+
   deleteTicket(ticketElement: TicketTableElement) {
     let ticket: Ticket = this.tickets.filter(ticket => ticket.id === ticketElement.id)[0];
     this.ticketService.deleteTicket(ticket).subscribe(() => {
