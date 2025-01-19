@@ -8,17 +8,17 @@ import { environment } from 'src/environments/environment';
 })
 export class TicketService {
 
-  private createTicketUrl = environment.uri+':9052/ticket/';
+  private createTicketUrl = environment.uri + ':9052/ticket/';
 
   constructor(private http: HttpClient) {
   }
 
-  createTicket(ticket:CreateTicket) {
-     return this.http.post<Ticket>(this.createTicketUrl,ticket);
+  createTicket(ticket: CreateTicket) {
+    return this.http.post<Ticket>(this.createTicketUrl, ticket);
   }
 
-  getTicketById(id:number){
-    return this.http.get<Ticket>(this.createTicketUrl+id);
+  getTicketById(id: number) {
+    return this.http.get<Ticket>(this.createTicketUrl + id);
   }
 
   getAllTickets() {
@@ -26,8 +26,11 @@ export class TicketService {
   }
 
   deleteTicket(ticket: Ticket) {
-    return this.http.delete(this.createTicketUrl+ticket.id);
+    return this.http.delete(this.createTicketUrl + ticket.id);
   }
- 
+
+  changeTicketStatus(status: string, id: number) {
+    return this.http.put<Ticket>(this.createTicketUrl + 'status/' + id, status);
+  }
 
 }
