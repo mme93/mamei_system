@@ -37,7 +37,7 @@ export class CreateTicketComponent implements OnInit {
   constructor(private eventService: TitleEventService, private fb: FormBuilder, private ticketService: TicketService, private router: Router) {
     this.ticketForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]],
+      description: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2000)]],
       startDate: [this.creationDate],
       endDate: [this.creationDate],
       deadLine: [true],
