@@ -56,7 +56,7 @@ public class TicketController {
         return new ResponseEntity<>(ticketService.updateTicketStatus(parsedStatus,id),HttpStatus.OK);
     }
 
-    @PutMapping("")
+    @PutMapping("/")
     public ResponseEntity<TicketEntity>updateTicket(@RequestBody TicketEntity ticket){
         return new ResponseEntity<>(ticketService.updateTicket(ticket),HttpStatus.OK);
     }
