@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TicketTableFilter, TicketTableSettings } from 'src/app/shared/model/settings/TicketSettings';
+import { TicketTableFilterService } from 'src/app/shared/services/dashboard/ticket/ticket-table-filter.service';
 
 @Component({
   selector: 'app-ticket-settings-dialog',
@@ -8,11 +9,14 @@ import { TicketTableFilter, TicketTableSettings } from 'src/app/shared/model/set
   styleUrls: ['./ticket-settings-dialog.component.scss']
 })
 export class TicketSettingsDialogComponent {
+  currentCopy: TicketTableFilter | undefined;
   isEditable = false;
+  isNewFilter = false;
   settings: TicketTableSettings;
   filterNames: string[] = [];
   filterName = '';
   defaultColumns: string[] = [];
+  newTicketFilterName = '';
   selectedFilter: TicketTableFilter = {
     name: '',
     statusFilter: {
@@ -27,7 +31,7 @@ export class TicketSettingsDialogComponent {
   isALL = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: TicketTableSettings,
+    @Inject(MAT_DIALOG_DATA) public data: TicketTableSettings, private filterService: TicketTableFilterService,
     private dialogRef: MatDialogRef<TicketSettingsDialogComponent>
   ) {
     this.settings = { ...data };
@@ -42,6 +46,7 @@ export class TicketSettingsDialogComponent {
   }
 
   onClose(): void {
+    this.settings.selectedFilter = this.selectedFilter;
     this.dialogRef.close(this.settings);
   }
 
@@ -56,7 +61,7 @@ export class TicketSettingsDialogComponent {
           isIN_PROGRESS: true,
           isDONE: true
         },
-        displayedColumns: ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
+        displayedColumns: this.settings.defaultCoulmns
       }
     }
   }
@@ -68,12 +73,25 @@ export class TicketSettingsDialogComponent {
         this.selectedFilter.name = filter.name;
         this.selectedFilter.statusFilter = { ...filter.statusFilter };
         this.defaultColumns = [...filter.displayedColumns];
+
+        this.currentCopy = {
+          displayedColumns: [...filter.displayedColumns],
+          name: filter.name,
+          statusFilter: { ...filter.statusFilter }
+        }
+
       }
     });
     this.isEditable = this.filterName === 'default';
     this.changeCheckbox();
   }
-
+  changeIsAllCheckbox(): void {
+    this.selectedFilter.statusFilter.isCREATED = this.isALL;
+    this.selectedFilter.statusFilter.isWAITING = this.isALL;
+    this.selectedFilter.statusFilter.isREFINEMENT = this.isALL;
+    this.selectedFilter.statusFilter.isIN_PROGRESS = this.isALL;
+    this.selectedFilter.statusFilter.isDONE = this.isALL;
+  }
   changeCheckbox(): void {
     this.isALL = this.selectedFilter.statusFilter.isCREATED &&
       this.selectedFilter.statusFilter.isWAITING &&
@@ -82,11 +100,33 @@ export class TicketSettingsDialogComponent {
       this.selectedFilter.statusFilter.isDONE;
   }
 
-  createNewFilter() {
-    throw new Error('Method not implemented.');
+  resetRows() {
+    this.defaultColumns = this.settings.defaultCoulmns;
+    this.selectedFilter.displayedColumns = this.settings.defaultCoulmns;
+  }
+  newFilter() {
+    this.isNewFilter = !this.isNewFilter;
   }
 
   editFilter() {
     this.isEditable = !this.isEditable;
   }
+
+  createNewFilter() {
+    this.filterService.updateFilter({
+      name: this.newTicketFilterName,
+      statusFilter: this.selectedFilter.statusFilter,
+      displayedColumns: this.selectedFilter.displayedColumns
+    } as TicketTableFilter);
+  }
+
+  updateFilter() {
+    this.filterService.updateFilter(this.selectedFilter);
+    this.onClose();
+  }
+
+  deleteFilter() {
+    this.filterService.deleteFilter(this.filterName);
+  }
+
 }
