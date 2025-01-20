@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateTicket, Ticket } from 'src/app/shared/model/dashboard/Ticket';
 import { environment } from 'src/environments/environment';
@@ -11,30 +11,67 @@ export class TicketService {
   private createTicketUrl = environment.uri + ':9052/ticket/';
 
   constructor(private http: HttpClient) {
+
   }
 
   createTicket(ticket: CreateTicket) {
-    return this.http.post<Ticket>(this.createTicketUrl, ticket);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<Ticket>(this.createTicketUrl, ticket, httpOptions);
   }
 
   getTicketById(id: number) {
-    return this.http.get<Ticket>(this.createTicketUrl + id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.get<Ticket>(this.createTicketUrl + id, httpOptions);
   }
 
   getAllTickets() {
-    return this.http.get<Ticket[]>(this.createTicketUrl);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.get<Ticket[]>(this.createTicketUrl, httpOptions);
   }
 
   deleteTicket(ticket: Ticket) {
-    return this.http.delete(this.createTicketUrl + ticket.id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.delete(this.createTicketUrl + ticket.id, httpOptions);
   }
 
   changeTicketStatus(status: string, id: number) {
-    return this.http.put<Ticket>(this.createTicketUrl + 'status/' + id, status);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<Ticket>(this.createTicketUrl + 'status/' + id, status, httpOptions);
   }
 
   updateTicket(ticket: Ticket | null) {
-    return this.http.put(this.createTicketUrl, ticket);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put(this.createTicketUrl, ticket, httpOptions);
   }
 
 }
