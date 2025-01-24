@@ -21,6 +21,10 @@ public class TicketEntity {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    private String projectId;
+
+    private String projectLabel;
+
     private  String  title ;
 
     @Enumerated(EnumType.STRING)
@@ -46,7 +50,10 @@ public class TicketEntity {
 
     private boolean deadLine;
 
-    public TicketEntity(String title, ETicketTyp type, ETicketLabel label, ETicketClassification classification, ETicketStatus status, String description, Date startDate, Date endDate, Date createDate, boolean deadLine) {
+
+    public TicketEntity(String projectId, String projectLabel, String title, ETicketTyp type, ETicketLabel label, ETicketClassification classification, ETicketStatus status, String description, Date startDate, Date endDate, Date createDate, boolean deadLine) {
+        this.projectId = projectId;
+        this.projectLabel = projectLabel;
         this.title = title;
         this.type = type;
         this.label = label;
