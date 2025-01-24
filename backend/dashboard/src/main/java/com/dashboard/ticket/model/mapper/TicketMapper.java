@@ -8,6 +8,8 @@ public class TicketMapper {
 
     public static TicketEntity createTicketMapToTicket(CreateTicketDto ticket){
         return new TicketEntity(
+                null,
+                ticket.getProjectLabel(),
                 ticket.getTitle(),
                 ticket.getType(),
                 ticket.getLabel(),
