@@ -20,5 +20,6 @@ public class CreateTicketDto {
     private ETicketTyp type;
     private ETicketLabel label;
     private ETicketClassification classification;
+    private String projectLabel;
 
 }
