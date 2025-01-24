@@ -18,7 +18,7 @@ import { DialogService } from 'src/app/shared/services/dialog/dialog.service';
 })
 export class TicketOverviewComponent implements OnInit {
   ticketTableSettings: TicketTableSettings = {
-    defaultCoulmns: ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons'],
+    defaultCoulmns: ['position', 'id','project_id','project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons'],
     selectedFilter: {
       name: 'default',
       statusFilter: {
@@ -28,7 +28,7 @@ export class TicketOverviewComponent implements OnInit {
         isIN_PROGRESS: true,
         isDONE: true
       },
-      displayedColumns: ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
+      displayedColumns: ['position', 'id','project_id','project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
     },
     filter: [{
       name: 'default',
@@ -39,7 +39,7 @@ export class TicketOverviewComponent implements OnInit {
         isIN_PROGRESS: true,
         isDONE: true
       },
-      displayedColumns: ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
+      displayedColumns: ['position', 'id','project_id','project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
     },{
       name: 'Done',
       statusFilter: {
@@ -113,6 +113,8 @@ export class TicketOverviewComponent implements OnInit {
         id: ticket.id ? ticket.id : -1,
         title: ticket.title,
         description: ticket.description,
+        projectId: ticket.projectId,
+        projectLabel: ticket.projectLabel,
         startDate: ticket.startDate,
         endDate: ticket.endDate,
         createDate: ticket.createDate,
@@ -120,7 +122,7 @@ export class TicketOverviewComponent implements OnInit {
         type: ticket.type,
         label: ticket.label,
         classification: ticket.classification,
-        status: ticket.status
+        status: ticket.status,
       })
       index++;
     })
