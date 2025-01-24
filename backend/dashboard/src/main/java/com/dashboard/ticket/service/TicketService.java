@@ -1,9 +1,9 @@
 package com.dashboard.ticket.service;
 
 import com.dashboard.ticket.TicketIdGenerator;
-import com.dashboard.ticket.model.CreateTicketDto;
-import com.dashboard.ticket.model.ETicketStatus;
-import com.dashboard.ticket.model.TicketEntity;
+import com.dashboard.ticket.model.dto.CreateTicketDto;
+import com.dashboard.ticket.model.enums.ETicketStatus;
+import com.dashboard.ticket.model.entity.TicketEntity;
 import com.dashboard.ticket.model.mapper.TicketMapper;
 import com.dashboard.ticket.repository.TicketRepository;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.dashboard.ticket.model;
+package com.dashboard.ticket.model.enums;
 
 public enum ETicketClassification {
     LOW,

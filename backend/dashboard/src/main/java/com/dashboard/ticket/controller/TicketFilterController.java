@@ -1,6 +1,6 @@
 package com.dashboard.ticket.controller;
 
-import com.dashboard.ticket.model.TicketTableFilterEntity;
+import com.dashboard.ticket.model.entity.TicketTableFilterEntity;
 import com.dashboard.ticket.service.TicketFilterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

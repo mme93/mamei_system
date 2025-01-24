@@ -1,4 +1,4 @@
-package com.dashboard.ticket.model;
+package com.dashboard.ticket.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

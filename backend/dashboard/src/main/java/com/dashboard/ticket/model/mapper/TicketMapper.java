@@ -1,8 +1,8 @@
 package com.dashboard.ticket.model.mapper;
 
-import com.dashboard.ticket.model.CreateTicketDto;
-import com.dashboard.ticket.model.ETicketStatus;
-import com.dashboard.ticket.model.TicketEntity;
+import com.dashboard.ticket.model.dto.CreateTicketDto;
+import com.dashboard.ticket.model.enums.ETicketStatus;
+import com.dashboard.ticket.model.entity.TicketEntity;
 
 public class TicketMapper {
 

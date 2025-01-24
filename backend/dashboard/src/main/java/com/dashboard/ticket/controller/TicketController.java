@@ -1,8 +1,8 @@
 package com.dashboard.ticket.controller;
 
-import com.dashboard.ticket.model.CreateTicketDto;
-import com.dashboard.ticket.model.ETicketStatus;
-import com.dashboard.ticket.model.TicketEntity;
+import com.dashboard.ticket.model.dto.CreateTicketDto;
+import com.dashboard.ticket.model.enums.ETicketStatus;
+import com.dashboard.ticket.model.entity.TicketEntity;
 import com.dashboard.ticket.service.TicketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

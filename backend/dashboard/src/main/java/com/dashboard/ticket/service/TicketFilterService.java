@@ -1,6 +1,6 @@
 package com.dashboard.ticket.service;
 
-import com.dashboard.ticket.model.TicketTableFilterEntity;
+import com.dashboard.ticket.model.entity.TicketTableFilterEntity;
 import com.dashboard.ticket.repository.TicketTableFilterRepository;
 import org.springframework.stereotype.Service;
 

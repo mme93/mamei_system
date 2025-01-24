@@ -1,5 +1,9 @@
-package com.dashboard.ticket.model;
+package com.dashboard.ticket.model.entity;
 
+import com.dashboard.ticket.model.enums.ETicketClassification;
+import com.dashboard.ticket.model.enums.ETicketLabel;
+import com.dashboard.ticket.model.enums.ETicketStatus;
+import com.dashboard.ticket.model.enums.ETicketTyp;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
