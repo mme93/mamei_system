@@ -1,5 +1,6 @@
 package com.dashboard.ticket.service;
 
+import com.dashboard.ticket.TicketIdGenerator;
 import com.dashboard.ticket.model.CreateTicketDto;
 import com.dashboard.ticket.model.ETicketStatus;
 import com.dashboard.ticket.model.TicketEntity;
@@ -15,14 +16,19 @@ public class TicketService {
 
     private final TicketValidatorService validatorService;
     private final TicketRepository ticketRepository;
+    private final TicketIdGenerator ticketIdGenerator;
 
-    public TicketService(TicketValidatorService validatorService, TicketRepository ticketRepository) {
+    public TicketService(TicketValidatorService validatorService, TicketRepository ticketRepository, TicketIdGenerator ticketIdGenerator) {
         this.validatorService = validatorService;
         this.ticketRepository = ticketRepository;
+        this.ticketIdGenerator = ticketIdGenerator;
     }
 
     public TicketEntity createTicket(CreateTicketDto ticket){
-       return ticketRepository.save(TicketMapper.createTicketMapToTicket(ticket));
+        TicketEntity ticketEntity=ticketRepository.save(TicketMapper.createTicketMapToTicket(ticket));
+        String projectId=ticketIdGenerator.generateId(ticketEntity.getId(),ticketEntity.getProjectLabel());
+        ticketEntity.setProjectId(projectId);
+        return ticketRepository.save(ticketEntity);
     }
 
     public Optional<TicketEntity> getTicketById(Long id) {
@@ -66,4 +72,5 @@ public class TicketService {
         }
         throw new IllegalArgumentException("Problem to update ticket");
     }
+
 }
