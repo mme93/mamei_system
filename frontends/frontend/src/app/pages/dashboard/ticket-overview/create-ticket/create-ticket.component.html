@@ -35,6 +35,14 @@
                     </mat-form-field>
                 </div>
 
+                <mat-form-field class="full-width">
+                    <mat-label>Projekt of the ticket</mat-label>
+                    <mat-select formControlName="project" [disabled]="ticketForm.get('label')?.value !=='CODE'">
+                        <mat-option *ngFor="let project of projects " [value]="project.value ">
+                            {{ project.viewValue }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
                 <mat-form-field class="full-width">
                     <mat-label>Description</mat-label>
