@@ -1,6 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { TicketTableFilter, TicketTableSettings } from 'src/app/shared/model/settings/TicketSettings';
+import { TicketTableFilter, TicketTableSettings, X } from 'src/app/shared/model/settings/TicketSettings';
 import { TicketTableFilterService } from 'src/app/shared/services/dashboard/ticket/ticket-table-filter.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { TicketTableFilterService } from 'src/app/shared/services/dashboard/tick
   templateUrl: './ticket-settings-dialog.component.html',
   styleUrls: ['./ticket-settings-dialog.component.scss']
 })
-export class TicketSettingsDialogComponent {
+export class TicketSettingsDialogComponent implements OnInit{
   currentCopy: TicketTableFilter | undefined;
   isEditable = false;
   isNewFilter = false;
@@ -30,6 +30,17 @@ export class TicketSettingsDialogComponent {
   };
   isALL = false;
 
+  filters: X[] = [];
+  selectedFilters: X = {
+    filterName: '',
+    done: true,
+    create: true,
+    in_PROGRESS: true,
+    refinement: true,
+    waiting: true,
+    displayedColumns: []
+  };
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TicketTableSettings, private filterService: TicketTableFilterService,
     private dialogRef: MatDialogRef<TicketSettingsDialogComponent>
@@ -39,6 +50,9 @@ export class TicketSettingsDialogComponent {
     const name = this.settings.selectedFilter.name;
     this.filterName = name;
     this.changeFilter(name);
+  }
+  ngOnInit(): void {
+   this.filterService.getFilters().subscribe((result:X[])=>this.filters=result);
   }
 
   onCancle() {
