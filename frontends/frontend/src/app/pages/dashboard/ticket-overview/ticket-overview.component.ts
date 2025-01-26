@@ -7,7 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TitleEventService } from 'src/app/shared/event/title-event.service';
 import { Ticket, TicketTableElement } from 'src/app/shared/model/dashboard/Ticket';
-import { TicketTableSettings } from 'src/app/shared/model/settings/TicketSettings';
+import { TicketTableFilter, TicketTableSettings, X } from 'src/app/shared/model/settings/TicketSettings';
+import { TicketTableFilterService } from 'src/app/shared/services/dashboard/ticket/ticket-table-filter.service';
 import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.service';
 import { DialogService } from 'src/app/shared/services/dialog/dialog.service';
 
@@ -18,7 +19,7 @@ import { DialogService } from 'src/app/shared/services/dialog/dialog.service';
 })
 export class TicketOverviewComponent implements OnInit {
   ticketTableSettings: TicketTableSettings = {
-    defaultCoulmns: ['position', 'id','project_id','project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons'],
+    defaultCoulmns: ['position', 'id', 'project_id', 'project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons'],
     selectedFilter: {
       name: 'default',
       statusFilter: {
@@ -28,7 +29,7 @@ export class TicketOverviewComponent implements OnInit {
         isIN_PROGRESS: true,
         isDONE: true
       },
-      displayedColumns: ['position', 'id','project_id','project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
+      displayedColumns: ['position', 'id', 'project_id', 'project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
     },
     filter: [{
       name: 'default',
@@ -39,8 +40,8 @@ export class TicketOverviewComponent implements OnInit {
         isIN_PROGRESS: true,
         isDONE: true
       },
-      displayedColumns: ['position', 'id','project_id','project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
-    },{
+      displayedColumns: ['position', 'id', 'project_id', 'project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
+    }, {
       name: 'Done',
       statusFilter: {
         isCREATED: false,
@@ -52,23 +53,55 @@ export class TicketOverviewComponent implements OnInit {
       displayedColumns: ['position', 'id', 'status', 'label', 'classification', 'title', 'buttons']
     }]
   }
+  filter: X = {
+    filterName: '',
+    done:true,
+    create:true,
+    in_PROGRESS:true,
+    refinement:true,
+    waiting:true,
+    displayedColumns: []
+  };
   ticketElements: TicketTableElement[] = []
   dataSource = new MatTableDataSource(this.ticketElements);
 
   tickets: Ticket[] = [];
+  filteredTickets: Ticket[] = [];
 
-  constructor(private dialogService: DialogService, private eventService: TitleEventService, private router: Router, private ticketService: TicketService) { }
+  constructor(private dialogService: DialogService, private eventService: TitleEventService, private router: Router,
+    private ticketService: TicketService, private ticketFilterService: TicketTableFilterService) { }
 
   ngOnInit(): void {
-    this.ticketService.getAllTickets().subscribe(result => {
-      this.tickets = result;
-      this.createTableContent(result)
+    this.ticketService.getAllTickets().subscribe(tickets => {
+      this.tickets = tickets;
+      this.ticketFilterService.getFilterById(1).subscribe((filter: X) => {
+        this.filter = filter;
+        this.filterTable(tickets, filter);
+        this.createTableContent(this.filteredTickets);
+      },
+        (error: HttpErrorResponse) => {
+          console.log('HTTP Status:', error.status);
+        });
+
     },
       (error: HttpErrorResponse) => {
         console.log('HTTP Status:', error.status);
       });
     this.eventService.updateTitle('Ticket Overview')
 
+  }
+
+  filterTable(response: Ticket[], filter: X) {
+    const tickets = response;
+    this.filteredTickets = []
+    this.filteredTickets = tickets.filter(ticket => {
+      const isOkay= (ticket.status === 'CREATED' &&  filter.create)||
+      (ticket.status === 'IN_PROGRESS' &&  filter.in_PROGRESS)||
+      (ticket.status === 'REFINEMENT' &&  filter.refinement)||
+      (ticket.status === 'WAITING' &&  filter.waiting)||
+      (ticket.status === 'DONE' &&  filter.done);
+      return isOkay;
+    });
   }
 
   viewTicket(ticket: TicketTableElement) {
@@ -130,9 +163,8 @@ export class TicketOverviewComponent implements OnInit {
   }
 
   openSettingsDialog(): void {
-    console.log(this.ticketTableSettings)
     this.dialogService.openTicketSettingsDialog(this.ticketTableSettings).subscribe((result: TicketTableSettings) => {
-      if(result){
+      if (result) {
         this.ticketTableSettings = result;
       }
     });
