@@ -1,13 +1,10 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { tick } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TitleEventService } from 'src/app/shared/event/title-event.service';
 import { Ticket, TicketTableElement } from 'src/app/shared/model/dashboard/Ticket';
-import { TicketTableFilter, TicketTableSettings, X } from 'src/app/shared/model/settings/TicketSettings';
+import { TicketTableFilter } from 'src/app/shared/model/settings/TicketSettings';
 import { TicketTableFilterService } from 'src/app/shared/services/dashboard/ticket/ticket-table-filter.service';
 import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.service';
 import { DialogService } from 'src/app/shared/services/dialog/dialog.service';
@@ -18,48 +15,13 @@ import { DialogService } from 'src/app/shared/services/dialog/dialog.service';
   styleUrl: './ticket-overview.component.scss'
 })
 export class TicketOverviewComponent implements OnInit {
-  ticketTableSettings: TicketTableSettings = {
-    defaultCoulmns: ['position', 'id', 'project_id', 'project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons'],
-    selectedFilter: {
-      name: 'default',
-      statusFilter: {
-        isCREATED: true,
-        isWAITING: true,
-        isREFINEMENT: true,
-        isIN_PROGRESS: true,
-        isDONE: true
-      },
-      displayedColumns: ['position', 'id', 'project_id', 'project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
-    },
-    filter: [{
-      name: 'default',
-      statusFilter: {
-        isCREATED: true,
-        isWAITING: true,
-        isREFINEMENT: true,
-        isIN_PROGRESS: true,
-        isDONE: true
-      },
-      displayedColumns: ['position', 'id', 'project_id', 'project', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'buttons']
-    }, {
-      name: 'Done',
-      statusFilter: {
-        isCREATED: false,
-        isWAITING: false,
-        isREFINEMENT: false,
-        isIN_PROGRESS: false,
-        isDONE: true
-      },
-      displayedColumns: ['position', 'id', 'status', 'label', 'classification', 'title', 'buttons']
-    }]
-  }
-  filter: X = {
+  filter: TicketTableFilter = {
     filterName: '',
-    done:true,
-    create:true,
-    in_PROGRESS:true,
-    refinement:true,
-    waiting:true,
+    done: true,
+    created: true,
+    in_PROGRESS: true,
+    refinement: true,
+    waiting: true,
     displayedColumns: []
   };
   ticketElements: TicketTableElement[] = []
@@ -74,7 +36,7 @@ export class TicketOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.ticketService.getAllTickets().subscribe(tickets => {
       this.tickets = tickets;
-      this.ticketFilterService.getFilterById(1).subscribe((filter: X) => {
+      this.ticketFilterService.getFilterById(1).subscribe((filter: TicketTableFilter) => {
         this.filter = filter;
         this.filterTable(tickets, filter);
         this.createTableContent(this.filteredTickets);
@@ -91,15 +53,15 @@ export class TicketOverviewComponent implements OnInit {
 
   }
 
-  filterTable(response: Ticket[], filter: X) {
+  filterTable(response: Ticket[], filter: TicketTableFilter) {
     const tickets = response;
     this.filteredTickets = []
     this.filteredTickets = tickets.filter(ticket => {
-      const isOkay= (ticket.status === 'CREATED' &&  filter.create)||
-      (ticket.status === 'IN_PROGRESS' &&  filter.in_PROGRESS)||
-      (ticket.status === 'REFINEMENT' &&  filter.refinement)||
-      (ticket.status === 'WAITING' &&  filter.waiting)||
-      (ticket.status === 'DONE' &&  filter.done);
+      const isOkay = (ticket.status === 'CREATED' && filter.created) ||
+        (ticket.status === 'IN_PROGRESS' && filter.in_PROGRESS) ||
+        (ticket.status === 'REFINEMENT' && filter.refinement) ||
+        (ticket.status === 'WAITING' && filter.waiting) ||
+        (ticket.status === 'DONE' && filter.done);
       return isOkay;
     });
   }
@@ -163,9 +125,9 @@ export class TicketOverviewComponent implements OnInit {
   }
 
   openSettingsDialog(): void {
-    this.dialogService.openTicketSettingsDialog(this.ticketTableSettings).subscribe((result: TicketTableSettings) => {
+    this.dialogService.openTicketSettingsDialog(this.filter).subscribe((result: TicketTableFilter) => {
       if (result) {
-        this.ticketTableSettings = result;
+        this.filter = result;
       }
     });
   }
