@@ -82,8 +82,8 @@
                 </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="ticketTableSettings.selectedFilter.displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: ticketTableSettings.selectedFilter.displayedColumns;"></tr>
+            <tr mat-header-row *matHeaderRowDef="filter.displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: filter.displayedColumns;"></tr>
             <tr class="mat-row" *matNoDataRow>
                 <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
             </tr>
