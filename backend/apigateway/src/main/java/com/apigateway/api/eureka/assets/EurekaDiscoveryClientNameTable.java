@@ -12,7 +12,7 @@ public class EurekaDiscoveryClientNameTable {
     //System Services Range 9000-9049
     public static final String ApiGateWay = "APIGATEWAY";
     public static final String SystemManagerAPI = "SYSTEM";
-    public static final String ConfigManagerAPI = "CONFIG_NOT_IN_LIST";
+    public static final String ConfigManagerAPI = "CONFIGMANAGER";
     public static final String HealthManagerAPI = "HEALTHMANAGER";
     public static final String SecurityGatewayAPI = "SECURITYGATEWAY";
     public static final String DataStorageAPI = "DATASTORAGE";
@@ -31,5 +31,5 @@ public class EurekaDiscoveryClientNameTable {
             UserAPI, MassDataPoolAPI);
 
     public static final String eurekaDiscoverClientNames = "APIGATEWAY, DASHBOARD, DATASTORAGE, GAMESMANAGER, HEALTHMANAGER, " +
-            "MAMEI_FSM, SECURITYGATEWAY, SHOPPINGLIST, SUDOKU, SYSTEM, USER, MASSDATAPOOL";
+            "MAMEI_FSM, SECURITYGATEWAY, SHOPPINGLIST, SUDOKU, SYSTEM, USER, MASSDATAPOOL, CONFIGMANAGER";
 }

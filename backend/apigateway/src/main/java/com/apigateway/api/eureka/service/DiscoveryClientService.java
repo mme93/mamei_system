@@ -92,6 +92,13 @@ public class DiscoveryClientService {
     }
 
     /**
+     * Retrieves the address of the Config Manager client.
+     */
+    public String getConfigManagerByName() {
+        return discoveryClient.getInstances(EurekaDiscoveryClientNameTable.ConfigManagerAPI).get(0).getUri().toString();
+    }
+
+    /**
      * Retrieves the address of a client by name.
      *
      * @param clientName The name of the client.

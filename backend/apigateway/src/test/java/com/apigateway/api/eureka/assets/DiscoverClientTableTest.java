@@ -24,7 +24,7 @@ public class DiscoverClientTableTest {
     public void testSystemServicesNames(){
         Assertions.assertTrue(EurekaDiscoveryClientNameTable.ApiGateWay.equals("APIGATEWAY"));
         Assertions.assertTrue(EurekaDiscoveryClientNameTable.SystemManagerAPI.equals("SYSTEM"));
-        Assertions.assertTrue(EurekaDiscoveryClientNameTable.ConfigManagerAPI.equals("CONFIG_NOT_IN_LIST"));
+        Assertions.assertTrue(EurekaDiscoveryClientNameTable.ConfigManagerAPI.equals("CONFIGMANAGER"));
         Assertions.assertTrue(EurekaDiscoveryClientNameTable.HealthManagerAPI.equals("HEALTHMANAGER"));
         Assertions.assertTrue(EurekaDiscoveryClientNameTable.SecurityGatewayAPI.equals("SECURITYGATEWAY"));
         Assertions.assertTrue(EurekaDiscoveryClientNameTable.DataStorageAPI.equals("DATASTORAGE"));
