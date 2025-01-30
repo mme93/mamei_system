@@ -1,5 +1,8 @@
-package com.dashboard.ticket.model;
+package com.dashboard.ticket.model.dto;
 
+import com.dashboard.ticket.model.enums.ETicketClassification;
+import com.dashboard.ticket.model.enums.ETicketLabel;
+import com.dashboard.ticket.model.enums.ETicketTyp;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +23,6 @@ public class CreateTicketDto {
     private ETicketTyp type;
     private ETicketLabel label;
     private ETicketClassification classification;
+    private String projectLabel;
 
 }

@@ -1,0 +1,73 @@
+<h2 mat-dialog-title>Ticket Filter Settings</h2>
+
+<mat-dialog-content>
+
+    <!-- Status Filter Section -->
+    <h3>Status Filter</h3>
+    <div class="status-filter">
+        <div class="checkbox-group">
+            <mat-checkbox [(ngModel)]="isALL" [disabled]="!isEditable" (ngModelChange)="changeIsAllCheckbox()">
+                {{ 'ALL' | titlecase }}
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="selectedFilter.created" [disabled]="!isEditable" (ngModelChange)="changeCheckbox()">
+                {{ 'CREATED' | titlecase }}
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="selectedFilter.waiting" [disabled]="!isEditable" (ngModelChange)="changeCheckbox()">
+                {{ 'WAITING' | titlecase }}
+            </mat-checkbox>
+        </div>
+        <div class="checkbox-group">
+            <mat-checkbox [(ngModel)]="selectedFilter.refinement" [disabled]="!isEditable" (ngModelChange)="changeCheckbox()">
+                {{ 'REFINEMENT' | titlecase }}
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="selectedFilter.in_PROGRESS" [disabled]="!isEditable" (ngModelChange)="changeCheckbox()">
+                {{ 'IN_PROGRESS' | titlecase }}
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="selectedFilter.done" [disabled]="!isEditable" (ngModelChange)="changeCheckbox()">
+                {{ 'DONE' | titlecase }}
+            </mat-checkbox>
+        </div>
+    </div>
+
+    <h3>Filter</h3>
+    <div>
+        <mat-form-field class="full-width" *ngIf="filters.length > 1 && !isNewFilter ">
+            <mat-label>Choose Filter</mat-label>
+            <mat-select [(value)]="selectedFilter.filterName" placeholder="Select Filter " (selectionChange)="changeFilter(selectedFilter.filterName) ">
+                <mat-option *ngFor="let filter of filters " [value]="filter.filterName ">
+                    {{ filter.filterName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width " *ngIf="isNewFilter ">
+            <mat-label>New filter name</mat-label>
+            <input matInput [value]="newTicketFilterName">
+        </mat-form-field>
+    </div>
+
+    <h3>Rows</h3>
+    <div class="form-field-container ">
+        <mat-form-field class="full-width " *ngIf="selectedFilter.displayedColumns.length> 1">
+            <mat-label>Choose Columns</mat-label>
+            <mat-select [(value)]="selectedFilter.displayedColumns" multiple [disabled]="!isEditable">
+                <mat-option *ngFor="let column of selectedFilter.displayedColumns" [value]="column">
+                    {{ column }}
+                </mat-option>
+            </mat-select>
+            <button mat-mini-fab matSuffix (click)="resetRows()" *ngIf="selectedFilter.filterName!=='default' " [disabled]="!isEditable">
+                <mat-icon>restart_alt</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onCancle()">Cancle</button>
+    <button mat-button (click)="resetDefault()" *ngIf="selectedFilter.filterName==='default'">Reset</button>
+    <button mat-button (click)="newFilter()" *ngIf="selectedFilter.filterName==='default' ">New Filter</button>
+    <button mat-button (click)="editFilter()" *ngIf="selectedFilter.filterName !=='default' ">Edit</button>
+    <button mat-button (click)="deleteFilter()" *ngIf="selectedFilter.filterName !=='default' && isEditable ">Delete</button>
+    <button mat-button (click)="updateFilter()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

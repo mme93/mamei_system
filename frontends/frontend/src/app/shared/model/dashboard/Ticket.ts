@@ -3,15 +3,18 @@ export interface CreateTicket {
     description: string,
     startDate: Date,
     endDate: Date,
-    createDate:Date,
+    createDate: Date,
     deadLine: boolean
     type: string,
     label: string,
-    classification: string
+    classification: string,
+    projectLabel: string,
 }
 
 export interface Ticket {
     id?: number;
+    projectId: string,
+    projectLabel: string,
     title: string,
     description: string,
     startDate: Date,
@@ -35,9 +38,11 @@ export interface CreateTicketContent {
     ticketPrios: TicketDropDown[],
 }
 
-export interface TicketTableElement{
+export interface TicketTableElement {
     position: number;
     id: number;
+    projectId: string;
+    projectLabel: string;
     title: string,
     description: string,
     startDate: Date,
@@ -50,7 +55,7 @@ export interface TicketTableElement{
     status: string
 }
 
-export interface TicketStatusDropDown{
-    label:string;
-    code:string;
+export interface TicketStatusDropDown {
+    label: string;
+    code: string;
 }

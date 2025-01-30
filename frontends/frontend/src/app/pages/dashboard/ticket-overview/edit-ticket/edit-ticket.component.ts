@@ -30,6 +30,11 @@ export class EditTicketComponent implements OnInit {
       { value: 'HIGH', viewValue: 'High' },
       { value: 'MIDDLE', viewValue: 'Middle' },
       { value: 'LOW', viewValue: 'Low' }
+    ],
+    projects : [
+      { value: 'NOTHING_SELECTED', viewValue: 'Nothing selected' },
+      { value: 'DASHBOARD', viewValue: 'Dashboard' },
+      { value: 'API_GATEWAY', viewValue: 'ApiGateway' }
     ]
   };
 
@@ -60,7 +65,8 @@ export class EditTicketComponent implements OnInit {
       deadLine: [true],
       type: ['TASK', [Validators.required]],
       label: ['NOTICE', [Validators.required]],
-      classification: ['LOW', [Validators.required]]
+      classification: ['LOW', [Validators.required]],
+      projectLabel: ['NOTHING_SELECTED', [Validators.required]]
     });
   }
 

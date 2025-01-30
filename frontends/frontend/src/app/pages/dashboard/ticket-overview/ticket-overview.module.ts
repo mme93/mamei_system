@@ -17,6 +17,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatMenuModule } from "@angular/material/menu";
 import { EditTicketComponent } from "./edit-ticket/edit-ticket.component";
+import { OverlayModule } from "@angular/cdk/overlay";
+import { TicketSettingsDialogComponent } from "./ticket-settings-dialog/ticket-settings-dialog.component";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 
@@ -37,13 +40,16 @@ import { EditTicketComponent } from "./edit-ticket/edit-ticket.component";
         MatIconModule,
         MatProgressSpinnerModule,
         MatProgressBarModule,
-        MatMenuModule
+        MatMenuModule,
+        OverlayModule,
+        MatDialogModule
     ],
     exports: [],
     declarations: [
         CreateTicketComponent,
         TicketComponent,
-        EditTicketComponent
+        EditTicketComponent,
+        TicketSettingsDialogComponent
     ]
 })
 export class TicketOverviewModule { }

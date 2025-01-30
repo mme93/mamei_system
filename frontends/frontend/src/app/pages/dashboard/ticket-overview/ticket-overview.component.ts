@@ -1,11 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { tick } from '@angular/core/testing';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TitleEventService } from 'src/app/shared/event/title-event.service';
 import { Ticket, TicketTableElement } from 'src/app/shared/model/dashboard/Ticket';
+import { TicketTableFilter } from 'src/app/shared/model/settings/TicketSettings';
+import { TicketTableFilterService } from 'src/app/shared/services/dashboard/ticket/ticket-table-filter.service';
 import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.service';
+import { DialogService } from 'src/app/shared/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-ticket-overview',
@@ -13,24 +15,55 @@ import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.s
   styleUrl: './ticket-overview.component.scss'
 })
 export class TicketOverviewComponent implements OnInit {
+  filter: TicketTableFilter = {
+    filterName: '',
+    done: true,
+    created: true,
+    in_PROGRESS: true,
+    refinement: true,
+    waiting: true,
+    displayedColumns: []
+  };
   ticketElements: TicketTableElement[] = []
-  displayedColumns: string[] = ['position', 'id', 'status', 'label', 'classification', 'title', 'date', 'createDate', 'delete'];
   dataSource = new MatTableDataSource(this.ticketElements);
 
   tickets: Ticket[] = [];
+  filteredTickets: Ticket[] = [];
 
-  constructor(private eventService: TitleEventService, private router: Router, private ticketService: TicketService) { }
+  constructor(private dialogService: DialogService, private eventService: TitleEventService, private router: Router,
+    private ticketService: TicketService, private ticketFilterService: TicketTableFilterService) { }
 
   ngOnInit(): void {
-    this.ticketService.getAllTickets().subscribe(result => {
-      this.tickets = result;
-      this.createTableContent(result)
+    this.ticketService.getAllTickets().subscribe(tickets => {
+      this.tickets = tickets;
+      this.ticketFilterService.getFilterById(1).subscribe((filter: TicketTableFilter) => {
+        this.filter = filter;
+        this.filterTable(tickets, filter);
+        this.createTableContent(this.filteredTickets);
+      },
+        (error: HttpErrorResponse) => {
+          console.log('HTTP Status:', error.status);
+        });
+
     },
       (error: HttpErrorResponse) => {
         console.log('HTTP Status:', error.status);
       });
     this.eventService.updateTitle('Ticket Overview')
 
+  }
+
+  filterTable(response: Ticket[], filter: TicketTableFilter) {
+    const tickets = response;
+    this.filteredTickets = []
+    this.filteredTickets = tickets.filter(ticket => {
+      const isOkay = (ticket.status === 'CREATED' && filter.created) ||
+        (ticket.status === 'IN_PROGRESS' && filter.in_PROGRESS) ||
+        (ticket.status === 'REFINEMENT' && filter.refinement) ||
+        (ticket.status === 'WAITING' && filter.waiting) ||
+        (ticket.status === 'DONE' && filter.done);
+      return isOkay;
+    });
   }
 
   viewTicket(ticket: TicketTableElement) {
@@ -75,6 +108,8 @@ export class TicketOverviewComponent implements OnInit {
         id: ticket.id ? ticket.id : -1,
         title: ticket.title,
         description: ticket.description,
+        projectId: ticket.projectId,
+        projectLabel: ticket.projectLabel,
         startDate: ticket.startDate,
         endDate: ticket.endDate,
         createDate: ticket.createDate,
@@ -82,11 +117,19 @@ export class TicketOverviewComponent implements OnInit {
         type: ticket.type,
         label: ticket.label,
         classification: ticket.classification,
-        status: ticket.status
+        status: ticket.status,
       })
       index++;
     })
     this.dataSource.data = this.ticketElements;
+  }
+
+  openSettingsDialog(): void {
+    this.dialogService.openTicketSettingsDialog(this.filter).subscribe((result: TicketTableFilter) => {
+      if (result) {
+        this.filter = result;
+      }
+    });
   }
 
 }

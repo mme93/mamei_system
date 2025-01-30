@@ -1,7 +1,7 @@
 package com.dashboard.ticket.service;
 
-import com.dashboard.ticket.model.ETicketStatus;
-import com.dashboard.ticket.model.TicketEntity;
+import com.dashboard.ticket.model.enums.ETicketStatus;
+import com.dashboard.ticket.model.entity.TicketEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

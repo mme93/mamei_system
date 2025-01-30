@@ -32,18 +32,25 @@ export class CreateTicketComponent implements OnInit {
     { value: 'LOW', viewValue: 'Low' }
   ];
 
+  projects = [
+    { value: 'NOTHING_SELECTED', viewValue: 'Nothing selected' },
+    { value: 'DASHBOARD', viewValue: 'Dashboard' },
+    { value: 'API_GATEWAY', viewValue: 'ApiGateway' }
+  ];
+
   creationDate: Date = new Date();
 
   constructor(private eventService: TitleEventService, private fb: FormBuilder, private ticketService: TicketService, private router: Router) {
     this.ticketForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2000)]],
+      description: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]],
       startDate: [this.creationDate],
       endDate: [this.creationDate],
       deadLine: [true],
       type: ['TASK', [Validators.required]],
       label: ['NOTICE', [Validators.required]],
-      classification: ['LOW', [Validators.required]]
+      classification: ['LOW', [Validators.required]],
+      project: ['NOTHING_SELECTED', [Validators.required]]
     });
   }
 
@@ -62,6 +69,7 @@ export class CreateTicketComponent implements OnInit {
       type: this.ticketForm.get('type')?.value,
       label: this.ticketForm.get('label')?.value,
       classification: this.ticketForm.get('classification')?.value,
+      projectLabel: this.ticketForm.get('project')?.value
     };
     this.ticketService.createTicket(ticket).subscribe(result => {
       if (result.id) {
