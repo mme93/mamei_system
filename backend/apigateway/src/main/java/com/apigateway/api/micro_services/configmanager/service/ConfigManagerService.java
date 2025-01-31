@@ -24,4 +24,20 @@ public class ConfigManagerService {
                 .retrieve()
                 .bodyToMono(String.class).block();
     }
+
+    @Async
+    public Object getFilterConfig(String username, String frontendName) {
+        String uri = String.format("%s%s%s%s",
+                clientService.getConfigManagerByName(),
+                ConfigManagerRouterTable.CONFIG_MANAGER_GET_FILTERCONFIG_PREFIX,
+                frontendName,
+                ConfigManagerRouterTable.CONFIG_MANAGER_GET_FILTERCONFIG_SUFFIX);
+        return webClient
+                .build()
+                .get()
+                .uri(uri)
+                .headers(headers -> headers.set("X-Username", username))
+                .retrieve()
+                .bodyToMono(String.class).block();
+    }
 }
