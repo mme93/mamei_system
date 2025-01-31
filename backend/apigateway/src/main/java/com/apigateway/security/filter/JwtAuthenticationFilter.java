@@ -68,6 +68,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     context.setAuthentication(authToken);
                     SecurityContextHolder.setContext(context);
                     userLogger.info("Update Token with Username: " + authToken.getName());
+                    request.setAttribute("X-Username", userName);
                 }
             }
         } catch (ExpiredJwtException e) {
