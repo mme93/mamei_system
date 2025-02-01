@@ -1,10 +1,8 @@
 package com.configmanager.settings.frontend.projects.mamei.service;
 
 import com.configmanager.settings.frontend.projects.mamei.model.EMameiSpecific;
-import com.configmanager.settings.frontend.projects.mamei.tickettable.MaMeiTicketTableService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +32,33 @@ public class MaMeiFrontendService {
 
 
     public Object createSpecificFrontendConfig(String username, EMameiSpecific eMameiSpecific, Object config) {
-        switch (eMameiSpecific){
+        switch (eMameiSpecific) {
             case TICKET_TABLE -> {
-                return maMeiTicketTableService.createConfig(config);
+                return maMeiTicketTableService.createConfig(config, username);
             }
         }
 
         return null;
+    }
+
+    public Object updateSpecificFrontendConfig(EMameiSpecific eMameiSpecific, Object config) {
+        switch (eMameiSpecific) {
+            case TICKET_TABLE -> {
+                return maMeiTicketTableService.updateConfig(config);
+            }
+        }
+
+        throw new IllegalArgumentException(String.format("No service found for %s.", eMameiSpecific.name()));
+    }
+
+    public void deleteSpecificFrontendConfig(EMameiSpecific eMameiSpecific, String username) {
+        switch (eMameiSpecific) {
+            case TICKET_TABLE -> {
+                maMeiTicketTableService.deleteConfig(username);
+            }
+            default -> throw new IllegalArgumentException(String.format("No service found for %s.", eMameiSpecific.name()));
+        }
+
+
     }
 }
