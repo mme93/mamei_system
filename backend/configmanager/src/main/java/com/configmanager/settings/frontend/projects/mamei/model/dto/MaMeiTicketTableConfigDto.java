@@ -1,4 +1,4 @@
-package com.configmanager.settings.frontend.projects.mamei.tickettable;
+package com.configmanager.settings.frontend.projects.mamei.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
