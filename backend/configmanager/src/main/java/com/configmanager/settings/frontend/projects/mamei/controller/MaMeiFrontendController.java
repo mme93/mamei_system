@@ -2,7 +2,6 @@ package com.configmanager.settings.frontend.projects.mamei.controller;
 
 import com.configmanager.settings.frontend.projects.mamei.model.EMameiSpecific;
 import com.configmanager.settings.frontend.projects.mamei.service.MaMeiFrontendService;
-import com.configmanager.settings.frontend.projects.mamei.tickettable.MaMeiTicketTableConfigDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +21,7 @@ public class MaMeiFrontendController {
 
     @GetMapping("")
     public ResponseEntity<List<Object>> loadFrontendConfigs(@RequestHeader(value = "X-Username", required = false) String username) {
+        System.err.println(username);
         return new ResponseEntity<>(maMeiFrontendService.loadFrontendConfigs(username), HttpStatus.OK);
     }
 
@@ -39,7 +39,21 @@ public class MaMeiFrontendController {
     public ResponseEntity<Object> createSpecificFrontendConfig(@RequestHeader(value = "X-Username", required = false) String username,
                                                                @PathVariable String specification, @RequestBody Object config) {
         return new ResponseEntity<>(maMeiFrontendService.
-                createSpecificFrontendConfig(username, EMameiSpecific.valueOf(specification),config), HttpStatus.CREATED);
+                createSpecificFrontendConfig(username, EMameiSpecific.valueOf(specification), config), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{specification}")
+    public ResponseEntity<Object> updateSpecificFrontendConfig(@RequestHeader(value = "X-Username", required = false) String username,
+                                                               @PathVariable String specification, @RequestBody Object config) {
+        return new ResponseEntity<>(maMeiFrontendService.
+                updateSpecificFrontendConfig(EMameiSpecific.valueOf(specification), config), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{specification}")
+    public ResponseEntity<Object> deleteSpecificFrontendConfig(@RequestHeader(value = "X-Username", required = false) String username,
+                                                               @PathVariable String specification) {
+        maMeiFrontendService.deleteSpecificFrontendConfig(EMameiSpecific.valueOf(specification), username);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
