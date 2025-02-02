@@ -32,6 +32,17 @@ services:
     environment:
       - EUREKA_URI=http://serviceregistry:8761/eureka
 
+  configmanager:
+    build:
+      context: backend/configmanager
+      dockerfile: Dockerfile
+    ports:
+      - "9002:9002"
+    networks:
+      - eureka
+    environment:
+      - EUREKA_URI=http://serviceregistry:8761/eureka
+
   datastoragemanager:
     build:
       context: backend/datastoragemanager

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TicketService {
 
-  private createTicketUrl = environment.uri + ':9052/ticket/';
+  private createTicketUrl = environment.uri + ':9000/api/dashboard/ticket/';
 
   constructor(private http: HttpClient) {
 

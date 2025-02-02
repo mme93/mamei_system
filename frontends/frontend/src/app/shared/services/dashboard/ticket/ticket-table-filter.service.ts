@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TicketTableFilter } from 'src/app/shared/model/settings/TicketSettings';
 import { environment } from 'src/environments/environment';
@@ -10,25 +10,49 @@ export class TicketTableFilterService {
 
 
   private createTicketUrl = environment.uri + ':9052/ticket/table/settings/';
-  private ticketFilterUrl = environment.uri + ':9052/ticket/filter';
+  private ticketFilterUrl = environment.uri + ':9000/api/dashboard/ticket/table';
 
   constructor(private http: HttpClient) {
   }
 
   updateFilter(filter: TicketTableFilter) {
-    return this.http.put<TicketTableFilter>(this.createTicketUrl, filter);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<TicketTableFilter>(this.createTicketUrl, filter, httpOptions);
   }
 
   deleteFilter(filterName: string) {
-    return this.http.delete(this.createTicketUrl + filterName);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.delete(this.createTicketUrl + filterName, httpOptions);
   }
 
   getFilterById(id: number) {
-    return this.http.get<TicketTableFilter>(this.ticketFilterUrl + "/table/" + id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.get<TicketTableFilter>(this.ticketFilterUrl + "/" + id, httpOptions);
   }
 
   getFilters() {
-    return this.http.get<TicketTableFilter[]>(this.ticketFilterUrl + "/table");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token') + '',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.get<TicketTableFilter[]>(this.ticketFilterUrl, httpOptions);
   }
 
 }
