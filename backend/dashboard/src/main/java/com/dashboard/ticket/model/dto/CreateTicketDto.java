@@ -1,8 +1,6 @@
 package com.dashboard.ticket.model.dto;
 
-import com.dashboard.ticket.model.enums.ETicketClassification;
-import com.dashboard.ticket.model.enums.ETicketLabel;
-import com.dashboard.ticket.model.enums.ETicketTyp;
+import com.dashboard.ticket.model.enums.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +18,10 @@ public class CreateTicketDto {
     private Date endDate;
     private Date createDate;
     private boolean deadLine;
+    private EProject project;
+    private ESystemTyp system;
     private ETicketTyp type;
     private ETicketLabel label;
     private ETicketClassification classification;
-    private String projectLabel;
 
 }
