@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 import { Router } from '@angular/router';
+import { ticketDropDown } from 'src/app/shared/data/TicketData';
 import { TitleEventService } from 'src/app/shared/event/title-event.service';
 import { CreateTicket } from 'src/app/shared/model/dashboard/Ticket';
 import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.service';
@@ -14,30 +16,13 @@ import { TicketService } from 'src/app/shared/services/dashboard/ticket/ticket.s
 export class CreateTicketComponent implements OnInit {
 
   ticketForm: FormGroup;
-
-  types = [
-    { value: 'TASK', viewValue: 'Task' },
-    { value: 'BUG', viewValue: 'Bug' },
-    { value: 'FEATURE', viewValue: 'Feature' }
-  ];
-
-  labels = [
-    { value: 'CODE', viewValue: 'Code' },
-    { value: 'NOTICE', viewValue: 'Notice' }
-  ];
-
-  classsifcations = [
-    { value: 'HIGH', viewValue: 'High' },
-    { value: 'MIDDLE', viewValue: 'Middle' },
-    { value: 'LOW', viewValue: 'Low' }
-  ];
-
-  projects = [
-    { value: 'NOTHING_SELECTED', viewValue: 'Nothing selected' },
-    { value: 'DASHBOARD', viewValue: 'Dashboard' },
-    { value: 'API_GATEWAY', viewValue: 'ApiGateway' }
-  ];
-
+  systems = ticketDropDown.systems;
+  types = ticketDropDown.types;
+  labels = ticketDropDown.labels;
+  classifications = ticketDropDown.classifications;
+  projects_frontend = ticketDropDown.projects_frontend;
+  projects_backend = ticketDropDown.projects_backend;
+  projects = this.projects_backend;
   creationDate: Date = new Date();
 
   constructor(private eventService: TitleEventService, private fb: FormBuilder, private ticketService: TicketService, private router: Router) {
@@ -48,8 +33,9 @@ export class CreateTicketComponent implements OnInit {
       endDate: [this.creationDate],
       deadLine: [true],
       type: ['TASK', [Validators.required]],
-      label: ['NOTICE', [Validators.required]],
+      label: ['CODE', [Validators.required]],
       classification: ['LOW', [Validators.required]],
+      system: ['BACKEND', [Validators.required]],
       project: ['NOTHING_SELECTED', [Validators.required]]
     });
   }
@@ -64,13 +50,15 @@ export class CreateTicketComponent implements OnInit {
       description: this.ticketForm.get('description')?.value,
       startDate: this.ticketForm.get('startDate')?.value,
       endDate: this.ticketForm.get('endDate')?.value,
-      createDate:this.creationDate,
+      createDate: this.creationDate,
       deadLine: this.ticketForm.get('deadLine')?.value,
+      project: this.ticketForm.get('project')?.value,
+      system: this.ticketForm.get('system')?.value,
       type: this.ticketForm.get('type')?.value,
       label: this.ticketForm.get('label')?.value,
-      classification: this.ticketForm.get('classification')?.value,
-      projectLabel: this.ticketForm.get('project')?.value
-    };
+      classification: this.ticketForm.get('classification')?.value
+    } as CreateTicket;
+
     this.ticketService.createTicket(ticket).subscribe(result => {
       if (result.id) {
         this.router.navigate(['/dashboard/ticket', result.id]);
@@ -80,7 +68,17 @@ export class CreateTicketComponent implements OnInit {
         console.log('HTTP Status:', error.status);
       });
   }
-  backToOverview(){
+  backToOverview() {
     this.router.navigate(['/dashboard/ticket/overview']);
+  }
+
+  onSystemChange($event: MatSelectChange) {
+    this.projects = [];
+    this.ticketForm.get('project')?.setValue('NOTHING_SELECTED');
+    if ($event.value === this.systems[0].value) {
+      this.projects = this.projects_backend;
+    } else {
+      this.projects = this.projects_frontend;
+    }
   }
 }
