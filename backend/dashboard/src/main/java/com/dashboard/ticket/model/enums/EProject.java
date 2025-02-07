@@ -1,0 +1,19 @@
+package com.dashboard.ticket.model.enums;
+
+public enum EProject {
+    //BACKEND
+    API_GATEWAY,
+    CONFIG_MANAGER,
+    DASHBOARD,
+    DATABASE_MANAGE,
+    DATA_STORAGE_MANAGER,
+    GAMES_MANAGER,
+    HEALTH_MANAGER,
+    MAMEI_FSM,
+    MASS_DATA_POOL,
+    SECURITY_GATEWAY,
+    SERVICE_REGISTRY,
+    //FRONTEND
+    MAMEI_SYSTEM,
+    DB_MANAGER
+}
