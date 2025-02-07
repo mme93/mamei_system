@@ -42,6 +42,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.23</version>
 		</dependency>
+		<!--Webflux-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webflux</artifactId>
+		</dependency>
 		<!--Lombok-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
