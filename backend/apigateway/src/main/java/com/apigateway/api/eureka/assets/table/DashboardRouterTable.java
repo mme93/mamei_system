@@ -1,7 +1,5 @@
 package com.apigateway.api.eureka.assets.table;
 
-import java.util.List;
-
 /**
  * Router table for Dashboard service.
  */
