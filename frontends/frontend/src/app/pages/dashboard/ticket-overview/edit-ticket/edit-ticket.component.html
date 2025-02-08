@@ -12,7 +12,7 @@
                     <mat-form-field class="flex-item">
                         <mat-label>Type of ticket</mat-label>
                         <mat-select formControlName="type">
-                            <mat-option *ngFor="let type of options.types" [value]="type.value">
+                            <mat-option *ngFor="let type of types" [value]="type.value">
                                 {{ type.viewValue }}
                             </mat-option>
                         </mat-select>
@@ -20,7 +20,7 @@
                     <mat-form-field class="flex-item">
                         <mat-label>Label of the ticket</mat-label>
                         <mat-select formControlName="label">
-                            <mat-option *ngFor="let label of options.labels" [value]="label.value">
+                            <mat-option *ngFor="let label of labels" [value]="label.value">
                                 {{ label.viewValue }}
                             </mat-option>
                         </mat-select>
@@ -28,8 +28,16 @@
                     <mat-form-field class="flex-item">
                         <mat-label>Classification of the ticket</mat-label>
                         <mat-select formControlName="classification">
-                            <mat-option *ngFor="let classsifcation of options.classifications" [value]="classsifcation.value">
+                            <mat-option *ngFor="let classsifcation of classifications" [value]="classsifcation.value">
                                 {{ classsifcation.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="flex-item">
+                        <mat-label>System</mat-label>
+                        <mat-select formControlName="system" (selectionChange)="onSystemChange($event)">
+                            <mat-option *ngFor="let system of systems" [value]="system.value">
+                                {{ system.viewValue }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -37,8 +45,8 @@
 
                 <mat-form-field class="full-width">
                     <mat-label>Projekt of the ticket</mat-label>
-                    <mat-select formControlName="projectLabel">
-                        <mat-option *ngFor="let project of options.projects " [value]="project.value">
+                    <mat-select formControlName="project">
+                        <mat-option *ngFor="let project of projects " [value]="project.value">
                             {{ project.viewValue }}
                         </mat-option>
                     </mat-select>
