@@ -14,45 +14,34 @@ public class TicketIdGenerator {
         return String.format("%s-%s",generateSuffix(projectLabel),id);
     }
 
-    public String generateSuffix(String projectLabel){
-        switch (projectLabel){
-            case DASHBOARD:
-                return "DB";
-            case API_GATEWAY:
-                return "API_GW";
-            default:
-                throw new RuntimeException(String.format("Label found by name %s.",projectLabel));
-        }
-    }
-
     public String generateSuffix(EProject project){
         switch (project) {
             case API_GATEWAY:
-                return "AG";
+                return "B-AG";
             case CONFIG_MANAGER:
-                return "CM";
+                return "B-CM";
             case DASHBOARD:
-                return "DAB";
+                return "B-DAB";
             case DATABASE_MANAGE:
-                return "DB";
+                return "B-DB";
             case DATA_STORAGE_MANAGER:
-                return "DS";
+                return "B-DS";
             case GAMES_MANAGER:
-                return "G";
+                return "B-G";
             case HEALTH_MANAGER:
-                return "H";
+                return "B-H";
             case MAMEI_FSM:
-                return "MF";
+                return "B-MF";
             case MASS_DATA_POOL:
-                return "MD";
+                return "B-MD";
             case SECURITY_GATEWAY:
-                return "SG";
+                return "B-SG";
             case SERVICE_REGISTRY:
-                return "SR";
+                return "B-SR";
             case MAMEI_SYSTEM:
-                return "SG";
+                return "F-MS";
             case DB_MANAGER:
-                return "SR";
+                return "F-SR";
             default:
                 throw new IllegalArgumentException("Unknown MicroServiceProject: " + project);
         }
