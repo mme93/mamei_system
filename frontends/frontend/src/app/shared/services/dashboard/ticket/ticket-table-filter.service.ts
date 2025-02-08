@@ -35,14 +35,14 @@ export class TicketTableFilterService {
     return this.http.delete(this.createTicketUrl + filterName, httpOptions);
   }
 
-  getFilterById(id: number) {
+  getCurrentFilter() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
         'Content-Type': 'application/json'
       })
     };
-    return this.http.get<TicketTableFilter>(this.ticketFilterUrl + "/" + id, httpOptions);
+    return this.http.get<TicketTableFilter>(this.ticketFilterUrl, httpOptions);
   }
 
   getFilters() {
@@ -52,7 +52,7 @@ export class TicketTableFilterService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.get<TicketTableFilter[]>(this.ticketFilterUrl, httpOptions);
+    return this.http.get<TicketTableFilter[]>(this.ticketFilterUrl+"s", httpOptions);
   }
 
 }
