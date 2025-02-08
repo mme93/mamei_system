@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class TicketTableFilterService {
 
-
-  private createTicketUrl = environment.uri + ':9052/ticket/table/settings/';
+  private updateTicketUrl = environment.uri + ':9052/ticket/filter/table';
+  private createTicketUrl = environment.uri + ':9052/dashboard/ticket/table';
   private ticketFilterUrl = environment.uri + ':9000/api/dashboard/ticket/table';
 
   constructor(private http: HttpClient) {
@@ -19,10 +19,11 @@ export class TicketTableFilterService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('token') + '',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Username':'user'
       })
     };
-    return this.http.put<TicketTableFilter>(this.createTicketUrl, filter, httpOptions);
+    return this.http.put<TicketTableFilter>(this.updateTicketUrl, filter, httpOptions);
   }
 
   deleteFilter(filterName: string) {
@@ -52,7 +53,7 @@ export class TicketTableFilterService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.get<TicketTableFilter[]>(this.ticketFilterUrl+"s", httpOptions);
+    return this.http.get<TicketTableFilter[]>(this.ticketFilterUrl + "s", httpOptions);
   }
 
 }
