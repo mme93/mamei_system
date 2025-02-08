@@ -30,6 +30,7 @@ export class TicketComponent implements OnInit {
     });
   }
 
+
   backToOverview() {
     this.router.navigate(['/dashboard/ticket/overview']);
   }
@@ -71,6 +72,10 @@ export class TicketComponent implements OnInit {
         label: 'Set to Done',
         code: 'DONE'
       });
+       this.statusLabels.push({
+        label: 'Set to Rejected',
+        code: 'REJECTED'
+      });
     } else if (ticket.status === 'REFINEMENT') {
       this.statusLabels.push({
         label: 'Set to Waiting',
@@ -83,6 +88,10 @@ export class TicketComponent implements OnInit {
       this.statusLabels.push({
         label: 'Set to Done',
         code: 'DONE'
+      });
+      this.statusLabels.push({
+        label: 'Set to Rejected',
+        code: 'REJECTED'
       });
     } else if (ticket.status === 'IN_PROGRESS') {
       this.statusLabels.push({
@@ -97,7 +106,24 @@ export class TicketComponent implements OnInit {
         label: 'Set to Done',
         code: 'DONE'
       });
+      this.statusLabels.push({
+        label: 'Set to Rejected',
+        code: 'REJECTED'
+      });
     } else if (ticket.status === 'DONE') {
+      this.statusLabels.push({
+        label: 'Set to Waiting',
+        code: 'WAITING'
+      });
+      this.statusLabels.push({
+        label: 'Set to Refinement',
+        code: 'REFINEMENT'
+      });
+      this.statusLabels.push({
+        label: 'Set to In Progress',
+        code: 'IN_PROGRESS'
+      });
+    }else if (ticket.status === 'IN_PROGRESS') {
       this.statusLabels.push({
         label: 'Set to Waiting',
         code: 'WAITING'
