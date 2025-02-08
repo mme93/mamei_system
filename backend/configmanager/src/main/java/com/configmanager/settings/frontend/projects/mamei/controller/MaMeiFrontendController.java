@@ -21,7 +21,6 @@ public class MaMeiFrontendController {
 
     @GetMapping("")
     public ResponseEntity<List<Object>> loadFrontendConfigs(@RequestHeader(value = "X-Username", required = false) String username) {
-        System.err.println(username);
         return new ResponseEntity<>(maMeiFrontendService.loadFrontendConfigs(username), HttpStatus.OK);
     }
 
@@ -30,7 +29,8 @@ public class MaMeiFrontendController {
                                                              @PathVariable String specification) {
         Optional<Object> configOpt = maMeiFrontendService.loadSpecificFrontendConfig(username, EMameiSpecific.valueOf(specification));
         if (configOpt.isPresent()) {
-            return new ResponseEntity<>(configOpt.get(), HttpStatus.OK);
+            Object obj=configOpt.get();
+            return new ResponseEntity<>(obj, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
