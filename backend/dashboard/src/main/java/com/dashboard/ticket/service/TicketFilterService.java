@@ -54,9 +54,19 @@ public class TicketFilterService {
         }
     }
 
-    public TicketTableFilterEntity updateTicketTableFilter(TicketTableFilterResponseDto filterCreateDto) {
+    public TicketTableFilterEntity updateTicketTableFilter(TicketTableFilterResponseDto tableFilterDto, String userName) {
         try {
-            TicketTableFilterEntity entity = TicketFilterMapper.dtoMapToEntity(filterCreateDto);
+            MaMeiTicketTableConfigDto dto = loadMaMeiTicketTableConfigs(userName);
+            Optional<TicketTableFilterEntity>opt=ticketTableFilterRepository.findAll().stream().filter(filter ->
+                filter.getFilterName().equals(tableFilterDto.getFilterName())).findFirst();
+            if(!opt.isPresent()){
+                throw new NotFoundException("No filter found by id");
+            }
+            TicketTableFilterEntity filterEntity=opt.get();
+            dto.setCurrentTableId(filterEntity.getId());
+            dto.setCurrentFilterName(filterEntity.getFilterName());
+            saveMaMeiTicketTableConfigs(dto,userName);
+            TicketTableFilterEntity entity = TicketFilterMapper.dtoMapToEntity(tableFilterDto);
             return ticketTableFilterRepository.save(entity);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
@@ -69,6 +79,19 @@ public class TicketFilterService {
 
     public void deleteTicketTableFilterById(Long id) {
         ticketTableFilterRepository.deleteById(id);
+    }
+
+    private void saveMaMeiTicketTableConfigs(MaMeiTicketTableConfigDto dto,String userName){
+        String uri = String.format("%s/configmanager/frontend/mamei/TICKET_TABLE",
+                discoveryClientService.getConfigManagerByName());
+        webClient
+                .build()
+                .put()
+                .uri(uri)
+                .headers(headers -> headers.set("X-Username", userName))
+                .bodyValue(dto)
+                .retrieve()
+                .bodyToMono(MaMeiTicketTableConfigDto.class).block();
     }
 
     private MaMeiTicketTableConfigDto loadMaMeiTicketTableConfigs(String userName) {
