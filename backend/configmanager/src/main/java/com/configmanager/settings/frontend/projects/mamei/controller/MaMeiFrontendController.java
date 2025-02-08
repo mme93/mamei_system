@@ -46,7 +46,7 @@ public class MaMeiFrontendController {
     public ResponseEntity<Object> updateSpecificFrontendConfig(@RequestHeader(value = "X-Username", required = false) String username,
                                                                @PathVariable String specification, @RequestBody Object config) {
         return new ResponseEntity<>(maMeiFrontendService.
-                updateSpecificFrontendConfig(EMameiSpecific.valueOf(specification), config), HttpStatus.CREATED);
+                updateSpecificFrontendConfig(EMameiSpecific.valueOf(specification), config), HttpStatus.OK);
     }
 
     @DeleteMapping("/{specification}")
