@@ -61,8 +61,8 @@ public class TicketFilterController {
     }
 
     @PutMapping("/table")
-    public ResponseEntity<TicketTableFilterEntity> updateTicketTableFilter(@RequestBody TicketTableFilterResponseDto tableFilterResponseDto){
-        return new ResponseEntity<>(this.ticketFilterService.updateTicketTableFilter(tableFilterResponseDto), HttpStatus.OK);
+    public ResponseEntity<TicketTableFilterEntity> updateTicketTableFilter(@RequestHeader(value = "X-Username", required = false) String username,@RequestBody TicketTableFilterResponseDto tableFilterResponseDto){
+        return new ResponseEntity<>(this.ticketFilterService.updateTicketTableFilter(tableFilterResponseDto,username), HttpStatus.OK);
     }
 
     @DeleteMapping("/table/{id}")
