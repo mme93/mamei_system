@@ -65,9 +65,9 @@
 
 <mat-dialog-actions>
     <button mat-button (click)="onCancle()">Cancle</button>
-    <button mat-button (click)="resetDefault()" *ngIf="selectedFilter.filterName==='default'">Reset</button>
-    <button mat-button (click)="newFilter()" *ngIf="selectedFilter.filterName==='default' ">New Filter</button>
-    <button mat-button (click)="editFilter()" *ngIf="selectedFilter.filterName !=='default' ">Edit</button>
-    <button mat-button (click)="deleteFilter()" *ngIf="selectedFilter.filterName !=='default' && isEditable ">Delete</button>
+    <button mat-button (click)="resetDefault()" *ngIf="selectedFilter.filterName==='Default'">Reset</button>
+    <button mat-button (click)="newFilter()" *ngIf="selectedFilter.filterName==='Default' ">New Filter</button>
+    <button mat-button (click)="editFilter()" *ngIf="selectedFilter.filterName !=='Default' ">Edit</button>
+    <button mat-button (click)="deleteFilter()" *ngIf="selectedFilter.filterName !=='Default' && isEditable ">Delete</button>
     <button mat-button (click)="updateFilter()" cdkFocusInitial>Save</button>
 </mat-dialog-actions>
