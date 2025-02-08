@@ -23,14 +23,24 @@ public class TicketFilterController {
         this.ticketFilterService = ticketFilterService;
     }
 
-    @GetMapping("/table")
-    public ResponseEntity<List<TicketTableFilterResponseDto>> getAllTicketTableFilter(){
+    @GetMapping("/tables")
+    public ResponseEntity<List<TicketTableFilterResponseDto>> getAllTicketTableFilter(@RequestHeader(value = "X-Username", required = false) String username){
         try {
-            return new ResponseEntity<>(this.ticketFilterService.getAllTicketTableFilter(), HttpStatus.OK);
+            return new ResponseEntity<>(this.ticketFilterService.getAllTicketTableFilter(username), HttpStatus.OK);
         } catch (JsonProcessingException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/table")
+    public ResponseEntity<TicketTableFilterResponseDto> getCurrentTicketTableFilter(@RequestHeader(value = "X-Username", required = false) String username){
+        try {
+            return new ResponseEntity<>(this.ticketFilterService.getCurrentTicketTableFilter(username), HttpStatus.OK);
+        } catch (JsonProcessingException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @GetMapping("/table/{id}")
     public ResponseEntity<TicketTableFilterResponseDto> getTicketTableFilterById(@PathVariable Long id){
