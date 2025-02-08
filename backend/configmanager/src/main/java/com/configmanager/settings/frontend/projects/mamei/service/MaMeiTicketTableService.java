@@ -18,8 +18,7 @@ public class MaMeiTicketTableService {
     }
 
     public MaMeiTicketTableConfigDto loadConfig(String username) {
-
-        return null;
+        return wrapperService.wrapToTicketTableConfigDto(ticketTableConfigRepository.findByOwner(username));
     }
 
     public Object createConfig(Object config, String userName) {
