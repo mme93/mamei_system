@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TicketTableFilter } from 'src/app/shared/model/settings/TicketSettings';
@@ -66,10 +67,9 @@ export class TicketSettingsDialogComponent implements OnInit {
         this.copyFilter.refinement = filter.refinement;
         this.copyFilter.waiting = filter.waiting;
         this.copyFilter.done = filter.done;
-
       }
     });
-    this.isEditable = this.selectedFilter.filterName === 'default';
+    this.isEditable = this.selectedFilter.filterName === 'Default';
     this.changeCheckbox();
   }
   changeIsAllCheckbox(): void {
@@ -101,22 +101,25 @@ export class TicketSettingsDialogComponent implements OnInit {
   createNewFilter() {
     this.filterService.updateFilter({
       filterName: this.newTicketFilterName,
-      done: true,
-      created: true,
-      in_PROGRESS: true,
-      refinement: true,
-      waiting: true,
+      done: this.selectedFilter.done,
+      created: this.selectedFilter.created,
+      in_PROGRESS: this.selectedFilter.in_PROGRESS,
+      refinement: this.selectedFilter.refinement,
+      waiting: this.selectedFilter.waiting,
       displayedColumns: []
     } as TicketTableFilter);
   }
 
   updateFilter() {
-    this.filterService.updateFilter(this.selectedFilter);
-    this.onClose();
+    this.filterService.updateFilter(this.selectedFilter).subscribe(() => {
+      this.onClose();
+    },
+      (error: HttpErrorResponse) => {
+        console.log('HTTP Status:', error.status);
+      });
   }
 
   deleteFilter() {
     this.filterService.deleteFilter(this.selectedFilter.filterName);
   }
-
 }
