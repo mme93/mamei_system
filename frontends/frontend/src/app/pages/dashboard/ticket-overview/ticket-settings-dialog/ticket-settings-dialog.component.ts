@@ -52,7 +52,6 @@ export class TicketSettingsDialogComponent implements OnInit {
   changeFilter(filterName: string): void {
     this.filters.forEach(filter => {
       if (filterName === filter.filterName) {
-        console.log(filter)
         this.selectedFilter.displayedColumns = [...filter.displayedColumns];
         this.selectedFilter.filterName = filter.filterName;
         this.selectedFilter.created = filter.created;
@@ -60,8 +59,6 @@ export class TicketSettingsDialogComponent implements OnInit {
         this.selectedFilter.refinement = filter.refinement;
         this.selectedFilter.waiting = filter.waiting;
         this.selectedFilter.done = filter.done;
-        console.log(this.selectedFilter)
-        console.log(filter.created)
         this.copyFilter.displayedColumns = [...filter.displayedColumns];
         this.copyFilter.filterName = filter.filterName;
         this.copyFilter.created = filter.created;
