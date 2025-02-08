@@ -36,7 +36,7 @@ export class TicketOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.ticketService.getAllTickets().subscribe(tickets => {
       this.tickets = tickets;
-      this.ticketFilterService.getFilterById(1).subscribe((filter: TicketTableFilter) => {
+      this.ticketFilterService.getCurrentFilter().subscribe((filter: TicketTableFilter) => {
         this.filter = filter;
         this.filterTable(tickets, filter);
         this.createTableContent(this.filteredTickets);
@@ -109,7 +109,7 @@ export class TicketOverviewComponent implements OnInit {
         title: ticket.title,
         description: ticket.description,
         projectId: ticket.projectId,
-        projectLabel: ticket.projectLabel,
+        projectLabel: ticket.project,
         startDate: ticket.startDate,
         endDate: ticket.endDate,
         createDate: ticket.createDate,
