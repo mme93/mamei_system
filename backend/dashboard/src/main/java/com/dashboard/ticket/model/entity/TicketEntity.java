@@ -1,9 +1,6 @@
 package com.dashboard.ticket.model.entity;
 
-import com.dashboard.ticket.model.enums.ETicketClassification;
-import com.dashboard.ticket.model.enums.ETicketLabel;
-import com.dashboard.ticket.model.enums.ETicketStatus;
-import com.dashboard.ticket.model.enums.ETicketTyp;
+import com.dashboard.ticket.model.enums.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +24,13 @@ public class TicketEntity {
 
     private String projectId;
 
-    private String projectLabel;
-
     private  String  title ;
+
+    @Enumerated(EnumType.STRING)
+    private EProject project;
+
+    @Enumerated(EnumType.STRING)
+    private ESystemTyp system;
 
     @Enumerated(EnumType.STRING)
     private ETicketTyp type;
@@ -54,11 +55,11 @@ public class TicketEntity {
 
     private boolean deadLine;
 
-
-    public TicketEntity(String projectId, String projectLabel, String title, ETicketTyp type, ETicketLabel label, ETicketClassification classification, ETicketStatus status, String description, Date startDate, Date endDate, Date createDate, boolean deadLine) {
+    public TicketEntity(String projectId, String title, EProject project, ESystemTyp system, ETicketTyp type, ETicketLabel label, ETicketClassification classification, ETicketStatus status, String description, Date startDate, Date endDate, Date createDate, boolean deadLine) {
         this.projectId = projectId;
-        this.projectLabel = projectLabel;
         this.title = title;
+        this.project = project;
+        this.system = system;
         this.type = type;
         this.label = label;
         this.classification = classification;

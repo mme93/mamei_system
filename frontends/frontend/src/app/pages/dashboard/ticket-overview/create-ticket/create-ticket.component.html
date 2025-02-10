@@ -18,7 +18,7 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field class="flex-item">
-                        <mat-label>Label of the ticket</mat-label>
+                        <mat-label>Label</mat-label>
                         <mat-select formControlName="label">
                             <mat-option *ngFor="let label of labels" [value]="label.value">
                                 {{ label.viewValue }}
@@ -26,10 +26,18 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field class="flex-item">
-                        <mat-label>Classification of the ticket</mat-label>
+                        <mat-label>Classification</mat-label>
                         <mat-select formControlName="classification">
-                            <mat-option *ngFor="let classsifcation of classsifcations" [value]="classsifcation.value">
+                            <mat-option *ngFor="let classsifcation of classifications" [value]="classsifcation.value">
                                 {{ classsifcation.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="flex-item">
+                        <mat-label>System</mat-label>
+                        <mat-select formControlName="system" (selectionChange)="onSystemChange($event)">
+                            <mat-option *ngFor="let system of systems" [value]="system.value">
+                                {{ system.viewValue }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

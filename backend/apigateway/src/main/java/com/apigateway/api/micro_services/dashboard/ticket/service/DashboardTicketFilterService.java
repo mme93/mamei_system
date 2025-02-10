@@ -15,14 +15,27 @@ public class DashboardTicketFilterService {
     private final DiscoveryClientService clientService;
     private final WebClient.Builder webClient;
 
-    public List<Object> getAllTicketTableFilter() {
+    public List<Object> getAllTicketTableFilter(String username) {
         String uri = clientService.getDashboardClientAdress() + DashboardRouterTable.URI_DASH_BOARD_GET_ALL_TICKET_TABLE_FILTER;
         return webClient
                 .build()
                 .get()
                 .uri(uri)
+                .headers(headers -> headers.set("X-Username", username))
                 .retrieve()
                 .bodyToMono(List.class).block();
+    }
+
+
+    public Object getCurrentTicketTableFilter(String username) {
+        String uri = clientService.getDashboardClientAdress() + DashboardRouterTable.URI_DASH_BOARD_GET_CURRENT_TICKET_TABLE_FILTER;
+        return webClient
+                .build()
+                .get()
+                .uri(uri)
+                .headers(headers -> headers.set("X-Username", username))
+                .retrieve()
+                .bodyToMono(Object.class).block();
     }
 
     public Object getTicketTableFilterById(Long id) {
@@ -72,4 +85,5 @@ public class DashboardTicketFilterService {
                 .retrieve()
                 .bodyToMono(String.class).block();
     }
+
 }

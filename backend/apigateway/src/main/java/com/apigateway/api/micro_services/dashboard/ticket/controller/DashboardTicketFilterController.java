@@ -1,6 +1,7 @@
 package com.apigateway.api.micro_services.dashboard.ticket.controller;
 
 import com.apigateway.api.micro_services.dashboard.ticket.service.DashboardTicketFilterService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +19,15 @@ public class DashboardTicketFilterController {
     }
 
     @GetMapping("/table")
-    public ResponseEntity<List<Object>> getAllTicketTableFilter(){
-        return new ResponseEntity<>(ticketFilterService.getAllTicketTableFilter(), HttpStatus.OK);
+    public ResponseEntity<Object> getCurrentTicketTableFilter(HttpServletRequest request){
+        String username = (String) request.getAttribute("X-Username");
+        return new ResponseEntity<>(ticketFilterService.getCurrentTicketTableFilter(username), HttpStatus.OK);
+    }
+
+    @GetMapping("/tables")
+    public ResponseEntity<List<Object>> getAllTicketTableFilter(HttpServletRequest request){
+        String username = (String) request.getAttribute("X-Username");
+        return new ResponseEntity<>(ticketFilterService.getAllTicketTableFilter(username), HttpStatus.OK);
     }
 
     @GetMapping("/table/{id}")

@@ -1,10 +1,13 @@
 package com.configmanager.settings.frontend.projects.mamei.service;
 
 import com.configmanager.settings.frontend.projects.mamei.model.dto.MaMeiTicketTableConfigDto;
+import com.configmanager.settings.frontend.projects.mamei.model.entity.MaMeiTicketTableConfigEntity;
 import com.configmanager.settings.frontend.projects.mamei.repository.MaMeiTicketTableConfigRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class MaMeiTicketTableService {
@@ -18,8 +21,7 @@ public class MaMeiTicketTableService {
     }
 
     public MaMeiTicketTableConfigDto loadConfig(String username) {
-
-        return null;
+        return wrapperService.wrapToTicketTableConfigDto(ticketTableConfigRepository.findByOwner(username));
     }
 
     public Object createConfig(Object config, String userName) {
@@ -32,7 +34,11 @@ public class MaMeiTicketTableService {
     public Object updateConfig(Object config) {
         ObjectMapper objectMapper = new ObjectMapper();
         MaMeiTicketTableConfigDto dto = objectMapper.convertValue(config, MaMeiTicketTableConfigDto.class);
-        return this.ticketTableConfigRepository.save(wrapperService.wrapToTicketTableConfigEntity(dto));
+        Optional<MaMeiTicketTableConfigEntity> entityOpt = ticketTableConfigRepository.findByOwner(dto.getOwner());
+        MaMeiTicketTableConfigEntity entity=entityOpt.get();
+        entity.setCurrentTableId(dto.getCurrentTableId());
+        entity.setCurrentFilterName(dto.getCurrentFilterName());
+        return this.ticketTableConfigRepository.save(entity);
     }
 
     @Transactional

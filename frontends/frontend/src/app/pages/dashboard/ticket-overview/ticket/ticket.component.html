@@ -52,9 +52,9 @@
                 <strong>Project ID:</strong> {{ ticket?.projectId }}
             </div>
 
-            <div class="status-display" [ngClass]="ticket.projectLabel.toLowerCase()">
+            <div class="status-display" [ngClass]="ticket.project.toLowerCase()">
                 <mat-icon>badge</mat-icon>
-                <strong>Project Name:</strong> {{ ticket?.projectLabel }}
+                <strong>Project Name:</strong> {{ ticket?.project }}
             </div>
         </mat-card-content>
 

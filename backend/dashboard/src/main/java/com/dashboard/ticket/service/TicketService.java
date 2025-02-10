@@ -2,6 +2,7 @@ package com.dashboard.ticket.service;
 
 import com.dashboard.ticket.TicketIdGenerator;
 import com.dashboard.ticket.model.dto.CreateTicketDto;
+import com.dashboard.ticket.model.dto.TicketDto;
 import com.dashboard.ticket.model.enums.ETicketStatus;
 import com.dashboard.ticket.model.entity.TicketEntity;
 import com.dashboard.ticket.model.mapper.TicketMapper;
@@ -24,15 +25,15 @@ public class TicketService {
         this.ticketIdGenerator = ticketIdGenerator;
     }
 
-    public TicketEntity createTicket(CreateTicketDto ticket){
-        TicketEntity ticketEntity=ticketRepository.save(TicketMapper.createTicketMapToTicket(ticket));
-        String projectId=ticketIdGenerator.generateId(ticketEntity.getId(),ticketEntity.getProjectLabel());
+    public TicketEntity createTicket(CreateTicketDto ticket) {
+        TicketEntity ticketEntity = ticketRepository.save(TicketMapper.createTicketMapToTicket(ticket));
+        String projectId = ticketIdGenerator.generateId(ticketEntity.getId(), ticketEntity.getProject());
         ticketEntity.setProjectId(projectId);
         return ticketRepository.save(ticketEntity);
     }
 
     public Optional<TicketEntity> getTicketById(Long id) {
-      return ticketRepository.findById(id);
+        return ticketRepository.findById(id);
     }
 
     public List<TicketEntity> getAllTickets() {
@@ -43,20 +44,20 @@ public class TicketService {
         ticketRepository.deleteById(id);
     }
 
-    public TicketEntity updateTicketStatus(ETicketStatus status, Long id) {
-        Optional<TicketEntity>ticketOpt= ticketRepository.findById(id);
-        if(validatorService.isValidStatusChange(ticketOpt,status)){
+    public TicketDto updateTicketStatus(ETicketStatus status, Long id) {
+        Optional<TicketEntity> ticketOpt = ticketRepository.findById(id);
+        if (validatorService.isValidStatusChange(ticketOpt, status)) {
             TicketEntity ticket = ticketOpt.get();
             ticket.setStatus(status);
             ticket = ticketRepository.save(ticket);
-            return ticket;
+            return TicketMapper.mapToDto(ticket);
         }
-       throw new IllegalArgumentException(String.format("Can´t find ticket by ID %s or status change is invalid.",id));
+        throw new IllegalArgumentException(String.format("Can´t find ticket by ID %s or status change is invalid.", id));
     }
 
-    public TicketEntity updateTicket(TicketEntity ticket) {
-        Optional<TicketEntity>ticketOpt= ticketRepository.findById(ticket.getId());
-        if(ticketOpt.isPresent()){
+    public TicketDto updateTicket(TicketEntity ticket) {
+        Optional<TicketEntity> ticketOpt = ticketRepository.findById(ticket.getId());
+        if (ticketOpt.isPresent()) {
             TicketEntity ticketEntity = ticketOpt.get();
             ticketEntity.setTitle(ticket.getTitle());
             ticketEntity.setType(ticket.getType());
@@ -68,7 +69,7 @@ public class TicketService {
             ticketEntity.setEndDate(ticket.getEndDate());
             ticketEntity.setDeadLine(ticket.isDeadLine());
             ticketRepository.save(ticketEntity);
-            return ticketEntity;
+            return TicketMapper.mapToDto(ticketEntity);
         }
         throw new IllegalArgumentException("Problem to update ticket");
     }
