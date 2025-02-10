@@ -23,7 +23,7 @@ export class TicketTableFilterService {
         'X-Username':'user'
       })
     };
-    return this.http.put<TicketTableFilter>(this.updateTicketUrl, filter, httpOptions);
+    return this.http.put<TicketTableFilter>(this.ticketFilterUrl, filter, httpOptions);
   }
 
   deleteFilter(filterName: string) {
