@@ -22,14 +22,12 @@
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
-
         <!-- SQL Connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.23</version>
         </dependency>
-
         <!-- Mockito für Unit-Tests -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -37,20 +35,12 @@
             <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
-
         <!-- JUnit 4 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- H2 Database (für Tests) -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>2.2.224</version>
         </dependency>
         <!--Maria-DB-->
         <dependency>
