@@ -1,17 +1,17 @@
 package mamei.de.module;
 
-import mamei.de.module.sql.connection.H2ConnectionFactoryTest;
 import mamei.de.module.sql.connection.SqlConnectionContextTest;
 import mamei.de.module.sql.connection.SqlConnectionFactoryTest;
+import mamei.de.module.sql.query.NexusCoreQuerySuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        H2ConnectionFactoryTest.class,
         SqlConnectionContextTest.class,
-        SqlConnectionFactoryTest.class
+        SqlConnectionFactoryTest.class,
+        NexusCoreQuerySuite.class
 })
-public class NexusCoreModuleSuite {
+public class NexusModuleSuite {
 }
