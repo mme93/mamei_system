@@ -1,8 +1,5 @@
 package mamei.de.module.sql.executor.administration;
 
-import mamei.de.module.sql.connection.SqlConnectionContext;
-import mamei.de.module.sql.query.clause.create.SqlCreateUser;
-import mamei.de.module.sql.query.clause.drop.SqlDropUser;
 import mamei.de.module.sql.rule.MariaDBRule;
 import org.junit.ClassRule;
 import org.junit.FixMethodOrder;
