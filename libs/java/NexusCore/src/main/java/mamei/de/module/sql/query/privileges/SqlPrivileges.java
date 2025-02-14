@@ -11,6 +11,7 @@ public class SqlPrivileges implements ISqlQuery {
     private String privileges;
 
     private SqlPrivileges(String privileges) {
+        CheckParam.isNotBlank(privileges, "privileges");
         this.privileges = privileges;
     }
 
@@ -21,7 +22,7 @@ public class SqlPrivileges implements ISqlQuery {
 
     @Override
     public String getAction() {
-        return "GRANT";
+        return "PRIVILEGES";
     }
 
     public static SqlPrivilegesBuilder builder() {
@@ -39,11 +40,13 @@ public class SqlPrivileges implements ISqlQuery {
         }
 
         public SqlPrivilegesBuilder grantTyp(ESqlPrivilegesTyp sqlPrivilegesTyp) {
+            CheckParam.isNotNull(sqlPrivilegesTyp, "sqlPrivilegesTyp");
             sqlPrivilegesTypList.add(sqlPrivilegesTyp);
             return this;
         }
 
         public SqlPrivilegesBuilder grantTyp(List<ESqlPrivilegesTyp> sqlPrivilegesTyp) {
+            CheckParam.isNotEmpty(sqlPrivilegesTyp, "sqlPrivilegesTyp");
             sqlPrivilegesTypList.addAll(sqlPrivilegesTyp);
             return this;
         }
