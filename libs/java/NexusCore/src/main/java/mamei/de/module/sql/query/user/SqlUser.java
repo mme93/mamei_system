@@ -12,6 +12,9 @@ public class SqlUser implements ISqlQuery {
     private String password;
 
     private SqlUser(String host, String user, String password) {
+        CheckParam.isNotBlank(host, "host");
+        CheckParam.isNotBlank(user, "user");
+        CheckParam.isNotBlank(password, "password");
         this.host = host;
         this.user = user;
         this.password = password;
@@ -22,7 +25,6 @@ public class SqlUser implements ISqlQuery {
         return String.format("CREATE USER '%s'@'%s' IDENTIFIED BY '%s'",
                 user, host, password);
 
-        //GRANT SELECT, INSERT ON example_db.* TO 'testuser'@'localhost';
     }
 
     @Override
