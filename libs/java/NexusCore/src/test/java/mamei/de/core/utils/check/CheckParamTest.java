@@ -2,6 +2,7 @@ package mamei.de.core.utils.check;
 
 import mamei.de.core.exception.NexusCoreIsEmptyException;
 import mamei.de.core.exception.NexusCoreNullPointerException;
+import mamei.de.core.utils.CheckParam;
 import org.junit.Test;
 
 import java.util.List;

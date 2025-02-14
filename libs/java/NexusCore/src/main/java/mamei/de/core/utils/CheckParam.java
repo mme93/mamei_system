@@ -1,4 +1,4 @@
-package mamei.de.core.utils.check;
+package mamei.de.core.utils;
 
 import mamei.de.core.exception.NexusCoreIsEmptyException;
 import mamei.de.core.exception.NexusCoreNullPointerException;

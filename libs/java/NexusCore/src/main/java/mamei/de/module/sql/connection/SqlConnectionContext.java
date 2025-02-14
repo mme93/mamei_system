@@ -2,7 +2,7 @@ package mamei.de.module.sql.connection;
 
 import lombok.Getter;
 import lombok.Setter;
-import mamei.de.core.utils.check.CheckParam;
+import mamei.de.core.utils.CheckParam;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

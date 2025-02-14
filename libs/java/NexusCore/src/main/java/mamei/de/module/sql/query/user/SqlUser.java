@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.user;
 
-import mamei.de.core.utils.check.CheckParam;
+import mamei.de.core.utils.CheckParam;
 import mamei.de.module.sql.query.ISqlQuery;
 import mamei.de.module.sql.query.privileges.ESqlPrivilegesTyp;
 import mamei.de.module.sql.query.privileges.SqlPrivileges;

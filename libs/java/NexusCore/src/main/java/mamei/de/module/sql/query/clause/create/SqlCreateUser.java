@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.clause.create;
 
-import mamei.de.core.utils.check.CheckParam;
+import mamei.de.core.utils.CheckParam;
 import mamei.de.module.sql.query.ISqlQuery;
 
 public class SqlCreateUser implements ISqlQuery {

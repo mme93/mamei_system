@@ -1,6 +1,6 @@
 package mamei.de.module.sql.executor;
 
-import mamei.de.core.utils.check.CheckParam;
+import mamei.de.core.utils.CheckParam;
 import mamei.de.module.sql.connection.SqlConnectionContext;
 import mamei.de.module.sql.connection.SqlConnectionFactory;
 import mamei.de.module.sql.model.ESqlEnvironment;
