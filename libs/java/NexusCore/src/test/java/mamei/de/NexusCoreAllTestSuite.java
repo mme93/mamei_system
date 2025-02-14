@@ -1,14 +1,14 @@
 package mamei.de;
 
-import mamei.de.core.utils.check.NexusCoreTestSuite;
-import mamei.de.module.NexusCoreModuleSuite;
+import mamei.de.core.NexusCoreTestSuite;
+import mamei.de.module.NexusModuleSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         NexusCoreTestSuite.class,
-        NexusCoreModuleSuite.class
+        NexusModuleSuite.class
 })
 public class NexusCoreAllTestSuite {
 }
