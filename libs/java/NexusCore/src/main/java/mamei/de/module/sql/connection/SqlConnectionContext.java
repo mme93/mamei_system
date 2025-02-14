@@ -20,7 +20,7 @@ public class SqlConnectionContext {
     public SqlConnectionContext(String ip, String userName, String password, String serverName) {
         CheckParam.isNotBlank(ip, "ip");
         CheckParam.isNotBlank(userName, "userName");
-        CheckParam.isNotBlank(password, "password");
+        CheckParam.isNotNull(password, "password");
         CheckParam.isNotBlank(serverName, "serverName");
         this.ip = ip;
         this.userName = userName;
@@ -29,6 +29,11 @@ public class SqlConnectionContext {
     }
 
     public SqlConnectionContext(String ip, String userName, String password, String serverName, String databaseName) {
+        CheckParam.isNotBlank(ip, "ip");
+        CheckParam.isNotBlank(userName, "userName");
+        CheckParam.isNotNull(password, "password");
+        CheckParam.isNotBlank(serverName, "serverName");
+        CheckParam.isNotBlank(databaseName, "databaseName");
         this.ip = ip;
         this.userName = userName;
         this.password = password;
