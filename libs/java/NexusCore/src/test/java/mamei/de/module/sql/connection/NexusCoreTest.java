@@ -1,19 +1,28 @@
 package mamei.de.module.sql.connection;
 
 import mamei.de.module.sql.executor.administration.AdministrationSqlExecutor;
+import mamei.de.module.sql.executor.administration.SystemUser;
+import mamei.de.module.sql.rule.MariaDBRule;
+import org.junit.ClassRule;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class NexusCoreTest {
 
+    @ClassRule
+    public static MariaDBRule mariaDBRule = new MariaDBRule();
+
+
     @Test
     public void test() throws SQLException {
-        AdministrationSqlExecutor executor = new AdministrationSqlExecutor(
-                new SqlConnectionContext("jdbc:mysql://212.227.165.166:3306/", "remote_user", "!xyz123456", "XXX"));
-        executor.getAllSystemUser().forEach(systemUser -> System.err.println(
-                String.format("Host: %s, Name:%s AND Grant:%s",systemUser.getHost(),systemUser.getName(),systemUser.getGrant())
-        ));
+        AdministrationSqlExecutor executor = new AdministrationSqlExecutor(MariaDBRule.CONNECTION_CONTEXT);
+        List<SystemUser> users = executor.getAllSystemUser();
+        for(SystemUser user:users){
+            System.err.println(user.getName());
+        }
     }
+
 }
