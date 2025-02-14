@@ -1,10 +1,13 @@
 package mamei.de.module.sql.connection;
 
+import mamei.de.module.sql.rule.MariaDBRule;
+import org.junit.ClassRule;
 import org.junit.Test;
 
 public class SqlConnectionFactoryTest {
 
-    private SqlConnectionContext context = new SqlConnectionContext("jdbc:h2:file:./data/mydb", "sa", "test", "test");
+    @ClassRule
+    public static MariaDBRule mariaDBRule = new MariaDBRule();
 
     @Test
     public void shouldCreateNewConnection() {
