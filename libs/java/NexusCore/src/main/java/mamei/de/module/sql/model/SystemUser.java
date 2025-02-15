@@ -1,4 +1,4 @@
-package mamei.de.module.sql.executor.administration;
+package mamei.de.module.sql.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

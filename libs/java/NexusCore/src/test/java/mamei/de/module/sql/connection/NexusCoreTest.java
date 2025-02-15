@@ -1,7 +1,7 @@
 package mamei.de.module.sql.connection;
 
 import mamei.de.module.sql.executor.administration.AdministrationSqlExecutor;
-import mamei.de.module.sql.executor.administration.SystemUser;
+import mamei.de.module.sql.model.SystemUser;
 import mamei.de.module.sql.rule.MariaDBRule;
 import org.junit.ClassRule;
 import org.junit.Test;

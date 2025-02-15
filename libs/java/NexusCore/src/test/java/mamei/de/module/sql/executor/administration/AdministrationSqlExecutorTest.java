@@ -1,5 +1,6 @@
 package mamei.de.module.sql.executor.administration;
 
+import mamei.de.module.sql.model.SystemUser;
 import mamei.de.module.sql.rule.MariaDBRule;
 import org.junit.ClassRule;
 import org.junit.FixMethodOrder;
