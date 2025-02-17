@@ -1,5 +1,6 @@
 package mamei.de.module.sql.executor.administration;
 
+import mamei.de.core.utils.CheckParam;
 import mamei.de.module.sql.connection.SqlConnectionContext;
 import mamei.de.module.sql.executor.AbstractSqlExecutor;
 import mamei.de.module.sql.model.ESqlEnvironment;
@@ -9,6 +10,7 @@ import mamei.de.module.sql.query.clause.alias.ISqlAlias;
 import mamei.de.module.sql.query.clause.alias.SqlColumnAlias;
 import mamei.de.module.sql.query.clause.create.SqlCreateUser;
 import mamei.de.module.sql.query.clause.drop.SqlDropUser;
+import mamei.de.module.sql.query.clause.grant.SqlGrantUser;
 import mamei.de.module.sql.query.clause.select.SqlSelect;
 import mamei.de.module.sql.query.clause.grant.SqlGrantTable;
 import mamei.de.module.sql.query.privileges.ESqlPrivilegesTyp;
@@ -18,7 +20,11 @@ import mamei.de.module.sql.query.user.SqlUser;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AdministrationSqlExecutor extends AbstractSqlExecutor {
 
@@ -58,7 +64,47 @@ public class AdministrationSqlExecutor extends AbstractSqlExecutor {
         return executeUpdate(sqlQuery);
     }
 
-    public boolean grantSystemUser(SqlPrivileges sqlPrivileges, SystemUser user, String database) {
+    public Map<String, List<String>> getGrantFromSystemUser(SystemUser systemUser) throws SQLException {
+        ISqlQuery sqlQuery = SqlSelect
+                .builder()
+                .select("*")
+                .from("information_schema.user_privileges")
+                .build();
+        ResultSet resultSet = executeQuery(sqlQuery);
+
+        Map<String, List<String>> userPrivilegesMap = new HashMap<>();
+        while (resultSet.next()) {
+            String grantee = resultSet.getString("GRANTEE");
+            Pattern pattern = Pattern.compile("'(.*?)'@'.*?'");
+            Matcher matcher = pattern.matcher(grantee);
+            if (matcher.find() && systemUser.getName().equals(matcher.group(1))) {
+                String privilegesTyp = resultSet.getString("PRIVILEGE_TYPE");
+                userPrivilegesMap.computeIfAbsent(grantee, k -> new ArrayList<>()).add(privilegesTyp);
+            }
+        }
+        CheckParam.isNotEmpty(userPrivilegesMap, "userPrivilegesMap");
+        return userPrivilegesMap;
+    }
+
+    public boolean grantSystemUserToTable(SqlPrivileges sqlPrivileges, SystemUser user, String database, String table) {
+        ISqlQuery sqlQuery = SqlGrantUser.builder()
+                .withUser(user)
+                .withPrivileges(sqlPrivileges)
+                .onSqlEnvironment(database, table)
+                .build();
+        return execute(sqlQuery);
+    }
+
+    public boolean grantSystemUserToDatabase(SqlPrivileges sqlPrivileges, SystemUser user, String database) {
+        ISqlQuery sqlQuery = SqlGrantUser.builder()
+                .withUser(user)
+                .withPrivileges(sqlPrivileges)
+                .onSqlEnvironment(database)
+                .build();
+        return execute(sqlQuery);
+    }
+
+    public boolean grantSystemUserOnDb(SqlPrivileges sqlPrivileges, SystemUser user, String database) {
         ISqlQuery sqlQuery = SqlUser.builder()
                 .withAction(ESqlPrivilegesTyp.GRANT)
                 .withHost(user.getHost())
