@@ -11,6 +11,13 @@ public class SqlUser implements ISqlQuery {
     private String user;
     private String password;
 
+    public SqlUser(String host, String user) {
+        CheckParam.isNotBlank(host, "host");
+        CheckParam.isNotBlank(user, "user");
+        this.host = host;
+        this.user = user;
+    }
+
     private SqlUser(String host, String user, String password) {
         CheckParam.isNotBlank(host, "host");
         CheckParam.isNotBlank(user, "user");
@@ -68,6 +75,11 @@ public class SqlUser implements ISqlQuery {
             return this;
         }
 
+        public SqlCreateUserBuilder withPrivileges(SqlPrivileges sqlPrivileges) {
+            this.privileges = sqlPrivileges.toSql();
+            return this;
+        }
+
         public SqlCreateUserBuilder withAllPrivileges(String grantDatabase) {
             this.privileges = String.format("%s ON %s", ESqlPrivilegesTyp.ALL_PRIVILEGES.getPrivilege(), grantDatabase);
             return this;
@@ -82,8 +94,10 @@ public class SqlUser implements ISqlQuery {
         public SqlUser build() {
             CheckParam.isNotNull(host, "host");
             CheckParam.isNotNull(user, "user");
-            CheckParam.isNotNull(password, "password");
-            return new SqlUser(host, user, password);
+            if (password != null) {
+                return new SqlUser(host, user, password);
+            }
+            return new SqlUser(host, user);
         }
     }
 }
