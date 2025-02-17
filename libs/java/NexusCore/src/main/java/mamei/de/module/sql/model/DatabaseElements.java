@@ -22,7 +22,9 @@ public class DatabaseElements {
 
     public static enum EDatabaseElements {
         TABLE,
+        TABLES,
         DATABASE,
+        DATABASES,
         SCHEMA,
         INDEX,
         TRIGGER,
