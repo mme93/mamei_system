@@ -4,6 +4,7 @@ import mamei.de.core.exception.NexusCoreIsEmptyException;
 import mamei.de.core.exception.NexusCoreNullPointerException;
 
 import java.util.List;
+import java.util.Map;
 
 public class CheckParam {
 
@@ -32,6 +33,13 @@ public class CheckParam {
             throw new NexusCoreIsEmptyException(String.format("Param list with the name %s is empty.", listName));
         }
         return list;
+    }
+
+    public static Map<?,?> isNotEmpty(Map<?,?> map, String listName) {
+        if (map.isEmpty()) {
+            throw new NexusCoreIsEmptyException(String.format("Param map with the name %s is empty.", listName));
+        }
+        return map;
     }
 
 
