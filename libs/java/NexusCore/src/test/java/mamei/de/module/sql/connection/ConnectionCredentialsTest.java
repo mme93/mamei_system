@@ -6,12 +6,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Unit tests for {@link SqlConnectionContext}.
+ * Unit tests for {@link ConnectionCredentials}.
  * <p>
  * This class tests the validation logic of SQL connection parameters, ensuring
  * that valid connections are accepted and invalid inputs throw appropriate exceptions.
  */
-public class SqlConnectionContextTest {
+public class ConnectionCredentialsTest {
 
     private static final String VALID_IP = "8.8.8.8";
 
@@ -20,8 +20,8 @@ public class SqlConnectionContextTest {
      */
     @Test
     public void shouldReturnTrueForValidConnection() {
-        SqlConnectionContext sqlConnectionContext = new SqlConnectionContext(VALID_IP, "Test", "Test", "Google DNS");
-        assertTrue("Expected IP to be valid, but it was not.", sqlConnectionContext.isValidIp());
+        ConnectionCredentials connectionCredentials = new ConnectionCredentials(VALID_IP, "Test", "Test", "Google DNS");
+        assertTrue("Expected IP to be valid, but it was not.", connectionCredentials.isValidIp());
     }
 
     /**
@@ -29,8 +29,8 @@ public class SqlConnectionContextTest {
      */
     @Test
     public void shouldReturnFalseForInvalidConnection() {
-        SqlConnectionContext sqlConnectionContext = new SqlConnectionContext("INVALID_IP", "Test", "Test", "Google DNS");
-        assertFalse("Expected IP to be invalid, but it was not.", sqlConnectionContext.isValidIp());
+        ConnectionCredentials connectionCredentials = new ConnectionCredentials("INVALID_IP", "Test", "Test", "Google DNS");
+        assertFalse("Expected IP to be invalid, but it was not.", connectionCredentials.isValidIp());
     }
 
     /**
@@ -39,7 +39,7 @@ public class SqlConnectionContextTest {
     @Test
     public void shouldThrowExceptionWhenIpIsNull() {
         try {
-            new SqlConnectionContext(null, "Test", "Test", "Google DNS");
+            new ConnectionCredentials(null, "Test", "Test", "Google DNS");
             fail("Expected NexusCoreNullPointerException for null IP address.");
         } catch (NexusCoreNullPointerException e) {
             assertNotNull("Exception message should not be null", e.getMessage());
@@ -52,7 +52,7 @@ public class SqlConnectionContextTest {
     @Test
     public void shouldThrowExceptionWhenUserNameIsNull() {
         try {
-            new SqlConnectionContext(VALID_IP, null, "Test", "Google DNS");
+            new ConnectionCredentials(VALID_IP, null, "Test", "Google DNS");
             fail("Expected NexusCoreNullPointerException for null username.");
         } catch (NexusCoreNullPointerException e) {
             assertNotNull("Exception message should not be null", e.getMessage());
@@ -65,7 +65,7 @@ public class SqlConnectionContextTest {
     @Test
     public void shouldThrowExceptionWhenPasswordIsNull() {
         try {
-            new SqlConnectionContext(VALID_IP, "Test", null, "Google DNS");
+            new ConnectionCredentials(VALID_IP, "Test", null, "Google DNS");
             fail("Expected NexusCoreNullPointerException for null password.");
         } catch (NexusCoreNullPointerException e) {
             assertNotNull("Exception message should not be null", e.getMessage());
@@ -78,7 +78,7 @@ public class SqlConnectionContextTest {
     @Test
     public void shouldThrowExceptionWhenServerNameIsNull() {
         try {
-            new SqlConnectionContext(VALID_IP, "Test", "Test", null);
+            new ConnectionCredentials(VALID_IP, "Test", "Test", null);
             fail("Expected NexusCoreNullPointerException for null server name.");
         } catch (NexusCoreNullPointerException e) {
             assertNotNull("Exception message should not be null", e.getMessage());

@@ -1,7 +1,7 @@
 package mamei.de.module.sql.executor.administration;
 
 import mamei.de.core.utils.CheckValue;
-import mamei.de.module.sql.connection.SqlConnectionContext;
+import mamei.de.module.sql.connection.ConnectionCredentials;
 import mamei.de.module.sql.executor.AbstractSqlExecutor;
 import mamei.de.module.sql.model.ESqlEnvironment;
 import mamei.de.module.sql.model.SystemUser;
@@ -28,13 +28,13 @@ import java.util.regex.Pattern;
 
 public class AdministrationSqlExecutor extends AbstractSqlExecutor {
 
-    public AdministrationSqlExecutor(SqlConnectionContext connectionContext) {
+    public AdministrationSqlExecutor(ConnectionCredentials connectionContext) {
         super(connectionContext, ESqlEnvironment.SERVER);
     }
 
 
     @Override
-    public void changeSqlEnvironment(ESqlEnvironment sqlEnvironment, SqlConnectionContext connectionContext) {
+    public void changeSqlEnvironment(ESqlEnvironment sqlEnvironment, ConnectionCredentials connectionContext) {
         super.changeSqlEnvironment(sqlEnvironment, connectionContext);
     }
 

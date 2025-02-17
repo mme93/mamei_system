@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 
 @Getter
 @Setter
-public class SqlConnectionContext {
+public class ConnectionCredentials {
 
     private String ip;
     private String userName;
@@ -17,7 +17,7 @@ public class SqlConnectionContext {
     private String serverName;
     private String databaseName;
 
-    public SqlConnectionContext(String ip, String userName, String password, String serverName) {
+    public ConnectionCredentials(String ip, String userName, String password, String serverName) {
         CheckValue.isNotBlank(ip, "ip");
         CheckValue.isNotBlank(userName, "userName");
         CheckValue.isNotNull(password, "password");
@@ -28,7 +28,7 @@ public class SqlConnectionContext {
         this.serverName = serverName;
     }
 
-    public SqlConnectionContext(String ip, String userName, String password, String serverName, String databaseName) {
+    public ConnectionCredentials(String ip, String userName, String password, String serverName, String databaseName) {
         CheckValue.isNotBlank(ip, "ip");
         CheckValue.isNotBlank(userName, "userName");
         CheckValue.isNotNull(password, "password");
@@ -48,6 +48,14 @@ public class SqlConnectionContext {
         } catch (UnknownHostException e) {
             return false;
         }
+    }
+
+    public boolean match(ConnectionCredentials context) {
+        return this.ip == context.getIp() &&
+               this.userName == context.getUserName() &&
+               this.password == context.getPassword() &&
+               this.serverName == context.getServerName() &&
+               this.databaseName == context.getDatabaseName();
     }
 
     @Override

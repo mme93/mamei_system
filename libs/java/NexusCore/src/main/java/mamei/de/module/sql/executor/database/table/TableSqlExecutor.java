@@ -1,6 +1,6 @@
 package mamei.de.module.sql.executor.database.table;
 
-import mamei.de.module.sql.connection.SqlConnectionContext;
+import mamei.de.module.sql.connection.ConnectionCredentials;
 import mamei.de.module.sql.executor.AbstractSqlExecutor;
 import mamei.de.module.sql.model.ESqlEnvironment;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TableSqlExecutor extends AbstractSqlExecutor {
 
-    public TableSqlExecutor(SqlConnectionContext connectionContext) {
+    public TableSqlExecutor(ConnectionCredentials connectionContext) {
         super(connectionContext, ESqlEnvironment.TABLE);
     }
 

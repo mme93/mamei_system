@@ -1,7 +1,7 @@
 package mamei.de.module.sql.executor;
 
 import mamei.de.core.utils.CheckValue;
-import mamei.de.module.sql.connection.SqlConnectionContext;
+import mamei.de.module.sql.connection.ConnectionCredentials;
 import mamei.de.module.sql.connection.SqlConnectionFactory;
 import mamei.de.module.sql.model.ESqlEnvironment;
 import mamei.de.module.sql.query.ISqlQuery;
@@ -10,10 +10,10 @@ import java.sql.*;
 
 public abstract class AbstractSqlExecutor implements ISqlExecutor {
 
-    private SqlConnectionContext connectionContext;
+    private ConnectionCredentials connectionContext;
     private ESqlEnvironment sqlEnvironment;
 
-    public AbstractSqlExecutor(SqlConnectionContext connectionContext, ESqlEnvironment sqlEnvironment) {
+    public AbstractSqlExecutor(ConnectionCredentials connectionContext, ESqlEnvironment sqlEnvironment) {
         CheckValue.isNotNull(connectionContext, "connectionContext");
         CheckValue.isNotNull(sqlEnvironment, "sqlEnvironment");
         this.connectionContext = connectionContext;
@@ -55,7 +55,7 @@ public abstract class AbstractSqlExecutor implements ISqlExecutor {
     }
 
 
-    public void changeSqlEnvironment(ESqlEnvironment sqlEnvironment, SqlConnectionContext connectionContext) {
+    public void changeSqlEnvironment(ESqlEnvironment sqlEnvironment, ConnectionCredentials connectionContext) {
         this.sqlEnvironment = sqlEnvironment;
         this.connectionContext = connectionContext;
     }

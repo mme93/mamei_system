@@ -1,6 +1,6 @@
 package mamei.de.module.sql.rule;
 
-import mamei.de.module.sql.connection.SqlConnectionContext;
+import mamei.de.module.sql.connection.ConnectionCredentials;
 import org.junit.rules.ExternalResource;
 import org.testcontainers.containers.MariaDBContainer;
 
@@ -8,7 +8,7 @@ import org.testcontainers.containers.MariaDBContainer;
  * JUnit Rule that manages the lifecycle of a MariaDB container for testing purposes.
  * <p>
  * This rule sets up a MariaDB container using Testcontainers, which is started before each test
- * and stopped after the test completes. It also provides a {@link SqlConnectionContext} to be used
+ * and stopped after the test completes. It also provides a {@link ConnectionCredentials} to be used
  * in tests for establishing a database connection to the running MariaDB container.
  * </p>
  * <p>
@@ -28,7 +28,7 @@ public class MariaDBRule extends ExternalResource {
      * The SQL connection context to interact with the MariaDB database.
      * This is initialized when the MariaDB container starts.
      */
-    public static SqlConnectionContext CONNECTION_CONTEXT;
+    public static ConnectionCredentials CONNECTION_CONTEXT;
 
     static {
         System.setProperty("testcontainers.reuse.enable", "true");
@@ -45,7 +45,7 @@ public class MariaDBRule extends ExternalResource {
      * Starts the MariaDB container before each test.
      * <p>
      * This method is automatically invoked by JUnit before each test is executed.
-     * It starts the MariaDB container and initializes the {@link SqlConnectionContext}
+     * It starts the MariaDB container and initializes the {@link ConnectionCredentials}
      * with the appropriate connection details (URL, username, password).
      * </p>
      *
@@ -59,7 +59,7 @@ public class MariaDBRule extends ExternalResource {
                 .withPassword("");
         mariaDB.start();
 
-        CONNECTION_CONTEXT = new SqlConnectionContext(
+        CONNECTION_CONTEXT = new ConnectionCredentials(
                 mariaDB.getJdbcUrl(), mariaDB.getUsername(), mariaDB.getPassword(), "Test", "db");
     }
 
