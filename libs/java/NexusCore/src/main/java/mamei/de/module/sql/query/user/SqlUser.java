@@ -66,6 +66,7 @@ public class SqlUser implements ISqlQuery {
         }
 
         public SqlCreateUserBuilder withPassword(String password) {
+            CheckParam.isNotBlank(password, "password");
             this.password = password;
             return this;
         }
