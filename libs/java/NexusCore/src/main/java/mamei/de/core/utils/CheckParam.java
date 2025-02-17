@@ -35,9 +35,9 @@ public class CheckParam {
         return list;
     }
 
-    public static Map<?,?> isNotEmpty(Map<?,?> map, String listName) {
+    public static Map<?,?> isNotEmpty(Map<?,?> map, String mapName) {
         if (map.isEmpty()) {
-            throw new NexusCoreIsEmptyException(String.format("Param map with the name %s is empty.", listName));
+            throw new NexusCoreIsEmptyException(String.format("Param map with the name %s is empty.", mapName));
         }
         return map;
     }
