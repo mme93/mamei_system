@@ -29,17 +29,17 @@ public class SqlConnectionFactory {
                 filter(connectionFactory -> connectionFactory.getContext().getServerName().equals(serverName)).findAny();
 
         if (!opt.isPresent()) {
-            System.out.println("No connection found, create new connection.");
+            // System.out.println("No connection found, create new connection.");
             return createNewDatabaseConnectionSingleton(context);
         }
         instance = opt.get();
 
         if (instance.getConnection().isClosed() || !instance.getConnection().isValid(2)) {
-            System.out.println("Connection found, but was closed, create new connection.");
+            //System.out.println("Connection found, but was closed, create new connection.");
             instances.remove(instance);
             return createNewDatabaseConnectionSingleton(context);
         }
-        System.out.println("Found existing connection.");
+        // System.out.println("Found existing connection.");
         return instance;
     }
 
