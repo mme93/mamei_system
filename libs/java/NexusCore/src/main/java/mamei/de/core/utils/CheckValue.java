@@ -6,7 +6,7 @@ import mamei.de.core.exception.NexusCoreNullPointerException;
 import java.util.List;
 import java.util.Map;
 
-public class CheckParam {
+public class CheckValue {
 
     public static Object isNotNull(Object param, String valueName) {
         if (param == null) {

@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.user;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.query.ISqlQuery;
 import mamei.de.module.sql.query.privileges.ESqlPrivilegesTyp;
 import mamei.de.module.sql.query.privileges.SqlPrivileges;
@@ -12,16 +12,16 @@ public class SqlUser implements ISqlQuery {
     private String password;
 
     public SqlUser(String host, String user) {
-        CheckParam.isNotBlank(host, "host");
-        CheckParam.isNotBlank(user, "user");
+        CheckValue.isNotBlank(host, "host");
+        CheckValue.isNotBlank(user, "user");
         this.host = host;
         this.user = user;
     }
 
     private SqlUser(String host, String user, String password) {
-        CheckParam.isNotBlank(host, "host");
-        CheckParam.isNotBlank(user, "user");
-        CheckParam.isNotBlank(password, "password");
+        CheckValue.isNotBlank(host, "host");
+        CheckValue.isNotBlank(user, "user");
+        CheckValue.isNotBlank(password, "password");
         this.host = host;
         this.user = user;
         this.password = password;
@@ -66,7 +66,7 @@ public class SqlUser implements ISqlQuery {
         }
 
         public SqlCreateUserBuilder withPassword(String password) {
-            CheckParam.isNotBlank(password, "password");
+            CheckValue.isNotBlank(password, "password");
             this.password = password;
             return this;
         }
@@ -93,8 +93,8 @@ public class SqlUser implements ISqlQuery {
         }
 
         public SqlUser build() {
-            CheckParam.isNotNull(host, "host");
-            CheckParam.isNotNull(user, "user");
+            CheckValue.isNotNull(host, "host");
+            CheckValue.isNotNull(user, "user");
             if (password != null) {
                 return new SqlUser(host, user, password);
             }

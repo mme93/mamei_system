@@ -2,7 +2,7 @@ package mamei.de.module.sql.connection;
 
 import lombok.Getter;
 import lombok.Setter;
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -18,10 +18,10 @@ public class SqlConnectionContext {
     private String databaseName;
 
     public SqlConnectionContext(String ip, String userName, String password, String serverName) {
-        CheckParam.isNotBlank(ip, "ip");
-        CheckParam.isNotBlank(userName, "userName");
-        CheckParam.isNotNull(password, "password");
-        CheckParam.isNotBlank(serverName, "serverName");
+        CheckValue.isNotBlank(ip, "ip");
+        CheckValue.isNotBlank(userName, "userName");
+        CheckValue.isNotNull(password, "password");
+        CheckValue.isNotBlank(serverName, "serverName");
         this.ip = ip;
         this.userName = userName;
         this.password = password;
@@ -29,11 +29,11 @@ public class SqlConnectionContext {
     }
 
     public SqlConnectionContext(String ip, String userName, String password, String serverName, String databaseName) {
-        CheckParam.isNotBlank(ip, "ip");
-        CheckParam.isNotBlank(userName, "userName");
-        CheckParam.isNotNull(password, "password");
-        CheckParam.isNotBlank(serverName, "serverName");
-        CheckParam.isNotBlank(databaseName, "databaseName");
+        CheckValue.isNotBlank(ip, "ip");
+        CheckValue.isNotBlank(userName, "userName");
+        CheckValue.isNotNull(password, "password");
+        CheckValue.isNotBlank(serverName, "serverName");
+        CheckValue.isNotBlank(databaseName, "databaseName");
         this.ip = ip;
         this.userName = userName;
         this.password = password;

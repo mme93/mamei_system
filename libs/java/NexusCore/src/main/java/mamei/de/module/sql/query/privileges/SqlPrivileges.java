@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.privileges;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.query.ISqlQuery;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class SqlPrivileges implements ISqlQuery {
     private String privileges;
 
     private SqlPrivileges(String privileges) {
-        CheckParam.isNotBlank(privileges, "privileges");
+        CheckValue.isNotBlank(privileges, "privileges");
         this.privileges = privileges;
     }
 
@@ -40,13 +40,13 @@ public class SqlPrivileges implements ISqlQuery {
         }
 
         public SqlPrivilegesBuilder grantTyp(ESqlPrivilegesTyp sqlPrivilegesTyp) {
-            CheckParam.isNotNull(sqlPrivilegesTyp, "sqlPrivilegesTyp");
+            CheckValue.isNotNull(sqlPrivilegesTyp, "sqlPrivilegesTyp");
             sqlPrivilegesTypList.add(sqlPrivilegesTyp);
             return this;
         }
 
         public SqlPrivilegesBuilder grantTyp(List<ESqlPrivilegesTyp> sqlPrivilegesTyp) {
-            CheckParam.isNotEmpty(sqlPrivilegesTyp, "sqlPrivilegesTyp");
+            CheckValue.isNotEmpty(sqlPrivilegesTyp, "sqlPrivilegesTyp");
             sqlPrivilegesTypList.addAll(sqlPrivilegesTyp);
             return this;
         }
@@ -55,7 +55,7 @@ public class SqlPrivileges implements ISqlQuery {
             if (hasAllPrivileges) {
                 return new SqlPrivileges(ESqlPrivilegesTyp.ALL_PRIVILEGES.getPrivilege());
             }
-            CheckParam.isNotEmpty(sqlPrivilegesTypList, "sqlPrivilegesTypList");
+            CheckValue.isNotEmpty(sqlPrivilegesTypList, "sqlPrivilegesTypList");
             return new SqlPrivileges(String.join(",", sqlPrivilegesTypList.stream().map(ESqlPrivilegesTyp::getPrivilege).toList()));
         }
 

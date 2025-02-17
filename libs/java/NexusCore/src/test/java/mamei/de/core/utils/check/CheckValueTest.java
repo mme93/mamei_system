@@ -2,7 +2,7 @@ package mamei.de.core.utils.check;
 
 import mamei.de.core.exception.NexusCoreIsEmptyException;
 import mamei.de.core.exception.NexusCoreNullPointerException;
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -12,14 +12,14 @@ import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
 
 /**
- * Unit tests for the {@link CheckParam} utility class.
+ * Unit tests for the {@link CheckValue} utility class.
  *
  * <p>This class ensures that parameter validation methods work as expected
  * by throwing appropriate exceptions for null, empty, or blank values.</p>
  *
  * <p>It uses JUnit for assertions and exception testing.</p>
  */
-public class CheckParamTest {
+public class CheckValueTest {
 
     /**
      * Verifies that {@code isNotNull} throws a {@link NexusCoreNullPointerException}
@@ -28,7 +28,7 @@ public class CheckParamTest {
     @Test
     public void shouldThrowExceptionIfNull() {
         Exception exception = assertThrows(NexusCoreNullPointerException.class, () -> {
-            CheckParam.isNotNull(null, "test");
+            CheckValue.isNotNull(null, "test");
         });
         String msg = "Param with the name test is null.";
         assertEquals(exception.getMessage(), msg);
@@ -41,7 +41,7 @@ public class CheckParamTest {
     @Test
     public void shouldThrowExceptionIfEmptyString() {
         Exception exception = assertThrows(NexusCoreIsEmptyException.class, () -> {
-            CheckParam.isNotBlank("", "test");
+            CheckValue.isNotBlank("", "test");
         });
         String msg = "String with the name test is empty.";
         assertEquals(exception.getMessage(), msg);
@@ -54,7 +54,7 @@ public class CheckParamTest {
     @Test
     public void shouldThrowExceptionIfEmptyList() {
         Exception exception = assertThrows(NexusCoreIsEmptyException.class, () -> {
-            CheckParam.isNotEmpty(asList(), "test");
+            CheckValue.isNotEmpty(asList(), "test");
         });
         String msg = "Param list with the name test is empty.";
         assertEquals(exception.getMessage(), msg);
@@ -67,7 +67,7 @@ public class CheckParamTest {
     @Test
     public void shouldThrowExceptionIfEmptyMap() {
         Exception exception = assertThrows(NexusCoreIsEmptyException.class, () -> {
-            CheckParam.isNotEmpty(new HashMap<>(), "map");
+            CheckValue.isNotEmpty(new HashMap<>(), "map");
         });
         String msg = "Param map with the name map is empty.";
         assertEquals(exception.getMessage(), msg);
@@ -79,7 +79,7 @@ public class CheckParamTest {
     @Test
     public void shouldNotNull() {
         String test = "test";
-        assertEquals(test, CheckParam.isNotNull(test, "test"));
+        assertEquals(test, CheckValue.isNotNull(test, "test"));
     }
 
     /**
@@ -88,7 +88,7 @@ public class CheckParamTest {
     @Test
     public void shouldNotBlank() {
         String test = "test";
-        assertEquals(test, CheckParam.isNotBlank(test, "test"));
+        assertEquals(test, CheckValue.isNotBlank(test, "test"));
     }
 
     /**
@@ -97,7 +97,7 @@ public class CheckParamTest {
     @Test
     public void shouldNotEmptyList() {
         String test = "test";
-        List<String> result = (List<String>) CheckParam.isNotNull(asList(test), "test");
+        List<String> result = (List<String>) CheckValue.isNotNull(asList(test), "test");
         assertEquals(asList(test), result);
     }
 
@@ -108,7 +108,7 @@ public class CheckParamTest {
     public void shouldNotEmptyMap() {
         HashMap<String, String> map = new HashMap<>();
         map.put("Test", "Test");
-        HashMap<String, String> result = (HashMap<String, String>) CheckParam.isNotNull(map, "map");
+        HashMap<String, String> result = (HashMap<String, String>) CheckValue.isNotNull(map, "map");
         assertEquals(map, result);
     }
 }

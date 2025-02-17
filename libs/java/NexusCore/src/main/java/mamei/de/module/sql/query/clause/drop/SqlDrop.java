@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.clause.drop;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.model.DatabaseElements;
 import mamei.de.module.sql.query.ISqlQuery;
 
@@ -10,8 +10,8 @@ public class SqlDrop implements ISqlQuery {
     private DatabaseElements.EDatabaseElements databaseElements;
 
     private SqlDrop(String content, DatabaseElements.EDatabaseElements databaseElements) {
-        CheckParam.isNotBlank(content, "content");
-        CheckParam.isNotNull(databaseElements, "databaseElements");
+        CheckValue.isNotBlank(content, "content");
+        CheckValue.isNotNull(databaseElements, "databaseElements");
         this.content = content;
         this.databaseElements = databaseElements;
     }

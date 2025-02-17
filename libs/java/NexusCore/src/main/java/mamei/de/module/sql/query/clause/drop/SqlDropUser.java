@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.clause.drop;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.query.ISqlQuery;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class SqlDropUser implements ISqlQuery {
     private List<String> users;
 
     private SqlDropUser(List<String> users) {
-        CheckParam.isNotEmpty(users, "users");
+        CheckValue.isNotEmpty(users, "users");
         this.users = users;
     }
 

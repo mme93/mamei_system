@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.clause.create;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.query.ISqlQuery;
 
 public class SqlCreate implements ISqlQuery {
@@ -35,7 +35,7 @@ public class SqlCreate implements ISqlQuery {
         }
 
         public SqlCreate build() {
-            CheckParam.isNotBlank(content, "content");
+            CheckValue.isNotBlank(content, "content");
             return new SqlCreate(content);
         }
     }

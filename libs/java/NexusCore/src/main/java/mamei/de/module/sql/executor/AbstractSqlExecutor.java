@@ -1,6 +1,6 @@
 package mamei.de.module.sql.executor;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.connection.SqlConnectionContext;
 import mamei.de.module.sql.connection.SqlConnectionFactory;
 import mamei.de.module.sql.model.ESqlEnvironment;
@@ -14,8 +14,8 @@ public abstract class AbstractSqlExecutor implements ISqlExecutor {
     private ESqlEnvironment sqlEnvironment;
 
     public AbstractSqlExecutor(SqlConnectionContext connectionContext, ESqlEnvironment sqlEnvironment) {
-        CheckParam.isNotNull(connectionContext, "connectionContext");
-        CheckParam.isNotNull(sqlEnvironment, "sqlEnvironment");
+        CheckValue.isNotNull(connectionContext, "connectionContext");
+        CheckValue.isNotNull(sqlEnvironment, "sqlEnvironment");
         this.connectionContext = connectionContext;
         this.sqlEnvironment = sqlEnvironment;
     }

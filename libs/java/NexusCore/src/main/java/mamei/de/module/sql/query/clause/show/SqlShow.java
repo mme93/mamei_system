@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.clause.show;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.query.ISqlQuery;
 
 import static mamei.de.module.sql.model.DatabaseElements.*;
@@ -12,9 +12,9 @@ public class SqlShow implements ISqlQuery {
 
     private SqlShow(String content, EDatabaseElements databaseElements) {
         if(!(EDatabaseElements.DATABASES.name()==databaseElements.name())){
-            CheckParam.isNotBlank(content, "content");
+            CheckValue.isNotBlank(content, "content");
         }
-        CheckParam.isNotNull(databaseElements, "databaseElements");
+        CheckValue.isNotNull(databaseElements, "databaseElements");
         this.content = content;
         this.databaseElements = databaseElements;
     }

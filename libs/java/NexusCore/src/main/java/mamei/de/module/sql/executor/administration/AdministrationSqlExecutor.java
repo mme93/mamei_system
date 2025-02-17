@@ -1,6 +1,6 @@
 package mamei.de.module.sql.executor.administration;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.connection.SqlConnectionContext;
 import mamei.de.module.sql.executor.AbstractSqlExecutor;
 import mamei.de.module.sql.model.ESqlEnvironment;
@@ -82,7 +82,7 @@ public class AdministrationSqlExecutor extends AbstractSqlExecutor {
                 userPrivilegesMap.computeIfAbsent(grantee, k -> new ArrayList<>()).add(privilegesTyp);
             }
         }
-        CheckParam.isNotEmpty(userPrivilegesMap, "userPrivilegesMap");
+        CheckValue.isNotEmpty(userPrivilegesMap, "userPrivilegesMap");
         return userPrivilegesMap;
     }
 

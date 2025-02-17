@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.clause.grant;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.model.SystemUser;
 import mamei.de.module.sql.query.ISqlQuery;
 
@@ -49,22 +49,22 @@ public class SqlGrantUser implements ISqlQuery {
         }
 
         public SqlGrantUserBuilder onSqlEnvironment(String database) {
-            CheckParam.isNotBlank(database, "database");
+            CheckValue.isNotBlank(database, "database");
             this.sqlEnvironment = String.format("%s.*", database);
             return this;
         }
 
         public SqlGrantUserBuilder onSqlEnvironment(String database, String table) {
-            CheckParam.isNotBlank(database, "database");
-            CheckParam.isNotBlank(table, "table");
+            CheckValue.isNotBlank(database, "database");
+            CheckValue.isNotBlank(table, "table");
             this.sqlEnvironment = String.format("%s.%s", database, table);
             return this;
         }
 
         public SqlGrantUser build() {
-            CheckParam.isNotNull(privileges, "privileges");
-            CheckParam.isNotBlank(user, "user");
-            CheckParam.isNotBlank(host, "host");
+            CheckValue.isNotNull(privileges, "privileges");
+            CheckValue.isNotBlank(user, "user");
+            CheckValue.isNotBlank(host, "host");
             return new SqlGrantUser(privileges, String.format("'%s'@'%s'", user, host), sqlEnvironment);
         }
 

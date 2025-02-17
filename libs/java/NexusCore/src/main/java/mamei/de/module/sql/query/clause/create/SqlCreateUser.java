@@ -1,6 +1,6 @@
 package mamei.de.module.sql.query.clause.create;
 
-import mamei.de.core.utils.CheckParam;
+import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.query.ISqlQuery;
 
 public class SqlCreateUser implements ISqlQuery {
@@ -10,9 +10,9 @@ public class SqlCreateUser implements ISqlQuery {
     private String password;
 
     private SqlCreateUser(String host, String user, String password) {
-        CheckParam.isNotBlank(host, "host");
-        CheckParam.isNotBlank(user, "user");
-        CheckParam.isNotBlank(password, "password");
+        CheckValue.isNotBlank(host, "host");
+        CheckValue.isNotBlank(user, "user");
+        CheckValue.isNotBlank(password, "password");
         this.host = host;
         this.user = user;
         this.password = password;
