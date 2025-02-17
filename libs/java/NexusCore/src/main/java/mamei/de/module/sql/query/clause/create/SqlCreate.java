@@ -1,31 +1,42 @@
 package mamei.de.module.sql.query.clause.create;
 
+import mamei.de.core.utils.CheckParam;
 import mamei.de.module.sql.query.ISqlQuery;
 
 public class SqlCreate implements ISqlQuery {
 
-    private SqlCreate() {
+    private String content;
+
+    private SqlCreate(String content) {
+        this.content = content;
     }
 
     @Override
     public String toSql() {
-        return "";
+        return String.format("CREATE %s",content);
     }
 
     @Override
     public String getAction() {
-        return "";
+        return "CREATE";
     }
 
-    public static SqlCreateBuilder build() {
+    public static SqlCreateBuilder create() {
         return new SqlCreateBuilder();
     }
 
     public static class SqlCreateBuilder {
 
+        private String content;
+
+        public SqlCreateBuilder database(String databaseName) {
+            content = String.format("DATABASE %s", databaseName);
+            return this;
+        }
 
         public SqlCreate build() {
-            return new SqlCreate();
+            CheckParam.isNotBlank(content, "content");
+            return new SqlCreate(content);
         }
     }
 
