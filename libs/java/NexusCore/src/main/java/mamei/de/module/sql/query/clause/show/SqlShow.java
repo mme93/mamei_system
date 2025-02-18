@@ -7,23 +7,15 @@ import static mamei.de.module.sql.model.DatabaseElements.*;
 
 public class SqlShow implements ISqlQuery {
 
-    private String content;
     private EDatabaseElements databaseElements;
 
-    private SqlShow(String content, EDatabaseElements databaseElements) {
-        if(!(EDatabaseElements.DATABASES.name()==databaseElements.name())){
-            CheckValue.isNotBlank(content, "content");
-        }
+    private SqlShow(EDatabaseElements databaseElements) {
         CheckValue.isNotNull(databaseElements, "databaseElements");
-        this.content = content;
         this.databaseElements = databaseElements;
     }
 
     @Override
     public String toSql() {
-        if(content!=null){
-            return String.format("SHOW %s %s", databaseElements.name(), content);
-        }
         return String.format("SHOW %s", databaseElements.name());
     }
 
@@ -38,7 +30,6 @@ public class SqlShow implements ISqlQuery {
 
     public static class SqlShowBuilder {
 
-        private String content;
         private EDatabaseElements databaseElements;
 
         public SqlShowBuilder showDatabase() {
@@ -46,14 +37,13 @@ public class SqlShow implements ISqlQuery {
             return this;
         }
 
-        public SqlShowBuilder showTables(String databaseName) {
+        public SqlShowBuilder showTables() {
             this.databaseElements = EDatabaseElements.DATABASE;
-            this.content=databaseName;
             return this;
         }
 
         public SqlShow build() {
-            return new SqlShow(content, databaseElements);
+            return new SqlShow(databaseElements);
         }
     }
 }

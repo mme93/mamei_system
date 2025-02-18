@@ -41,6 +41,12 @@ public class SqlDrop implements ISqlQuery {
             return this;
         }
 
+        public SqlDropBuilder table(String tableName) {
+            databaseElements = DatabaseElements.EDatabaseElements.TABLE;
+            content = tableName;
+            return this;
+        }
+
         public SqlDrop build() {
             return new SqlDrop(content, databaseElements);
         }
