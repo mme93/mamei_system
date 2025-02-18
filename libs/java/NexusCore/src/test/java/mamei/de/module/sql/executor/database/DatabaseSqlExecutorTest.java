@@ -17,7 +17,7 @@ public class DatabaseSqlExecutorTest {
 
     @Test
     public void shouldCreateAndDeleteDatabase() throws SQLException {
-        DatabaseSqlExecutor executor = new DatabaseSqlExecutor(MariaDBRule.CONNECTION_CONTEXT);
+        DatabaseSqlExecutor executor = new DatabaseSqlExecutor(MariaDBRule.CONNECTION_CREDENTIALS);
         List<String> databaseList= executor.show();
         Assert.assertFalse(databaseList.contains(databaseName));
         executor.create(databaseName);
