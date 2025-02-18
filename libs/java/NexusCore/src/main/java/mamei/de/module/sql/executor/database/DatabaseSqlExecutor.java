@@ -47,4 +47,9 @@ public class DatabaseSqlExecutor extends AbstractSqlExecutor {
         return execute(sqlQuery);
     }
 
+    public boolean exist(String databaseName){
+
+        return true;
+    }
+
 }
