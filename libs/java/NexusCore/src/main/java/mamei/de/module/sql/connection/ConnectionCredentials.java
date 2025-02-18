@@ -3,6 +3,7 @@ package mamei.de.module.sql.connection;
 import lombok.Getter;
 import lombok.Setter;
 import mamei.de.core.utils.CheckValue;
+import mamei.de.core.utils.CompareValue;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -50,12 +51,18 @@ public class ConnectionCredentials {
         }
     }
 
+
+    public String getIp() {
+        if (CompareValue.isNotNull(databaseName)) {
+            return String.format("%s/%s", ip, databaseName);
+        }
+        return ip;
+    }
+
     public boolean match(ConnectionCredentials context) {
         return this.ip == context.getIp() &&
-               this.userName == context.getUserName() &&
-               this.password == context.getPassword() &&
-               this.serverName == context.getServerName() &&
-               this.databaseName == context.getDatabaseName();
+                this.serverName == context.getServerName() &&
+                this.databaseName == context.getDatabaseName();
     }
 
     @Override
