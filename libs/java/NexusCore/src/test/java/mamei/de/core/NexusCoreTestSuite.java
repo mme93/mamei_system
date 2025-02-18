@@ -8,11 +8,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         CheckValueTest.class,
-        //Exceptions
-        NexusCoreNullPointerExceptionTest.class,
-        NexusCoreMethodNotImplementedExceptionTest.class,
-        NexusCoreIsEmptyExceptionTest.class,
-        NexusCoreIllegalArgumentExceptionTest.class
+        NexusCoreExceptionSuite.class
 })
 public class NexusCoreTestSuite {
 }
