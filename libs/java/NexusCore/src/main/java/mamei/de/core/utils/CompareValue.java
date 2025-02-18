@@ -7,7 +7,7 @@ public class CompareValue {
     }
 
     public static boolean isNotNull(Object value) {
-        return value == null;
+        return value != null;
     }
 
     public static boolean isBlank(String value) {
