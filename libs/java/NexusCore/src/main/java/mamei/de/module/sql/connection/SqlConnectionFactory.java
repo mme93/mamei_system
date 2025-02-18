@@ -11,17 +11,17 @@ public class SqlConnectionFactory {
 
     private static List<SqlConnectionFactory> instances = new ArrayList<>();
 
-    private SqlConnectionContext context;
+    private ConnectionCredentials context;
 
     private Connection con;
 
-    private SqlConnectionFactory(SqlConnectionContext context, Connection con) {
+    private SqlConnectionFactory(ConnectionCredentials context, Connection con) {
         this.con = con;
         this.context = context;
     }
 
 
-    public static synchronized SqlConnectionFactory getInstance(SqlConnectionContext context) throws SQLException {
+    public static synchronized SqlConnectionFactory getInstance(ConnectionCredentials context) throws SQLException {
         SqlConnectionFactory instance;
         String serverName = context.getServerName();
         Optional<SqlConnectionFactory> opt = instances.
@@ -43,7 +43,7 @@ public class SqlConnectionFactory {
         return instance;
     }
 
-    private static SqlConnectionFactory createNewDatabaseConnectionSingleton(SqlConnectionContext context) throws SQLException {
+    private static SqlConnectionFactory createNewDatabaseConnectionSingleton(ConnectionCredentials context) throws SQLException {
         SqlConnectionFactory instance = new SqlConnectionFactory(context, createConnection(context));
         instances.add(instance);
         return instance;
@@ -53,7 +53,7 @@ public class SqlConnectionFactory {
         return con;
     }
 
-    private static Connection createConnection(SqlConnectionContext context) throws SQLException {
+    private static Connection createConnection(ConnectionCredentials context) throws SQLException {
         return DriverManager.getConnection(
                 context.getIp(),
                 context.getUserName(),
@@ -67,7 +67,7 @@ public class SqlConnectionFactory {
         }
     }
 
-    public SqlConnectionContext getContext() {
+    public ConnectionCredentials getContext() {
         return context;
     }
 }
