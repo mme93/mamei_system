@@ -28,7 +28,7 @@ public class MariaDBRule extends ExternalResource {
      * The SQL connection context to interact with the MariaDB database.
      * This is initialized when the MariaDB container starts.
      */
-    public static ConnectionCredentials CONNECTION_CONTEXT;
+    public static ConnectionCredentials CONNECTION_CREDENTIALS;
 
     static {
         System.setProperty("testcontainers.reuse.enable", "true");
@@ -59,8 +59,8 @@ public class MariaDBRule extends ExternalResource {
                 .withPassword("");
         mariaDB.start();
 
-        CONNECTION_CONTEXT = new ConnectionCredentials(
-                mariaDB.getJdbcUrl(), mariaDB.getUsername(), mariaDB.getPassword(), "Test", "db");
+        CONNECTION_CREDENTIALS = new ConnectionCredentials(
+                mariaDB.getJdbcUrl(), mariaDB.getUsername(), mariaDB.getPassword(), "Test");
     }
 
     /**
