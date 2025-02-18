@@ -31,4 +31,9 @@ public class TableSqlExecutor extends AbstractSqlExecutor {
 
         return false;
     }
+
+    public boolean exist(String databaseName){
+
+        return true;
+    }
 }
