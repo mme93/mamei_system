@@ -24,7 +24,7 @@ public class AdministrationSqlExecutorTest {
 
     @Test
     public void shouldCreateAndDeleteUser() throws SQLException {
-        AdministrationSqlExecutor executor = new AdministrationSqlExecutor(MariaDBRule.CONNECTION_CONTEXT);
+        AdministrationSqlExecutor executor = new AdministrationSqlExecutor(MariaDBRule.CONNECTION_CREDENTIALS);
         List<SystemUser> users = executor.getAllSystemUser();
         executor.createSystemUser(testUser, password);
         List<SystemUser> compareUsers = executor.getAllSystemUser();
@@ -38,7 +38,7 @@ public class AdministrationSqlExecutorTest {
     @Test
     public void shouldCreateUserWithAllPrivileges() throws SQLException {
         String database="*";
-        AdministrationSqlExecutor executor = new AdministrationSqlExecutor(MariaDBRule.CONNECTION_CONTEXT);
+        AdministrationSqlExecutor executor = new AdministrationSqlExecutor(MariaDBRule.CONNECTION_CREDENTIALS);
         executor.createSystemUser(testUser, password);
         List<String> userPrivileges = executor.getGrantFromSystemUser(testUser)
                 .get(String.format("'%s'@'%s'", testUser.getName(), testUser.getHost()));
