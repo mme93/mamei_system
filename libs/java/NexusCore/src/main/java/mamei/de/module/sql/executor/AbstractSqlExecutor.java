@@ -2,7 +2,7 @@ package mamei.de.module.sql.executor;
 
 import mamei.de.core.utils.CheckValue;
 import mamei.de.module.sql.connection.ConnectionCredentials;
-import mamei.de.module.sql.connection.SqlConnectionFactory;
+import mamei.de.module.sql.connection.ConnectionManager;
 import mamei.de.module.sql.model.ESqlEnvironment;
 import mamei.de.module.sql.query.ISqlQuery;
 
@@ -23,7 +23,7 @@ public abstract class AbstractSqlExecutor implements ISqlExecutor {
     public ResultSet executeQuery(ISqlQuery query) {
         ResultSet resultSet = null;
         try {
-            Connection con = SqlConnectionFactory.getInstance(connectionContext).getConnection();
+            Connection con = ConnectionManager.getInstance(connectionContext).getConnection();
             PreparedStatement statement = con.prepareStatement(query.toSql());
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
@@ -34,7 +34,7 @@ public abstract class AbstractSqlExecutor implements ISqlExecutor {
 
     public int executeUpdate(ISqlQuery query) {
         try {
-            Connection con = SqlConnectionFactory.getInstance(connectionContext).getConnection();
+            Connection con = ConnectionManager.getInstance(connectionContext).getConnection();
             Statement statement = con.createStatement();
             return statement.executeUpdate(query.toSql());
         } catch (SQLException e) {
@@ -45,7 +45,7 @@ public abstract class AbstractSqlExecutor implements ISqlExecutor {
 
     public boolean execute(ISqlQuery query) {
         try {
-            Connection con = SqlConnectionFactory.getInstance(connectionContext).getConnection();
+            Connection con = ConnectionManager.getInstance(connectionContext).getConnection();
             Statement statement = con.createStatement();
             return statement.execute(query.toSql());
         } catch (SQLException e) {
