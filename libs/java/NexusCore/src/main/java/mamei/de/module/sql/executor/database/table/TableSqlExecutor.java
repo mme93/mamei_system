@@ -8,6 +8,8 @@ import mamei.de.module.sql.query.ISqlQuery;
 import mamei.de.module.sql.query.clause.drop.SqlDrop;
 import mamei.de.module.sql.query.clause.show.SqlShow;
 
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,8 +48,11 @@ public class TableSqlExecutor extends AbstractSqlExecutor {
         return false;
     }
 
-    public boolean exist(String databaseName) {
-
-        return true;
+    public boolean exist(String tableName) throws SQLException {
+        Connection con = getConnection();
+        DatabaseMetaData metaData = con.getMetaData();
+        try (ResultSet resultSet = metaData.getTables(null, null, tableName.toUpperCase(), new String[]{"TABLE"})) {
+            return resultSet.next();
+        }
     }
 }
