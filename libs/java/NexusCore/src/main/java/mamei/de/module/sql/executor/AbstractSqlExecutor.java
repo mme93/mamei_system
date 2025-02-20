@@ -54,6 +54,9 @@ public abstract class AbstractSqlExecutor implements ISqlExecutor {
         return false;
     }
 
+    public Connection getConnection() throws SQLException {
+        return ConnectionManager.getInstance(connectionContext).getConnection();
+    }
 
     public void changeSqlEnvironment(ESqlEnvironment sqlEnvironment, ConnectionCredentials connectionContext) {
         this.sqlEnvironment = sqlEnvironment;
