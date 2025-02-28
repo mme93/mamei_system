@@ -70,6 +70,6 @@ public class SqlDataTyp implements ISqlDataTyp{
 
     @Override
     public String getDataTyp() {
-        return "";
+        return dataType;
     }
 }
