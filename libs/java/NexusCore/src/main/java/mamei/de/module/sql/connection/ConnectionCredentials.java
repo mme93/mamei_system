@@ -17,6 +17,7 @@ public class ConnectionCredentials {
     private String password;
     private String serverName;
     private String databaseName;
+    private String tableName;
 
     public ConnectionCredentials(String ip, String userName, String password, String serverName) {
         CheckValue.isNotBlank(ip, "ip");
@@ -40,6 +41,21 @@ public class ConnectionCredentials {
         this.password = password;
         this.serverName = serverName;
         this.databaseName = databaseName;
+    }
+
+    public ConnectionCredentials(String ip, String userName, String password, String serverName, String databaseName, String tableName) {
+        CheckValue.isNotBlank(ip, "ip");
+        CheckValue.isNotBlank(userName, "userName");
+        CheckValue.isNotNull(password, "password");
+        CheckValue.isNotBlank(serverName, "serverName");
+        CheckValue.isNotBlank(databaseName, "databaseName");
+        CheckValue.isNotBlank(tableName, "tableName");
+        this.ip = ip;
+        this.userName = userName;
+        this.password = password;
+        this.serverName = serverName;
+        this.databaseName = databaseName;
+        this.tableName = tableName;
     }
 
     public boolean isValidIp() {
