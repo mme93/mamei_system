@@ -5,6 +5,7 @@ public enum ESqlEnvironment {
     DATABASE,
     TABLE,
     COLUMN,
+    ROW,
     META_DATA,
     TEST
 }
