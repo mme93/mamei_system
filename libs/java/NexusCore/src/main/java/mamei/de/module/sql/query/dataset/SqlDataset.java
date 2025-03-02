@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class SqlDataset implements ISqlDataset {
 
-    private Map<String, Object> values;
+    private final Map<String, Object> values;
 
     private SqlDataset(Map<String, Object> values) {
         CheckValue.isNotEmpty(values, "values");
