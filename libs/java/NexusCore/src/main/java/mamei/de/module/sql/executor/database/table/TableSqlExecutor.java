@@ -12,7 +12,7 @@ import mamei.de.module.sql.executor.database.table.model.Table;
 import mamei.de.module.sql.query.ISqlQuery;
 import mamei.de.module.sql.query.SqlQueryCaster;
 import mamei.de.module.sql.query.clause.alter.ISqlAlter;
-import mamei.de.module.sql.query.clause.alter.SqlAlter;
+import mamei.de.module.sql.query.clause.alter.SqlAlterPrivileges;
 import mamei.de.module.sql.query.clause.create.SqlCreate;
 import mamei.de.module.sql.query.clause.drop.SqlDrop;
 import mamei.de.module.sql.query.clause.insert.SqlInsert;
@@ -102,7 +102,7 @@ public class TableSqlExecutor extends AbstractSqlExecutor {
     }
 
     public boolean alter(String tableName, ESqlPrivilegesTyp sqlPrivilegesTyp, ISqlColumn column) {
-        ISqlAlter alter = SqlAlter
+        ISqlAlter alter = SqlAlterPrivileges
                 .alter()
                 .withName(tableName)
                 .withPrivileges(sqlPrivilegesTyp)

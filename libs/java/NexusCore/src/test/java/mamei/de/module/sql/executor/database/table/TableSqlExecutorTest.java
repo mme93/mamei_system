@@ -1,5 +1,7 @@
 package mamei.de.module.sql.executor.database.table;
 
+import mamei.de.module.sql.executor.database.table.model.Column;
+import mamei.de.module.sql.executor.database.table.model.Row;
 import mamei.de.module.sql.executor.database.table.model.Table;
 import mamei.de.module.sql.query.column.ISqlColumn;
 import mamei.de.module.sql.query.column.SqlColumnDefinition;
@@ -27,6 +29,10 @@ public class TableSqlExecutorTest {
 
     private TableSqlExecutor executor = new TableSqlExecutor(mariaDBRule.CONNECTION_DB_CREDENTIALS);
 
+    private final String ID = "ID";
+    private final String NAME = "NAME";
+    private final String AGE = "AGE";
+
     public TableSqlExecutorTest() throws SQLException {
     }
 
@@ -35,6 +41,7 @@ public class TableSqlExecutorTest {
         assertFalse(executor.exist(tableName));
         createTable(executor);
         assertTrue(executor.exist(tableName));
+        executor.drop(tableName);
     }
 
     @Test
@@ -48,16 +55,15 @@ public class TableSqlExecutorTest {
     public void shouldLoadData() throws SQLException {
         executor.setTableName(tableName);
         createTable(executor);
-        Table table=executor.loadData();
-        assertEquals(table.getTableName(),tableName);
-        assertEquals(table.getRows().size(),4);
-        assertEquals(table.getDatabaseName(),mariaDBRule.CONNECTION_DB_CREDENTIALS.getDatabaseName());
+        Table table = executor.loadData();
+        assertEquals(table.getTableName(), tableName);
+        assertEquals(table.getRows().size(), 4);
+        assertEquals(table.getDatabaseName(), mariaDBRule.CONNECTION_DB_CREDENTIALS.getDatabaseName());
+        assertEquals(table.getRows().get(0).getColumns().stream().map(Column::getName).toList(),asList(ID,NAME,AGE));
+        executor.drop(tableName);
     }
 
     private void createTable(TableSqlExecutor executor) throws SQLException {
-        final String ID = "ID";
-        final String NAME = "NAME";
-        final String AGE = "AGE";
         List<ISqlColumn> columns = new ArrayList<>();
         columns.add(SqlColumnDefinition
                 .builder()
