@@ -1,7 +1,6 @@
 package mamei.de.module.sql.executor.database.table;
 
 import mamei.de.module.sql.executor.database.table.model.Column;
-import mamei.de.module.sql.executor.database.table.model.Row;
 import mamei.de.module.sql.executor.database.table.model.Table;
 import mamei.de.module.sql.query.column.ISqlColumn;
 import mamei.de.module.sql.query.column.SqlColumnDefinition;
@@ -92,7 +91,7 @@ public class TableSqlExecutorTest {
                 SqlDataset.builder().addData(ID, 1L).addData(NAME, "Susi").addData(AGE, 12).build(),
                 SqlDataset.builder().addData(ID, 1L).addData(NAME, "Julian").addData(AGE, 3).build()
         );
-        executor.addRows(datasets, tableName);
+        executor.addDatasets(datasets, tableName);
     }
 
 }
