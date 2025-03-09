@@ -1,11 +1,15 @@
 package mamei.de.module.sql.query.clause.alias;
 
-public class SqlColumnAlias implements ISqlAlias{
+import mamei.de.core.utils.CheckValue;
+
+public class SqlColumnAlias implements ISqlAlias {
 
     private String alias;
     private String param;
 
-    public SqlColumnAlias(String alias, String param) {
+    public SqlColumnAlias(String param, String alias) {
+        CheckValue.isNotBlank(param, "param");
+        CheckValue.isNotBlank(alias, "alias");
         this.alias = alias;
         this.param = param;
     }
