@@ -6,11 +6,13 @@ import mamei.de.module.sql.executor.AbstractSqlExecutor;
 import mamei.de.module.sql.executor.database.table.model.Column;
 import mamei.de.module.sql.executor.database.table.model.MetaData;
 import mamei.de.module.sql.executor.database.table.model.Row;
+import mamei.de.module.sql.executor.database.table.model.Table;
 import mamei.de.module.sql.extractor.MetaDataSqlExtractor;
 import mamei.de.module.sql.model.ESqlEnvironment;
 import mamei.de.module.sql.query.ISqlQuery;
 import mamei.de.module.sql.query.clause.insert.SqlInsert;
 import mamei.de.module.sql.query.clause.select.SqlSelect;
+import mamei.de.module.sql.query.condition.ISqlCondition;
 import mamei.de.module.sql.query.dataset.ISqlDataset;
 
 import java.sql.ResultSet;
@@ -29,20 +31,36 @@ public class RowSqlExecutor extends AbstractSqlExecutor {
         this.metaDataSqlExtractor = new MetaDataSqlExtractor(connectionContext);
     }
 
-    public List<Row> loadRows() throws SQLException {
-        CheckValue.isNotBlank(connectionContext.getTableName(), "tableName");
-        List<MetaData> headers = metaDataSqlExtractor.loadMetaData();
-        ResultSet resultSet = executeQuery(SqlSelect.builder().selectAll().from(connectionContext.getTableName()).build());
-        List<Row> rows = new ArrayList<>();
-        while (resultSet.next()) {
-            List<Column> columns = new ArrayList<>();
-            for (MetaData metaData : headers) {
-                String name = metaData.getField();
-                columns.add(new Column(resultSet.getString(name), name, metaData));
-            }
-            rows.add(new Row(columns));
-        }
-        return rows;
+    public Table loadData() throws SQLException {
+        return new Table(
+                connectionContext.getTableName(),
+                connectionContext.getDatabaseName(),
+                loadRows()
+        );
+    }
+
+    public Table loadData(List<String> column) throws SQLException {
+        return new Table(
+                connectionContext.getTableName(),
+                connectionContext.getDatabaseName(),
+                loadRows()
+        );
+    }
+
+    public Table loadData(ISqlCondition condition) throws SQLException {
+        return new Table(
+                connectionContext.getTableName(),
+                connectionContext.getDatabaseName(),
+                loadRows()
+        );
+    }
+
+    public Table loadData(List<String> column, ISqlCondition condition) throws SQLException {
+        return new Table(
+                connectionContext.getTableName(),
+                connectionContext.getDatabaseName(),
+                loadRows()
+        );
     }
 
     public boolean addRow(ISqlDataset dataset, String tableName) {
@@ -61,6 +79,22 @@ public class RowSqlExecutor extends AbstractSqlExecutor {
                 .addRows(datasets)
                 .build();
         return execute(query);
+    }
+
+    private List<Row> loadRows() throws SQLException {
+        CheckValue.isNotBlank(connectionContext.getTableName(), "tableName");
+        List<MetaData> headers = metaDataSqlExtractor.loadMetaData();
+        ResultSet resultSet = executeQuery(SqlSelect.builder().selectAll().from(connectionContext.getTableName()).build());
+        List<Row> rows = new ArrayList<>();
+        while (resultSet.next()) {
+            List<Column> columns = new ArrayList<>();
+            for (MetaData metaData : headers) {
+                String name = metaData.getField();
+                columns.add(new Column(resultSet.getString(name), name, metaData));
+            }
+            rows.add(new Row(columns));
+        }
+        return rows;
     }
 
 }
