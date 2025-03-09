@@ -40,26 +40,6 @@ public class TableSqlExecutor extends AbstractSqlExecutor {
         this.connectionContext = connectionContext;
     }
 
-    public List<MetaData> loadMetaData() throws SQLException {
-        return metaDataSqlExtractor.loadMetaData();
-    }
-
-    public boolean addDataset(ISqlDataset dataset, String tableName) {
-        return rowSqlExecutor.addRow(dataset, tableName);
-    }
-
-    public boolean addDatasets(List<ISqlDataset> datasets, String tableName) {
-        return rowSqlExecutor.addRows(datasets, tableName);
-    }
-
-    public Table loadData() throws SQLException {
-        return new Table(
-                connectionContext.getTableName(),
-                connectionContext.getDatabaseName(),
-                rowSqlExecutor.loadRows()
-        );
-    }
-
     public List<String> show() throws SQLException {
         List<String> results = new ArrayList<>();
         ISqlQuery sqlQuery = SqlShow.show().showTables().build();
