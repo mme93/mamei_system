@@ -11,11 +11,7 @@ public class CompareValue {
     }
 
     public static boolean isBlank(String value) {
-        return !isNotNull(value) && value.isEmpty();
-    }
-
-    public static boolean isNotBlank(String value) {
-        return isNotNull(value) && value.isEmpty();
+        return isNull(value) || value.isEmpty();
     }
 
 }
