@@ -13,6 +13,7 @@ public class Table {
 
     private String tableName;
     private String databaseName;
-    private List<Row>rows;
+    private List<MetaData> columns;
+    private List<Row> rows;
 
 }
