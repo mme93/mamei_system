@@ -1,6 +1,6 @@
 package mamei.de.module.sql.executor.database.table;
 
-import mamei.de.module.sql.executor.database.table.model.Column;
+import mamei.de.module.sql.executor.database.table.model.MetaData;
 import mamei.de.module.sql.executor.database.table.model.Table;
 import mamei.de.module.sql.executor.database.table.row.RowSqlExecutor;
 import mamei.de.module.sql.query.column.ISqlColumn;
@@ -60,7 +60,11 @@ public class TableSqlExecutorTest {
         assertEquals(table.getTableName(), tableName);
         assertEquals(table.getRows().size(), 4);
         assertEquals(table.getDatabaseName(), mariaDBRule.CONNECTION_DB_CREDENTIALS.getDatabaseName());
-        assertEquals(table.getRows().get(0).getColumns().stream().map(Column::getName).toList(),asList(ID,NAME,AGE));
+        assertEquals(table.getColumns().stream().map(MetaData::getField).toList(), asList(ID, NAME, AGE));
+        assertEquals(table.getRows().get(0).getValues(), asList("1", "Peter", "18"));
+        assertEquals(table.getRows().get(1).getValues(), asList("2", "Frank", "56"));
+        assertEquals(table.getRows().get(2).getValues(), asList("3", "Susi", "12"));
+        assertEquals(table.getRows().get(3).getValues(), asList("4", "Julian", "3"));
         tableSqlExecutor.drop(tableName);
     }
 
@@ -89,9 +93,9 @@ public class TableSqlExecutorTest {
         assertTrue(executor.exist(tableName));
         List<ISqlDataset> datasets = asList(
                 SqlDataset.builder().addData(ID, 1L).addData(NAME, "Peter").addData(AGE, 18).build(),
-                SqlDataset.builder().addData(ID, 1L).addData(NAME, "Frank").addData(AGE, 56).build(),
-                SqlDataset.builder().addData(ID, 1L).addData(NAME, "Susi").addData(AGE, 12).build(),
-                SqlDataset.builder().addData(ID, 1L).addData(NAME, "Julian").addData(AGE, 3).build()
+                SqlDataset.builder().addData(ID, 2L).addData(NAME, "Frank").addData(AGE, 56).build(),
+                SqlDataset.builder().addData(ID, 3L).addData(NAME, "Susi").addData(AGE, 12).build(),
+                SqlDataset.builder().addData(ID, 4L).addData(NAME, "Julian").addData(AGE, 3).build()
         );
         rowSqlExecutor.addRows(datasets, tableName);
     }
