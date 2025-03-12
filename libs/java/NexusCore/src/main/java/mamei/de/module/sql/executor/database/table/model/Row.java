@@ -1,16 +1,29 @@
 package mamei.de.module.sql.executor.database.table.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
 public class Row {
 
-    private List<Column> columns;
+    private List<String> values;
 
+    public Row() {
+        this.values = new ArrayList<>();
+    }
+
+    public Row(List<String> values) {
+        this.values = new ArrayList<>();
+    }
+
+    public void addRow(String value) {
+        values.add(value);
+    }
+
+    public List<String> getValues() {
+        return values;
+    }
+
+    public void clear() {
+        values.clear();
+    }
 }
